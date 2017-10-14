@@ -5,12 +5,11 @@
  *      Author:
  */
 #include <iostream>
+#include "cota.h"
 
 int main(){
-
-	std::cout<<"hello \n";
-	std::cout<<"hello again \n";
-	return 0;
+std::cout<<"hello!"<<std::endl;
+return 0;
 }
 
 
