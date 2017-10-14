@@ -18,11 +18,11 @@ public:
 	//construtor
 	Cota(bool emDia,unsigned int atraso);
 
-	//métodos set
+	//metodos set
 	void setEmDia(bool emDia);
 	void setAtraso(unsigned int atraso);
 
-	//métodos get
+	//metodos get
 	bool getEmDia() const;
 	unsigned int getAtraso() const;
 
