@@ -1,0 +1,35 @@
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <fstream>
+
+using namespace std;
+
+int main(){
+	map<string, map<string, vector<string>>> mapTeste;
+	map<string, vector<string>> mapSubTeste1;
+	mapSubTeste1["Biomedicina"].push_back("Uncobiologia");
+	mapSubTeste1["Biomedicina"].push_back("Mecanismos");
+	mapSubTeste1["Imunologia"] = {};
+	mapSubTeste1["Biologia"] = {};
+	mapTeste["Ciencias da Vida"] = mapSubTeste1;
+
+	ofstream teste;
+	teste.open("teste.txt");
+
+	for (map<string, map<string, vector<string>>>::const_iterator mi = mapTeste.begin(); mi != mapTeste.end(); mi++) {
+		teste << "@ " << mi->first << endl;
+		for (map<string, vector<string>>::const_iterator m = mi->second.begin(); m != mi->second.end(); m++) {
+			teste << "  # " << m->first << endl;
+			for (int i = 0; i < m->second.size(); i++)
+			{
+				teste << "   * " << m->second.at(i) << endl;
+			}
+		}
+
+	}
+
+	
+
+}
