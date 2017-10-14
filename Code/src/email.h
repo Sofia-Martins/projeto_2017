@@ -5,13 +5,13 @@
  *      Author: sofia
  */
 
-#include<string>
-
-
-
 
 #ifndef CODE_SRC_EMAIL_H_
 #define CODE_SRC_EMAIL_H_
+
+///////////////////
+#include<string>
+//////////////////
 
 
 class Email

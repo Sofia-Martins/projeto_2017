@@ -6,6 +6,8 @@
  */
 #include <iostream>
 #include "cota.h"
+#include "email.h"
+#include "gestor.h"
 
 int main(){
 std::cout<<"hello!"<<std::endl;

@@ -5,8 +5,8 @@
  *      Author: sofia
  */
 
-#ifndef CODE_COTA_H_
-#define CODE_COTA_H_
+#ifndef CODE_SRC_COTA_H_
+#define CODE_SRC_COTA_H_
 
 class Cota
 {
@@ -28,4 +28,4 @@ public:
 
 };
 
-#endif /* CODE_COTA_H_ */
+#endif /* CODE_SRC_COTA_H_ */
