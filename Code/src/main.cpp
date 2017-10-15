@@ -8,9 +8,13 @@
 #include "cota.h"
 #include "email.h"
 #include "gestor.h"
+#include "subAreaCientifica.h"
 
 int main(){
-std::cout<<"hello!"<<std::endl;
+
+
+
+
 return 0;
 }
 
