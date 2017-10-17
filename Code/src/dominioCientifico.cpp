@@ -10,20 +10,22 @@
 ////////////////////////////////
 
 // metodos de adicao de Ciencias/AreasCientificas/SubAreasCientificas
-void DominioCientifico::addCiencia(const Ciencia &ciencia)
+void DominioCientifico::addCiencia(Ciencia* &ciencia)
 {
-	std::vector<Ciencia>::const_iterator inicio=ciencias.begin(); //apontador para a primeira ciencia
-	std::vector<Ciencia>::const_iterator fim=ciencias.end(); //apontador para o final do vector ciencias
-	bool existeCiencia=binary_search(inicio, fim, ciencia);
+
+	std::vector<Ciencia*>::const_iterator inicio=ciencias.begin(); //apontador para a primeira ciencia
+	std::vector<Ciencia*>::const_iterator fim=ciencias.end(); //apontador para o final do vector ciencias
+	bool existeCiencia=binary_search(inicio, fim, ciencia,cienciasIguais);
 
 	if(existeCiencia)
-		throw  CienciaRepetida(&ciencia);
+		throw  CienciaRepetida(ciencia);
 	else
-	{   //FALTA ACABAR!!
-		//ciencias.push_back(&ciencia);
-
+	{
+		ciencias.push_back(ciencia);
 	}
 
+
+
 }
-void DominioCientifico::addAreaCientifica(const AreaCientifica &area);
-void DominioCientifico::addSubAreaCientifica(const SubAreaCientifica &subArea);
+//void DominioCientifico::addAreaCientifica(const AreaCientifica &area);
+//void DominioCientifico::addSubAreaCientifica(const SubAreaCientifica &subArea);
