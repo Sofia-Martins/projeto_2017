@@ -9,6 +9,7 @@
 #include "email.h"
 #include "gestor.h"
 #include "subAreaCientifica.h"
+#include "data.h"
 
 int main(){
 
