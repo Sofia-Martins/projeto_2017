@@ -10,6 +10,7 @@
 
 ////////////////////////
 #include <vector>
+#include <algorithm>             // std::binary_search
 #include "subAreaCientifica.h"
 ////////////////////////
 
@@ -32,6 +33,20 @@ public:
 	std::string getNomeAreaCientifica() const;
 	std::string getSiglaAreaCientifica() const;
 
+
+	//outros metodos
+	void addSubAreaCientifica(SubAreaCientifica* &subArea);
+
+};
+
+//excecoes
+
+class SubAreaCientificaRepetida
+{
+private:
+	SubAreaCientifica* subArea;
+public:
+	SubAreaCientificaRepetida(SubAreaCientifica* subArea);
 };
 
 

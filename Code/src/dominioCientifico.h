@@ -21,17 +21,10 @@ private:
 	std::vector<Ciencia*> ciencias;
 
 public:
-	// metodos de adicao de Ciencias/AreasCientificas/SubAreasCientificas
+	// metodos de adicao de Ciencias
 	void addCiencia(Ciencia* &ciencia);
-	void addAreaCientifica(const AreaCientifica* &area);  //FAZER!!!!
 	void addSubAreaCientifica(const SubAreaCientifica* &subArea); //FAZER!!!
 };
-
-//outras funcoes
-bool cienciasIguais(const Ciencia* &ciencia1,const Ciencia* &ciencia2)
-{
-	return (ciencia1->getNomeCiencia()==ciencia2->getNomeCiencia());
-}
 
 
 //excecoes

@@ -12,5 +12,7 @@ var searchData=
   ['setpassword',['setPassword',['../classGestor.html#a6ad1da347cf447ff597a2d7faa6571b2',1,'Gestor']]],
   ['setsiglaareacientifica',['setSiglaAreaCientifica',['../classAreaCientifica.html#a7a73755888f7cb88cdcdc074f48892a8',1,'AreaCientifica']]],
   ['setsiglasubareacientifica',['setSiglaSubAreaCientifica',['../classSubAreaCientifica.html#a693c76ee36e159a9e2d88f5ece9693ce',1,'SubAreaCientifica']]],
-  ['subareacientifica',['SubAreaCientifica',['../classSubAreaCientifica.html#a5adff1794a7d8e9a08f53d030e828494',1,'SubAreaCientifica']]]
+  ['subareacientifica',['SubAreaCientifica',['../classSubAreaCientifica.html#a5adff1794a7d8e9a08f53d030e828494',1,'SubAreaCientifica']]],
+  ['subareacientificarepetida',['SubAreaCientificaRepetida',['../classSubAreaCientificaRepetida.html#aef399d7616ddc805a5f5c97169bb9b9e',1,'SubAreaCientificaRepetida']]],
+  ['subareasiguais',['subAreasIguais',['../areaCientifica_8cpp.html#ab229b88ff44f195fcfd24fff1ff20578',1,'areaCientifica.cpp']]]
 ];

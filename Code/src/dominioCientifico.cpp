@@ -9,6 +9,12 @@
 #include "dominioCientifico.h"
 ////////////////////////////////
 
+//funcoes auxiliares
+bool cienciasIguais(const Ciencia* &ciencia1,const Ciencia* &ciencia2)
+{
+	return (ciencia1->getNomeCiencia()==ciencia2->getNomeCiencia());
+}
+
 // metodos de adicao de Ciencias/AreasCientificas/SubAreasCientificas
 void DominioCientifico::addCiencia(Ciencia* &ciencia)
 {
@@ -27,5 +33,10 @@ void DominioCientifico::addCiencia(Ciencia* &ciencia)
 
 
 }
-//void DominioCientifico::addAreaCientifica(const AreaCientifica &area);
-//void DominioCientifico::addSubAreaCientifica(const SubAreaCientifica &subArea);
+
+//excecoes
+CienciaRepetida::CienciaRepetida(Ciencia* ciencia)
+{
+	this->ciencia=ciencia;
+}
+
