@@ -8,9 +8,9 @@
 #ifndef CODE_SRC_SUBAREACIENTIFICA_H_
 #define CODE_SRC_SUBAREACIENTIFICA_H_
 
-/////////////////////////////
-#include "areaCientifica.h"
-/////////////////////////////
+///////////////////
+#include <string>
+///////////////////
 
 class SubAreaCientifica
 {

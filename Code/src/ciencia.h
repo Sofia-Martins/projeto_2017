@@ -5,16 +5,17 @@
  *      Author: sofia
  */
 
+
 #ifndef CODE_SRC_CIENCIA_H_
 #define CODE_SRC_CIENCIA_H_
 
-/////////////////////
-#include <string>
-#include "subAreaCientifica.h"
-////////////////////
+/////////////////////////////
+#include "areaCientifica.h"
+/////////////////////////////
 
 class Ciencia
 {
+
 private:
 	std::string nomeCiencia;
 	std::vector<AreaCientifica*> areas;

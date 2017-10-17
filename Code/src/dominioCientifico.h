@@ -10,22 +10,28 @@
 
 /////////////////////////
 #include <map>
-#include <vector>
 #include <algorithm>             // std::binary_search
-#include "subAreaCientifica.h"
+#include "ciencia.h"
 ////////////////////////
 
 class DominioCientifico
 {
+
 private:
 	std::vector<Ciencia*> ciencias;
 
 public:
 	// metodos de adicao de Ciencias/AreasCientificas/SubAreasCientificas
-	void addCiencia(const Ciencia &ciencia);
-	void addAreaCientifica(const AreaCientifica &area);
-	void addSubAreaCientifica(const SubAreaCientifica &subArea);
+	void addCiencia(Ciencia* &ciencia);
+	void addAreaCientifica(const AreaCientifica* &area);  //FAZER!!!!
+	void addSubAreaCientifica(const SubAreaCientifica* &subArea); //FAZER!!!
 };
+
+//outras funcoes
+bool cienciasIguais(const Ciencia* &ciencia1,const Ciencia* &ciencia2)
+{
+	return (ciencia1->getNomeCiencia()==ciencia2->getNomeCiencia());
+}
 
 
 //excecoes

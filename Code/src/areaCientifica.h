@@ -10,7 +10,6 @@
 
 ////////////////////////
 #include <vector>
-#include "ciencia.h"
 #include "subAreaCientifica.h"
 ////////////////////////
 
