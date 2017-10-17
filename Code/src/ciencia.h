@@ -11,6 +11,7 @@
 
 /////////////////////////////
 #include "areaCientifica.h"
+#include <algorithm>             // std::binary_search
 /////////////////////////////
 
 class Ciencia
@@ -28,8 +29,20 @@ public:
 
 	//metodos get
 	std::string getNomeCiencia() const;
+
+	//outros metodos
+	void addAreaCientifica(AreaCientifica* &area);
 };
 
+//excecoes
+
+class AreaCientificaRepetida
+{
+private:
+	AreaCientifica* area;
+public:
+	AreaCientificaRepetida(AreaCientifica* area);
+};
 
 
 

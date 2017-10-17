@@ -14,8 +14,11 @@ var searchData=
   ['setsiglasubareacientifica',['setSiglaSubAreaCientifica',['../classSubAreaCientifica.html#a693c76ee36e159a9e2d88f5ece9693ce',1,'SubAreaCientifica']]],
   ['siglaarea',['siglaArea',['../classAreaCientifica.html#ad9099f20ea49c56e4be97c039220beac',1,'AreaCientifica']]],
   ['siglasubarea',['siglaSubArea',['../classSubAreaCientifica.html#aca64ac22bfd39cdcc7a17d22a2047fb9',1,'SubAreaCientifica']]],
+  ['subarea',['subArea',['../classSubAreaCientificaRepetida.html#a4451459617add52d010860d4a62e96e5',1,'SubAreaCientificaRepetida']]],
   ['subareacientifica',['SubAreaCientifica',['../classSubAreaCientifica.html',1,'SubAreaCientifica'],['../classSubAreaCientifica.html#a5adff1794a7d8e9a08f53d030e828494',1,'SubAreaCientifica::SubAreaCientifica()']]],
   ['subareacientifica_2ecpp',['subAreaCientifica.cpp',['../subAreaCientifica_8cpp.html',1,'']]],
   ['subareacientifica_2eh',['subAreaCientifica.h',['../subAreaCientifica_8h.html',1,'']]],
-  ['subareas',['subAreas',['../classAreaCientifica.html#aba11062f1129a466df834113b17425dc',1,'AreaCientifica']]]
+  ['subareacientificarepetida',['SubAreaCientificaRepetida',['../classSubAreaCientificaRepetida.html',1,'SubAreaCientificaRepetida'],['../classSubAreaCientificaRepetida.html#aef399d7616ddc805a5f5c97169bb9b9e',1,'SubAreaCientificaRepetida::SubAreaCientificaRepetida()']]],
+  ['subareas',['subAreas',['../classAreaCientifica.html#aba11062f1129a466df834113b17425dc',1,'AreaCientifica']]],
+  ['subareasiguais',['subAreasIguais',['../areaCientifica_8cpp.html#ab229b88ff44f195fcfd24fff1ff20578',1,'areaCientifica.cpp']]]
 ];
