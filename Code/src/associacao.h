@@ -19,6 +19,7 @@
 class Associacao{
 private:
 	std::string nome;
+	std::string sigla;
 	//DominioCientifico* dominioAssociacao;
 	std::vector<Evento*> eventos;
 	std::vector<Email*> emails;
@@ -37,6 +38,7 @@ public:
 
 	//metodos set
 	void setNome(std::string nome);
+	void setSigla(std::string sigla);
 	//void setDominio(DominioCientifico dominio);
 
 	//other metodos

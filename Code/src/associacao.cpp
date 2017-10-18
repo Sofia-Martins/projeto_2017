@@ -34,6 +34,11 @@ void Associacao::setNome(std::string nome){
 	this->nome = nome;
 }
 
+void Associacao::setSigla(std::string sigla)
+{
+	this->sigla=sigla;
+}
+
 
 //other metodos
 void Associacao::addEmail(Email &email){
