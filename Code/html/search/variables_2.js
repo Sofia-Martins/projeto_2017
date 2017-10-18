@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['emailsenviados',['emailsEnviados',['../classGestor.html#a47702a27c600033f1eab2fd02d57b68a',1,'Gestor']]],
-  ['emailsrecebidos',['emailsRecebidos',['../classGestor.html#a495ab04e9c3e3fe4eff818443ef8e75a',1,'Gestor']]],
-  ['emdia',['emDia',['../classCota.html#ac4c149f165956934e653876328c0a2ba',1,'Cota']]],
-  ['enderecoemail',['enderecoEmail',['../classGestor.html#a3e3420a8202eaeb4f55bd184d3a11d7b',1,'Gestor']]]
+  ['data',['data',['../classEvento.html#a677d941a2a91f58f3d660c5d127f57d2',1,'Evento']]],
+  ['dia',['dia',['../classData.html#a71a904380d17858da0b902e9a2563546',1,'Data']]]
 ];
