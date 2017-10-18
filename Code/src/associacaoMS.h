@@ -12,7 +12,7 @@
 
 class AssociacaoMS{
 private:
-	Associacao* apt;
+	Associacao* apic;
 
 public:
 	//metodo obter menu

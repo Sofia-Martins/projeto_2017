@@ -10,11 +10,16 @@
 #include "gestor.h"
 #include "subAreaCientifica.h"
 #include "data.h"
+#include "associacaoMS.h"
+#include "associacao.h"
+#include "associado.h"
+#include "evento.h"
+#include "apoio.h"
 
 int main(){
 
-
-
+AssociacaoMS ac1;
+ac1.menu();
 
 return 0;
 }

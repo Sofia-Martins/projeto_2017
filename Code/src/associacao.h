@@ -14,32 +14,35 @@
 #include "email.h"
 #include "associado.h"
 #include "gestor.h"
+#include "evento.h"
 
 class Associacao{
 private:
 	std::string nome;
 	//DominioCientifico* dominioAssociacao;
-	//std::vector<Evento*> eventos;
+	std::vector<Evento*> eventos;
 	std::vector<Email*> emails;
 	std::vector<Associado*> associados;
 	std::vector<Gestor*> gestores;
 
 public:
 	//metodos get
-	std::string getNome();
+	std::string getNome() const;
 	//DominioCientifico getDominio();
-	std::vector getEmails();
-	std::vector getAssociados();
-	std::vector getGestores();
+	std::vector<Associado*> getAssociados() const;
+	std::vector<Gestor*> getGestores() const;
+	std::vector<Email*> getEmails() const;
+	std::vector<Evento*> getEventos() const;
+
 
 	//metodos set
 	void setNome(std::string nome);
 	//void setDominio(DominioCientifico dominio);
 
 	//other metodos
-	void addEmail(Email email);
-	void addAssociado(Associado associado);
-	void addGestor(Gestor gestor);
+	void addEmail(Email &email);
+	void addAssociado(Associado &associado);
+	void addGestor(Gestor &gestor);
 
 };
 
@@ -48,7 +51,7 @@ public:
 class AssociacaoRepetida
 {
 private:
-	std::string nome();
+	std::string nome;
 public:
 	AssociacaoRepetida(std::string nome);
 };
