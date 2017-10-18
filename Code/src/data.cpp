@@ -73,6 +73,7 @@ unsigned int Data::getMinuto () const
 	return minuto;
 }
 
+
 std::string Data::getData() const
 {
 	std::string s = std::string std::to_string(dia) + "/"
