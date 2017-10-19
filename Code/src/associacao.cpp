@@ -8,6 +8,16 @@
 
 #include "associacao.h"
 
+Associacao::Associacao(std::string nome, std::vector<Evento*> eventos,
+		std::vector<Email*> emails, std::vector<Gestor*> gestores){
+	this->nome = nome;
+	this->eventos = eventos;
+	this->emails = emails;
+	this->gestores = gestores;
+}
+
+
+//metodos get
 std::string Associacao::getNome() const{
 	return this->nome;
 }

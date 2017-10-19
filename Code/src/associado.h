@@ -13,20 +13,24 @@
 #include <vector>
 #include "email.h"
 #include "dominioCientifico.h"
+#include "evento.h"
 
 class Associado{
 private:
-	bool gestor;
+	int ID;
 	std::string nome;
 	std::string password;
 	std::string instituicao;
-	//DominioCientifico* dominio;
+	DominioCientifico* dominio;
 	Cota* cota;
 	std::string enderecoEmail;
-	//std::vector<>
+	std::vector<Evento*> eventosParticipar;
 
 public:
+	Associado(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+			Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar);
 	//metodos get
+	int getID() const;
 	std::string getNome() const;
 	std::string getInstituicao() const;
 	//DominioCientifico getDominio() const;
@@ -53,6 +57,9 @@ public:
 
 //subclasse Contributor
 class Contributor: public Associado{
+	Contributor(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+			Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar,
+			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
 	std::vector<Email*> emailsRecebidos;
 	std::vector<Email*> emailsEnviados;
 public:
@@ -66,6 +73,9 @@ public:
 };
 
 class Subscriber: public Associado{
+	Subscriber(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+			Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar,
+			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
 	std::vector<Email*> emailsRecebidos;
 public:
 	//metodos get
