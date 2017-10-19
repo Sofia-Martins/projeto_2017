@@ -26,6 +26,8 @@ private:
 	std::vector<Gestor*> gestores;
 
 public:
+
+	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails, std::vector<Gestor*> gestores);
 	//metodos get
 	std::string getNome() const;
 	//DominioCientifico getDominio();
