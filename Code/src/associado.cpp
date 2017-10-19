@@ -8,7 +8,24 @@
 
 #include "associado.h"
 
+Associado::Associado(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+		Cota* cota, std::string enderecoEmail, std::vector<Evento*> eventosParticipar){
+	this->ID = ID;
+	this->nome = nome;
+	this->instituicao = instituicao;
+	this->dominio = dominio;
+	this->cota = cota;
+	this->enderecoEmail = enderecoEmail;
+	this->eventosParticipar = eventosParticipar;
+
+	}
+
+
 //metodos get
+
+int Associado::getID() const{
+	return this->ID;
+}
 std::string Associado::getNome()const{
 	return this->nome;
 }
@@ -47,6 +64,14 @@ AssociadoRepetido::AssociadoRepetido(std::string nome){
 
 //subclasse contribuitor
 
+Contributor::Contributor(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+		Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar,
+		std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados){
+	Associado(ID, nome, instituicao, dominio, cota, enderecoEmail, eventosParticipar);
+	this->emailsRecebidos = emailsRecebidos;
+	this->emailsEnviados = emailsEnviados;
+}
+
 //metodos get
 std::vector<Email*> Contributor::getEmailsRecebidos(){
 	return this->emailsRecebidos;
@@ -66,6 +91,12 @@ void Contributor::receberEmail(Email &email){
 
 //subclasse subscriber
 
+Subscriber::Subscriber(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+		Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar,
+		std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados){
+	Associado(ID, nome, instituicao, dominio, cota, enderecoEmail, eventosParticipar);
+	this->emailsRecebidos = emailsRecebidos;
+}
 //metodos get
 std::vector<Email*> Subscriber::getEmailsRecebidos(){
 	return this->emailsRecebidos;
