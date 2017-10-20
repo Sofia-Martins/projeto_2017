@@ -35,7 +35,7 @@ public:
 
 
 	//outros metodos
-	void addSubAreaCientifica(SubAreaCientifica* &subArea);
+	void addSubAreaCientifica(SubAreaCientifica* subArea);
 
 };
 
@@ -52,4 +52,4 @@ public:
 
 
 
-#endif /* CODE_SRC_AREACIENTIFICA_H_ */
+#endif

@@ -19,7 +19,7 @@ private:
 
 public:
 	//Construtor
-	Apoio (bool ApoioAssociacao, std::string tipoApoio);
+	Apoio(bool apoioAssociacao, std::string tipoApoio);
 
 	//Metodos Set
 	void setApoioAssociacao(bool apoioAssociacao);
@@ -30,4 +30,4 @@ public:
 	std::string getTipoApoio() const;
 };
 
-#endif /* APOIO_H_ */
+#endif

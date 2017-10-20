@@ -9,11 +9,12 @@
 #define ASSOCIADO_H_
 
 #include <string>
-#include "cota.h"
 #include <vector>
+#include "cota.h"
 #include "email.h"
 #include "dominioCientifico.h"
-#include "evento.h"
+//#include "evento.h"
+
 
 class Associado{
 private:
@@ -24,11 +25,10 @@ private:
 	DominioCientifico* dominio;
 	Cota* cota;
 	std::string enderecoEmail;
-	std::vector<Evento*> eventosParticipar;
+
 
 public:
-	Associado(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
-			Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar);
+	Associado(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio, Cota* cota, std::string enderecoEmail);
 	//metodos get
 	int getID() const;
 	std::string getNome() const;
@@ -58,7 +58,7 @@ public:
 //subclasse Contributor
 class Contributor: public Associado{
 	Contributor(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
-			Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar,
+			Cota* cota, std::string enderecoEmail,
 			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
 	std::vector<Email*> emailsRecebidos;
 	std::vector<Email*> emailsEnviados;
@@ -74,7 +74,7 @@ public:
 
 class Subscriber: public Associado{
 	Subscriber(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
-			Cota* cota, std::string enderecoEmail, 	std::vector<Evento*> eventosParticipar,
+			Cota* cota, std::string enderecoEmail,
 			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
 	std::vector<Email*> emailsRecebidos;
 public:
@@ -87,4 +87,4 @@ public:
 
 
 
-#endif /* ASSOCIADO_H_ */
+#endif

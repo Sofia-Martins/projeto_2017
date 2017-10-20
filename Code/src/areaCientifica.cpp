@@ -37,16 +37,16 @@ std::string AreaCientifica::getSiglaAreaCientifica() const
 }
 
 //funcoes auxiliares
-bool subAreasIguais(const AreaCientifica* &area1,const AreaCientifica* &area2)
+bool subAreasIguais( SubAreaCientifica* subArea1,SubAreaCientifica* subArea2)
 {
-	return(area1->getNomeAreaCientifica()==area2->getNomeAreaCientifica());
+	return(subArea1->getNomeSubAreaCientifica() == subArea2->getNomeSubAreaCientifica());
 }
 
 //outros metodos
-void AreaCientifica::addSubAreaCientifica(SubAreaCientifica* &subArea)
+void AreaCientifica::addSubAreaCientifica(SubAreaCientifica* subArea)
 {
-	std::vector<AreaCientifica*>::const_iterator inicio=subAreas.begin(); //apontador para a primeira ciencia
-	std::vector<AreaCientifica*>::const_iterator fim=subAreas.end(); //apontador para o final do vector ciencias
+	std::vector<SubAreaCientifica*>::const_iterator inicio=subAreas.begin(); //apontador para a primeira ciencia
+	std::vector<SubAreaCientifica*>::const_iterator fim=subAreas.end(); //apontador para o final do vector ciencias
 	bool existeArea=binary_search(inicio, fim, subArea,subAreasIguais);
 
 		if(existeArea)

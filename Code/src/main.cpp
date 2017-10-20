@@ -18,8 +18,8 @@
 
 int main(){
 
-AssociacaoMS ac1;
-ac1.menu();
+AssociacaoMS associacaoMS;
+associacaoMS.menuFicheiroAssociacoes();
 
 return 0;
 }

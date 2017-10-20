@@ -31,7 +31,7 @@ public:
 	std::string getNomeCiencia() const;
 
 	//outros metodos
-	void addAreaCientifica(AreaCientifica* &area);
+	void addAreaCientifica(AreaCientifica* area);
 };
 
 //excecoes

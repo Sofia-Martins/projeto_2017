@@ -42,6 +42,6 @@ public:
 
 };
 
-#endif  /* CODE_SRC_GESTOR_H_ */
+#endif
 
 

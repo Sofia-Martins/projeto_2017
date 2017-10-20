@@ -24,7 +24,7 @@ private:
 public:
 
 	//Construtor
-	Data (unsigned int dia, unsigned int mes, int ano, unsigned int hora, unsigned int minuto);
+	Data(unsigned int dia, unsigned int mes, int ano, unsigned int hora, unsigned int minuto);
 
 	//Metodos Set
 	void setDia (unsigned int dia);
@@ -44,4 +44,4 @@ public:
 };
 
 
-#endif /* DATA_H_ */
+#endif

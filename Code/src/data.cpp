@@ -10,7 +10,7 @@
 
 //Construtor
 
-Data::Data (unsigned int dia, unsigned int mes, int ano, unsigned int hora, unsigned int minuto)
+Data::Data(unsigned int dia, unsigned int mes, int ano, unsigned int hora, unsigned int minuto)
 {
 	this->dia = dia;
 	this->mes = mes;
@@ -74,16 +74,20 @@ unsigned int Data::getMinuto () const
 }
 
 
+
 std::string Data::getData() const
 {
-	std::string s = std::string std::to_string(dia) + "/"
-			+ std::string std::to_string(mes)+ "/"
-			+ std::string std::to_string(ano) + " "
-			+ std::string std::to_string(hora) + ":"
-			+ std::string std::to_string(minuto);
+	using namespace std;
+	string stringDia=to_string((unsigned long)dia);
+	string stringMes=to_string((unsigned long)mes);
+	string stringAno=to_string((unsigned long)ano);
+	string stringHora=to_string((unsigned long)hora);
+	string stringMinuto=to_string((unsigned long)minuto);
 
+	string s = stringDia + "/" + stringMes+"/"+stringAno+" "+stringHora+":"+stringMinuto;
 	return s;
 }
+
 
 
 

@@ -22,8 +22,8 @@ private:
 
 public:
 	// metodos de adicao de Ciencias
-	void addCiencia(Ciencia* &ciencia);
-	void addSubAreaCientifica(const SubAreaCientifica* &subArea); //FAZER!!!
+	void addCiencia(Ciencia* ciencia);
+	void addSubAreaCientifica(SubAreaCientifica* subArea);
 };
 
 

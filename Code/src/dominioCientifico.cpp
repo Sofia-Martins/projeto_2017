@@ -10,13 +10,13 @@
 ////////////////////////////////
 
 //funcoes auxiliares
-bool cienciasIguais(const Ciencia* &ciencia1,const Ciencia* &ciencia2)
+bool cienciasIguais(const Ciencia* ciencia1,const Ciencia* ciencia2)
 {
 	return (ciencia1->getNomeCiencia()==ciencia2->getNomeCiencia());
 }
 
 // metodos de adicao de Ciencias/AreasCientificas/SubAreasCientificas
-void DominioCientifico::addCiencia(Ciencia* &ciencia)
+void DominioCientifico::addCiencia(Ciencia* ciencia)
 {
 
 	std::vector<Ciencia*>::const_iterator inicio=ciencias.begin(); //apontador para a primeira ciencia

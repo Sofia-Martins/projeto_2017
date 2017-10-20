@@ -28,4 +28,4 @@ public:
 
 };
 
-#endif /* CODE_SRC_COTA_H_ */
+#endif

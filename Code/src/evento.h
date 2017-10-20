@@ -20,8 +20,8 @@
 class Evento{
 
 private:
-	std::vector <Associado*> planeadores;
-	std::vector <Associado*> organizadores;
+	std::vector<Associado*> planeadores;
+	std::vector<Associado*> organizadores;
 	std::string local;
 	std::string tema;
 	Data data;
@@ -44,7 +44,7 @@ private:
 
 public:
 	//Construtor
-	Conferencia(std::vector <Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
+	Conferencia(std::vector<Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
 };
 
 
@@ -58,8 +58,13 @@ private:
 
 public:
 	//Construtor
-	EscolaVerao(std::vector <Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento, std::vector <Associado*> formadores);
+	EscolaVerao(std::vector <Associado*> planeadores,
+			std::string local,
+			std::string tema,
+			Data data,
+			Apoio apoioEvento,
+			std::vector<Associado*> formadores);
 };
 
 
-#endif /* EVENTO_H_ */
+#endif

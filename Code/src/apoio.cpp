@@ -9,9 +9,9 @@
 
 
 	//Construtor
-	Apoio::Apoio (bool ApoioAssociacao, std::string tipoApoio)
+	Apoio::Apoio (bool apoioAssociacao, std::string tipoApoio)
 	{
-		this->apoioAssociacao=ApoioAssociacao;
+		this->apoioAssociacao=apoioAssociacao;
 		this->tipoApoio=tipoApoio;
 	}
 
