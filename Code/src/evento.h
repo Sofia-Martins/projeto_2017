@@ -28,8 +28,27 @@ private:
 	Apoio apoioEvento;
 
 public:
-	//Construtor
+	// Construtor
 	Evento(std::vector <Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento);
+
+	// Metodos get
+
+	std::vector<Associado*> getPlaneadores () const;
+	std::vector<Associado*> getOrganizadores() const;
+	std::string getLocal() const;
+	std::string getTema() const;
+
+	// Metodos set
+
+	void setLocal(std::string local);
+	void setTema(std::string tema);
+
+	// Outros metodos
+
+	void addPlaneador (Associado* planeador);
+	void addOrganizador (Associado* organizador);
+	void removePlaneador (Associado* planeador);
+	void removeOrganizador (Associado* organizador);
 
 };
 
@@ -43,8 +62,14 @@ private:
 	unsigned int numeroParticipantes;
 
 public:
-	//Construtor
+	// Construtor
 	Conferencia(std::vector<Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
+
+	// Metodos get
+	unsigned int getNumeroParticipantes() const;
+
+	// Metodos set
+	void setNumeroParticipantes(unsigned int numeroParticipantes);
 };
 
 
@@ -64,6 +89,13 @@ public:
 			Data data,
 			Apoio apoioEvento,
 			std::vector<Associado*> formadores);
+
+	// Metodos get
+	std::vector<Associado*> getFormadores () const;
+
+	// Outros metodos
+	void addFormador (Associado* formador);
+	void removeFormador (Associado* formador);
 };
 
 

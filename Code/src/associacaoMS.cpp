@@ -8,16 +8,19 @@
 #include "associacaoMS.h"
 
 //declaracao de algumas funcoes
+
 bool hasChar(std::string &string);
 void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
-void getNumber(uint &number, const std::string &question);
+void getNumber(unsigned int &number, const std::string &question);
 
 //menu 1
+
 void AssociacaoMS::menuFicheiroAssociacoes() {
 	std::cout<<"---- BEM-VINDO AO GESTOR DE ASSOCIACOES CIENTIFICAS! ----\n\n";
 	menuFicheiroAssociacoesSelection(); //invocacao do metodo
 }
+
 void AssociacaoMS::menuFicheiroAssociacoesSelection() {
 
 	std::string nomeFicheiro;
@@ -34,6 +37,7 @@ void AssociacaoMS::menuFicheiroAssociacoesSelection() {
 	//se o ficheiro existir
 	ficheiroAssociacoes = nomeFicheiro;
 }
+
 void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 {
 	std::ifstream streamAssociacoes;
@@ -52,6 +56,7 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 	}
 
 }
+
 /*
  void AssociacaoMS::menu(){
 
@@ -105,15 +110,16 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 
 //funcoes relacionadas com inputs do utilizador
 bool hasChar(std::string &string) {
-	for (int i = 0; i < (string.length()); i++) {
+	for (unsigned int i = 0; i < (string.length()); i++) {
 		if (((string.at(i)) < 48) || (string.at(i) > 57))
 			return true;  //if the string has some char
 	}
 
 	return false;
 }
+
 void eliminateSpaces(std::string &string) {
-	for (int i = 0; i < string.length() - 1; i++) {
+	for (unsigned int i = 0; i < string.length() - 1; i++) {
 		if ((string.at(i) == ' ') && (string.at(i + 1) == ' ')) {
 			string.erase(i, 1); //erases the current space if it's followed by another space
 			i = i - 1;
@@ -129,6 +135,7 @@ void eliminateSpaces(std::string &string) {
 	}
 
 }
+
 void getString(std::string &string, const std::string question) {
 	std::string test;
 
@@ -149,7 +156,8 @@ void getString(std::string &string, const std::string question) {
 	string = test + string;
 	eliminateSpaces(string);
 }
-void getNumber(uint &number, const std::string &question) {
+
+void getNumber(unsigned int &number, const std::string &question) {
 	bool valid;
 
 	std::string test;

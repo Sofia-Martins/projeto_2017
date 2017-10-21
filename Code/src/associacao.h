@@ -29,14 +29,15 @@ private:
 public:
 
 	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails, std::vector<Gestor*> gestores);
+
 	//metodos get
 	std::string getNome() const;
+
 	//DominioCientifico getDominio();
 	std::vector<Associado*> getAssociados() const;
 	std::vector<Gestor*> getGestores() const;
 	std::vector<Email*> getEmails() const;
 	std::vector<Evento*> getEventos() const;
-
 
 	//metodos set
 	void setNome(std::string nome);
