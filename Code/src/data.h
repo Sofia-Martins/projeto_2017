@@ -24,6 +24,7 @@ private:
 public:
 
 	//Construtor
+	Data();
 	Data(unsigned int dia, unsigned int mes, int ano, unsigned int hora, unsigned int minuto);
 
 	//Metodos Set

@@ -20,6 +20,7 @@ private:
 public:
 	//Construtor
 	Apoio(bool apoioAssociacao, std::string tipoApoio);
+	Apoio();
 
 	//Metodos Set
 	void setApoioAssociacao(bool apoioAssociacao);

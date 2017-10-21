@@ -9,6 +9,13 @@
 #include "data.h"
 
 //Construtor
+Data::Data(){
+	this->dia = 0;
+	this->mes = 0;
+	this->ano = 0;
+	this->hora = 0;
+	this->minuto = 0;
+}
 
 Data::Data(unsigned int dia, unsigned int mes, int ano, unsigned int hora, unsigned int minuto)
 {
