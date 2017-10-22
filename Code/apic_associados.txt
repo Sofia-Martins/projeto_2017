@@ -1,0 +1,4 @@
+nome, id, password, instituicao, emDia, atraso, email; temas dos eventos; subareas de interesse
+Tiago Rodrigues, 1, 201604772, instituicao, email, tema
+Luísa Freire, 2, 20165248, ins, em, tem
+Sofia Martins, 20154115, in, e, te

@@ -13,8 +13,15 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <cstdlib>
+#include <unistd.h>  //funcao sleep() em linux
+#include <stdlib.h>
+#include <stdio.h>
+#include <climits>
 #include <utility>  //std::pair
 #include "associacao.h"
+
+
 
 class AssociacaoMS{
 private:
@@ -29,15 +36,24 @@ private:
 	std::vector<std::pair<std::string,std::string>> associacoes; //siglas e nomes das associacoes
 
 public:
-	//menus
+
+	//menu 1
+	void menuBemVindo();
+	void menuBemVindoSelecao();
+
+	//menu 2
 	void menuFicheiroAssociacoes();
+	void menuFicheiroAssociacoesSelecao();
+	void lerAssociacoes(std::string ficheiroAssociacoes);
+
+	//menu final
+	void menuTermino();
 
 
-	//inputs nos menus
-	void menuFicheiroAssociacoesSelection();
+
 
 	//ler dos ficheiros
-	void lerAssociacoes(std::string ficheiroAssociacoes);
+
 
 
 };

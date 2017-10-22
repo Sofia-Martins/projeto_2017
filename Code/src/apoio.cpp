@@ -11,7 +11,7 @@
 	//Construtor
 	Apoio::Apoio(){
 		this->apoioAssociacao = false;
-		this->tipoApoio = {};
+		
 	}
 	Apoio::Apoio (bool apoioAssociacao, std::string tipoApoio)
 	{
@@ -44,5 +44,3 @@
 	{
 		return tipoApoio;
 	}
-
-

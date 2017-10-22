@@ -63,4 +63,3 @@ SubAreaCientificaRepetida::SubAreaCientificaRepetida(SubAreaCientifica* subArea)
 	this->subArea=subArea;
 
 }
-

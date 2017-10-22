@@ -13,15 +13,51 @@ bool hasChar(std::string &string);
 void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
+void clearScreen(); //pode (e deve) ser procurado um método melhor!!!
 
-//menu 1
+//variaveis globais
+std::string retornoMenu="/";
+
+/*------------------------------------------- menu 1 -------------------------------------------*/
+void AssociacaoMS::menuBemVindo()
+{
+	clearScreen(); //apagar conteudo do ecra
+
+	std::cout<<"---- BEM-VINDO AO GESTOR DE ASSOCIACOES CIENTIFICAS! ----\n\n";
+	std::cout <<"1. Criar associacao\n";
+	std::cout <<"2. Aceder a uma associacao ja existente\n\n";
+
+	this->menuBemVindoSelecao();
+
+}
+void AssociacaoMS::menuBemVindoSelecao()
+{
+
+	std::cout<<"menu bem vindo selecao\n";
+	unsigned int numeroOpcao=0;
+
+	do
+	{
+		getNumber(numeroOpcao,"Opcao: ");
+
+		if(std::cin.eof())
+			this->menuTermino();
+
+	}while(!((numeroOpcao==1) || (numeroOpcao==2)));
+
+	if(numeroOpcao==2)
+		this->menuFicheiroAssociacoes();
+	//else: invoca o menu para criar uma associacao
+
+}
+/*------------------------------------------- menu 2 -------------------------------------------*/
 
 void AssociacaoMS::menuFicheiroAssociacoes() {
-	std::cout<<"---- BEM-VINDO AO GESTOR DE ASSOCIACOES CIENTIFICAS! ----\n\n";
-	menuFicheiroAssociacoesSelection(); //invocacao do metodo
+	clearScreen(); //apagar conteudo do ecra
+	std::cout<<"---- ESCOLHER FICHEIRO DAS ASSSOCIACOES ----\n\n";
+	menuFicheiroAssociacoesSelecao(); //invocacao do metodo
 }
-
-void AssociacaoMS::menuFicheiroAssociacoesSelection() {
+void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 
 	std::string nomeFicheiro;
 	std::ifstream streamAssociacoes;
@@ -29,15 +65,18 @@ void AssociacaoMS::menuFicheiroAssociacoesSelection() {
 	do {
 		getString(nomeFicheiro,"Por favor introduza o nome do ficheiro das associacoes (sem .txt): ");
 		if (std::cin.eof())
-			return; //se o utilizador inseriu CTRL+Z
-		nomeFicheiro += ".txt";
+		{
+			std::cin.clear();
+			menuBemVindo(); //se o utilizador inseriu CTRL+D
+		}
+		nomeFicheiro = nomeFicheiro + ".txt";
 		streamAssociacoes.open(nomeFicheiro);
 	} while (streamAssociacoes.fail());
 
 	//se o ficheiro existir
 	ficheiroAssociacoes = nomeFicheiro;
+	lerAssociacoes(nomeFicheiro);
 }
-
 void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 {
 	std::ifstream streamAssociacoes;
@@ -51,9 +90,32 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 		std::istringstream ssFicheiro(linhaFicheiro);
 		getline(ssFicheiro,siglaAssociacao,';');
 		getline(ssFicheiro,nomeAssociacao);
+		eliminateSpaces(nomeAssociacao);
+		eliminateSpaces(siglaAssociacao);
+
 		//acrescentar a sigla e nome da associacao ao vetor associacoes
 		associacoes.push_back(std::pair<std::string,std::string>(siglaAssociacao,nomeAssociacao));
 	}
+
+
+	for(int i=0;i<associacoes.size();i++)
+	{
+		using namespace std;
+		cout <<"Nome da associacao: "<<associacoes.at(i).first<<"\n";
+		cout <<"Sigla da associacao: "<<associacoes.at(i).second<<"\n\n";
+	}
+
+}
+
+
+
+/*------------------------------------------- menu final -------------------------------------------*/
+void AssociacaoMS::menuTermino()
+{
+	clearScreen(); //apagar conteudo do ecra
+	std::cout<<"Obrigada pela visita! Ate `a proxima! :-D\n\n";
+	sleep(5);
+	exit(0);
 
 }
 
@@ -108,7 +170,7 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
  }
  */
 
-//funcoes relacionadas com inputs do utilizador
+//funcoes relacionadas com inputs do utilizador ///////////////////////////////////////////
 bool hasChar(std::string &string) {
 	for (unsigned int i = 0; i < (string.length()); i++) {
 		if (((string.at(i)) < 48) || (string.at(i) > 57))
@@ -160,25 +222,30 @@ void getString(std::string &string, const std::string question) {
 void getNumber(unsigned int &number, const std::string &question) {
 	bool valid;
 
-	std::string test;
-	std::string number_string;
+		std::string test;
+		std::string number_string;
 
-	std::cout << question;
-	std::cin >> test;
-	std::getline(std::cin, number_string);
-	number_string = test + number_string;
-	valid = hasChar(number_string);
-
-	while ((std::cin.fail()) || ((!(std::cin.fail())) && valid)) {
-		if (std::cin.eof())
-			return;
-		std::cin.clear();
 		std::cout << question;
 		std::cin >> test;
 		std::getline(std::cin, number_string);
 		number_string = test + number_string;
 		valid = hasChar(number_string);
-	}
 
-	number = std::stoul(number_string);
+		while ((std::cin.fail()) || ((!(std::cin.fail())) && valid))
+		{
+			if (std::cin.eof()) return;
+			std::cin.clear();
+			std::cout << question;
+			std::cin >> test;
+			std::getline(std::cin, number_string);
+			number_string = test + number_string;
+			valid = hasChar(number_string);
+		}
+
+		number = std::stoul(number_string);
 }
+
+void clearScreen() //pode (e deve) ser procurado um método melhor!!!
+  {
+    std::cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+  }

@@ -5,11 +5,13 @@
  *      Author:
  */
 #include <iostream>
+
 #include "cota.h"
 #include "email.h"
 #include "gestor.h"
-#include "subAreaCientifica.h"
 #include "data.h"
+#include "associacaoMS.h"
+#include "subAreaCientifica.h"
 #include "associacaoMS.h"
 #include "associacao.h"
 #include "associado.h"
@@ -19,10 +21,9 @@
 int main(){
 
 AssociacaoMS associacaoMS;
-associacaoMS.menuFicheiroAssociacoes();
+associacaoMS.menuBemVindo();
+
+
 
 return 0;
 }
-
-
-

@@ -1,0 +1,1 @@
+planeadores; organizadores; local, tema; dia, mes, ano, hora, minuto; apoioAssociacao, tipoApoio; numero de participantes;

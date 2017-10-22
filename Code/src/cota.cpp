@@ -7,32 +7,24 @@
 #include "cota.h"
 
 //construtor
-	Cota::Cota(bool emDia,unsigned int atraso)
-	{
-		this->emDia=emDia;
-		this->atraso=atraso;
-	}
+Cota::Cota(bool emDia, unsigned int atraso) {
+	this->emDia = emDia;
+	this->atraso = atraso;
+}
 
 //métodos set
-	void Cota::setEmDia(bool emDia)
-	{
-		this->emDia=emDia;
-	}
-	void Cota::setAtraso(unsigned int atraso)
-	{
-		this->atraso=atraso;
-	}
+void Cota::setEmDia(bool emDia) {
+	this->emDia = emDia;
+}
+void Cota::setAtraso(unsigned int atraso) {
+	this->atraso = atraso;
+}
 
 //métodos get
-	bool Cota::getEmDia() const
-	{
-		return emDia;
-	}
-	unsigned int Cota::getAtraso() const
-	{
-		return atraso;
-	}
-
-
-
+bool Cota::getEmDia() const {
+	return emDia;
+}
+unsigned int Cota::getAtraso() const {
+	return atraso;
+}
 
