@@ -275,6 +275,19 @@ void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados,
 		else a1 = Associado(nome, std::stoul(ID), password, instituicao,
 				dominio, Cota(emDia,stoul(atraso)), email);
 
+		//guardar subareas de interesse
+		std::vector<std::string> v_subareas;
+		do
+		{
+			int p1 = subareas.find_first_of(","); // posicao da vírgula
+			v_subareas.push_back(subareas.substr(1, p1 - 1));
+			subareas = subareas.substr(p1 + 1);
+
+		} while (subareas.find_first_of(",") != subareas.size() - 1);
+
+		a1.setAreasInteresse(v_subareas);
+
+
 		ac1.addAssociado(a1);
 
 	}
