@@ -21,7 +21,9 @@
 #include <utility>  //std::pair
 #include "associacao.h"
 #include "associado.h"
-
+#include "areaCientifica.h"
+#include "dominioCientifico.h"
+#include "subAreaCientifica.h"
 
 
 class AssociacaoMS{
@@ -47,7 +49,8 @@ public:
 	void menuFicheiroAssociacoesSelecao();
 	void lerAssociacoes(std::string ficheiroAssociacoes);
 	void menuAssociacoes();
-	void lerAssociados(Associacao ac1, std::string ficheiroAssociados);
+	DominioCientifico lerDominios(std::string ficheiroDominios);
+	void lerAssociados(Associacao ac1, std::string ficheiroAssociados, DominioCientifico dominio);
 	void menuLogin();
 
 	//menu final

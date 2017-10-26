@@ -42,8 +42,8 @@ public:
 	void setNome(std::string nome);
 	void setPassword(std::string pass);
 	void setInstituicao(std::string instituicao);
-	//void setDominio(DominioCientifico dominio);
-	//void setCota(Cota cota);
+	void setDominio(DominioCientifico dominio){this->dominio->ciencias = dominio.ciencias;};
+	void setCota(Cota cota){this->cota->getAtraso() = cota.getAtraso(); this->cota->getEmDia() = cota.getEmDia(); };
 	void setEmail(std::string email);
 
 	//operators
@@ -61,6 +61,9 @@ public:
 
 //subclasse Contributor
 class Contributor: public Associado{
+	//construtor sem emails
+	Contributor(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio,
+				Cota* cota, std::string enderecoEmail);
 	Contributor(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio,
 			Cota* cota, std::string enderecoEmail,
 			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
@@ -77,9 +80,11 @@ public:
 };
 
 class Subscriber: public Associado{
+	//construtor sem emails
 	Subscriber(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio,
-			Cota* cota, std::string enderecoEmail,
-			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
+			Cota* cota, std::string enderecoEmail);
+	Subscriber(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio,
+			Cota* cota, std::string enderecoEmail, std::vector<Email*> emailsRecebidos);
 	std::vector<Email*> emailsRecebidos;
 public:
 	//metodos get

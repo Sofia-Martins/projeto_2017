@@ -23,6 +23,8 @@ private:
 
 public:
 	//construtor
+	AreaCientifica(){nomeArea = {}; siglaArea = {}; }; //construtor por defeito
+	AreaCientifica(std::string nomeArea); //construtor sem sigla
 	AreaCientifica(std::string nomeArea,std::string siglaArea);
 
 	//metodos set
@@ -32,6 +34,7 @@ public:
 	//metodos get
 	std::string getNomeAreaCientifica() const;
 	std::string getSiglaAreaCientifica() const;
+	std::vector<SubAreaCientifica*> getsubAreas() const {return subAreas;};
 
 
 	//outros metodos

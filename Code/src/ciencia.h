@@ -22,6 +22,7 @@ private:
 	std::vector<AreaCientifica*> areas;
 public:
 	//construtor
+	Ciencia(){nomeCiencia = "";};
 	Ciencia(std::string nomeCiencia);
 
 	//metodos set
@@ -29,6 +30,7 @@ public:
 
 	//metodos get
 	std::string getNomeCiencia() const;
+	std::vector<AreaCientifica*> getAreas() const{return areas;};
 
 	//outros metodos
 	void addAreaCientifica(AreaCientifica* area);

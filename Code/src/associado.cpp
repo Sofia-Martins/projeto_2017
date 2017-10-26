@@ -87,6 +87,12 @@ Contributor::Contributor(std::string nome, int ID, std::string password, std::st
 		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
 		std::vector<Email*> emailsRecebidos,
 		std::vector<Email*> emailsEnviados)
+:Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail){};
+
+Contributor::Contributor(std::string nome, int ID, std::string password, std::string instituicao,
+		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
+		std::vector<Email*> emailsRecebidos,
+		std::vector<Email*> emailsEnviados)
 :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail)
 {
 	this->emailsRecebidos = emailsRecebidos;
@@ -110,6 +116,12 @@ void Contributor::receberEmail(Email &email) {
 }
 
 //subclasse subscriber
+
+Subscriber::Subscriber(std::string nome, int ID, std::string password, std::string instituicao,
+		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
+		std::vector<Email*> emailsRecebidos,
+		std::vector<Email*> emailsEnviados) :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail){};
+
 
 Subscriber::Subscriber(std::string nome, int ID, std::string password, std::string instituicao,
 		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,

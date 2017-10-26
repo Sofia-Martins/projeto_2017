@@ -20,6 +20,7 @@ private:
 
 public:
 	//construtor
+	SubAreaCientifica() {nomeSubArea = ""; siglaSubArea = "";};
 	SubAreaCientifica(std::string nomeSubArea,std::string siglaSubArea);
 
 	//metodos set

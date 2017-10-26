@@ -139,11 +139,110 @@ void AssociacaoMS::menuAssociacoes(){
 	ficheiroGestores = associacoes[opcao - 1].second + "_gestores.txt";
 
 	//ler ficheiros...
-	lerAssociados(ac1, ficheiroAssociados);
+	DominioCientifico  DC = lerDominios(ficheiroDominios);
+	lerAssociados(ac1, ficheiroAssociados, DC);
 
 }
 
-void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados){
+DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
+	std::ifstream dac; //Dominios e Areas Cientificas
+	dac.open(ficheiroDominios);
+	char carater;
+	std::string ciencia, areaCientifica, subArea;
+	DominioCientifico dominioCientifico;
+
+	dac >> carater;
+	Ciencia c;
+	AreaCientifica ac;
+	SubAreaCientifica sac;
+
+	do
+	{
+
+		if (carater == '@')
+		{
+			if(c.getNomeCiencia() != "")
+				dominioCientifico.addCiencia(&c);
+
+			getline(dac, ciencia);
+			dac >> carater;
+			c.setNomeCiencia(ciencia);
+
+			if (carater == '#')
+			{
+				getline(dac, areaCientifica);
+				dac >> carater;
+				ac.setNomeAreaCientifica(areaCientifica);
+
+				while (carater == '*')
+				{
+					getline(dac, subArea);
+					dac >> carater;
+					std::string sigla = subArea.substr(subArea.length()-7, subArea.length() - 1);
+					sac.setNomeSubAreaCientifica(subArea);
+					sac.setSiglaSubAreaCientifica(sigla);
+
+					ac.addSubAreaCientifica(&sac);
+				}
+				c.addAreaCientifica(&ac);
+			}
+			else { dac.ignore(1000, '\n'); }
+		}
+
+		else
+		{
+			if (carater == '#')
+			{
+				getline(dac, areaCientifica);
+				dac >> carater;
+				AreaCientifica ac(areaCientifica);
+
+				while (carater == '*')
+				{
+					getline(dac, subArea);
+					dac >> carater;
+					std::string sigla = subArea.substr(subArea.length()-7, subArea.length() - 1);
+					SubAreaCientifica sac(subArea, sigla);
+
+					ac.addSubAreaCientifica(&sac);
+				}
+
+				c.addAreaCientifica(&ac);
+			}
+			else { dac.ignore(1000, '\n'); }
+		}
+
+
+	} while (!dac.eof());
+
+	//teste para confirmar que funciona
+/*
+	std::ofstream teste;
+	teste.open("teste.txt");
+
+		for (int i = 0; i < dominioCientifico.getCiencia().size(); i++)
+		{
+			teste << "@" << dominioCientifico.getCiencia().at(i) << std::endl;
+			for (int j = 0; j < dominioCientifico.getCiencia().at(i)->getAreas().size(); j++)
+			{
+				teste << "#" << dominioCientifico.getCiencia().at(i)->getAreas().at(j) << std::endl;
+				for (int k = 0; k < dominioCientifico.getCiencia().at(i)->getAreas().at(j)->getsubAreas().size(); k++)
+				{
+					teste << "*" << dominioCientifico.getCiencia().at(i)->getAreas().at(j)->getsubAreas().at(k) << std::endl;
+				}
+
+				teste << std::endl;
+			}
+
+			teste << std::endl;
+		}
+
+*/
+
+	return dominioCientifico;
+}
+
+void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados, DominioCientifico dominio){
 	std::ifstream streamAssociados;
 	streamAssociados.open(ficheiroAssociados);
 	std::string linhaFicheiro, nome, ID, password, instituicao, emDia, atraso, email, tema, subareas;
@@ -163,15 +262,16 @@ void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados)
 		getline(input,subareas); eliminateSpaces(subareas);
 
 		//verificar dominio, tema, subareas
-		//falta guardar na associacao correspondente, falta criar associacao
 		Associado a1;
 
+
+		//verificar o funcionamento
 		if(emDia == "sim")
-			Contributor(nome, std::stoul(ID), password, instituicao,
-					dominio, Cota(emDia,stoul(atraso)), email,{},{});
+			Contributor a1 = (nome, std::stoul(ID), password, instituicao,
+					dominio, Cota(emDia,stoul(atraso)), email);
 		else if (stoul(atraso) < 5)
-			Subscriber a1(nome, std::stoul(ID), password, instituicao,
-					dominio, Cota(emDia,stoul(atraso)), email,{});
+			Subscriber a1 = (nome, std::stoul(ID), password, instituicao,
+					dominio, Cota(emDia,stoul(atraso)), email);
 		else a1 = Associado(nome, std::stoul(ID), password, instituicao,
 				dominio, Cota(emDia,stoul(atraso)), email);
 

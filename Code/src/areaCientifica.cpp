@@ -10,6 +10,11 @@
 
 
 //construtor
+AreaCientifica::AreaCientifica(std::string nomeArea){
+	this->nomeArea = nomeArea;
+	this->siglaArea = {};
+}
+
 AreaCientifica::AreaCientifica(std::string nomeArea,std::string siglaArea)
 {
  this->nomeArea=nomeArea;
