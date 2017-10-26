@@ -7,10 +7,21 @@
 
 #include "associado.h"
 
-Associado::Associado(int ID, std::string nome, std::string instituicao,
+Associado::Associado(){
+	this->ID = 0;
+	this->nome = {};
+	this->password = {};
+	this->instituicao = {};
+	this->dominio = NULL;
+	this->cota = NULL;
+	this->enderecoEmail = {};
+}
+
+Associado::Associado(std::string nome, int ID, std::string password, std::string instituicao,
 		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail) {
 	this->ID = ID;
 	this->nome = nome;
+	this->password = password;
 	this->instituicao = instituicao;
 	this->dominio = dominio;
 	this->cota = cota;
@@ -52,6 +63,19 @@ void Associado::setEmail(std::string email) {
 	this->enderecoEmail = email;
 }
 
+//operator
+const Associado & Associado::operator= (const Associado & a){
+	if (this != &a){
+		this->ID = a.ID;
+		this->nome = a.nome;
+		this->password = a.password;
+		this->instituicao = a.instituicao;
+		this->dominio = a.dominio;
+		this->cota = a.cota;
+		this->enderecoEmail = a.enderecoEmail;
+	}
+}
+
 //excecao
 AssociadoRepetido::AssociadoRepetido(std::string nome) {
 	this->nome = nome;
@@ -59,11 +83,11 @@ AssociadoRepetido::AssociadoRepetido(std::string nome) {
 
 //subclasse contribuitor
 
-Contributor::Contributor(int ID, std::string nome, std::string instituicao,
+Contributor::Contributor(std::string nome, int ID, std::string password, std::string instituicao,
 		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
 		std::vector<Email*> emailsRecebidos,
 		std::vector<Email*> emailsEnviados)
-:Associado(ID, nome, instituicao, dominio, cota, enderecoEmail)
+:Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail)
 {
 	this->emailsRecebidos = emailsRecebidos;
 	this->emailsEnviados = emailsEnviados;
@@ -87,10 +111,10 @@ void Contributor::receberEmail(Email &email) {
 
 //subclasse subscriber
 
-Subscriber::Subscriber(int ID, std::string nome, std::string instituicao,
+Subscriber::Subscriber(std::string nome, int ID, std::string password, std::string instituicao,
 		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
 		std::vector<Email*> emailsRecebidos,
-		std::vector<Email*> emailsEnviados) :Associado(ID, nome, instituicao, dominio, cota, enderecoEmail)
+		std::vector<Email*> emailsEnviados) :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail)
 {
 	this->emailsRecebidos = emailsRecebidos;
 }

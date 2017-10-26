@@ -14,6 +14,8 @@ void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
 void clearScreen(); //pode (e deve) ser procurado um método melhor!!!
+void getID(unsigned int id);
+void getPassword(std::string pass);
 
 //variaveis globais
 std::string retornoMenu="/";
@@ -76,6 +78,8 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 	//se o ficheiro existir
 	ficheiroAssociacoes = nomeFicheiro;
 	lerAssociacoes(nomeFicheiro);
+
+	this->menuAssociacoes(); //selecionar associacao
 }
 void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 {
@@ -107,7 +111,102 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 
 }
 
+void AssociacaoMS::menuAssociacoes(){
+	unsigned int opcao = 0, i= 0;
+	bool valido;
+	std::cout <<"---- ESCOLHER ASSOCIACAO ----\n\n";
 
+	for(i ; i < associacoes.size(); i++)
+		std::cout << i+1 << ". " << associacoes[i].first;
+
+	do
+	{
+		getNumber(opcao,"Opcao: ");
+		if(opcao > associacoes.size())
+			valido = false;
+		else valido = true;
+
+		if(std::cin.eof())
+			this->menuTermino();
+	}while(!valido);
+
+	Associacao ac1(associacoes[opcao - 1].first, {}, {}, {}, {} ); //criar associacao
+	ficheiroAssociados = associacoes[opcao - 1].second + "_associados.txt"; //Confirmar q é o second!
+	ficheiroConferencias = associacoes[opcao - 1].second + "_conferencias.txt";
+	ficheiroDominios = associacoes[opcao - 1].second + "_dominios.txt";
+	ficheiroEmails = associacoes[opcao - 1].second + "_emails.txt";
+	ficheiroEscolasVerao = associacoes[opcao - 1].second + "_escolaVerao.txt";
+	ficheiroGestores = associacoes[opcao - 1].second + "_gestores.txt";
+
+	//ler ficheiros...
+	lerAssociados(ac1, ficheiroAssociados);
+
+}
+
+void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados){
+	std::ifstream streamAssociados;
+	streamAssociados.open(ficheiroAssociados);
+	std::string linhaFicheiro, nome, ID, password, instituicao, emDia, atraso, email, tema, subareas;
+
+
+	while(!streamAssociados.eof()){
+		getline(streamAssociados, linhaFicheiro);
+		std::stringstream input(linhaFicheiro);
+		getline(input,nome,','); eliminateSpaces(nome);
+		getline(input,ID,','); eliminateSpaces(ID);
+		getline(input,password,','); eliminateSpaces(password);
+		getline(input,instituicao,','); eliminateSpaces(instituicao);
+		getline(input,emDia,','); eliminateSpaces(emDia);
+		getline(input,atraso,','); eliminateSpaces(atraso);
+		getline(input,email,';'); eliminateSpaces(email);
+		getline(input,tema,';'); eliminateSpaces(tema);
+		getline(input,subareas); eliminateSpaces(subareas);
+
+		//verificar dominio, tema, subareas
+		//falta guardar na associacao correspondente, falta criar associacao
+		Associado a1;
+
+		if(emDia == "sim")
+			Contributor(nome, std::stoul(ID), password, instituicao,
+					dominio, Cota(emDia,stoul(atraso)), email,{},{});
+		else if (stoul(atraso) < 5)
+			Subscriber a1(nome, std::stoul(ID), password, instituicao,
+					dominio, Cota(emDia,stoul(atraso)), email,{});
+		else a1 = Associado(nome, std::stoul(ID), password, instituicao,
+				dominio, Cota(emDia,stoul(atraso)), email);
+
+		ac1.addAssociado(a1);
+
+	}
+
+}
+
+void AssociacaoMS::menuLogin(){
+	std::cout <<"---- LOGIN ----\n\n";
+	std::cout <<"1. Sign up\n";
+	std::cout <<"2. Sign in\n";
+	unsigned int opcao=0, id = 0;
+	std::string password;
+
+	do
+	{
+		getNumber(opcao,"Opcao: ");
+		if(std::cin.eof())
+			this->menuTermino();
+	}while(!((opcao==1) || (opcao==2)));
+
+	if(opcao == 1){
+		//cria conta com id automatico
+	}
+
+	if(opcao == 2){
+		//acede a conta da lista associados
+		std::cout <<"---- SIGN IN ----\n\n";
+		getID(id);
+		getPassword(password);
+
+	}
+}
 
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()
@@ -249,3 +348,14 @@ void clearScreen() //pode (e deve) ser procurado um método melhor!!!
   {
     std::cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
   }
+
+//ACABARRR!!!!!!!
+void getID(unsigned int id){
+	getNumber(id,"ID: ");
+
+}
+
+void getPassword(std::string pass){
+	getString(pass,"Password: ");
+
+}

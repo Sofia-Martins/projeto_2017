@@ -9,10 +9,11 @@
 #include "associacao.h"
 
 Associacao::Associacao(std::string nome, std::vector<Evento*> eventos,
-		std::vector<Email*> emails, std::vector<Gestor*> gestores){
+		std::vector<Email*> emails, std::vector<Associado*> associados, std::vector<Gestor*> gestores){
 	this->nome = nome;
 	this->eventos = eventos;
 	this->emails = emails;
+	this->associados = associados;
 	this->gestores = gestores;
 }
 

@@ -28,7 +28,8 @@ private:
 
 
 public:
-	Associado(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio, Cota* cota, std::string enderecoEmail);
+	Associado();
+	Associado(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio, Cota* cota, std::string enderecoEmail);
 	//metodos get
 	int getID() const;
 	std::string getNome() const;
@@ -45,6 +46,9 @@ public:
 	//void setCota(Cota cota);
 	void setEmail(std::string email);
 
+	//operators
+	const Associado & operator= (const Associado & a);
+
 };
 
 class AssociadoRepetido{
@@ -57,7 +61,7 @@ public:
 
 //subclasse Contributor
 class Contributor: public Associado{
-	Contributor(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+	Contributor(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio,
 			Cota* cota, std::string enderecoEmail,
 			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
 	std::vector<Email*> emailsRecebidos;
@@ -73,7 +77,7 @@ public:
 };
 
 class Subscriber: public Associado{
-	Subscriber(int ID, std::string nome, std::string instituicao, DominioCientifico* dominio,
+	Subscriber(std::string nome, int ID, std::string password, std::string instituicao, DominioCientifico* dominio,
 			Cota* cota, std::string enderecoEmail,
 			std::vector<Email*> emailsRecebidos,std::vector<Email*> emailsEnviados);
 	std::vector<Email*> emailsRecebidos;

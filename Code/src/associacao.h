@@ -28,7 +28,8 @@ private:
 
 public:
 
-	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails, std::vector<Gestor*> gestores);
+	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails,
+			std::vector<Associado*> associados, std::vector<Gestor*> gestores);
 
 	//metodos get
 	std::string getNome() const;

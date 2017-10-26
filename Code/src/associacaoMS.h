@@ -20,6 +20,7 @@
 #include <climits>
 #include <utility>  //std::pair
 #include "associacao.h"
+#include "associado.h"
 
 
 
@@ -45,6 +46,9 @@ public:
 	void menuFicheiroAssociacoes();
 	void menuFicheiroAssociacoesSelecao();
 	void lerAssociacoes(std::string ficheiroAssociacoes);
+	void menuAssociacoes();
+	void lerAssociados(Associacao ac1, std::string ficheiroAssociados);
+	void menuLogin();
 
 	//menu final
 	void menuTermino();
