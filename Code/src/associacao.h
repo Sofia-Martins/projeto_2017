@@ -43,7 +43,7 @@ public:
 	//metodos set
 	void setNome(std::string nome);
 	void setSigla(std::string sigla);
-	void setDominio(DominioCientifico dominio) {this->dominioAssociacao->ciencias = dominio.getCiencia();} ;
+	void setDominio(DominioCientifico dominio) {this->dominioAssociacao->setCiencia(dominio.getCiencia());}
 
 	//other metodos
 	void addEmail(Email &email);

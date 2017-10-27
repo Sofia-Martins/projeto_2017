@@ -27,6 +27,9 @@ public:
 	void addSubAreaCientifica(SubAreaCientifica* subArea);
 	//metodos get
 	std::vector<Ciencia*> getCiencia() const;
+
+	//metodos ser
+	void setCiencia(std::vector<Ciencia*> ciencias) {this->ciencias = ciencias;}
 };
 
 

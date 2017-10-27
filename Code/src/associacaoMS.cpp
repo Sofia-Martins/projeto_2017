@@ -13,7 +13,7 @@ bool hasChar(std::string &string);
 void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
-void clearScreen(); //pode (e deve) ser procurado um método melhor!!!
+void clearScreen(); //pode (e deve) ser procurado um metodo melhor!!!
 void getID(Associacao *ac1, unsigned int id, std::string pass);
 void getPassword(Associacao *ac1, std::string pass);
 
@@ -492,7 +492,7 @@ void getNumber(unsigned int &number, const std::string &question) {
 		number = std::stoul(number_string);
 }
 
-void clearScreen() //pode (e deve) ser procurado um método melhor!!!
+void clearScreen() //pode (e deve) ser procurado um metodo melhor!!!
   {
     std::cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
   }

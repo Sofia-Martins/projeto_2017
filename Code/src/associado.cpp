@@ -84,9 +84,7 @@ AssociadoRepetido::AssociadoRepetido(std::string nome) {
 //subclasse contribuitor
 
 Contributor::Contributor(std::string nome, int ID, std::string password, std::string instituicao,
-		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
-		std::vector<Email*> emailsRecebidos,
-		std::vector<Email*> emailsEnviados)
+		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail)
 :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail){};
 
 Contributor::Contributor(std::string nome, int ID, std::string password, std::string instituicao,
@@ -118,15 +116,12 @@ void Contributor::receberEmail(Email &email) {
 //subclasse subscriber
 
 Subscriber::Subscriber(std::string nome, int ID, std::string password, std::string instituicao,
-		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
-		std::vector<Email*> emailsRecebidos,
-		std::vector<Email*> emailsEnviados) :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail){};
+		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail) :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail){};
 
 
 Subscriber::Subscriber(std::string nome, int ID, std::string password, std::string instituicao,
 		DominioCientifico* dominio, Cota* cota, std::string enderecoEmail,
-		std::vector<Email*> emailsRecebidos,
-		std::vector<Email*> emailsEnviados) :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail)
+		std::vector<Email*> emailsRecebidos) :Associado(nome, ID, password, instituicao, dominio, cota, enderecoEmail)
 {
 	this->emailsRecebidos = emailsRecebidos;
 }
