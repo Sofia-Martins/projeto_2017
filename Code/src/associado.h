@@ -13,7 +13,7 @@
 #include "cota.h"
 #include "email.h"
 #include "dominioCientifico.h"
-#include "evento.h"
+
 
 
 class Associado{
@@ -44,11 +44,14 @@ public:
 	void setNome(std::string nome);
 	void setPassword(std::string pass);
 	void setInstituicao(std::string instituicao);
-	void setDominio(DominioCientifico dominio){this->dominio->ciencias = dominio.ciencias;};
-	void setCota(Cota cota){this->cota->getAtraso() = cota.getAtraso(); this->cota->getEmDia() = cota.getEmDia(); };
+	void setDominio(DominioCientifico *dominio){this->dominio->ciencias = dominio->getCiencia();};
+	void setCota(Cota *cota){
+		this->cota->getAtraso() = cota->getAtraso();
+		this->cota->getEmDia() = cota->getEmDia();
+	};
 	void setEmail(std::string email);
 	void setEventos(std::vector<std::string> eventos){this->eventos = eventos;};
-	void setAreasInteresse(std::vector<std::string> areasInteresse){this->areasInteresse};
+	void setAreasInteresse(std::vector<std::string> areasInteresse){this->areasInteresse;};
 
 	//operators
 	const Associado & operator= (const Associado & a);

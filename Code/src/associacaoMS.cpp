@@ -141,6 +141,7 @@ void AssociacaoMS::menuAssociacoes(){
 	//ler ficheiros...
 	DominioCientifico  DC = lerDominios(ficheiroDominios);
 	lerAssociados(&ac1, ficheiroAssociados, DC);
+	ac1.setDominio(DC);
 
 	this->menuLogin(&ac1);
 }
@@ -324,6 +325,9 @@ void AssociacaoMS::menuLogin(Associacao *ac1){
 
 	if(opcao == 1){
 		//cria conta com id automatico
+		std::cout <<"---- SIGN UP ----\n\n";
+		this->criaConta(ac1);
+
 	}
 
 	if(opcao == 2){
@@ -333,6 +337,23 @@ void AssociacaoMS::menuLogin(Associacao *ac1){
 		//caso validado acede a menu seguinte. ***Ver funcao getPassword***
 
 	}
+}
+
+void criaConta(Associacao *ac1){
+	std::string nome, password, instituicao, email;
+	int ID = ac1->getAssociados().at( ac1->getAssociados().size() -1 ) + 1;
+
+	getString(nome, "Nome: ");
+	getString(password, "Password: ");
+	getString(instituicao, "Instituicao: ");
+	getString(email, "Endereco de email: ");
+
+	Cota cota(true,0);
+
+	Contributor &a(nome, ID, password, instituicao, ac1->getDominio(), cota, email);
+
+	ac1->getAssociados().push_back(&a);
+
 }
 
 /*------------------------------------------- menu final -------------------------------------------*/

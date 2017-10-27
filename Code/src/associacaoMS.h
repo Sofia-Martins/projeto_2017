@@ -52,6 +52,7 @@ public:
 	DominioCientifico lerDominios(std::string ficheiroDominios);
 	void lerAssociados(Associacao *ac1, std::string ficheiroAssociados, DominioCientifico dominio);
 	void menuLogin(Associacao *ac1);
+	void criaConta(Associacao *ac1);
 
 	//menu final
 	void menuTermino();
