@@ -8,8 +8,18 @@
 
 #include "associacao.h"
 
+Associacao::Associacao(std::string nome){
+	this->nome = nome;
+	this->dominioAssociacao = NULL;
+	this->eventos = {};
+	this->emails = {};
+	this->associados = {};
+	this->gestores = {};
+}
+
 Associacao::Associacao(std::string nome, std::vector<Evento*> eventos,
 		std::vector<Email*> emails, std::vector<Associado*> associados, std::vector<Gestor*> gestores){
+	this->dominioAssociacao = NULL;
 	this->nome = nome;
 	this->eventos = eventos;
 	this->emails = emails;

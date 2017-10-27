@@ -27,7 +27,7 @@ private:
 	std::vector<Gestor*> gestores;
 
 public:
-
+	Associacao(std::string nome);
 	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails,
 			std::vector<Associado*> associados, std::vector<Gestor*> gestores);
 
