@@ -15,8 +15,9 @@ void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
 void clearScreen(); //pode (e deve) ser procurado um metodo melhor!!!
-void getID(Associacao *ac1, unsigned int id, std::string pass);
-void getPassword(Associacao *ac1, std::string pass);
+void getID(Associacao &ac1, unsigned int id, std::string pass);
+void getPassword(Associacao &ac1, std::string pass);
+void criaConta(Associacao &ac1);
 
 //variaveis globais
 std::string retornoMenu="/";
@@ -141,10 +142,10 @@ void AssociacaoMS::menuAssociacoes(){
 
 	//ler ficheiros...
 	DominioCientifico  DC = lerDominios(ficheiroDominios);
-	lerAssociados(&ac1, ficheiroAssociados, DC);
+	lerAssociados(ac1, ficheiroAssociados, &DC);
 	ac1.setDominio(DC);
 
-	this->menuLogin(&ac1);
+	this->menuLogin(ac1);
 }
 
 DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
@@ -245,10 +246,10 @@ DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
 	return dominioCientifico;
 }
 
-void AssociacaoMS::lerAssociados(Associacao *ac1, std::string ficheiroAssociados, DominioCientifico dominio){
+void AssociacaoMS::lerAssociados(Associacao &ac1, std::string ficheiroAssociados, DominioCientifico *dominio){
 	std::ifstream streamAssociados;
 	streamAssociados.open(ficheiroAssociados);
-	std::string linhaFicheiro, nome, ID, password, instituicao, emDia, atraso, email, tema, subareas;
+	std::string linhaFicheiro, nome, ID, password, instituicao, emDiaString, atraso, email, tema, subareas;
 
 
 	while(!streamAssociados.eof()){
@@ -258,25 +259,24 @@ void AssociacaoMS::lerAssociados(Associacao *ac1, std::string ficheiroAssociados
 		getline(input,ID,','); eliminateSpaces(ID);
 		getline(input,password,','); eliminateSpaces(password);
 		getline(input,instituicao,','); eliminateSpaces(instituicao);
-		getline(input,emDia,','); eliminateSpaces(emDia);
+		getline(input,emDiaString,','); eliminateSpaces(emDiaString);
 		getline(input,atraso,','); eliminateSpaces(atraso);
 		getline(input,email,';'); eliminateSpaces(email);
 		getline(input,tema,';'); eliminateSpaces(tema);
 		getline(input,subareas); eliminateSpaces(subareas);
 
-		//verificar dominio, tema, subareas
-		Associado a1;
+		bool emDia;
+		if(emDiaString == "sim")
+			emDia = true;
+		else emDia = false;
 
+		Cota *cota = new Cota(emDia, std::stoul(atraso));
+		Associado *a1 = new Associado(nome, std::stoul(ID), password, instituicao, cota, email);
 
-		//verificar o funcionamento
-		if(emDia == "sim")
-			Contributor a1 = (nome, std::stoul(ID), password, instituicao,
-					dominio, Cota(emDia,stoul(atraso)), email);
-		else if (stoul(atraso) < 5)
-			Subscriber a1 = (nome, std::stoul(ID), password, instituicao,
-					dominio, Cota(emDia,stoul(atraso)), email);
-		else a1 = Associado(nome, std::stoul(ID), password, instituicao,
-				dominio, Cota(emDia,stoul(atraso)), email);
+		if(emDia)
+			Contributor a1();
+		else if (std::stoul(atraso) < 5)
+			Subscriber a1();
 
 		//guardar temas de eventos
 		std::vector<std::string> v_eventos;
@@ -288,7 +288,7 @@ void AssociacaoMS::lerAssociados(Associacao *ac1, std::string ficheiroAssociados
 
 		} while (tema.find_first_of(",") != tema.size() - 1);
 
-		a1.setEventos(v_eventos);
+		a1->setEventos(v_eventos);
 
 
 		//guardar subareas de interesse
@@ -301,16 +301,16 @@ void AssociacaoMS::lerAssociados(Associacao *ac1, std::string ficheiroAssociados
 
 		} while (subareas.find_first_of(",") != subareas.size() - 1);
 
-		a1.setAreasInteresse(v_subareas);
+		a1->setAreasInteresse(v_subareas);
 
 
-		ac1->addAssociado(a1);
+		ac1.addAssociado(*a1);
 
 	}
 
 }
 
-void AssociacaoMS::menuLogin(Associacao *ac1){
+void AssociacaoMS::menuLogin(Associacao &ac1){
 	std::cout <<"---- LOGIN ----\n\n";
 	std::cout <<"1. Sign up\n";
 	std::cout <<"2. Sign in\n";
@@ -327,7 +327,7 @@ void AssociacaoMS::menuLogin(Associacao *ac1){
 	if(opcao == 1){
 		//cria conta com id automatico
 		std::cout <<"---- SIGN UP ----\n\n";
-		this->criaConta(ac1);
+		criaConta(ac1);
 
 	}
 
@@ -340,20 +340,20 @@ void AssociacaoMS::menuLogin(Associacao *ac1){
 	}
 }
 
-void criaConta(Associacao *ac1){
+void criaConta(Associacao &ac1){
 	std::string nome, password, instituicao, email;
-	int ID = ac1->getAssociados().at( ac1->getAssociados().size() -1 ) + 1;
+	int ID = ac1.getAssociados().at( ac1.getAssociados().size() -1 )->getID() + 1; //falta ordernar vetor!!!!!
 
 	getString(nome, "Nome: ");
 	getString(password, "Password: ");
 	getString(instituicao, "Instituicao: ");
 	getString(email, "Endereco de email: ");
 
-	Cota cota(true,0);
+	Cota *cota = new Cota(true,0);
 
-	Contributor &a(nome, ID, password, instituicao, ac1->getDominio(), cota, email);
+	Contributor *a = new Contributor(nome, ID, password, instituicao, cota, email);
 
-	ac1->getAssociados().push_back(&a);
+	ac1.getAssociados().push_back(a);
 
 }
 
@@ -499,13 +499,13 @@ void clearScreen() //pode (e deve) ser procurado um metodo melhor!!!
   }
 
 //ACABARRR!!!!!!!
-void getID(Associacao *ac1, unsigned int id, std::string pass){
+void getID(Associacao &ac1, unsigned int id, std::string pass){
 	bool IDvalido = false;
 	do {
 		getNumber(id, "ID: ");
 
-		for (int i = 0; i < ac1->getAssociados().size(); i++)
-			if (ac1->getAssociados().at(i)->getID() == id) //ID valido
+		for (int i = 0; i < ac1.getAssociados().size(); i++)
+			if (ac1.getAssociados().at(i)->getID() == id) //ID valido
 				IDvalido = true;
 		if (IDvalido)
 			getPassword(ac1, pass);
@@ -515,12 +515,12 @@ void getID(Associacao *ac1, unsigned int id, std::string pass){
 
 }
 
-void getPassword(Associacao *ac1, std::string pass){
+void getPassword(Associacao &ac1, std::string pass){
 	bool PassValida = false;
 	do {
 		getString(pass, "Password: ");
-		for (int i = 0; i < ac1->getAssociados().size(); i++)
-			if (ac1->getAssociados().at(i)->getPassword() == pass) //pass valido
+		for (int i = 0; i < ac1.getAssociados().size(); i++)
+			if (ac1.getAssociados().at(i)->getPassword() == pass) //pass valido
 				PassValida = true;
 		if (!PassValida)
 			std::cout << "Password invalid<!! \n\n";
