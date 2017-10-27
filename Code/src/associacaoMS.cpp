@@ -73,8 +73,12 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 			std::cin.clear();
 			menuBemVindo(); //se o utilizador inseriu CTRL+D
 		}
+		std::cout << nomeFicheiro << "\n\n";
+
 		nomeFicheiro = nomeFicheiro + ".txt";
 		streamAssociacoes.open(nomeFicheiro);
+		if(streamAssociacoes.is_open())
+			std::cout << "Open!\n\n";
 	} while (streamAssociacoes.fail());
 
 	//se o ficheiro existir
@@ -93,23 +97,16 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 	while(!streamAssociacoes.eof())
 	{
 		getline(streamAssociacoes,linhaFicheiro); //linha que tem a sigla e nome da associacao
-		std::istringstream ssFicheiro(linhaFicheiro);
+		std::stringstream ssFicheiro(linhaFicheiro);
 		getline(ssFicheiro,siglaAssociacao,';');
 		getline(ssFicheiro,nomeAssociacao);
-		eliminateSpaces(nomeAssociacao);
-		eliminateSpaces(siglaAssociacao);
+		//eliminateSpaces(nomeAssociacao);
+		//eliminateSpaces(siglaAssociacao);
 
 		//acrescentar a sigla e nome da associacao ao vetor associacoes
 		associacoes.push_back(std::pair<std::string,std::string>(siglaAssociacao,nomeAssociacao));
 	}
 
-
-	for(int i=0;i<associacoes.size();i++)
-	{
-		using namespace std;
-		cout <<"Nome da associacao: "<<associacoes.at(i).first<<"\n";
-		cout <<"Sigla da associacao: "<<associacoes.at(i).second<<"\n\n";
-	}
 
 }
 
@@ -146,6 +143,7 @@ void AssociacaoMS::menuAssociacoes(){
 	ac1.setDominio(DC);
 
 	this->menuLogin(ac1);
+
 }
 
 DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
