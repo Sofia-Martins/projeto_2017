@@ -14,8 +14,8 @@ void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
 void clearScreen(); //pode (e deve) ser procurado um método melhor!!!
-void getID(unsigned int id);
-void getPassword(std::string pass);
+void getID(Associacao *ac1, unsigned int id, std::string pass);
+void getPassword(Associacao *ac1, std::string pass);
 
 //variaveis globais
 std::string retornoMenu="/";
@@ -140,8 +140,9 @@ void AssociacaoMS::menuAssociacoes(){
 
 	//ler ficheiros...
 	DominioCientifico  DC = lerDominios(ficheiroDominios);
-	lerAssociados(ac1, ficheiroAssociados, DC);
+	lerAssociados(&ac1, ficheiroAssociados, DC);
 
+	this->menuLogin(&ac1);
 }
 
 DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
@@ -242,7 +243,7 @@ DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
 	return dominioCientifico;
 }
 
-void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados, DominioCientifico dominio){
+void AssociacaoMS::lerAssociados(Associacao *ac1, std::string ficheiroAssociados, DominioCientifico dominio){
 	std::ifstream streamAssociados;
 	streamAssociados.open(ficheiroAssociados);
 	std::string linhaFicheiro, nome, ID, password, instituicao, emDia, atraso, email, tema, subareas;
@@ -275,6 +276,19 @@ void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados,
 		else a1 = Associado(nome, std::stoul(ID), password, instituicao,
 				dominio, Cota(emDia,stoul(atraso)), email);
 
+		//guardar temas de eventos
+		std::vector<std::string> v_eventos;
+		do
+		{
+			int p1 = tema.find_first_of(","); // posicao da vírgula
+			v_eventos.push_back(tema.substr(1, p1 - 1));
+			tema = tema.substr(p1 + 1);
+
+		} while (tema.find_first_of(",") != tema.size() - 1);
+
+		a1.setEventos(v_eventos);
+
+
 		//guardar subareas de interesse
 		std::vector<std::string> v_subareas;
 		do
@@ -288,13 +302,13 @@ void AssociacaoMS::lerAssociados(Associacao ac1, std::string ficheiroAssociados,
 		a1.setAreasInteresse(v_subareas);
 
 
-		ac1.addAssociado(a1);
+		ac1->addAssociado(a1);
 
 	}
 
 }
 
-void AssociacaoMS::menuLogin(){
+void AssociacaoMS::menuLogin(Associacao *ac1){
 	std::cout <<"---- LOGIN ----\n\n";
 	std::cout <<"1. Sign up\n";
 	std::cout <<"2. Sign in\n";
@@ -315,8 +329,8 @@ void AssociacaoMS::menuLogin(){
 	if(opcao == 2){
 		//acede a conta da lista associados
 		std::cout <<"---- SIGN IN ----\n\n";
-		getID(id);
-		getPassword(password);
+		getID(ac1, id, password);
+		//caso validado acede a menu seguinte. ***Ver funcao getPassword***
 
 	}
 }
@@ -463,12 +477,31 @@ void clearScreen() //pode (e deve) ser procurado um método melhor!!!
   }
 
 //ACABARRR!!!!!!!
-void getID(unsigned int id){
-	getNumber(id,"ID: ");
+void getID(Associacao *ac1, unsigned int id, std::string pass){
+	bool IDvalido = false;
+	do {
+		getNumber(id, "ID: ");
+
+		for (int i = 0; i < ac1->getAssociados().size(); i++)
+			if (ac1->getAssociados().at(i)->getID() == id) //ID valido
+				IDvalido = true;
+		if (IDvalido)
+			getPassword(ac1, pass);
+		else
+			std::cout << "ID invalido!! \n\n";
+	} while (!IDvalido);
 
 }
 
-void getPassword(std::string pass){
-	getString(pass,"Password: ");
-
+void getPassword(Associacao *ac1, std::string pass){
+	bool PassValida = false;
+	do {
+		getString(pass, "Password: ");
+		for (int i = 0; i < ac1->getAssociados().size(); i++)
+			if (ac1->getAssociados().at(i)->getPassword() == pass) //pass valido
+				PassValida = true;
+		if (!PassValida)
+			std::cout << "Password invalid<!! \n\n";
+		//else acede a menu seguinte!!!
+	} while (!PassValida);
 }

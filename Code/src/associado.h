@@ -25,7 +25,7 @@ private:
 	DominioCientifico* dominio;
 	Cota* cota;
 	std::string enderecoEmail;
-	std::vector<Evento*> eventos = {};
+	std::vector<std::string> eventos = {};
 	std::vector<std::string> areasInteresse = {};
 
 public:
@@ -35,6 +35,7 @@ public:
 	int getID() const;
 	std::string getNome() const;
 	std::string getInstituicao() const;
+	std::string getPassword() const {return this->password;};
 	//DominioCientifico getDominio() const;
 	//Cota getCota() const;
 	std::string getEmail() const;
@@ -46,7 +47,7 @@ public:
 	void setDominio(DominioCientifico dominio){this->dominio->ciencias = dominio.ciencias;};
 	void setCota(Cota cota){this->cota->getAtraso() = cota.getAtraso(); this->cota->getEmDia() = cota.getEmDia(); };
 	void setEmail(std::string email);
-	void setEventos(std::vector<Evento*> eventos){this->eventos = eventos;};
+	void setEventos(std::vector<std::string> eventos){this->eventos = eventos;};
 	void setAreasInteresse(std::vector<std::string> areasInteresse){this->areasInteresse};
 
 	//operators

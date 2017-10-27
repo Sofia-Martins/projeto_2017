@@ -50,8 +50,8 @@ public:
 	void lerAssociacoes(std::string ficheiroAssociacoes);
 	void menuAssociacoes();
 	DominioCientifico lerDominios(std::string ficheiroDominios);
-	void lerAssociados(Associacao ac1, std::string ficheiroAssociados, DominioCientifico dominio);
-	void menuLogin();
+	void lerAssociados(Associacao *ac1, std::string ficheiroAssociados, DominioCientifico dominio);
+	void menuLogin(Associacao *ac1);
 
 	//menu final
 	void menuTermino();
