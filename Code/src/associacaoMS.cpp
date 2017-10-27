@@ -7,6 +7,7 @@
 
 #include "associacaoMS.h"
 
+
 //declaracao de algumas funcoes
 
 bool hasChar(std::string &string);
