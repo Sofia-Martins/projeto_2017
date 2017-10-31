@@ -73,9 +73,10 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 			std::cin.clear();
 			menuBemVindo(); //se o utilizador inseriu CTRL+D
 		}
-		std::cout << nomeFicheiro << "\n\n";
+		
 
 		nomeFicheiro = nomeFicheiro + ".txt";
+		std::cout << nomeFicheiro;
 		streamAssociacoes.open(nomeFicheiro);
 		if(streamAssociacoes.is_open())
 			std::cout << "Open!\n\n";
@@ -100,8 +101,8 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 		std::stringstream ssFicheiro(linhaFicheiro);
 		getline(ssFicheiro,siglaAssociacao,';');
 		getline(ssFicheiro,nomeAssociacao);
-		//eliminateSpaces(nomeAssociacao);
-		//eliminateSpaces(siglaAssociacao);
+		eliminateSpaces(nomeAssociacao);
+		eliminateSpaces(siglaAssociacao);
 
 		//acrescentar a sigla e nome da associacao ao vetor associacoes
 		associacoes.push_back(std::pair<std::string,std::string>(siglaAssociacao,nomeAssociacao));
@@ -111,12 +112,13 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 }
 
 void AssociacaoMS::menuAssociacoes(){
-	unsigned int opcao = 0, i= 0;
+	clearScreen();
+	unsigned int opcao = 0;
 	bool valido;
 	std::cout <<"---- ESCOLHER ASSOCIACAO ----\n\n";
 
-	for(i ; i < associacoes.size(); i++)
-		std::cout << i+1 << ". " << associacoes[i].first;
+	for (unsigned int i = 0; i < associacoes.size(); i++)
+		std::cout << i + 1 << ". " << associacoes.at(i).second << std::endl;
 
 	do
 	{
@@ -125,8 +127,11 @@ void AssociacaoMS::menuAssociacoes(){
 			valido = false;
 		else valido = true;
 
-		if(std::cin.eof())
-			this->menuTermino();
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuFicheiroAssociacoes();
+		}
 	}while(!valido);
 
 	Associacao ac1(associacoes[opcao - 1].first, {}, {}, {}, {} ); //criar associacao
@@ -365,56 +370,7 @@ void AssociacaoMS::menuTermino()
 
 }
 
-/*
- void AssociacaoMS::menu(){
 
- std::ifstream fAssociados, fDominios, fEventos, fGestores, fEmails; // ?
- std::string input;
- bool validFile;
-
- std::cout << "Bem-Vindo à APIC!\n\n";
-
- do{
- //pedir ficheiros
- std::cout <<"Ficheiro de associados: ";
- std::cin >> input;
- fAssociados.open(input + ".txt");
-
- std::cout <<"Ficheiro de dominios cientificos: ";
- std::cin >> input;
- fDominios.open(input + ".txt");
-
- std::cout <<"Ficheiro de eventos: ";
- std::cin >> input;
- fEventos.open(input + ".txt");
-
- std::cout <<"Ficheiro de gestores: ";
- std::cin >> input;
- fGestores.open(input + ".txt");
-
- std::cout <<"Ficheiro de emails: ";
- std::cin >> input;
- fEmails.open(input + ".txt");
-
- //se file associados nao existe
- if(fAssociados.fail()){
- validFile = false;
- std::cout << "Parece que a associacao esta um pouco vazia! \n Pretende criar um gestor ? (Yes/No) \n";
- std::cin >> input;
- switch(input){
- case "Yes":
- //criar gestor
- validFile = true;
- break;
- case "No" :
- std::cin.clear();
- break; //volta a pedir file
- }
- }
-
- }while(!validFile);
- }
- */
 
 //funcoes relacionadas com inputs do utilizador ///////////////////////////////////////////
 bool hasChar(std::string &string) {
@@ -493,7 +449,7 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() //pode (e deve) ser procurado um metodo melhor!!!
   {
-    std::cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	system("CLS");
   }
 
 //ACABARRR!!!!!!!
