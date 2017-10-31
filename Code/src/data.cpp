@@ -94,7 +94,3 @@ std::string Data::getData() const
 	string s = stringDia + "/" + stringMes+"/"+stringAno+" "+stringHora+":"+stringMinuto;
 	return s;
 }
-
-
-
-

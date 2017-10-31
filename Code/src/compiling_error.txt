@@ -1,0 +1,4 @@
+/media/sofia/TOSHIBA EXT/FEUP/ano_2/aeda/projeto_2017/Code/src/data.cpp: In member function ‘std::__cxx11::string Data::getData() const’:
+/media/sofia/TOSHIBA EXT/FEUP/ano_2/aeda/projeto_2017/Code/src/data.cpp:88:47: error: ‘to_string’ was not declared in this scope
+  string stringDia=to_string((unsigned long)dia);
+                                               ^

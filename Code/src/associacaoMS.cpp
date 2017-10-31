@@ -114,7 +114,7 @@ void AssociacaoMS::menuTermino()
 {
 	clearScreen(); //apagar conteudo do ecra
 	std::cout<<"Obrigada pela visita! Ate `a proxima! :-D\n\n";
-	sleep(5);
+	//sleep(5);
 	exit(0);
 
 }

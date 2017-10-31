@@ -14,7 +14,7 @@
 #include <string>
 #include <sstream>
 #include <cstdlib>
-#include <unistd.h>  //funcao sleep() em linux
+//#include <unistd.h>  //funcao sleep() em linux
 #include <stdlib.h>
 #include <stdio.h>
 #include <climits>
@@ -33,7 +33,7 @@ private:
 	std::string ficheiroEmails;
 	std::string ficheiroEscolasVerao;
 	std::string ficheiroGestores;
-	std::vector<std::pair<std::string,std::string>> associacoes; //siglas e nomes das associacoes
+	std::vector<std::pair<std::string,std::string > > associacoes; //siglas e nomes das associacoes
 
 public:
 
