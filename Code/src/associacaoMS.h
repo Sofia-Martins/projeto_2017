@@ -20,7 +20,10 @@
 #include <climits>
 #include <utility>  //std::pair
 #include "associacao.h"
-
+#include "associado.h"
+#include "areaCientifica.h"
+#include "dominioCientifico.h"
+#include "subAreaCientifica.h"
 
 
 class AssociacaoMS{
@@ -45,6 +48,11 @@ public:
 	void menuFicheiroAssociacoes();
 	void menuFicheiroAssociacoesSelecao();
 	void lerAssociacoes(std::string ficheiroAssociacoes);
+	void menuAssociacoes();
+	DominioCientifico lerDominios(std::string ficheiroDominios);
+	void lerAssociados(Associacao &ac1, std::string ficheiroAssociados, DominioCientifico *dominio);
+	void menuLogin(Associacao &ac1);
+
 
 	//menu final
 	void menuTermino();

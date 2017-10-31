@@ -34,6 +34,11 @@ void DominioCientifico::addCiencia(Ciencia* ciencia)
 
 }
 
+//metodos get
+std::vector<Ciencia*> DominioCientifico::getCiencia() const{
+	return ciencias;
+}
+
 //excecoes
 CienciaRepetida::CienciaRepetida(Ciencia* ciencia)
 {
