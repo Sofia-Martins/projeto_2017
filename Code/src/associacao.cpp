@@ -8,14 +8,15 @@
 
 #include "associacao.h"
 
-Associacao::Associacao(std::string nome){
-	this->nome = nome;
+Associacao::Associacao(){
+	
 	this->dominioAssociacao = NULL;
 	this->eventos = {};
 	this->emails = {};
 	this->associados = {};
 	this->gestores = {};
 }
+
 
 Associacao::Associacao(std::string nome, std::vector<Evento*> eventos,
 		std::vector<Email*> emails, std::vector<Associado*> associados, std::vector<Gestor*> gestores){
@@ -61,17 +62,22 @@ void Associacao::setSigla(std::string sigla)
 }
 
 
-//other metodos
+//outros metodos
 void Associacao::addEmail(Email &email){
-	this->getEmails().push_back(&email);
+	emails.push_back(&email);
 }
 
 void Associacao::addAssociado(Associado &associado){
-	this->getAssociados().push_back(&associado);
+	associados.push_back(&associado);
 }
 
 void Associacao::addGestor(Gestor &gestor){
-	this->getGestores().push_back(&gestor);
+	gestores.push_back(&gestor);
+}
+
+void Associacao::addEvento(Evento &evento)
+{
+	eventos.push_back(&evento);
 }
 
 AssociacaoRepetida::AssociacaoRepetida(std::string nome){

@@ -27,7 +27,8 @@ private:
 	std::vector<Gestor*> gestores;
 
 public:
-	Associacao(std::string nome);
+	Associacao();
+	
 	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails,
 			std::vector<Associado*> associados, std::vector<Gestor*> gestores);
 
@@ -43,12 +44,13 @@ public:
 	//metodos set
 	void setNome(std::string nome);
 	void setSigla(std::string sigla);
-	void setDominio(DominioCientifico dominio) {this->dominioAssociacao->setCiencia(dominio.getCiencia());}
+	void setDominio(DominioCientifico &dominio) {this->dominioAssociacao->setCiencia(dominio.getCiencia());}
 
-	//other metodos
+	//outros metodos
 	void addEmail(Email &email);
 	void addAssociado(Associado &associado);
 	void addGestor(Gestor &gestor);
+	void addEvento(Evento &evento);
 
 };
 

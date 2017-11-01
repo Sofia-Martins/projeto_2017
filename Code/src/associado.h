@@ -22,7 +22,7 @@ private:
 	std::string nome;
 	std::string password;
 	std::string instituicao;
-	//DominioCientifico* dominio;
+	DominioCientifico* dominio;
 	Cota* cota;
 	std::string enderecoEmail;
 	std::vector<std::string> eventos = {};
