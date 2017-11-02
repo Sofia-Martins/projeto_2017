@@ -28,7 +28,7 @@ public:
 	//metodos get
 	std::vector<Ciencia*> getCiencia() const;
 
-	//metodos ser
+	//metodos set
 	void setCiencia(std::vector<Ciencia*> ciencias) {this->ciencias = ciencias;}
 };
 

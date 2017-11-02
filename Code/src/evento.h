@@ -20,8 +20,8 @@
 class Evento{
 
 private:
-	std::vector<int> planeadores;
-	std::vector<int> organizadores;
+	std::vector<Associado*> planeadores;
+	std::vector<Associado*> organizadores;
 	std::string local;
 	std::string tema;
 	Data data;
@@ -29,12 +29,12 @@ private:
 
 public:
 	// Construtor
-	Evento(std::vector <int> planeadores, std::vector<int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento);
+	Evento(std::vector <Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento);
 
 	// Metodos get
 
-	std::vector<int> getPlaneadores () const;
-	std::vector<int> getOrganizadores() const;
+	std::vector<Associado*> getPlaneadores () const;
+	std::vector<Associado*> getOrganizadores() const;
 	std::string getLocal() const;
 	std::string getTema() const;
 
@@ -45,10 +45,10 @@ public:
 
 	// Outros metodos
 
-	void addPlaneador (int planeador);
-	void addOrganizador (int organizador);
-	void removePlaneador (int planeador);
-	void removeOrganizador (int organizador);
+	void addPlaneador (Associado* planeador);
+	void addOrganizador (Associado* organizador);
+	void removePlaneador (Associado* planeador);
+	void removeOrganizador (Associado* organizador);
 
 };
 
@@ -63,7 +63,7 @@ private:
 
 public:
 	// Construtor
-	Conferencia(std::vector<int> planeadores, std::vector<int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
+	Conferencia(std::vector<Associado*> planeadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
 
 	// Metodos get
 	unsigned int getNumeroParticipantes() const;
@@ -79,24 +79,23 @@ public:
 class EscolaVerao: public Evento {
 
 private:
-	std::vector <int> formadores;
+	std::vector <Associado*> formadores;
 
 public:
 	//Construtor
-	EscolaVerao(std::vector <int> planeadores,
-		std::vector<int> organizadores,
+	EscolaVerao(std::vector <Associado*> planeadores,
 			std::string local,
 			std::string tema,
 			Data data,
 			Apoio apoioEvento,
-			std::vector<int> formadores);
+			std::vector<Associado*> formadores);
 
 	// Metodos get
-	std::vector<int> getFormadores () const;
+	std::vector<Associado*> getFormadores () const;
 
 	// Outros metodos
-	void addFormador (int formador);
-	void removeFormador (int formador);
+	void addFormador (Associado* formador);
+	void removeFormador (Associado* formador);
 };
 
 

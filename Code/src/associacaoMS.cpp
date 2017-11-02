@@ -25,10 +25,6 @@ std::string retornoMenu="/";
 /*------------------------------------------- menu 1 -------------------------------------------*/
 void AssociacaoMS::menuBemVindo()
 {
-	//inicializar a associacao
-	this->associacao = new Associacao();
-
-
 	clearScreen(); //apagar conteudo do ecra
 
 	std::cout<<"---- BEM-VINDO AO GESTOR DE ASSOCIACOES CIENTIFICAS! ----\n\n";
@@ -38,6 +34,7 @@ void AssociacaoMS::menuBemVindo()
 	this->menuBemVindoSelecao();
 
 }
+
 void AssociacaoMS::menuBemVindoSelecao()
 {
 
@@ -53,18 +50,88 @@ void AssociacaoMS::menuBemVindoSelecao()
 
 	}while(!((numeroOpcao==1) || (numeroOpcao==2)));
 
+	if(numeroOpcao==1)
+		this->menuCriaAssociacao();
+
 	if(numeroOpcao==2)
 		this->menuFicheiroAssociacoes();
 	//else: invoca o menu para criar uma associacao
+}
+
+
+/*------------------------------------------- opcao 1 -------------------------------------------*/
+
+
+void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes) {
+
+	std::string nomeFicheiro;
+	std::ifstream streamAssociacoes;
+
+	do {
+		getString(nomeFicheiro,"Por favor introduza o nome do ficheiro das associacoes (sem .txt): ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			menuBemVindo(); //se o utilizador inseriu CTRL+D
+		}
+		std::cout << nomeFicheiro << "\n\n";
+
+		nomeFicheiro = nomeFicheiro + ".txt";
+		streamAssociacoes.open(nomeFicheiro);
+		if(streamAssociacoes.is_open())
+			std::cout << "Open!\n\n";
+	} while (streamAssociacoes.fail());
+
+	//se o ficheiro existir
+	ficheiroAssociacoes = nomeFicheiro;
+	lerAssociacoes(nomeFicheiro);
+
+	nomeFicheiroAssociacoes = nomeFicheiro;
 
 }
-/*------------------------------------------- menu 2 -------------------------------------------*/
+
+void AssociacaoMS::menuCriaAssociacao(){
+
+	std::string nomeFicheiroAssociacoes;
+
+	clearScreen(); //apagar conteudo do ecra
+	this->menuAbrirFicheiroAssociacoes(nomeFicheiroAssociacoes);
+
+
+	clearScreen(); //apagar conteudo do ecra
+	std::cout<<"-------------- CRIAR ASSOCIACAO --------------\n\n";
+	std::string nomeAssociacao, siglaAssociacao;
+
+	getString(nomeAssociacao, "Nome: ");
+	getString(siglaAssociacao, "Sigla: ");
+
+	associacoes.push_back(std::pair<std::string,std::string>(siglaAssociacao,nomeAssociacao));
+
+	this->enviarNovaAssociacaoFicheiro(nomeFicheiroAssociacoes);
+}
+
+void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes){
+	std::ofstream streamAssociacoes;
+	streamAssociacoes.open(nomeFicheiroAssociacoes);
+
+	if(streamAssociacoes.is_open())
+	{
+		for(unsigned int i=0; i<associacoes.size(); i++)
+			streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second << std::endl;
+	}
+	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
+
+	menuBemVindo();
+}
+
+/*------------------------------------------- opcao 2 -------------------------------------------*/
 
 void AssociacaoMS::menuFicheiroAssociacoes() {
 	clearScreen(); //apagar conteudo do ecra
 	std::cout<<"---- ESCOLHER FICHEIRO DAS ASSSOCIACOES ----\n\n";
 	menuFicheiroAssociacoesSelecao(); //invocacao do metodo
 }
+
 void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 
 	std::string nomeFicheiro;
@@ -77,10 +144,9 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 			std::cin.clear();
 			menuBemVindo(); //se o utilizador inseriu CTRL+D
 		}
-		
+		std::cout << nomeFicheiro << "\n\n";
 
 		nomeFicheiro = nomeFicheiro + ".txt";
-		std::cout << nomeFicheiro;
 		streamAssociacoes.open(nomeFicheiro);
 		if(streamAssociacoes.is_open())
 			std::cout << "Open!\n\n";
@@ -92,6 +158,7 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 
 	this->menuAssociacoes(); //selecionar associacao
 }
+
 void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 {
 	std::ifstream streamAssociacoes;
@@ -105,8 +172,8 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 		std::stringstream ssFicheiro(linhaFicheiro);
 		getline(ssFicheiro,siglaAssociacao,';');
 		getline(ssFicheiro,nomeAssociacao);
-		eliminateSpaces(nomeAssociacao);
-		eliminateSpaces(siglaAssociacao);
+		//eliminateSpaces(nomeAssociacao);
+		//eliminateSpaces(siglaAssociacao);
 
 		//acrescentar a sigla e nome da associacao ao vetor associacoes
 		associacoes.push_back(std::pair<std::string,std::string>(siglaAssociacao,nomeAssociacao));
@@ -115,15 +182,13 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 
 }
 
-/*------------------------------------------- menu 3 -------------------------------------------*/
 void AssociacaoMS::menuAssociacoes(){
-	clearScreen();
-	unsigned int opcao = 0;
+	unsigned int opcao = 0, i= 0;
 	bool valido;
 	std::cout <<"---- ESCOLHER ASSOCIACAO ----\n\n";
 
-	for (unsigned int i = 0; i < associacoes.size(); i++)
-		std::cout << i + 1 << ". " << associacoes.at(i).second << std::endl;
+	for(i ; i < associacoes.size(); i++)
+		std::cout << i+1 << ". " << associacoes[i].first;
 
 	do
 	{
@@ -132,41 +197,28 @@ void AssociacaoMS::menuAssociacoes(){
 			valido = false;
 		else valido = true;
 
-		if (std::cin.eof())
-		{
-			std::cin.clear();
-			this->menuFicheiroAssociacoes();
-		}
+		if(std::cin.eof())
+			this->menuTermino();
 	}while(!valido);
 
-	
-	//atualizar nome da associacao
-	associacao->setNome(associacoes.at(opcao-1).second);
-	//atualizar sigla da associacao
-	associacao->setSigla(associacoes.at(opcao-1).first);
+	Associacao ac1(associacoes[opcao - 1].second); //criar associacao
+	ficheiroAssociados = associacoes[opcao - 1].first + "_associados.txt"; //Confirmar q é o second!
+	ficheiroConferencias = associacoes[opcao - 1].first + "_conferencias.txt";
+	ficheiroDominios = associacoes[opcao - 1].first + "_dominios.txt";
+	ficheiroEmails = associacoes[opcao - 1].first + "_emails.txt";
+	ficheiroEscolasVerao = associacoes[opcao - 1].first + "_escolaVerao.txt";
+	ficheiroGestores = associacoes[opcao - 1].first + "_gestores.txt";
 
-	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first+ "_associados.txt"; //Confirmar q é o second!
-	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
-	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
-	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
-	ficheiroEscolasVerao = associacoes.at(opcao - 1).first + "_escolaVerao.txt";
-	ficheiroGestores = associacoes.at(opcao - 1).first + "_gestores.txt";
+	//ler ficheiros...
+	DominioCientifico  DC = lerDominios(ficheiroDominios);
+	lerAssociados(ac1, ficheiroAssociados, &DC);
 
-	//ler ficheiros
-	//lerDominios(ficheiroDominios);
-	//lerAssociados(ficheiroAssociados);
-	lerEmails();
-	lerConferencias();
-	lerEscolasVerao();
-
-	//proximo menu
-	//this->menuLogin(ac1);
+	ac1.setDominio(&DC);
+	this->menuLogin(ac1);
 
 }
-/*
-void AssociacaoMS::lerDominios(std::string ficheiroDominios){
 
+DominioCientifico AssociacaoMS::lerDominios(std::string ficheiroDominios){
 	std::ifstream dac; //Dominios e Areas Cientificas
 	dac.open(ficheiroDominios);
 	char carater;
@@ -238,7 +290,7 @@ void AssociacaoMS::lerDominios(std::string ficheiroDominios){
 	} while (!dac.eof());
 
 	//teste para confirmar que funciona
-
+/*
 	std::ofstream teste;
 	teste.open("teste.txt");
 
@@ -259,292 +311,94 @@ void AssociacaoMS::lerDominios(std::string ficheiroDominios){
 			teste << std::endl;
 		}
 
-
-	associacao->setDominio(dominioCientifico);
-}
-
 */
 
+	return dominioCientifico;
+}
 
-
-/*
-void AssociacaoMS::lerAssociados(std::string ficheiroAssociados){
+void AssociacaoMS::lerAssociados(Associacao &ac1, std::string ficheiroAssociados, DominioCientifico *dominio){
 	std::ifstream streamAssociados;
 	streamAssociados.open(ficheiroAssociados);
-	std::string linhaFicheiro, nome, ID, password, instituicao, emDiaString, atraso, email, tema, subareas;
-
+	std::string linhaFicheiro, nome, password, instituicao, emDiaString, email, tema, subareas;
+	unsigned int ID, atraso;
 
 	while(!streamAssociados.eof()){
 		getline(streamAssociados, linhaFicheiro);
 		std::stringstream input(linhaFicheiro);
-		getline(input,nome,','); eliminateSpaces(nome);
-		getline(input,ID,','); eliminateSpaces(ID);
-		getline(input,password,','); eliminateSpaces(password);
-		getline(input,instituicao,','); eliminateSpaces(instituicao);
-		getline(input,emDiaString,','); eliminateSpaces(emDiaString);
-		getline(input,atraso,','); eliminateSpaces(atraso);
-		getline(input,email,';'); eliminateSpaces(email);
-		getline(input,tema,';'); eliminateSpaces(tema);
-		getline(input,subareas); eliminateSpaces(subareas);
+		getline(input,nome,','); //eliminateSpaces(nome);
+		input >> ID;
+		input.ignore(1000, ',');
+		//getline(input,ID,',');
+		getline(input,password,','); //eliminateSpaces(password);
+		getline(input,instituicao,','); //eliminateSpaces(instituicao);
+		getline(input,emDiaString,','); //eliminateSpaces(emDiaString);
+		input >> atraso;
+		input.ignore(1000, ',');
+		//getline(input,atraso,',');
+		getline(input,email,';'); //eliminateSpaces(email);
+		getline(input,tema,';'); //eliminateSpaces(tema);
+		getline(input,subareas); //eliminateSpaces(subareas);
+
+
 
 		bool emDia;
 		if(emDiaString == "sim")
 			emDia = true;
 		else emDia = false;
 
-		Cota *cota = new Cota(emDia, std::stoul(atraso));
-		Associado *a1 = new Associado(nome, std::stoul(ID), password, instituicao, cota, email);
+		Cota *cota = new Cota(emDia, atraso);
+		Associado *a1 = new Associado(nome, ID, password, instituicao, cota, email);
 
 		if(emDia)
 			Contributor a1();
-		else if (std::stoul(atraso) < 5)
+		else if (atraso < 5)
 			Subscriber a1();
+
 
 		//guardar temas de eventos
 		std::vector<std::string> v_eventos;
-		do
+
+		while (tema.find(",") != tema.npos)
 		{
 			int p1 = tema.find_first_of(","); // posicao da vírgula
 			v_eventos.push_back(tema.substr(1, p1 - 1));
 			tema = tema.substr(p1 + 1);
 
-		} while (tema.find_first_of(",") != tema.size() - 1);
+		}
 
 		a1->setEventos(v_eventos);
 
 
+
 		//guardar subareas de interesse
 		std::vector<std::string> v_subareas;
-		do
+
+		while (subareas.find(",") != subareas.npos)
 		{
 			int p1 = subareas.find_first_of(","); // posicao da vírgula
 			v_subareas.push_back(subareas.substr(1, p1 - 1));
 			subareas = subareas.substr(p1 + 1);
 
-		} while (subareas.find_first_of(",") != subareas.size() - 1);
+		}
 
 		a1->setAreasInteresse(v_subareas);
 
 
 		ac1.addAssociado(*a1);
 
+
 	}
 
 }
-*/
 
-void AssociacaoMS::lerEmails()
-{
-	//abrir ficheiro
-	std::ifstream in;
-	in.open(ficheiroEmails);
-	std::string remetente, destinatario, conteudo;
-
-	//extrair informação do ficheiro
-	while (!in.eof())
-	{
-		getline(in, remetente, ',');
-		getline(in, destinatario, ',');
-		getline(in, conteudo);
-		eliminateSpaces(remetente);
-		eliminateSpaces(destinatario);
-		eliminateSpaces(conteudo);
-		Email* email = new Email(remetente, destinatario, conteudo);
-		associacao->addEmail(*email);
-	}
-}
-
-void AssociacaoMS::lerConferencias()
-{
-	std::ifstream in;
-	in.open(ficheiroConferencias);
-
-	while (!in.eof())
-	{
-		//buscar planeadores
-		std::vector<int> vetorPlaneadores;
-		std::string ID; //id do planeador
-		std::string planeadores;
-		getline(in, planeadores, ';');
-		std::istringstream ssPlaneadores(planeadores);
-
-		while (!ssPlaneadores.eof())
-		{
-			getline(ssPlaneadores, ID, ',');
-			vetorPlaneadores.push_back(stoi(ID)); //adiciona o id ao vetor de planeadores
-		}
-
-		//buscar organizadores
-		std::vector<int> vetorOrganizadores;
-		std::string organizadores;
-		getline(in, organizadores, ';');
-		std::istringstream ssOrganizadores(organizadores);
-
-		while (!ssOrganizadores.eof())
-		{
-			getline(ssOrganizadores, ID, ',');
-			vetorOrganizadores.push_back(stoi(ID)); //adiciona o ID ao vetor de organizadores
-		}
-
-		//buscar local
-		std::string local;
-		getline(in, local, ';');
-
-		//buscar tema
-		std::string tema;
-		getline(in, tema, ';');
-		eliminateSpaces(tema);
-
-		//buscar data
-		std::string data, dia, mes, ano, hora, minuto;
-		getline(in, data, ';');
-		std::istringstream ssData(data);
-		
-		getline(ssData, dia, ',');
-		getline(ssData, mes, ',');
-		getline(ssData, ano, ',');
-		getline(ssData, hora, ',');
-		getline(ssData, minuto);
-		eliminateSpaces(dia);
-		eliminateSpaces(mes);
-		eliminateSpaces(ano);
-		eliminateSpaces(hora);
-		eliminateSpaces(minuto);
-
-		Data dataEvento(stoul(dia), stoul(mes), stoul(ano), stoul(hora), stoul(minuto));
-
-		//buscar apoio da associacao (true/false)
-		std::string apoioAssociacao;
-		bool apoioB;
-		getline(in, apoioAssociacao, ';');
-		eliminateSpaces(apoioAssociacao);
-		(apoioAssociacao == "0") ? apoioB = false : apoioB = true;
-
-		//buscar tipo de apoio
-		std::string tipoApoio;
-		getline(in, tipoApoio, ';');
-		eliminateSpaces(tipoApoio);
-
-		Apoio apoio(apoioB, tipoApoio);
-
-		//buscar numero de participantes
-		std::string numeroParticipantes;
-		getline(in, numeroParticipantes);
-		eliminateSpaces(numeroParticipantes);
-		unsigned int nParticipantes = stoul(numeroParticipantes);
-
-		//criar conferencia
-		Evento* evento = new Conferencia(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, nParticipantes);
-		this->associacao->addEvento(*evento);
-	}
-}
-
-void AssociacaoMS::lerEscolasVerao()
-{
-	std::ifstream in;
-	in.open(ficheiroEscolasVerao);
-
-	while (!in.eof())
-	{
-		//buscar planeadores
-		std::vector<int> vetorPlaneadores;
-		std::string ID; //id do planeador
-		std::string planeadores;
-		getline(in, planeadores, ';');
-		std::istringstream ssPlaneadores(planeadores);
-
-		while (!ssPlaneadores.eof())
-		{
-			getline(ssPlaneadores, ID, ',');
-			vetorPlaneadores.push_back(stoi(ID)); //adiciona o id ao vetor de planeadores
-		}
-
-		//buscar organizadores
-		std::vector<int> vetorOrganizadores;
-		std::string organizadores;
-		getline(in, organizadores, ';');
-		std::istringstream ssOrganizadores(organizadores);
-
-		while (!ssOrganizadores.eof())
-		{
-			getline(ssOrganizadores, ID, ',');
-			vetorOrganizadores.push_back(stoi(ID)); //adiciona o ID ao vetor de organizadores
-		}
-
-		//buscar local
-		std::string local;
-		getline(in, local, ';');
-
-		//buscar tema
-		std::string tema;
-		getline(in, tema, ';');
-		eliminateSpaces(tema);
-
-		//buscar data
-		std::string data, dia, mes, ano, hora, minuto;
-		getline(in, data, ';');
-		std::istringstream ssData(data);
-
-		getline(ssData, dia, ',');
-		getline(ssData, mes, ',');
-		getline(ssData, ano, ',');
-		getline(ssData, hora, ',');
-		getline(ssData, minuto);
-		eliminateSpaces(dia);
-		eliminateSpaces(mes);
-		eliminateSpaces(ano);
-		eliminateSpaces(hora);
-		eliminateSpaces(minuto);
-
-		Data dataEvento(stoul(dia), stoul(mes), stoul(ano), stoul(hora), stoul(minuto));
-
-		//buscar apoio da associacao (true/false)
-		std::string apoioAssociacao;
-		bool apoioB;
-		getline(in, apoioAssociacao, ';');
-		eliminateSpaces(apoioAssociacao);
-		(apoioAssociacao == "0") ? apoioB = false : apoioB = true;
-
-		//buscar tipo de apoio
-		std::string tipoApoio;
-		getline(in, tipoApoio, ';');
-		eliminateSpaces(tipoApoio);
-
-		Apoio apoio(apoioB, tipoApoio);
-
-		//buscar formadores
-		std::vector <int> vetorFormadores;
-		std::string formadoresS;
-		getline(in, formadoresS);
-		std::istringstream ssFormadores(formadoresS);
-
-		while (!ssFormadores.eof())
-		{
-			std::string formador;
-			getline(ssFormadores, formador, ',');
-			eliminateSpaces(formador);
-			vetorFormadores.push_back(stoi(formador));
-		}
-
-		//criar EscolaVerao
-		Evento* evento = new EscolaVerao(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, vetorFormadores);
-		this->associacao->addEvento(*evento);
-	}
-}
-
-
-
-
-
-
-
-/*------------------------------------------- menu 4 -------------------------------------------*/
 void AssociacaoMS::menuLogin(Associacao &ac1){
 	std::cout <<"---- LOGIN ----\n\n";
 	std::cout <<"1. Sign up\n";
 	std::cout <<"2. Sign in\n";
 	unsigned int opcao=0, id = 0;
 	std::string password;
+
+	std::cout << "Hello!\n\n";
 
 	do
 	{
@@ -571,7 +425,7 @@ void AssociacaoMS::menuLogin(Associacao &ac1){
 
 void criaConta(Associacao &ac1){
 	std::string nome, password, instituicao, email;
-	int ID = ac1.getAssociados().at( ac1.getAssociados().size() -1 )->getID() + 1; //falta ordernar vetor!!!!!
+	int ID = ac1.incIdAssociado() ; //falta ordernar vetor!!!!!
 
 	getString(nome, "Nome: ");
 	getString(password, "Password: ");
@@ -591,11 +445,10 @@ void AssociacaoMS::menuTermino()
 {
 	clearScreen(); //apagar conteudo do ecra
 	std::cout<<"Obrigada pela visita! Ate `a proxima! :-D\n\n";
-	//sleep(5);
+	sleep(5);
 	exit(0);
 
 }
-
 
 
 //funcoes relacionadas com inputs do utilizador ///////////////////////////////////////////
@@ -675,7 +528,7 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() //pode (e deve) ser procurado um metodo melhor!!!
   {
-	system("CLS");
+    std::cout<<"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
   }
 
 //ACABARRR!!!!!!!

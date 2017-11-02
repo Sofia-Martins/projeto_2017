@@ -38,12 +38,12 @@ void Ciencia::addAreaCientifica(AreaCientifica* area)
 	std::vector<AreaCientifica*>::const_iterator fim=areas.end(); //apontador para o final do vector ciencias
 	bool existeArea=binary_search(inicio, fim, area,areasIguais);
 
-	if(existeArea)
+	/*if(existeArea)
 		throw  AreaCientificaRepetida(area);
 	else
 	{
 		areas.push_back(area);
-	}
+	}*/
 
 }
 

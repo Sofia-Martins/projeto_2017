@@ -8,36 +8,36 @@
 #include "email.h"
 
 //construtor
-Email::Email(std::string remetente, std::string destinatario, std::string conteudo)
+/*Email::Email(Associado* remetente,Associado* destinatario, string conteudo)
 {
 	this->remetente=remetente;
-	this->destinatario=destinatario;
+	this->destinatario->destinatario;
 	this->conteudo=conteudo;
-}
+}*/
 
 //metodos set
-void Email::setRemetente(std::string remetente)
+/*void Email::setRemetente(Associado* remetente)
 {
 	this->remetente=remetente;
-}
-void Email::setDestinatario(std::string destinatario)
+}*/
+/*void Email::setDestinatario(Associado* destinatario)
 {
 	this->destinatario=destinatario;
-}
+}*/
 void Email::setConteudo(std::string conteudo)
 {
 	this->conteudo=conteudo;
 }
 
 //metodos get
-std::string Email::getRemetente() const
+/*Associado* Email::getRemetente() const
 {
 	return remetente;
-}
-std::string Email::getDestinatario() const
+}*/
+/*Associado* Email::getDestinatario() const
 {
 	return destinatario;
-}
+}*/
 std::string Email::getConteudo() const
 {
 	return conteudo;

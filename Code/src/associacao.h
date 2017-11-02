@@ -20,6 +20,7 @@ class Associacao{
 private:
 	std::string nome;
 	std::string sigla;
+	unsigned int idAssociados = 0;
 	DominioCientifico* dominioAssociacao;
 	std::vector<Evento*> eventos;
 	std::vector<Email*> emails;
@@ -27,8 +28,7 @@ private:
 	std::vector<Gestor*> gestores;
 
 public:
-	Associacao();
-	
+	Associacao(std::string nome);
 	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails,
 			std::vector<Associado*> associados, std::vector<Gestor*> gestores);
 
@@ -44,13 +44,13 @@ public:
 	//metodos set
 	void setNome(std::string nome);
 	void setSigla(std::string sigla);
-	void setDominio(DominioCientifico &dominio) {this->dominioAssociacao->setCiencia(dominio.getCiencia());}
+	void setDominio(DominioCientifico* dominio) {dominioAssociacao = dominio;}
+	unsigned int incIdAssociado() {return ++idAssociados;}
 
-	//outros metodos
+	//other metodos
 	void addEmail(Email &email);
 	void addAssociado(Associado &associado);
 	void addGestor(Gestor &gestor);
-	void addEvento(Evento &evento);
 
 };
 

@@ -17,22 +17,22 @@
 class Email
 {
 private:
-	std::string remetente;  //email do remetente
-	std::string destinatario;  //email do destinatario
+	//Associado* remetente;
+	//Associado* destinatario;
 	std::string conteudo;
 
 public:
 	//construtor
-	Email(std::string remetente, std::string destinatario, std::string conteudo);
+	//Email(Associado* remetente,Associado* destinatario, string conteudo);
 
 	//metodos set
-	void setRemetente(std::string remetente);
-	void setDestinatario(std::string destinatario);
+	//void setRemetente(Associado* remetente);
+	//void setDestinatario(Associado* destinatario);
 	void setConteudo(std::string conteudo);
 
 	//metodos get
-	std::string getRemetente() const;
-	std::string getDestinatario() const;
+	//Associado* getRemetente() const;
+	//Associado* getDestinatario() const;
 	std::string getConteudo() const;
 };
 

@@ -14,7 +14,7 @@
 #include <string>
 #include <sstream>
 #include <cstdlib>
-//#include <unistd.h>  //funcao sleep() em linux
+#include <unistd.h>  //funcao sleep() em linux
 #include <stdlib.h>
 #include <stdio.h>
 #include <climits>
@@ -36,7 +36,7 @@ private:
 	std::string ficheiroEmails;
 	std::string ficheiroEscolasVerao;
 	std::string ficheiroGestores;
-	std::vector<std::pair<std::string,std::string > > associacoes; //siglas e nomes das associacoes (sigla,nome)
+	std::vector<std::pair<std::string,std::string>> associacoes; //siglas e nomes das associacoes
 
 public:
 
@@ -44,26 +44,28 @@ public:
 	void menuBemVindo();
 	void menuBemVindoSelecao();
 
-	//menu 2
+	//opcao 1
+	void menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes);
+	void menuCriaAssociacao();
+	void enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes);
+
+	//opcao 2
 	void menuFicheiroAssociacoes();
 	void menuFicheiroAssociacoesSelecao();
 	void lerAssociacoes(std::string ficheiroAssociacoes);
-
-	//menu 3
 	void menuAssociacoes();
-	void lerDominios();
-	void lerAssociados();
-	void lerEmails();
-	void lerConferencias();
-	void lerEscolasVerao();
-
-	//menu 4
+	DominioCientifico lerDominios(std::string ficheiroDominios);
+	void lerAssociados(Associacao &ac1, std::string ficheiroAssociados, DominioCientifico *dominio);
 	void menuLogin(Associacao &ac1);
 
 
 	//menu final
 	void menuTermino();
 
+
+
+
+	//ler dos ficheiros
 
 
 
