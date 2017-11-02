@@ -1,9 +1,9 @@
 /*
- * associacaoMS.h
- *
- *  Created on: 17/10/2017
- *      Author: luisa
- */
+* associacaoMS.h
+*
+*  Created on: 17/10/2017
+*      Author: luisa
+*/
 
 #ifndef ASSOCIACAOMS_H_
 #define ASSOCIACAOMS_H_
@@ -14,7 +14,7 @@
 #include <string>
 #include <sstream>
 #include <cstdlib>
-#include <unistd.h>  //funcao sleep() em linux
+//#include <unistd.h>  //funcao sleep() em linux
 #include <stdlib.h>
 #include <stdio.h>
 #include <climits>
@@ -26,7 +26,7 @@
 #include "subAreaCientifica.h"
 
 
-class AssociacaoMS{
+class AssociacaoMS {
 private:
 	Associacao* associacao;
 	std::string ficheiroAssociacoes;
@@ -36,7 +36,7 @@ private:
 	std::string ficheiroEmails;
 	std::string ficheiroEscolasVerao;
 	std::string ficheiroGestores;
-	std::vector<std::pair<std::string,std::string>> associacoes; //siglas e nomes das associacoes
+	std::vector<std::pair<std::string, std::string > > associacoes; //siglas e nomes das associacoes (sigla,nome)
 
 public:
 
@@ -44,28 +44,27 @@ public:
 	void menuBemVindo();
 	void menuBemVindoSelecao();
 
-	//opcao 1
-	void menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes);
-	void menuCriaAssociacao();
-	void enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes);
-
-	//opcao 2
+	//menu 2
 	void menuFicheiroAssociacoes();
 	void menuFicheiroAssociacoesSelecao();
 	void lerAssociacoes(std::string ficheiroAssociacoes);
+
+	//menu 3
 	void menuAssociacoes();
-	DominioCientifico lerDominios(std::string ficheiroDominios);
-	void lerAssociados(Associacao &ac1, std::string ficheiroAssociados, DominioCientifico *dominio);
+	void lerDominios();
+	//void lerAssociados();
+	void lerEmails();
+	void lerConferencias();
+	void lerEscolasVerao();
+	void lerGestores();
+
+	//menu 4
 	void menuLogin(Associacao &ac1);
 
 
 	//menu final
 	void menuTermino();
 
-
-
-
-	//ler dos ficheiros
 
 
 

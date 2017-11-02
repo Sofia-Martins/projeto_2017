@@ -30,8 +30,6 @@ void DominioCientifico::addCiencia(Ciencia* ciencia)
 		ciencias.push_back(ciencia);
 	}
 
-
-
 }
 
 //metodos get

@@ -16,20 +16,19 @@ class SubAreaCientifica
 {
 private:
 	std::string nomeSubArea;
-	std::string siglaSubArea;
 
 public:
 	//construtor
-	SubAreaCientifica() {nomeSubArea = ""; siglaSubArea = "";};
-	SubAreaCientifica(std::string nomeSubArea,std::string siglaSubArea);
+	SubAreaCientifica() { nomeSubArea = ""; }
+	SubAreaCientifica(std::string nomeSubArea);
 
 	//metodos set
 	void setNomeSubAreaCientifica(std::string nomeSubArea);
-	void setSiglaSubAreaCientifica(std::string siglaSubArea);
+	
 
 	//metodos get
 	std::string getNomeSubAreaCientifica() const;
-	std::string getSiglaSubAreaCientifica() const;
+	
 };
 
 

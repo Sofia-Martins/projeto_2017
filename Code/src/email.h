@@ -1,9 +1,9 @@
 /*
- * email.h
- *
- *  Created on: 14/10/2017
- *      Author: sofia
- */
+* email.h
+*
+*  Created on: 14/10/2017
+*      Author: sofia
+*/
 
 
 #ifndef CODE_SRC_EMAIL_H_
@@ -17,22 +17,22 @@
 class Email
 {
 private:
-	//Associado* remetente;
-	//Associado* destinatario;
+	std::string remetente;  //email do remetente
+	std::string destinatario;  //email do destinatario
 	std::string conteudo;
 
 public:
 	//construtor
-	//Email(Associado* remetente,Associado* destinatario, string conteudo);
+	Email(std::string remetente, std::string destinatario, std::string conteudo);
 
 	//metodos set
-	//void setRemetente(Associado* remetente);
-	//void setDestinatario(Associado* destinatario);
+	void setRemetente(std::string remetente);
+	void setDestinatario(std::string destinatario);
 	void setConteudo(std::string conteudo);
 
 	//metodos get
-	//Associado* getRemetente() const;
-	//Associado* getDestinatario() const;
+	std::string getRemetente() const;
+	std::string getDestinatario() const;
 	std::string getConteudo() const;
 };
 

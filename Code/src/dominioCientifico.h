@@ -24,7 +24,6 @@ public:
 	DominioCientifico(){ciencias = {};};
 	// metodos de adicao de Ciencias
 	void addCiencia(Ciencia* ciencia);
-	void addSubAreaCientifica(SubAreaCientifica* subArea);
 	//metodos get
 	std::vector<Ciencia*> getCiencia() const;
 

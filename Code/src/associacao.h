@@ -1,9 +1,9 @@
 /*
- * associacao.h
- *
- *  Created on: 17/10/2017
- *      Author: luisa
- */
+* associacao.h
+*
+*  Created on: 17/10/2017
+*      Author: luisa
+*/
 
 #ifndef ASSOCIACAO_H_
 #define ASSOCIACAO_H_
@@ -16,11 +16,10 @@
 #include "gestor.h"
 #include "evento.h"
 
-class Associacao{
+class Associacao {
 private:
 	std::string nome;
 	std::string sigla;
-	unsigned int idAssociados = 0;
 	DominioCientifico* dominioAssociacao;
 	std::vector<Evento*> eventos;
 	std::vector<Email*> emails;
@@ -28,14 +27,15 @@ private:
 	std::vector<Gestor*> gestores;
 
 public:
-	Associacao(std::string nome);
+	Associacao();
+
 	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails,
-			std::vector<Associado*> associados, std::vector<Gestor*> gestores);
+		std::vector<Associado*> associados, std::vector<Gestor*> gestores);
 
 	//metodos get
 	std::string getNome() const;
 
-	DominioCientifico* getDominio() const {return dominioAssociacao;};
+	DominioCientifico* getDominio() const { return dominioAssociacao; }
 	std::vector<Associado*> getAssociados() const;
 	std::vector<Gestor*> getGestores() const;
 	std::vector<Email*> getEmails() const;
@@ -44,13 +44,13 @@ public:
 	//metodos set
 	void setNome(std::string nome);
 	void setSigla(std::string sigla);
-	void setDominio(DominioCientifico* dominio) {dominioAssociacao = dominio;}
-	unsigned int incIdAssociado() {return ++idAssociados;}
+	void setDominio(DominioCientifico* dominio);
 
-	//other metodos
+	//outros metodos
 	void addEmail(Email &email);
 	void addAssociado(Associado &associado);
 	void addGestor(Gestor &gestor);
+	void addEvento(Evento &evento);
 
 };
 

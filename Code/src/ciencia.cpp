@@ -34,16 +34,16 @@ bool areasIguais(AreaCientifica* area1,AreaCientifica* area2)
 //outros metodos
 void Ciencia::addAreaCientifica(AreaCientifica* area)
 {
-	std::vector<AreaCientifica*>::const_iterator inicio=areas.begin(); //apontador para a primeira ciencia
-	std::vector<AreaCientifica*>::const_iterator fim=areas.end(); //apontador para o final do vector ciencias
-	bool existeArea=binary_search(inicio, fim, area,areasIguais);
-
-	/*if(existeArea)
-		throw  AreaCientificaRepetida(area);
-	else
+	auto inicio=areas.begin();
+	auto fim=areas.end();
+	
+	for (; inicio != fim; inicio++)
 	{
-		areas.push_back(area);
-	}*/
+		if (areasIguais(*inicio, area))
+			throw AreaCientificaRepetida(area);
+	}
+
+	this->areas.push_back(area);
 
 }
 
