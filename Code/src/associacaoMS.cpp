@@ -55,10 +55,11 @@ void AssociacaoMS::menuBemVindoSelecao()
 
 	if (numeroOpcao == 2)
 		this->menuFicheiroAssociacoes();
-	//else: invoca o menu para criar uma associacao
+	else if (numeroOpcao == 1)
+		this->menuCriaAssociacao();
 
 }
-/*------------------------------------------- menu 2 -------------------------------------------*/
+/*------------------------------------------- menu 2.1 -------------------------------------------*/
 
 void AssociacaoMS::menuFicheiroAssociacoes() {
 	clearScreen(); //apagar conteudo do ecra
@@ -88,12 +89,13 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 
 	//se o ficheiro existir
 	ficheiroAssociacoes = nomeFicheiro;
-	lerAssociacoes(nomeFicheiro);
+	lerAssociacoes();
 
 	this->menuAssociacoes(); //selecionar associacao
 }
-void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
+void AssociacaoMS::lerAssociacoes()
 {
+	this->associacoes.clear();
 	std::ifstream streamAssociacoes;
 	std::string linhaFicheiro, siglaAssociacao, nomeAssociacao;
 	streamAssociacoes.open(ficheiroAssociacoes);
@@ -112,7 +114,70 @@ void AssociacaoMS::lerAssociacoes(std::string ficheiroAssociacoes)
 		associacoes.push_back(std::pair<std::string, std::string>(siglaAssociacao, nomeAssociacao));
 	}
 
+	streamAssociacoes.close();
+}
 
+/*------------------------------------------- menu 2.2 -------------------------------------------*/
+void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes) {
+
+	std::string nomeFicheiro;
+	std::ifstream streamAssociacoes;
+
+	do {
+		getString(nomeFicheiro, "Por favor introduza o nome do ficheiro das associacoes (sem .txt): ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			menuBemVindo(); //se o utilizador inseriu CTRL+D
+		}
+		std::cout << nomeFicheiro << "\n\n";
+
+		nomeFicheiro = nomeFicheiro + ".txt";
+		streamAssociacoes.open(nomeFicheiro);
+		if (streamAssociacoes.is_open())
+			std::cout << "Open!\n\n";
+	} while (streamAssociacoes.fail());
+
+	//se o ficheiro existir
+	ficheiroAssociacoes = nomeFicheiro;
+	lerAssociacoes();
+
+	nomeFicheiroAssociacoes = nomeFicheiro;
+
+}
+
+void AssociacaoMS::menuCriaAssociacao() {
+
+	std::string nomeFicheiroAssociacoes;
+
+	clearScreen(); //apagar conteudo do ecra
+	this->menuAbrirFicheiroAssociacoes(nomeFicheiroAssociacoes);
+
+
+	clearScreen(); //apagar conteudo do ecra
+	std::cout << "-------------- CRIAR ASSOCIACAO --------------\n\n";
+	std::string nomeAssociacao, siglaAssociacao;
+
+	getString(nomeAssociacao, "Nome: ");
+	getString(siglaAssociacao, "Sigla: ");
+
+	associacoes.push_back(std::pair<std::string, std::string>(siglaAssociacao, nomeAssociacao));
+
+	this->enviarNovaAssociacaoFicheiro(nomeFicheiroAssociacoes);
+}
+
+void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes) {
+	std::ofstream streamAssociacoes;
+	streamAssociacoes.open(nomeFicheiroAssociacoes);
+
+	if (streamAssociacoes.is_open())
+	{
+		for (unsigned int i = 0; i<associacoes.size(); i++)
+			streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second << std::endl;
+	}
+	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
+
+	menuBemVindo();
 }
 
 /*------------------------------------------- menu 3 -------------------------------------------*/
@@ -165,7 +230,6 @@ void AssociacaoMS::menuAssociacoes() {
 	//this->menuLogin(ac1);
 
 }
-
 void AssociacaoMS::lerDominios() {
 
 	std::ifstream dac; //Dominios e Areas Cientificas
@@ -206,9 +270,8 @@ void AssociacaoMS::lerDominios() {
 	}
 
 	this->associacao->setDominio(dominio);
+	dac.close();
 }
-
-
 
 /*
 void AssociacaoMS::lerAssociados() {
@@ -282,8 +345,9 @@ void AssociacaoMS::lerEmails()
 		Email* email = new Email(remetente, destinatario, conteudo);
 		associacao->addEmail(*email);
 	}
-}
 
+	in.close();
+}
 void AssociacaoMS::lerConferencias()
 {
 	std::ifstream in;
@@ -367,8 +431,8 @@ void AssociacaoMS::lerConferencias()
 		Evento* evento = new Conferencia(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, nParticipantes);
 		this->associacao->addEvento(*evento);
 	}
+	in.close();
 }
-
 void AssociacaoMS::lerEscolasVerao()
 {
 	std::ifstream in;
@@ -460,8 +524,8 @@ void AssociacaoMS::lerEscolasVerao()
 		Evento* evento = new EscolaVerao(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, vetorFormadores);
 		this->associacao->addEvento(*evento);
 	}
+	in.close();
 }
-
 void AssociacaoMS::lerGestores()
 {
 	std::ifstream in;
@@ -496,6 +560,7 @@ void AssociacaoMS::lerGestores()
 		Gestor* gestor = new Gestor(nome, id, password, email);
 		this->associacao->addGestor(*gestor);
 	}
+	in.close();
 }
 
 /*------------------------------------------- menu 4 -------------------------------------------*/
@@ -528,7 +593,6 @@ void AssociacaoMS::menuLogin(Associacao &ac1) {
 
 	}
 }
-
 void criaConta(Associacao &ac1) {
 	std::string nome, password, instituicao, email;
 	int ID = ac1.getAssociados().at(ac1.getAssociados().size() - 1)->getID() + 1; //falta ordernar vetor!!!!!
@@ -555,7 +619,6 @@ void AssociacaoMS::menuTermino()
 	exit(0);
 
 }
-
 
 
 //funcoes relacionadas com inputs do utilizador ///////////////////////////////////////////
@@ -633,7 +696,7 @@ void getNumber(unsigned int &number, const std::string &question) {
 	number = std::stoul(number_string);
 }
 
-void clearScreen() //pode (e deve) ser procurado um metodo melhor!!!
+void clearScreen() 
 {
 	system("CLS");
 }

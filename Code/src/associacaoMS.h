@@ -44,10 +44,15 @@ public:
 	void menuBemVindo();
 	void menuBemVindoSelecao();
 
-	//menu 2
+	//menu 2.1
 	void menuFicheiroAssociacoes();
 	void menuFicheiroAssociacoesSelecao();
-	void lerAssociacoes(std::string ficheiroAssociacoes);
+	void lerAssociacoes();
+
+	//menu 2.2
+	void menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes);
+	void menuCriaAssociacao();
+	void enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes);
 
 	//menu 3
 	void menuAssociacoes();
