@@ -52,7 +52,7 @@ public:
 	}
 	void setEmail(std::string email);
 	void setEventos(std::vector<std::string> eventos) { this->eventos = eventos; }
-	void setAreasInteresse(std::vector<std::string> areasInteresse) { this->areasInteresse; }
+	void setAreasInteresse(std::vector<std::string> areasInteresse) { this->areasInteresse=areasInteresse; }
 
 	//operators
 	const Associado & operator= (const Associado & a);

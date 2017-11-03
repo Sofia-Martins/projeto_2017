@@ -151,7 +151,6 @@ void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssoci
 	streamAssociacoes.close();
 
 }
-
 void AssociacaoMS::menuCriaAssociacao() {
 
 	std::string nomeFicheiroAssociacoes;
@@ -197,7 +196,6 @@ void AssociacaoMS::menuCriaAssociacao() {
 	this->criaFicheirosNovaAssociacao(siglaAssociacao);
 	this->criaGestor(siglaAssociacao);
 }
-
 void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes) {
 	std::ofstream streamAssociacoes;
 	streamAssociacoes.open(nomeFicheiroAssociacoes);
@@ -219,7 +217,6 @@ void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssoci
 
 	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
 }
-
 void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
 	std::ofstream streamAssociados(siglaAssociacao+"_associados.txt");
 	std::ofstream streamConferencias(siglaAssociacao+"_conferencias.txt");
@@ -227,7 +224,6 @@ void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
 	std::ofstream streamEmails(siglaAssociacao+"_emails.txt");
 	std::ofstream streamEscolaVerao(siglaAssociacao+"_escolaVerao.txt");
 }
-
 void AssociacaoMS::criaGestor(std::string siglaAssociacao){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "---------------- CRIAR GESTOR --------------\n\n";
@@ -262,7 +258,6 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao){
 	}
 
 }
-
 void AssociacaoMS::enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores) {
 	std::ofstream streamGestores;
 	streamGestores.open(nomeFicheiroGestores);
@@ -313,7 +308,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt"; //Confirmar q é o second!
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt"; //Confirmar q é o second!
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -374,8 +369,6 @@ void AssociacaoMS::lerDominios() {
 	this->associacao->setDominio(dominio);
 	dac.close();
 }
-
-
 void AssociacaoMS::lerAssociados() {
 
 	std::ifstream streamAssociados;
@@ -395,41 +388,60 @@ void AssociacaoMS::lerAssociados() {
 		getline(input, email, ';');
 		getline(input, tema, ';');
 		getline(input, subareas);
+
+		eliminateSpaces(nome);
+		eliminateSpaces(ID);
+		eliminateSpaces(password);
+		eliminateSpaces(instituicao);
+		eliminateSpaces(emDiaString);
+		eliminateSpaces(atraso);
+		eliminateSpaces(email);
+		eliminateSpaces(tema);
+		eliminateSpaces(subareas);
+
 		bool emDia;
 		if (emDiaString == "sim")
 			emDia = true;
 		else emDia = false;
 
 		Cota *cota = new Cota(emDia, std::stoul(atraso));
-		Associado *a1 = new Associado(nome, std::stoul(ID), password, instituicao, cota, email);
+		Associado *a1;
 
 		if (emDia)
-			Contributor a1();
+			a1 = new Contributor(nome, std::stoul(ID), password, instituicao, cota, email);
 		else if (std::stoul(atraso) < 5)
-			Subscriber a1();
+			a1 = new Subscriber(nome, std::stoul(ID), password, instituicao, cota, email);
+		else
+			a1 = new Associado(nome, std::stoul(ID),password, instituicao, cota, email);
+
+
 		//guardar temas de eventos
+		std::istringstream ssEventos(tema);
 		std::vector<std::string> v_eventos;
-		while (tema.find(",") != tema.npos)
+		while (!ssEventos.eof())
 		{
-			int p1 = tema.find_first_of(","); // posicao da vírgula
-			v_eventos.push_back(tema.substr(1, p1 - 1));
-			tema = tema.substr(p1 + 1);
+			std::string evento;
+			getline(ssEventos, evento, ',');
+			eliminateSpaces(evento);
+			v_eventos.push_back(evento);
 		}
 		a1->setEventos(v_eventos);
+
+
 		//guardar subareas de interesse
+		std::istringstream ssSubAreas(subareas);
 		std::vector<std::string> v_subareas;
-		while (subareas.find(",") != subareas.npos)
+		while (!ssSubAreas.eof())
 		{
-			int p1 = subareas.find_first_of(","); // posicao da vírgula
-			v_subareas.push_back(subareas.substr(1, p1 - 1));
-			subareas = subareas.substr(p1 + 1);
+			std::string subArea;
+			getline(ssSubAreas, subArea, ',');
+			eliminateSpaces(subArea);
+			v_subareas.push_back(subArea);
 		}
 		a1->setAreasInteresse(v_subareas);
 		associacao->addAssociado(*a1);
 	}
 }
-
-
 void AssociacaoMS::lerEmails()
 {
 	//abrir ficheiro
@@ -735,7 +747,6 @@ bool hasChar(std::string &string) {
 
 	return false;
 }
-
 void eliminateSpaces(std::string &string) {
 	for (unsigned int i = 0; i < string.length() - 1; i++) {
 		if ((string.at(i) == ' ') && (string.at(i + 1) == ' ')) {
@@ -753,7 +764,6 @@ void eliminateSpaces(std::string &string) {
 	}
 
 }
-
 void getString(std::string &string, const std::string question) {
 	std::string test;
 
@@ -774,7 +784,6 @@ void getString(std::string &string, const std::string question) {
 	string = test + string;
 	eliminateSpaces(string);
 }
-
 void getNumber(unsigned int &number, const std::string &question) {
 	bool valid;
 
@@ -800,11 +809,10 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 	number = std::stoul(number_string);
 }
-
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-	//system("CLS");
+	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	system("CLS");
 }
 
 //ACABARRR!!!!!!!
@@ -823,7 +831,6 @@ void getID(Associacao &ac1, unsigned int id, std::string pass) {
 	} while (!IDvalido);
 
 }
-
 void getPassword(Associacao &ac1, std::string pass) {
 	bool PassValida = false;
 	do {
