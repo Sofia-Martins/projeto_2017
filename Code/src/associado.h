@@ -56,6 +56,9 @@ public:
 
 	//operators
 	const Associado & operator= (const Associado & a);
+	bool operator < (const Associado & a) const{
+		return (ID < a.ID);
+	}
 
 };
 

@@ -60,7 +60,7 @@ public:
 	//menu 3
 	void menuAssociacoes();
 	void lerDominios();
-	//void lerAssociados();
+	void lerAssociados();
 	void lerEmails();
 	void lerConferencias();
 	void lerEscolasVerao();

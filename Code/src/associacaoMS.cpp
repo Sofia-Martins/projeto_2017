@@ -159,7 +159,6 @@ void AssociacaoMS::menuCriaAssociacao() {
 	clearScreen(); //apagar conteudo do ecra
 	this->menuAbrirFicheiroAssociacoes(nomeFicheiroAssociacoes);
 
-
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "-------------- CRIAR ASSOCIACAO --------------\n\n";
 	std::string nomeAssociacao, siglaAssociacao;
@@ -323,7 +322,7 @@ void AssociacaoMS::menuAssociacoes() {
 
 	//ler ficheiros
 	lerDominios();
-	//lerAssociados(ficheiroAssociados);
+	lerAssociados();
 	lerEmails();
 	lerConferencias();
 	lerEscolasVerao();
@@ -376,7 +375,7 @@ void AssociacaoMS::lerDominios() {
 	dac.close();
 }
 
-/*
+
 void AssociacaoMS::lerAssociados() {
 
 	std::ifstream streamAssociados;
@@ -387,47 +386,49 @@ void AssociacaoMS::lerAssociados() {
 	while (!streamAssociados.eof()) {
 		getline(streamAssociados, linhaFicheiro);
 		std::stringstream input(linhaFicheiro);
-		getline(input, nome, ','); eliminateSpaces(nome);
-		getline(input, ID, ','); eliminateSpaces(ID);
-		getline(input, password, ','); eliminateSpaces(password);
-		getline(input, instituicao, ','); eliminateSpaces(instituicao);
-		getline(input, emDiaString, ','); eliminateSpaces(emDiaString);
-		getline(input, atraso, ','); eliminateSpaces(atraso);
-		getline(input, email, ';'); eliminateSpaces(email);
-		getline(input, tema, ';'); eliminateSpaces(tema);
-		getline(input, subareas); eliminateSpaces(subareas);
+		getline(input, nome, ',');
+		getline(input, ID, ',');
+		getline(input, password, ',');
+		getline(input, instituicao, ',');
+		getline(input, emDiaString, ',');
+		getline(input, atraso, ',');
+		getline(input, email, ';');
+		getline(input, tema, ';');
+		getline(input, subareas);
 		bool emDia;
 		if (emDiaString == "sim")
 			emDia = true;
 		else emDia = false;
+
 		Cota *cota = new Cota(emDia, std::stoul(atraso));
 		Associado *a1 = new Associado(nome, std::stoul(ID), password, instituicao, cota, email);
+
 		if (emDia)
 			Contributor a1();
 		else if (std::stoul(atraso) < 5)
 			Subscriber a1();
 		//guardar temas de eventos
 		std::vector<std::string> v_eventos;
-		do
+		while (tema.find(",") != tema.npos)
 		{
 			int p1 = tema.find_first_of(","); // posicao da vírgula
 			v_eventos.push_back(tema.substr(1, p1 - 1));
 			tema = tema.substr(p1 + 1);
-		} while (tema.find_first_of(",") != tema.size() - 1);
+		}
 		a1->setEventos(v_eventos);
 		//guardar subareas de interesse
 		std::vector<std::string> v_subareas;
-		do
+		while (subareas.find(",") != subareas.npos)
 		{
 			int p1 = subareas.find_first_of(","); // posicao da vírgula
 			v_subareas.push_back(subareas.substr(1, p1 - 1));
 			subareas = subareas.substr(p1 + 1);
-		} while (subareas.find_first_of(",") != subareas.size() - 1);
+		}
 		a1->setAreasInteresse(v_subareas);
-		ac1.addAssociado(*a1);
+		associacao->addAssociado(*a1);
 	}
 }
-*/
+
 
 void AssociacaoMS::lerEmails()
 {
@@ -698,7 +699,8 @@ void AssociacaoMS::menuLogin(Associacao &ac1) {
 }
 void criaConta(Associacao &ac1) {
 	std::string nome, password, instituicao, email;
-	int ID = ac1.getAssociados().at(ac1.getAssociados().size() - 1)->getID() + 1; //falta ordernar vetor!!!!!
+	std::sort(ac1.getAssociados().begin(), ac1.getAssociados().end());
+	int ID = ac1.getAssociados().at(ac1.getAssociados().size() - 1)->getID() + 1;
 
 	getString(nome, "Nome: ");
 	getString(password, "Password: ");
