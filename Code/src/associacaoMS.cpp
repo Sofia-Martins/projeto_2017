@@ -308,7 +308,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt"; //Confirmar q é o second!
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt"; 
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
