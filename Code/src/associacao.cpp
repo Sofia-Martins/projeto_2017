@@ -51,6 +51,7 @@ std::vector<Evento*> Associacao::getEventos() const {
 	return this->eventos;
 }
 
+
 //metodos set
 void Associacao::setNome(std::string nome) {
 	this->nome = nome;
@@ -68,6 +69,12 @@ void Associacao::setDominio(DominioCientifico* dominio)
 
 
 //outros metodos
+
+unsigned int Associacao::incIdAssociados(){
+	idAssociados++;
+	return this->idAssociados;
+}
+
 void Associacao::addEmail(Email &email) {
 	emails.push_back(&email);
 }

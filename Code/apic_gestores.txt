@@ -1,1 +1,1 @@
-nome, id, password, endereco de email;
+nome; id; password; endereco de email

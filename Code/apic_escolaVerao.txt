@@ -1,1 +1,1 @@
-planeadores; organizadores; local, tema; dia, mes, ano, hora, minuto; apoioAssociacao, tipoApoio; formador 1, formador 2;
+1,2,4;1,2,4,79; local; tema; 5, 10,2018, 13, 57; 0; tipoApoio; 4, 788

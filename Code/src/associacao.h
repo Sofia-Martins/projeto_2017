@@ -25,6 +25,7 @@ private:
 	std::vector<Email*> emails;
 	std::vector<Associado*> associados;
 	std::vector<Gestor*> gestores;
+	unsigned int idAssociados=0;
 
 public:
 	Associacao();
@@ -51,7 +52,7 @@ public:
 	void addAssociado(Associado &associado);
 	void addGestor(Gestor &gestor);
 	void addEvento(Evento &evento);
-
+	unsigned int incIdAssociados();
 };
 
 //excecoes

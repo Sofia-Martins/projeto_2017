@@ -1,1 +1,1 @@
-planeadores; organizadores; local, tema; dia, mes, ano, hora, minuto; apoioAssociacao, tipoApoio; numero de participantes;
+1,4,6;1,4,6,5;gondomar;festa de aniversario;24,12,2017,23,45;1;monetario;20

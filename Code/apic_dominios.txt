@@ -1,213 +1,40 @@
-@Ciências da Vida e da Saúde
-
-#Neurociências, Envelhecimento e Doenças Degenerativas
-*Neurociências - Molecular e Celular (NEU-NMC)
-*Neurociências - Sistemas, Clínica e Comportamento (NEU-SCC)
-*Biologia do Envelhecimento (NEU-BEN)
-*Degeneração de Orgãos e Sistemas (NEU-OSD)
-
-#Imunologia e Infeção
-*Imunologia e Inflamação (IMI-IMU)
-*Microbiologia e Infeção (IMI-MIC)
-
-#Diagnóstico, Terapêutica e Saúde Pública
-*Epidemiologia (DTP-EPI)
-*Saúde Pública e Fatores Ambientais (DTP-SAP)
-*Farmacologia e Toxicologia (DTP-FTO)
-*Fisiologia do Exercício e Ciências do Desporto (DTP-DES)
-*Investigação Clínica (DTP-PIC)
-
+@Ciï¿½ncias da Vida e da Saï¿½de
+#Neurociï¿½ncias, Envelhecimento e Doenï¿½as Degenerativas
+*Neurociï¿½ncias - Molecular e Celular 
+*Neurociï¿½ncias - Sistemas, Clï¿½nica e Comportamento 
+*Biologia do Envelhecimento 
+*Degeneraï¿½ï¿½o de Orgï¿½os e Sistemas 
+#Imunologia e Infeï¿½ï¿½o
+*Imunologia e Inflamaï¿½ï¿½o 
+*Microbiologia e Infeï¿½ï¿½o 
+#Diagnï¿½stico, Terapï¿½utica e Saï¿½de Pï¿½blica
+*Epidemiologia 
+*Saï¿½de Pï¿½blica e Fatores Ambientais 
+*Farmacologia e Toxicologia 
+*Fisiologia do Exercï¿½cio e Ciï¿½ncias do Desporto 
+*Investigaï¿½ï¿½o Clï¿½nica 
 #Biomedicina
-*Oncobiologia (BIM-ONC)
-*Mecanismos da Doença (BIM-MEC)
-*Metabolismo e Nutrição (BIM-MET)
-*Medicina Regenerativa (BIM-MED)
-
+*Oncobiologia 
+*Mecanismos da Doenï¿½a 
+*Metabolismo e Nutriï¿½ï¿½o 
+*Medicina Regenerativa 
 #Biologia Experimental
-*Genética e Genómica (BEX-GMG)
-*Biologia Celular e Molecular (BEX-BCM)
-*Biologia do Desenvolvimento (BEX-BID)
-*Biologia Computacional e Bioinformática (BEX-BCB)
-
-
-@Ciências Exatas e da Engenharia
-
-#Ciência e Engenharia de Materiais
-*Biomateriais (CTM-BIO)
-*Cerâmica e Vidro (CTM-CER)
-*Materiais para Produção e Armazenamento de Energia (CTM-ENE)
-*Nanomateriais e Dispositivos (CTM-NAN)
-*Polímeros e Compósitos (CTM-POL)
-*Materiais Estruturais (CTM-MAT)
-
-#Bioengenharia, Biotecnologia e Bioquímica
-*Engenharia Biológica (BBB-EBI)
-*Engenharia Metabólica e Fisiologia Microbiana (BBB-MET)
-*Biologia Sintética e de Sistemas (BBB-BSS)
-*Engenharia de Bioprocessos e Biocatálise (BBB-EBB)
-*Engenharia Celular e de Tecidos (BBB-ECT)
-*Biotecnologia (BBB-BIO)
-*Nanobiotecnologia e Biossensores (BBB-NAN)
-*Engenharia Biomédica (BBB-BMD)
-*Imagem e Biossinais (BBB-IMG)
-*Biomecânica (BBB-BMC)
-*Biologia Estrutural e Proteómica (BBB-BEP)
-*Bioquímica e Biofísica (BBB-BQB)
-
-#Engenharia Civil e Minas
-*Estruturas (ECM-EST)
-*Transportes (ECM-TRA)
-*Urbanismo (ECM-URB)
-*Geotecnia (ECM-GEO)
-*Hidráulica (ECM-HID)
-*Construções (ECM-COM)
-*Engenharia de Minas (ECM-MIN)
-
-#Engenharia Eletrotécnica e Engenharia Informática
-*Automação, Controlo e Robótica (EEI-AUT)
-*Eletrónica e Computadores (EEI-ELC)
-*Energia Elétrica (EEI-EEL)
-*Processamento de Sinal (EEI-PRO)
-*Telecomunicações (EEI-TEL)
-*Ciência e Tecnologia da Programação (EEI-CTP)
-*Engenharia de Software e Sistemas de Informação (EEI-ESS)
-*Sistemas Inteligentes, Interação e Multimédia (EEI-SII)
-
-#Engenharia Mecânica e Sistemas de Engenharia
-*Sistemas de Automação e Robótica (EMS-CRO)
-*Gestão Industrial (EMS-GIN)
-*Energia e Ambiente (EMS-ENE)
-*Projeto Mecânico (EMS-PRO)
-*Tecnologia Mecânica (EMS-TEC)
-*Transportes (EMS-TRA)
-*Sistemas de Engenharia (EMS-SIS)
-
-#Física
-*Física Nuclear, Partículas Elementares e Altas Energias (FIS-NUC)
-*Física Atómica e Molecular (FIS-ATO)
-*Física dos Plasmas e Fusão Nuclear (FIS-PLA)
-*Física da Matéria Condensada e Nanotecnologia (FIS-NAN)
-*Ótica e Fotónica (FIS-OPT)
-*Astronomia e Astrofísica (FIS-AST)
-
-#Matemática
-*Álgebra e Combinatória (MAT-ALG)
-*Análise (MAT-ANA)
-*Análise Numérica, Otimização e Modelação Matemática (MAT-NAN)
-*Cálculo de Variações, Equações Diferenciais e Sistemas Dinâmicos (MAT-CAL)
-*Geometria e Topologia (MAT-GEO)
-*Lógica e Teoria da Computação (MAT-LOG)
-*Estatística, Processos Estocásticos e Análise Estocástica (MAT-STA)
-
-#Química e Engenharia Química
-*Química Física (QEQ-QFI)
-*Química Orgânica (QEQ-QOR)
-*Química Inorgânica (QEQ-QIN)
-*Química Analítica (QEQ-QAN)
-*Química Supramolecular (QEQ-SUP)
-*Química Computacional (QEQ-COM)
-*Química Medicinal (QEQ-MED)
-*Engenharia da Reação Química (QEQ-ERQ)
-*Engenharia de Produto (QEQ-EPR)
-*Engenharia de Processos e Sistemas (QEQ-EPS)
-*Processos de Separação (QEQ-PRS)
-*Fenómenos de Transporte e Termodinâmica (QEQ-FTT)
-
-
-@Ciências Naturais e do Ambiente
-
-#Ambiente e Alterações Globais
-*Alterações Ambientais Globais (AAG-GLO)
-*Gestão Sustentável de Recursos (AAG-REC)
-*Tecnologias Ambientais (AAG-TEC)
-*Modelação e Avaliação Ambiental (AAG-MAA)
-
-#Ciência Animal e Ciências Veterinárias
-*Produção e Bem-estar Animal (CVT-WEL)
-*Sanidade Animal e Epidemiologia (CVT-EPI)
-*Nutrição Animal (CVT-NUT)
-*Melhoramento e Genómica Animal (CVT-GEN)
-*Tecnologias de Reprodução (CVT-REP)
-*Biodiversidade e Conservação de Raças Autóctones (CVT-LIV)
-
-#Agricultura e Ciências Florestais
-*Ciências Florestais (AGR-FOR)
-*Produção Agrícola (AGR-PRO)
-*Tecnologia de Produtos de Base Biológica (AGR-TEC)
-
-#Ciências Biológicas
-*Biodiversidade e Conservação (BIA-BIC)
-*Biologia Microbiana (BIA-MIC)
-*Evolução e Filogenia (BIA-EVF)
-*Biologia de Plantas (BIA-PLA)
-*Biologia Animal (BIA-ANM)
-
-#Geociências
-*Meteorologia e Clima (GEO-MET)
-*Geofísica e Geoquímica (GEO-FIQ)
-*Geologia (GEO-GEO)
-*Deteção Remota e Geodesia (GEO-REM)
-
-#Ciências do Mar
-*Sistemas Oceânicos e do Mar Profundo (MAR-PRO)
-*Sistemas Estuarinos, Costeiros e Litorais (MAR-EST)
-*Biotecnologia Marinha, Pescas e Aquacultura (MAR-BIO)
-*Energia e Tecnologias Marinhas (MAR-TEC)
-
-
-@Ciências Sociais e Humanidades
-
-#Indivíduos, Instituições e Mercados
-*Economia (IIM-ECO)
-*Finanças (IIM-FIN)
-*Gestão (IIM-GES)
-
-#Instituições, Valores, Crenças e Comportamento
-*Sociologia (IVC-SOC)
-*Antropologia (IVC-ANT)
-*Ciência Política (IVC-CPO)
-*Ciências Jurídicas (IVC-JUR)
-*Ciências da Comunicação e da Informação (IVC-COM)
-*Políticas de Educação e de Ciência (IVC-PEC)
-*História e Filosofia da Ciência e da Tecnologia (IVC-HFC)
-*Estudos Sociais da Ciência e da Tecnologia (IVC-ESCT)
-
-#Ambiente, Território e População
-*Geografia (ATP-GEO)
-*Demografia (ATP-DEM)
-*Estudos Urbanos e Regionais (ATP-EUR)
-*Estudos Ambientais (ATP-EAM)
-*Arquitetura (ATP-AQI)
-*Arquitetura Paisagista (ATP-ARP)
-
-#A Mente Humana e a sua Complexidade
-*Psicologia Aplicada (MHC-PAP)
-*Psicologia Clínica e Avaliação Psicológica (MHC-PCL)
-*Psicologia Cognitiva, Neuropsicologia e Cognição Social (MHC-PCN)
-*Psicologia da Educação e do Desenvolvimento (MHC-PED)
-*Psicologia da Saúde e Comunitária (MHC-PSC)
-*Psicologia Social e das Organizações (MHC-PSO)
-*Linguística (MHC-LIN)
-*Ciências da Educação (MHC-CED)
-*Filosofia (MHC-FIL)
-*Ética (MHC-ETI)
-*Religião (MHC-REL)
-
-#Culturas e produção cultural
-*Estudos Literários (CPC-ELT)
-*Estudos Artísticos (CPC-EAT)
-*Artes Visuais (CPC-VIS)
-*Artes Performativas (CPC-PER)
-*Design (CPC-DES)
-*Artes Multimédia (CPC-ARM)
-*Música e Musicologia (CPC-MMU)
-*Estudos Comparados (CPC-CMP)
-*História da Arte (CPC-HAT)
-
-#Estudo do Passado Humano
-*Arqueologia (EPH-ARQ)
-*História (EPH-HIS)
-*Património Cultural (EPH-PAT)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+*Genï¿½tica e Genï¿½mica
+*Biologia Celular e Molecular 
+*Biologia do Desenvolvimento 
+*Biologia Computacional e Bioinformï¿½tica
+@Ciï¿½ncias Exatas e da Engenharia
+#Ciï¿½ncia e Engenharia de Materiais
+*Biomateriais 
+*Cerï¿½mica e Vidro 
+*Materiais para Produï¿½ï¿½o e Armazenamento de Energia 
+*Nanomateriais e Dispositivos 
+*Polï¿½meros e Compï¿½sitos 
+*Materiais Estruturais 
+#Bioengenharia, Biotecnologia e Bioquï¿½mica
+*Engenharia Biolï¿½gica
+*Engenharia Metabï¿½lica e Fisiologia Microbiana
+*Biologia Sintï¿½tica e de Sistemas 
+*Engenharia de Bioprocessos e Biocatï¿½lise 
+*Engenharia Celular e de Tecidos 
+*Biotecnologia

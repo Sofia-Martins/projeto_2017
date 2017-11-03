@@ -45,14 +45,17 @@ public:
 	void menuBemVindoSelecao();
 
 	//menu 2.1
-	void menuFicheiroAssociacoes();
-	void menuFicheiroAssociacoesSelecao();
-	void lerAssociacoes();
-
-	//menu 2.2
 	void menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes);
 	void menuCriaAssociacao();
 	void enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes);
+	void criaGestor (std::string siglaAssociacao);
+	void criaFicheirosNovaAssociacao(std::string siglaAssociacao);
+	void enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores);
+
+	//menu 2.2
+	void menuFicheiroAssociacoes();
+	void menuFicheiroAssociacoesSelecao();
+	void lerAssociacoes();
 
 	//menu 3
 	void menuAssociacoes();

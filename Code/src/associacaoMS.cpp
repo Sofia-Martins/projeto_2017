@@ -22,7 +22,7 @@ void criaConta(Associacao &ac1);
 //variaveis globais
 std::string retornoMenu = "/";
 
-/*------------------------------------------- menu 1 -------------------------------------------*/
+/*------------------------------------------- menu 1 ---------------------------------------------*/
 void AssociacaoMS::menuBemVindo()
 {
 	//inicializar a associacao
@@ -59,7 +59,7 @@ void AssociacaoMS::menuBemVindoSelecao()
 		this->menuCriaAssociacao();
 
 }
-/*------------------------------------------- menu 2.1 -------------------------------------------*/
+/*------------------------------------------- menu 2.2 -------------------------------------------*/
 
 void AssociacaoMS::menuFicheiroAssociacoes() {
 	clearScreen(); //apagar conteudo do ecra
@@ -107,6 +107,10 @@ void AssociacaoMS::lerAssociacoes()
 		std::stringstream ssFicheiro(linhaFicheiro);
 		getline(ssFicheiro, siglaAssociacao, ';');
 		getline(ssFicheiro, nomeAssociacao);
+
+		if(siglaAssociacao == "" || nomeAssociacao == "")
+			break;
+
 		eliminateSpaces(nomeAssociacao);
 		eliminateSpaces(siglaAssociacao);
 
@@ -117,7 +121,7 @@ void AssociacaoMS::lerAssociacoes()
 	streamAssociacoes.close();
 }
 
-/*------------------------------------------- menu 2.2 -------------------------------------------*/
+/*------------------------------------------- menu 2.1 -------------------------------------------*/
 void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes) {
 
 	std::string nomeFicheiro;
@@ -130,7 +134,6 @@ void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssoci
 			std::cin.clear();
 			menuBemVindo(); //se o utilizador inseriu CTRL+D
 		}
-		std::cout << nomeFicheiro << "\n\n";
 
 		nomeFicheiro = nomeFicheiro + ".txt";
 		streamAssociacoes.open(nomeFicheiro);
@@ -141,8 +144,11 @@ void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssoci
 	//se o ficheiro existir
 	ficheiroAssociacoes = nomeFicheiro;
 	lerAssociacoes();
+	std::cout << nomeFicheiro << "\n\n";
 
 	nomeFicheiroAssociacoes = nomeFicheiro;
+
+	streamAssociacoes.close();
 
 }
 
@@ -157,13 +163,40 @@ void AssociacaoMS::menuCriaAssociacao() {
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "-------------- CRIAR ASSOCIACAO --------------\n\n";
 	std::string nomeAssociacao, siglaAssociacao;
+	bool encontrou = false;
 
-	getString(nomeAssociacao, "Nome: ");
-	getString(siglaAssociacao, "Sigla: ");
+	do {
+		encontrou = false;
+
+		getString(nomeAssociacao, "Nome: ");
+		getString(siglaAssociacao, "Sigla: ");
+
+		std::transform(siglaAssociacao.begin(), siglaAssociacao.end(),
+				siglaAssociacao.begin(), ::tolower); //converter sigla para letras minusculas
+
+		for (unsigned int i = 0; i < associacoes.size(); i++) {
+			if (siglaAssociacao == associacoes.at(i).first) {
+				encontrou = true;
+				std::cout
+						<< "A sigla da associacao já esta a ser usada, tente outra! "
+						<< std::endl << std::endl;
+			}
+
+			if (nomeAssociacao == associacoes.at(i).second) {
+				encontrou = true;
+				std::cout << "A associacao já existe! " << std::endl
+						<< std::endl;
+
+			}
+		}
+
+	} while(encontrou);
 
 	associacoes.push_back(std::pair<std::string, std::string>(siglaAssociacao, nomeAssociacao));
 
 	this->enviarNovaAssociacaoFicheiro(nomeFicheiroAssociacoes);
+	this->criaFicheirosNovaAssociacao(siglaAssociacao);
+	this->criaGestor(siglaAssociacao);
 }
 
 void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes) {
@@ -172,12 +205,82 @@ void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssoci
 
 	if (streamAssociacoes.is_open())
 	{
-		for (unsigned int i = 0; i<associacoes.size(); i++)
-			streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second << std::endl;
-	}
-	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
+		if (associacoes.size() > 1)
 
-	menuBemVindo();
+			for (unsigned int i = 0; i < associacoes.size(); i++)
+			{
+				if (i!=associacoes.size())
+					streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second << std::endl;
+				else streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second;
+			}
+
+
+		else streamAssociacoes << associacoes.at(0).first << ";" << associacoes.at(0).second;
+	}
+
+	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
+}
+
+void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
+	std::ofstream streamAssociados(siglaAssociacao+"_associados.txt");
+	std::ofstream streamConferencias(siglaAssociacao+"_conferencias.txt");
+	std::ofstream streamDominios(siglaAssociacao+"_dominios.txt");
+	std::ofstream streamEmails(siglaAssociacao+"_emails.txt");
+	std::ofstream streamEscolaVerao(siglaAssociacao+"_escolaVerao.txt");
+}
+
+void AssociacaoMS::criaGestor(std::string siglaAssociacao){
+	clearScreen(); //apagar conteudo do ecra
+	std::cout << "---------------- CRIAR GESTOR --------------\n\n";
+	std::string nome;
+	unsigned int id;
+	std::string password;
+	std::string enderecoEmail;
+
+	getString(nome, "Nome: ");
+	getString(password, "Passowrd: ");
+	id = this->associacao->incIdAssociados();
+	enderecoEmail = std::to_string(id)+"@"+siglaAssociacao+".com";
+
+	std::cout << "ID atribuido: " << id << std::endl;
+	std::cout << "Email: " << enderecoEmail << std::endl;
+
+	std::cout << this->associacao->getNome();
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+	Gestor gestor(nome, id, password, enderecoEmail);
+
+	this->associacao->addGestor(gestor);
+
+	std::string nomeFicheiroGestores = siglaAssociacao+"_gestores.txt";
+
+	this->enviarNovoGestorFicheiro(nomeFicheiroGestores);
+
+	if (std::cin.get())
+	{
+		std::cin.clear();
+		menuBemVindo(); //se o utilizador inseriu ENTER
+	}
+
+}
+
+void AssociacaoMS::enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores) {
+	std::ofstream streamGestores;
+	streamGestores.open(nomeFicheiroGestores);
+
+	if (streamGestores.is_open())
+	{
+		for (unsigned int i = 0; i < associacao->getGestores().size(); i++)
+		{
+			streamGestores << associacao->getGestores().at(i)->getNome() << "; "
+					<< associacao->getGestores().at(i)->getID() << "; "
+					<< associacao->getGestores().at(i)->getPassword()<< "; "
+					<< associacao->getGestores().at(i)->getEnderecoEmail() << std::endl;
+		}
+
+	}
+
+	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
 }
 
 /*------------------------------------------- menu 3 -------------------------------------------*/
@@ -698,7 +801,8 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	//system("CLS");
 }
 
 //ACABARRR!!!!!!!
