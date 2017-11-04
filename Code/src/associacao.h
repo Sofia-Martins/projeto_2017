@@ -25,7 +25,7 @@ private:
 	std::vector<Email*> emails;
 	std::vector<Associado*> associados;
 	std::vector<Gestor*> gestores;
-	unsigned int idAssociados=0;
+	unsigned int id;  //id do associado/gestor seguinte da associacao
 
 public:
 	Associacao();
@@ -41,11 +41,13 @@ public:
 	std::vector<Gestor*> getGestores() const;
 	std::vector<Email*> getEmails() const;
 	std::vector<Evento*> getEventos() const;
+	unsigned int getID() const;
 
 	//metodos set
 	void setNome(std::string nome);
 	void setSigla(std::string sigla);
 	void setDominio(DominioCientifico* dominio);
+	void setID(unsigned int id);
 	//
 	void setEmails(std::vector<Email*> emails);
 	void setAssociados(std::vector<Associado*> associados);

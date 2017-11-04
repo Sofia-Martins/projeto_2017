@@ -15,6 +15,7 @@ Associacao::Associacao() {
 	this->emails = {};
 	this->associados = {};
 	this->gestores = {};
+	this->id = 0;
 }
 
 
@@ -26,6 +27,7 @@ Associacao::Associacao(std::string nome, std::vector<Evento*> eventos,
 	this->emails = emails;
 	this->associados = associados;
 	this->gestores = gestores;
+	this->id = 0;
 }
 
 
@@ -54,7 +56,7 @@ std::vector<Gestor*> Associacao::getGestores() const {
 std::vector<Evento*> Associacao::getEventos() const {
 	return this->eventos;
 }
-
+unsigned int Associacao::getID() const { return this->id; }
 
 //metodos set
 void Associacao::setNome(std::string nome) {
@@ -70,6 +72,10 @@ void Associacao::setDominio(DominioCientifico* dominio)
 {
 	this->dominioAssociacao = dominio;
 }
+void Associacao::setID(unsigned int id)
+{
+	this->id = id;
+}
 
 void Associacao::setEventos(std::vector<Evento*> eventos) { this->eventos = eventos; }
 void Associacao::setEmails(std::vector<Email*> emails) { this->emails = emails; }
@@ -80,8 +86,8 @@ void Associacao::setGestores(std::vector<Gestor*> gestores) { this->gestores = g
 //outros metodos
 
 unsigned int Associacao::incIdAssociados(){
-	idAssociados++;
-	return this->idAssociados;
+	id++;
+	return this->id;
 }
 
 void Associacao::addEmail(Email &email) {

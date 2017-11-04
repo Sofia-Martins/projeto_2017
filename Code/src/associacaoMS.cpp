@@ -38,7 +38,6 @@ void AssociacaoMS::menuBemVindo()
 void AssociacaoMS::menuBemVindoSelecao()
 {
 
-	std::cout << "menu bem vindo selecao\n";
 	unsigned int numeroOpcao = 0;
 
 	do
@@ -80,8 +79,6 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 		nomeFicheiro = nomeFicheiro + ".txt";
 		std::cout << nomeFicheiro;
 		streamAssociacoes.open(nomeFicheiro);
-		if (streamAssociacoes.is_open())
-			std::cout << "Open!\n\n";
 	} while (streamAssociacoes.fail());
 
 	//se o ficheiro existir
@@ -134,8 +131,6 @@ void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssoci
 
 		nomeFicheiro = nomeFicheiro + ".txt";
 		streamAssociacoes.open(nomeFicheiro);
-		if (streamAssociacoes.is_open())
-			std::cout << "Open!\n\n";
 	} while (streamAssociacoes.fail());
 
 	//se o ficheiro existir
@@ -224,15 +219,16 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "---------------- CRIAR GESTOR --------------\n\n";
 	std::string nome;
-	unsigned int id;
+	unsigned int id = this->associacao->getID();
 	std::string password;
 	std::string enderecoEmail;
 
 	getString(nome, "Nome: ");
 	getString(password, "Password: ");
 
-	Gestor* gestor = new Gestor(nome, password, siglaAssociacao);
+	Gestor* gestor = new Gestor(nome, password, siglaAssociacao,id);
 	this->associacao->addGestor(*gestor);
+	this->associacao->setID(id++);
 
 	std::cout << "ID atribuido: " << gestor->getID() << std::endl;
 	std::cout << "Email: " <<gestor->getEnderecoEmail() << std::endl;
@@ -315,6 +311,7 @@ void AssociacaoMS::menuAssociacoes() {
 
 	//ler ficheiros
 	this->associacao->setEventos({});
+	this->associacao->setID(0);
 	lerAssociados();
 	lerDominios();
 	lerEmails();
@@ -457,6 +454,7 @@ void AssociacaoMS::lerAssociados() {
 		}
 		a1->setAreasInteresse(v_subareas);
 		associacao->addAssociado(*a1);
+		if (std::stoul(ID) >= this->associacao->getID()) this->associacao->setID(std::stoul(ID)+1);
 	}
 }
 void AssociacaoMS::lerEmails()
@@ -727,6 +725,7 @@ void AssociacaoMS::lerGestores()
 		//criar gestor
 		Gestor* gestor = new Gestor(nome, id, password, email);
 		this->associacao->addGestor(*gestor);
+		if (id >= this->associacao->getID()) this->associacao->setID(id+1);
 	}
 	in.close();
 }
