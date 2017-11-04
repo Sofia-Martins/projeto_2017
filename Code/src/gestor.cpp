@@ -7,14 +7,27 @@
 
 #include "gestor.h"
 
+//inicializacao da variavel static
+unsigned int Gestor::idGestor = 1;
 
-//construtor
+//construtores
 Gestor::Gestor(std::string nome,unsigned int id,std::string password,std::string enderecoEmail)
 {
 	this->nome=nome;
-	this->id=id;
+	this->id = id;
 	this->password=password;
 	this->enderecoEmail=enderecoEmail;
+
+	if (id >= idGestor)
+		idGestor++;
+}
+Gestor::Gestor(std::string nome, std::string password,std::string siglaAssociacao)
+{
+	this->nome = nome;
+	this->password = password;
+	this->id = idGestor;
+	this->idGestor++; //atualiza variavel static
+	this->enderecoEmail = std::to_string(this->id) + "@" + siglaAssociacao + ".com";
 }
 
 //metodos set

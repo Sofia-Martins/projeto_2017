@@ -194,6 +194,7 @@ void AssociacaoMS::menuCriaAssociacao() {
 	this->criaGestor(siglaAssociacao);
 }
 void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes) {
+
 	std::ofstream streamAssociacoes;
 	streamAssociacoes.open(nomeFicheiroAssociacoes);
 
@@ -203,19 +204,17 @@ void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssoci
 
 			for (unsigned int i = 0; i < associacoes.size(); i++)
 			{
-				if (i!=associacoes.size())
+				if (i!=(associacoes.size()-1))
 					streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second << std::endl;
 				else streamAssociacoes << associacoes.at(i).first << ";" << associacoes.at(i).second;
 			}
-
-
 		else streamAssociacoes << associacoes.at(0).first << ";" << associacoes.at(0).second;
 	}
 
 	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
 }
 void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
-	std::ofstream streamAssociados(siglaAssociacao+"_associados.txt");
+	std::ofstream streamAssociados(siglaAssociacao + "_associados.txt");
 	std::ofstream streamConferencias(siglaAssociacao+"_conferencias.txt");
 	std::ofstream streamDominios(siglaAssociacao+"_dominios.txt");
 	std::ofstream streamEmails(siglaAssociacao+"_emails.txt");
@@ -230,29 +229,26 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao){
 	std::string enderecoEmail;
 
 	getString(nome, "Nome: ");
-	getString(password, "Passowrd: ");
-	id = this->associacao->incIdAssociados();
-	enderecoEmail = std::to_string(id)+"@"+siglaAssociacao+".com";
+	getString(password, "Password: ");
 
-	std::cout << "ID atribuido: " << id << std::endl;
-	std::cout << "Email: " << enderecoEmail << std::endl;
+	Gestor* gestor = new Gestor(nome, password, siglaAssociacao);
+	this->associacao->addGestor(*gestor);
+
+	std::cout << "ID atribuido: " << gestor->getID() << std::endl;
+	std::cout << "Email: " <<gestor->getEnderecoEmail() << std::endl;
 
 	std::cout << this->associacao->getNome();
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
-
-	Gestor gestor(nome, id, password, enderecoEmail);
-
-	this->associacao->addGestor(gestor);
 
 	std::string nomeFicheiroGestores = siglaAssociacao+"_gestores.txt";
 
 	this->enviarNovoGestorFicheiro(nomeFicheiroGestores);
 
-	if (std::cin.get())
-	{
-		std::cin.clear();
-		menuBemVindo(); //se o utilizador inseriu ENTER
-	}
+	std::string lixo;
+	getString(lixo, "");
+	std::cin.clear();
+	this->menuBemVindo();
+	
 
 }
 void AssociacaoMS::enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores) {
@@ -261,12 +257,17 @@ void AssociacaoMS::enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores) 
 
 	if (streamGestores.is_open())
 	{
-		for (unsigned int i = 0; i < associacao->getGestores().size(); i++)
+		auto gestores = associacao->getGestores();
+
+		for (unsigned int i = 0; i <gestores.size(); i++)
 		{
-			streamGestores << associacao->getGestores().at(i)->getNome() << "; "
-					<< associacao->getGestores().at(i)->getID() << "; "
-					<< associacao->getGestores().at(i)->getPassword()<< "; "
-					<< associacao->getGestores().at(i)->getEnderecoEmail() << std::endl;
+			streamGestores << gestores.at(i)->getNome() << "; "
+				<< gestores.at(i)->getID() << "; "
+				<< gestores.at(i)->getPassword() << "; "
+				<< gestores.at(i)->getEnderecoEmail();
+
+			if(i!=(gestores.size()-1))
+				streamGestores<< std::endl;
 		}
 
 	}
@@ -313,8 +314,9 @@ void AssociacaoMS::menuAssociacoes() {
 	ficheiroGestores = associacoes.at(opcao - 1).first + "_gestores.txt";
 
 	//ler ficheiros
-	lerDominios();
+	this->associacao->setEventos({});
 	lerAssociados();
+	lerDominios();
 	lerEmails();
 	lerConferencias();
 	lerEscolasVerao();
@@ -328,6 +330,8 @@ void AssociacaoMS::lerDominios() {
 
 	std::ifstream dac; //Dominios e Areas Cientificas
 	dac.open(ficheiroDominios);
+	bool primeiraLeitura = true;
+	this->associacao->setDominio(NULL);
 
 	DominioCientifico* dominio = new DominioCientifico();
 	char carater;
@@ -336,9 +340,16 @@ void AssociacaoMS::lerDominios() {
 	AreaCientifica* area = NULL;
 	SubAreaCientifica* subArea = NULL;
 
+	dac.get(carater);
 	while (!dac.eof())
 	{
-		dac.get(carater);
+		if (primeiraLeitura)
+		{
+			dac.putback(carater);
+			primeiraLeitura = false;
+		}
+		else
+			dac.get(carater);
 
 		if (carater == '@')
 		{
@@ -370,10 +381,19 @@ void AssociacaoMS::lerAssociados() {
 
 	std::ifstream streamAssociados;
 	streamAssociados.open(ficheiroAssociados);
+	bool primeiraLeitura = true;
+	char carater;
+	this->associacao->setAssociados({});
 
 	std::string linhaFicheiro, nome, ID, password, instituicao, emDiaString, atraso, email, tema, subareas;
 
+	streamAssociados.get(carater);
 	while (!streamAssociados.eof()) {
+		if (primeiraLeitura)
+		{
+			streamAssociados.putback(carater);
+			primeiraLeitura = false;
+		}
 		getline(streamAssociados, linhaFicheiro);
 		std::stringstream input(linhaFicheiro);
 		getline(input, nome, ',');
@@ -441,14 +461,23 @@ void AssociacaoMS::lerAssociados() {
 }
 void AssociacaoMS::lerEmails()
 {
+	bool primeiraLeitura = true;
+	char carater;
+	this->associacao->setEmails({});
 	//abrir ficheiro
 	std::ifstream in;
 	in.open(ficheiroEmails);
 	std::string remetente, destinatario, conteudo;
 
+	in.get(carater);
 	//extrair informação do ficheiro
 	while (!in.eof())
 	{
+		if (primeiraLeitura)
+		{
+			in.putback(carater);
+			primeiraLeitura = false;
+		}
 		getline(in, remetente, ',');
 		getline(in, destinatario, ',');
 		getline(in, conteudo);
@@ -465,9 +494,17 @@ void AssociacaoMS::lerConferencias()
 {
 	std::ifstream in;
 	in.open(ficheiroConferencias);
+	bool primeiraLeitura = true;
+	char carater;
 
+	in.get(carater);
 	while (!in.eof())
 	{
+		if (primeiraLeitura)
+		{
+			in.putback(carater);
+			primeiraLeitura = false;
+		}
 		//buscar planeadores
 		std::vector<int> vetorPlaneadores;
 		std::string ID; //id do planeador
@@ -550,9 +587,17 @@ void AssociacaoMS::lerEscolasVerao()
 {
 	std::ifstream in;
 	in.open(ficheiroEscolasVerao);
+	bool primeiraLeitura = true;
+	char carater;
 
+	in.get(carater);
 	while (!in.eof())
 	{
+		if (primeiraLeitura)
+		{
+			in.putback(carater);
+			primeiraLeitura = false;
+		}
 		//buscar planeadores
 		std::vector<int> vetorPlaneadores;
 		std::string ID; //id do planeador
@@ -641,11 +686,21 @@ void AssociacaoMS::lerEscolasVerao()
 }
 void AssociacaoMS::lerGestores()
 {
+	this->associacao->setGestores({});
 	std::ifstream in;
 	in.open(ficheiroGestores);
+	bool primeiraLeitura = true;
+	char carater;
 
+	in.get(carater);
 	while (!in.eof())
 	{
+		if (primeiraLeitura)
+		{
+			in.putback(carater);
+			primeiraLeitura = false;
+		}
+
 		std::string nome;
 		std::string idS;
 		std::string password;
@@ -678,6 +733,7 @@ void AssociacaoMS::lerGestores()
 
 /*------------------------------------------- menu 4 -------------------------------------------*/
 void AssociacaoMS::menuLogin() {
+	clearScreen();
 	std::cout << "---- LOGIN ----\n\n";
 	std::cout << "1. Sign up\n";
 	std::cout << "2. Sign in\n";
@@ -723,7 +779,6 @@ void AssociacaoMS::criaConta() {
 	associacao->addAssociado(*a);
 
 }
-
 void AssociacaoMS::getID(unsigned int id, std::string pass) {
 	bool IDvalido = false;
 	bool PassValida = false;
@@ -795,7 +850,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	} while (!((opcao == 1) || (opcao == 2)));
 
 	if(opcao == 1)
-		this->criaGestor(associacao->sigla);
+		this->criaGestor(associacao->getSigla());
 	//else if (opcao == 2)
 		//this->alteraAssociado();
 

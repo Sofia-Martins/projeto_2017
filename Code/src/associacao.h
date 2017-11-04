@@ -35,7 +35,7 @@ public:
 
 	//metodos get
 	std::string getNome() const;
-
+    std::string getSigla() const;
 	DominioCientifico* getDominio() const { return dominioAssociacao; }
 	std::vector<Associado*> getAssociados() const;
 	std::vector<Gestor*> getGestores() const;
@@ -46,6 +46,11 @@ public:
 	void setNome(std::string nome);
 	void setSigla(std::string sigla);
 	void setDominio(DominioCientifico* dominio);
+	//
+	void setEmails(std::vector<Email*> emails);
+	void setAssociados(std::vector<Associado*> associados);
+	void setGestores(std::vector<Gestor*> gestores);
+	void setEventos(std::vector<Evento*> eventos);
 
 	//outros metodos
 	void addEmail(Email &email);

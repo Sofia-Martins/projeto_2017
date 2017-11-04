@@ -14,6 +14,7 @@
 #include "email.h"
 /////////////////////
 
+
 class Gestor
 {
 private:
@@ -23,10 +24,11 @@ private:
 	std::string enderecoEmail;
 	std::vector<Email*> emailsRecebidos;
 	std::vector<Email*> emailsEnviados;
-
+	static unsigned int idGestor;
 public:
 	//construtor
-	Gestor(std::string nome,unsigned int id,std::string password,std::string enderecoEmail);
+	Gestor(std::string nome,unsigned int id,std::string password,std::string enderecoEmail); //ler gestor do ficheiro
+	Gestor(std::string nome, std::string password, std::string siglaAssociacao); //criar gestor de raiz
 
 	//metodos set
 	void setNome(std::string nome);

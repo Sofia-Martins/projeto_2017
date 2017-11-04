@@ -34,6 +34,10 @@ std::string Associacao::getNome() const {
 	return this->nome;
 }
 
+std::string Associacao::getSigla() const
+{
+	return this->sigla;
+}
 
 std::vector<Email*> Associacao::getEmails() const {
 	return this->emails;
@@ -66,6 +70,11 @@ void Associacao::setDominio(DominioCientifico* dominio)
 {
 	this->dominioAssociacao = dominio;
 }
+
+void Associacao::setEventos(std::vector<Evento*> eventos) { this->eventos = eventos; }
+void Associacao::setEmails(std::vector<Email*> emails) { this->emails = emails; }
+void Associacao::setAssociados(std::vector<Associado*> associados) { this->associados = associados; }
+void Associacao::setGestores(std::vector<Gestor*> gestores) { this->gestores = gestores; }
 
 
 //outros metodos
