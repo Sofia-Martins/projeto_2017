@@ -15,9 +15,6 @@ void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
 void clearScreen(); //pode (e deve) ser procurado um metodo melhor!!!
-void getID(Associacao &ac1, unsigned int id, std::string pass);
-void getPassword(Associacao &ac1, std::string pass);
-void criaConta(Associacao &ac1);
 
 //variaveis globais
 std::string retornoMenu = "/";
@@ -324,7 +321,7 @@ void AssociacaoMS::menuAssociacoes() {
 	lerGestores();
 
 	//proximo menu
-	//this->menuLogin(ac1);
+	this->menuLogin();
 
 }
 void AssociacaoMS::lerDominios() {
@@ -680,7 +677,7 @@ void AssociacaoMS::lerGestores()
 }
 
 /*------------------------------------------- menu 4 -------------------------------------------*/
-void AssociacaoMS::menuLogin(Associacao &ac1) {
+void AssociacaoMS::menuLogin() {
 	std::cout << "---- LOGIN ----\n\n";
 	std::cout << "1. Sign up\n";
 	std::cout << "2. Sign in\n";
@@ -697,22 +694,22 @@ void AssociacaoMS::menuLogin(Associacao &ac1) {
 	if (opcao == 1) {
 		//cria conta com id automatico
 		std::cout << "---- SIGN UP ----\n\n";
-		criaConta(ac1);
+		this->criaConta();
 
 	}
 
 	if (opcao == 2) {
 		//acede a conta da lista associados
 		std::cout << "---- SIGN IN ----\n\n";
-		getID(ac1, id, password);
+		this->getID(id, password);
 		//caso validado acede a menu seguinte. ***Ver funcao getPassword***
 
 	}
 }
-void criaConta(Associacao &ac1) {
+void AssociacaoMS::criaConta() {
 	std::string nome, password, instituicao, email;
-	std::sort(ac1.getAssociados().begin(), ac1.getAssociados().end());
-	int ID = ac1.getAssociados().at(ac1.getAssociados().size() - 1)->getID() + 1;
+	std::sort(associacao->getAssociados().begin(), associacao->getAssociados().end());
+	int ID = associacao->getAssociados().at(associacao->getAssociados().size() - 1)->getID() + 1;
 
 	getString(nome, "Nome: ");
 	getString(password, "Password: ");
@@ -723,10 +720,116 @@ void criaConta(Associacao &ac1) {
 
 	Contributor *a = new Contributor(nome, ID, password, instituicao, cota, email);
 
-	ac1.getAssociados().push_back(a);
+	associacao->addAssociado(*a);
 
 }
 
+void AssociacaoMS::getID(unsigned int id, std::string pass) {
+	bool IDvalido = false;
+	bool PassValida = false;
+	unsigned int pos = -1;
+	do {
+		getNumber(id, "ID: ");
+
+		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
+			if (associacao->getAssociados().at(i)->getID() == id) //ID valido
+				{
+				IDvalido = true;
+				pos = i;
+				}
+		if (IDvalido)
+		{
+			do {
+					getString(pass, "Password do associado: ");
+					if(associacao->getAssociados().at(pos)->getPassword() == pass)
+							PassValida = true;
+					if (!PassValida)
+						std::cout << "Password invalida!! \n\n";
+					else std::cout << "Password correta!"; //aceder ao menu associado
+				} while (!PassValida);
+		}
+
+		else {
+			//verifica se e gestor
+			for(unsigned int i = 0; i < associacao->getGestores().size(); i++ )
+				if(associacao->getGestores().at(i)->getID() == id){
+					IDvalido = true;
+					pos = i;
+				}
+
+			if (IDvalido)
+			{
+				do {
+						getString(pass, "Password do gestor: ");
+						if(associacao->getGestores().at(pos)->getPassword() == pass)
+								PassValida = true;
+						if (!PassValida)
+							std::cout << "Password invalida!! \n\n";
+						else this->menuSessaoGestor(id);
+				} while (!PassValida);
+			}
+
+		}
+
+		if(!IDvalido)
+			std::cout << "ID invalido!! \n\n";
+
+	} while (!IDvalido);
+
+}
+
+/*------------------------------------------- menu 5 -------------------------------------------*/
+
+void AssociacaoMS::menuSessaoGestor(unsigned int id){
+	clearScreen(); //apagar conteudo do ecra
+	std::cout << "Bem-Vindo Gestor \n\n";
+	std::cout << "1) Criar um novo gestor\n"
+			<< "2) Alterar um associado existente \n\n";
+
+	unsigned int opcao = 0;
+	do
+	{
+		getNumber(opcao, "Opcao: ");
+		if (std::cin.eof())
+			this->menuTermino();
+	} while (!((opcao == 1) || (opcao == 2)));
+
+	if(opcao == 1)
+		this->criaGestor(associacao->sigla);
+	//else if (opcao == 2)
+		//this->alteraAssociado();
+
+}
+/*
+void AssociacaoMS::alteraAssociado(){
+	std::cout << "O que deseja alterar ? \n\n";
+	std::cout << "1) Nome \n"
+			<< "2) Password \n"
+			<< "3) Cota \n\n";
+
+	unsigned int opcao = 0;
+	do
+	{
+		getNumber(opcao, "Opcao: ");
+		if (std::cin.eof())
+			this->menuTermino();
+	} while (!( (opcao == 1) || (opcao == 2) || (opcao == 3)));
+
+	if(opcao == 1)
+	{
+		std::cout << "Introduza o ID do associado a alterar"
+	}
+	else if (opcao == 2)
+	{
+
+	}
+	else if (opcao == 3)
+	{
+
+	}
+
+}
+*/
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()
 {
@@ -813,33 +916,4 @@ void clearScreen()
 {
 	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	system("CLS");
-}
-
-//ACABARRR!!!!!!!
-void getID(Associacao &ac1, unsigned int id, std::string pass) {
-	bool IDvalido = false;
-	do {
-		getNumber(id, "ID: ");
-
-		for (int i = 0; i < ac1.getAssociados().size(); i++)
-			if (ac1.getAssociados().at(i)->getID() == id) //ID valido
-				IDvalido = true;
-		if (IDvalido)
-			getPassword(ac1, pass);
-		else
-			std::cout << "ID invalido!! \n\n";
-	} while (!IDvalido);
-
-}
-void getPassword(Associacao &ac1, std::string pass) {
-	bool PassValida = false;
-	do {
-		getString(pass, "Password: ");
-		for (int i = 0; i < ac1.getAssociados().size(); i++)
-			if (ac1.getAssociados().at(i)->getPassword() == pass) //pass valido
-				PassValida = true;
-		if (!PassValida)
-			std::cout << "Password invalid<!! \n\n";
-		//else acede a menu seguinte!!!
-	} while (!PassValida);
 }

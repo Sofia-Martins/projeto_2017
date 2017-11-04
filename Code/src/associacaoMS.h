@@ -67,8 +67,13 @@ public:
 	void lerGestores();
 
 	//menu 4
-	void menuLogin(Associacao &ac1);
+	void menuLogin();
+	void getID(unsigned int id, std::string pass);
+	void criaConta();
 
+	//menu 5
+	void menuSessaoGestor(unsigned int id);
+	void alteraAssociado();
 
 	//menu final
 	void menuTermino();
