@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 #include "dominioCientifico.h"
 #include "email.h"
 #include "associado.h"
@@ -36,6 +37,7 @@ public:
 	//metodos get
 	std::string getNome() const;
     std::string getSigla() const;
+	Gestor* getGestor(int id) const;
 	DominioCientifico* getDominio() const { return dominioAssociacao; }
 	std::vector<Associado*> getAssociados() const;
 	std::vector<Gestor*> getGestores() const;

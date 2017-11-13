@@ -48,7 +48,7 @@ public:
 	void menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssociacoes);
 	void menuCriaAssociacao();
 	void enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes);
-	void criaGestor (std::string siglaAssociacao);
+	void criaGestor (std::string siglaAssociacao,bool criaAssociacao, int idMenu);
 	void criaFicheirosNovaAssociacao(std::string siglaAssociacao);
 	void enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores);
 

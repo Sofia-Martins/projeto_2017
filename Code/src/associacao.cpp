@@ -45,6 +45,18 @@ std::vector<Email*> Associacao::getEmails() const {
 	return this->emails;
 }
 
+bool equalGestor(Gestor* g1, Gestor* g2)
+{
+	return (g1->getID() == g2->getID());
+}
+/*
+Gestor* Associacao::getGestor(int id) const
+{
+	Gestor* temp = new Gestor("", id, "", ""); //nome, id, password, email
+	auto it = find_if(this->gestores.begin(), this->gestores.end(), temp,equalGestor);
+	if()
+}
+*/
 std::vector<Associado*> Associacao::getAssociados() const {
 	return this->associados;
 }

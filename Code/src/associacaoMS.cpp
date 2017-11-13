@@ -186,7 +186,7 @@ void AssociacaoMS::menuCriaAssociacao() {
 
 	this->enviarNovaAssociacaoFicheiro(nomeFicheiroAssociacoes);
 	this->criaFicheirosNovaAssociacao(siglaAssociacao);
-	this->criaGestor(siglaAssociacao);
+	this->criaGestor(siglaAssociacao,true,0);
 }
 void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes) {
 
@@ -215,7 +215,7 @@ void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
 	std::ofstream streamEmails(siglaAssociacao+"_emails.txt");
 	std::ofstream streamEscolaVerao(siglaAssociacao+"_escolaVerao.txt");
 }
-void AssociacaoMS::criaGestor(std::string siglaAssociacao){
+void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, int idMenu){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "---------------- CRIAR GESTOR --------------\n\n";
 	std::string nome;
@@ -223,8 +223,29 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao){
 	std::string password;
 	std::string enderecoEmail;
 
-	getString(nome, "Nome: ");
-	getString(password, "Password: ");
+	do
+	{
+		getString(nome, "Nome: ");
+	} while (std::cin.eof() && criaAssociacao);
+
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		if (!criaAssociacao)
+			this->menuSessaoGestor(idMenu);
+	}
+
+	do
+	{
+		getString(password, "Password: ");
+	} while (std::cin.eof() && criaAssociacao);
+
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		if (!criaAssociacao)
+			this->menuSessaoGestor(idMenu);
+	}
 
 	Gestor* gestor = new Gestor(nome, password, siglaAssociacao,id);
 	this->associacao->addGestor(*gestor);
@@ -302,7 +323,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt"; 
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt"; 
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -743,11 +764,12 @@ void AssociacaoMS::menuLogin() {
 	{
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
-			this->menuTermino();
+			this->menuAssociacoes();
 	} while (!((opcao == 1) || (opcao == 2)));
 
 	if (opcao == 1) {
 		//cria conta com id automatico
+		clearScreen();
 		std::cout << "---- SIGN UP ----\n\n";
 		this->criaConta();
 
@@ -755,6 +777,7 @@ void AssociacaoMS::menuLogin() {
 
 	if (opcao == 2) {
 		//acede a conta da lista associados
+		clearScreen();
 		std::cout << "---- SIGN IN ----\n\n";
 		this->getID(id, password);
 		//caso validado acede a menu seguinte. ***Ver funcao getPassword***
@@ -784,7 +807,11 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 	unsigned int pos = -1;
 	do {
 		getNumber(id, "ID: ");
-
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuLogin();
+		}
 		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
 			if (associacao->getAssociados().at(i)->getID() == id) //ID valido
 				{
@@ -833,7 +860,6 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 }
 
 /*------------------------------------------- menu 5 -------------------------------------------*/
-
 void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "Bem-Vindo Gestor \n\n";
@@ -845,17 +871,18 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	{
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
-			this->menuTermino();
+			this->menuLogin();
 	} while (!((opcao == 1) || (opcao == 2)));
 
 	if(opcao == 1)
-		this->criaGestor(associacao->getSigla());
+		this->criaGestor(associacao->getSigla(),false,id);
 	//else if (opcao == 2)
 		//this->alteraAssociado();
 
 }
-/*
+
 void AssociacaoMS::alteraAssociado(){
+	
 	std::cout << "O que deseja alterar ? \n\n";
 	std::cout << "1) Nome \n"
 			<< "2) Password \n"
@@ -881,9 +908,10 @@ void AssociacaoMS::alteraAssociado(){
 	{
 
 	}
+	
 
 }
-*/
+
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()
 {
@@ -893,7 +921,6 @@ void AssociacaoMS::menuTermino()
 	exit(0);
 
 }
-
 
 //funcoes relacionadas com inputs do utilizador ///////////////////////////////////////////
 bool hasChar(std::string &string) {
