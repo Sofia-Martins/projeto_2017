@@ -893,7 +893,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 {
 	auto associados = this->associacao->getAssociados();
-	Associado* associado;
+	Associado* associado = NULL;
 
 	//procura o associado
 	for (unsigned int i = 0; i < associados.size(); i++)
@@ -905,15 +905,38 @@ void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 	//verifica que tipo de associado é (contributor, subscriber, ou simplesmente um associado)
 	if (associado->getCota()->getEmDia() == true)
 		this->menuSessaoContributor(associado);
+	/*
 	else if (associado->getCota()->getAtraso() < 5)
 		this->menuSessaoSubscriber(associado);
 	else
 		this->menuSessaoOther(associado);
+	}
+	*/
 
 }
 void AssociacaoMS::menuSessaoContributor(Associado* associado)
 {
+	clearScreen();
+	std::cout << "Bem vindo " << associado->getNome() << "!" << std::endl << std::endl;
 
+	std::cout << "________________ O MEU ESPACO ________________\n\n";
+	std::cout << "1. Informacoes da minha conta\n";
+	std::cout << "2. Modificar a minha conta\n";
+	std::cout << "3. Apagar a minha conta\n\n";
+
+	std::cout << "_______________ ESPACO ASSOCIACAO ______________\n\n";
+	std::cout << "4. Eventos\n";
+	std::cout << "5. Emails\n";
+	std::cout << "6. Areas e subareas cientificas dos restantes associados\n\n";
+
+	/* ---- variaveis ---- */
+	unsigned int opcao;
+	do
+	{
+		if (std::cin.eof())
+			this->menuLogin();
+		getNumber(opcao, "Opcao: ");
+	} while ((opcao < 0) || (opcao > 6));
 }
 void AssociacaoMS::alteraAssociado(){
 	
