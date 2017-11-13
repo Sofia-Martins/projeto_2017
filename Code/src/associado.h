@@ -38,7 +38,7 @@ public:
 	std::string getInstituicao() const;
 	std::string getPassword() const { return this->password; };
 	//DominioCientifico getDominio() const;
-	//Cota getCota() const;
+	Cota* getCota() const;
 	std::string getEmail() const;
 
 	//metodos set

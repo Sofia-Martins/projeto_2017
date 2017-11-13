@@ -825,8 +825,14 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 					if(associacao->getAssociados().at(pos)->getPassword() == pass)
 							PassValida = true;
 					if (!PassValida)
-						std::cout << "Password invalida!! \n\n";
-					else std::cout << "Password correta!"; //aceder ao menu associado
+					{
+						if (std::cin.eof())
+							this->menuLogin();
+						std::cout << "Password invalida! \n\n";
+					}
+					else {
+						this->menuSessaoAssociado(id);
+					}
 				} while (!PassValida);
 		}
 
@@ -860,6 +866,10 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 }
 
 /*------------------------------------------- menu 5 -------------------------------------------*/
+bool procuraAssociado(unsigned int id, Associado* associado)
+{
+	return associado->getID() == id;
+}
 void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "Bem-Vindo Gestor \n\n";
@@ -880,7 +890,31 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		//this->alteraAssociado();
 
 }
+void AssociacaoMS::menuSessaoAssociado(unsigned int id)
+{
+	auto associados = this->associacao->getAssociados();
+	Associado* associado;
 
+	//procura o associado
+	for (unsigned int i = 0; i < associados.size(); i++)
+	{
+		if (associados.at(i)->getID() == id)
+			associado = associados.at(i);
+	}
+
+	//verifica que tipo de associado é (contributor, subscriber, ou simplesmente um associado)
+	if (associado->getCota()->getEmDia() == true)
+		this->menuSessaoContributor(associado);
+	else if (associado->getCota()->getAtraso() < 5)
+		this->menuSessaoSubscriber(associado);
+	else
+		this->menuSessaoOther(associado);
+
+}
+void AssociacaoMS::menuSessaoContributor(Associado* associado)
+{
+
+}
 void AssociacaoMS::alteraAssociado(){
 	
 	std::cout << "O que deseja alterar ? \n\n";
@@ -898,7 +932,7 @@ void AssociacaoMS::alteraAssociado(){
 
 	if(opcao == 1)
 	{
-		std::cout << "Introduza o ID do associado a alterar"
+		std::cout << "Introduza o ID do associado a alterar";
 	}
 	else if (opcao == 2)
 	{

@@ -43,6 +43,11 @@ std::string Associado::getEmail() const {
 	return this->enderecoEmail;
 }
 
+Cota* Associado::getCota() const
+{
+	return this->cota;
+}
+
 //metodos set
 void Associado::setNome(std::string nome) {
 	this->nome = nome;

@@ -13,12 +13,14 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <functional>
 #include <cstdlib>
 //#include <unistd.h>  //funcao sleep() em linux
 #include <stdlib.h>
 #include <stdio.h>
 #include <climits>
 #include <utility>  //std::pair
+#include <algorithm>
 #include "associacao.h"
 #include "associado.h"
 #include "areaCientifica.h"
@@ -73,6 +75,12 @@ public:
 
 	//menu 5
 	void menuSessaoGestor(unsigned int id);
+
+	void menuSessaoAssociado(unsigned int id);
+	void menuSessaoContributor(Associado* associado);
+	void menuSessaoSubscriber(Associado* associado);
+	void menuSessaoOther(Associado* associado);  //menu do associado que não é nem um contributor nem um subscriber
+
 	void alteraAssociado();
 
 	//menu final
