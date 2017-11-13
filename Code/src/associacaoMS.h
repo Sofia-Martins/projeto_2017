@@ -79,9 +79,11 @@ public:
 	void menuSessaoAssociado(unsigned int id);
 	void menuSessaoContributor(Associado* associado);
 	void menuSessaoSubscriber(Associado* associado);
-	void menuSessaoOther(Associado* associado);  //menu do associado que não é nem um contributor nem um subscriber
+	void menuSessaoOther(Associado* associado);  //menu do associado que nï¿½o ï¿½ nem um contributor nem um subscriber
 
 	void alteraAssociado();
+	void apagaGestor();
+	void apagaAssociado();
 
 	//menu final
 	void menuTermino();

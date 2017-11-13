@@ -323,7 +323,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt"; 
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -874,7 +874,9 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "Bem-Vindo Gestor \n\n";
 	std::cout << "1) Criar um novo gestor\n"
-			<< "2) Alterar um associado existente \n\n";
+			<< "2) Alterar um associado existente \n"
+			<< "3) Apaga gestor \n"
+			<< "4) Apaga Associado \n\n";
 
 	unsigned int opcao = 0;
 	do
@@ -882,12 +884,16 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
 			this->menuLogin();
-	} while (!((opcao == 1) || (opcao == 2)));
+	} while (!( (opcao == 1) || (opcao == 2) || (opcao == 3) || (opcao == 4)) );
 
 	if(opcao == 1)
 		this->criaGestor(associacao->getSigla(),false,id);
-	//else if (opcao == 2)
-		//this->alteraAssociado();
+	else if (opcao == 2)
+		this->alteraAssociado();
+	else if (opcao == 3)
+		this->apagaGestor();
+	else if (opcao == 4)
+		this->apagaAssociado();
 
 }
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
@@ -940,6 +946,20 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 }
 void AssociacaoMS::alteraAssociado(){
 	
+	unsigned int ID, pos = -1, atraso;
+	std::string nome, pass, emdia;
+	bool emdiaBool;
+
+	do {
+		getNumber(ID,"Introduza o ID do associado a alterar");
+		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
+			if (associacao->getAssociados().at(i)->getID() == ID)
+				pos = i;
+		if (pos == -1)
+			std::cout << "ID invalido!!\n\n";
+	} while (pos == -1);
+
+
 	std::cout << "O que deseja alterar ? \n\n";
 	std::cout << "1) Nome \n"
 			<< "2) Password \n"
@@ -955,17 +975,84 @@ void AssociacaoMS::alteraAssociado(){
 
 	if(opcao == 1)
 	{
-		std::cout << "Introduza o ID do associado a alterar";
+		std::cout << "Nome atual : " << associacao->getAssociados().at(pos)->getNome();
+		getString(nome,"\nNovo Nome : ");
+		associacao->getAssociados().at(pos)->setNome(nome);
+		std::cout << "Nome alterado com sucesso!\n\n";
+
 	}
 	else if (opcao == 2)
 	{
-
+		std::cout << "Password atual : " << associacao->getAssociados().at(pos)->getPassword();
+		getString(pass,"\nNova Password : ");
+		associacao->getAssociados().at(pos)->setPassword(pass);
+		std::cout << "Password alterada com sucesso!\n\n";
 	}
 	else if (opcao == 3)
 	{
+		std::cout << "Estado da cota atual : " << associacao->getAssociados().at(pos)->getCota()->getEmDia()
+				<< " , atraso de " << associacao->getAssociados().at(pos)->getCota()->getAtraso() << "anos\n";
+		getString(pass,"Novo estado da cota : ");
+		getString(emdia,"Em dia ? (true/false) ");
+		if(emdia == "true")
+			emdiaBool = true;
+		else emdiaBool = false;
+		if(!emdiaBool)
+			getNumber(atraso,"Atraso (em anos) : ");
+		else atraso = 0;
+
+		if(associacao->getAssociados().at(pos)->getCota()->getEmDia() && emdiaBool) //continua como contributor
+		{
+			Cota *cota(emdiaBool, atraso);
+			associacao->getAssociados().at(pos)->setCota(cota);
+			std::cout << "Cota alterada com sucesso!\n\n";
+		}
+		else if(associacao->getAssociados().at(pos)->getCota()->getEmDia() && !emdiaBool && atraso < 5) //passa a subscriber
+		{
+			std::vector<Associado*> temp = associacao->getAssociados();
+			temp.erase(temp.begin() + pos);
+			associacao->setAssociados(temp);
+		}
+
 
 	}
 	
+	this->menuLogin;
+
+}
+void AssociacaoMS::apagaGestor(){
+	if (associacao->getGestores().size() == 1)
+	{
+		std::cout << "Impossivel apagar gestor. So existe um! \n\n";
+		this->menuLogin();
+	}
+	clearScreen(); //apagar conteudo do ecra
+	unsigned int id;
+	std::vector<Gestor*> temp = associacao->getGestores();
+	getNumber(id, "Insira o id do gestor a eliminar : ");
+	for(unsigned int i = 0; i < associacao->getGestores().size(); i++)
+		if(associacao->getGestores().at(i)->getID() == id)
+		{
+			temp.erase(temp.begin() + i);
+			associacao->setGestores(temp);
+			std::cout << "Gestor apagado com sucesso! \n\n";
+			this->menuLogin;
+		}
+
+}
+void AssociacaoMS::apagaAssociado(){
+	clearScreen(); //apagar conteudo do ecra
+	unsigned int id;
+	std::vector<Associado*> temp = associacao->getAssociados();
+	getNumber(id, "Insira o id do associado a eliminar : ");
+	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
+		if(associacao->getAssociados().at(i)->getID() == id)
+		{
+			temp.erase(temp.begin() + i);
+			associacao->setAssociados(temp);
+			std::cout << "Associado apagado com sucesso! \n\n";
+			this->menuLogin;
+		}
 
 }
 
