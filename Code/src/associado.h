@@ -10,11 +10,11 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+#include <iomanip>
 #include "cota.h"
 #include "email.h"
 #include "dominioCientifico.h"
-
-
 
 class Associado {
 private:
@@ -59,6 +59,9 @@ public:
 	bool operator < (const Associado & a) const{
 		return (ID < a.ID);
 	}
+
+	//outros metodos
+	void show() const;
 
 };
 

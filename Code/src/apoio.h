@@ -9,6 +9,7 @@
 #define APOIO_H_
 
 #include <string>
+#include <iostream>
 
 
 class Apoio
@@ -29,6 +30,9 @@ public:
 	//Metodos Get
 	bool getApoioAssociacao() const;
 	std::string getTipoApoio() const;
+
+	//outros metodos
+	void show() const;
 };
 
 #endif

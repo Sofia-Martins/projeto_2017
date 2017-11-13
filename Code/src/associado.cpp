@@ -7,6 +7,7 @@
 
 #include "associado.h"
 
+
 Associado::Associado(){
 	this->ID = 0;
 	this->nome = {};
@@ -63,6 +64,28 @@ void Associado::setInstituicao(std::string instituicao) {
 
 void Associado::setEmail(std::string email) {
 	this->enderecoEmail = email;
+}
+
+//outros metodos
+void Associado::show() const
+{
+	std::cout << "|1| INFORMACOES GERAIS " << std::endl;
+	std::cout << " | ID: " << this->ID << std::endl;
+	std::cout << " | Nome: " << this->nome << std::endl;
+	std::cout << " | Password: " <<  this->password << std::endl;
+	std::cout << " | Instituicao: " <<  this->instituicao << std::endl;
+	std::cout << " | Endereco de email: " <<this->enderecoEmail << std::endl << std::endl;
+
+	std::cout << "|2| COTA " << std::endl;
+	std::cout << " | Atraso: " << this->cota->getAtraso() << " anos" << std::endl << std::endl;
+
+	std::cout << "|3| AREAS DE INTERESSE " << std::endl;
+	//this->dominio->show();   Versao correta - completar se tiver tempo - falta inicializar o dominio com o vetor areas de interesse
+	for (unsigned int i = 0; i < areasInteresse.size(); i++)
+	{
+		std::cout << " | "<<areasInteresse.at(i) << std::endl;
+	}
+
 }
 
 

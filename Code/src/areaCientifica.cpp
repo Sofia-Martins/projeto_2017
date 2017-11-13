@@ -50,7 +50,15 @@ void AreaCientifica::addSubAreaCientifica(SubAreaCientifica* subArea)
 
 	subAreas.push_back(subArea);
 }
+void AreaCientifica::show() const
+{
+	std::cout << "AREA CIENTIFICA: " << this->nomeArea << std::endl;
 
+	for (unsigned int i = 0; i < subAreas.size(); i++)
+	{
+		subAreas.at(i)->show();
+	}
+}
 //excecoes
 SubAreaCientificaRepetida::SubAreaCientificaRepetida(SubAreaCientifica* subArea)
 {

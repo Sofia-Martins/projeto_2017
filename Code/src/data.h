@@ -9,6 +9,7 @@
 #define DATA_H_
 
 #include <string>
+#include<iostream>
 
 
 class Data
@@ -41,6 +42,9 @@ public:
 	unsigned int getAno () const;
 	unsigned int getHora () const;
 	unsigned int getMinuto () const;
+
+	//outros metodos
+	void show() const;
 
 };
 

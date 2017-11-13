@@ -11,6 +11,7 @@
 
 /////////////////////////////
 #include "areaCientifica.h"
+#include <iostream>
 #include <algorithm>             // std::binary_search
 /////////////////////////////
 
@@ -34,6 +35,7 @@ public:
 
 	//outros metodos
 	void addAreaCientifica(AreaCientifica* area);
+	void show() const;
 };
 
 //excecoes

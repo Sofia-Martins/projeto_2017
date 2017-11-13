@@ -44,3 +44,16 @@
 	{
 		return tipoApoio;
 	}
+
+
+	//outros metodos
+	void Apoio::show() const
+	{
+		if (apoioAssociacao)
+		{
+			std::cout << "Evento apoiado " << std::endl;
+			std::cout << "Tipo de apoio: " << tipoApoio << std::endl;
+		}
+		else
+			std::cout << "Evento nao apoiado " << std::endl;
+	}

@@ -10,6 +10,7 @@
 
 /////////////////////////
 #include <map>
+#include <iostream>
 #include <algorithm>             // std::binary_search
 #include "ciencia.h"
 ////////////////////////
@@ -21,14 +22,18 @@ private:
 	std::vector<Ciencia*> ciencias;
 
 public:
-	DominioCientifico(){ciencias = {};};
+	DominioCientifico(){ciencias = {};}
 	// metodos de adicao de Ciencias
 	void addCiencia(Ciencia* ciencia);
+
 	//metodos get
 	std::vector<Ciencia*> getCiencia() const;
 
 	//metodos set
 	void setCiencia(std::vector<Ciencia*> ciencias) {this->ciencias = ciencias;}
+
+	//outros metodos
+	void show() const;
 };
 
 

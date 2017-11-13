@@ -119,6 +119,30 @@ void Associacao::addEvento(Evento &evento)
 	eventos.push_back(&evento);
 }
 
+void Associacao::showEventos(Associado* associado) const
+{
+	for (unsigned int i = 0; i < eventos.size(); i++)
+	{
+		auto evento = eventos.at(i);
+		auto planeadores = evento->getPlaneadores();
+		auto organizadores = evento->getOrganizadores();
+
+		if (find(planeadores.begin(), planeadores.end(), associado->getID()) !=planeadores.end()) //se encontrou esse associado
+		{
+			evento->show();
+			std::cout << std::endl;
+		}
+		else
+		{
+			if (find(organizadores.begin(), organizadores.end(), associado->getID()) != organizadores.end())
+			{
+				evento->show();
+				std::cout << std::endl;
+			}
+		}
+	}
+}
+
 AssociacaoRepetida::AssociacaoRepetida(std::string nome) {
 	this->nome = nome;
 }

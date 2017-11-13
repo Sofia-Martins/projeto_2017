@@ -45,6 +45,7 @@ public:
 
 	// Outros metodos
 
+	virtual void show() const;
 	void addPlaneador(int planeador);
 	void addOrganizador(int organizador);
 	void removePlaneador(int planeador);
@@ -70,6 +71,9 @@ public:
 
 	// Metodos set
 	void setNumeroParticipantes(unsigned int numeroParticipantes);
+
+	//outros metodos
+	void show() const;
 };
 
 
@@ -95,6 +99,7 @@ public:
 	std::vector<int> getFormadores() const;
 
 	// Outros metodos
+	void show() const;
 	void addFormador(int formador);
 	void removeFormador(int formador);
 };

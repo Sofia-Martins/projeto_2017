@@ -62,7 +62,12 @@ public:
 	void addGestor(Gestor &gestor);
 	void addEvento(Evento &evento);
 	unsigned int incIdAssociados();
+	void showEventos(Associado* associado) const;
 };
+
+
+
+
 
 //excecoes
 

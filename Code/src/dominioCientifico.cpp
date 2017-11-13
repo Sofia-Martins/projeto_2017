@@ -37,6 +37,15 @@ std::vector<Ciencia*> DominioCientifico::getCiencia() const{
 	return ciencias;
 }
 
+//outros metodos
+void DominioCientifico::show() const
+{
+	for (unsigned int i = 0; i < ciencias.size(); i++)
+	{
+		ciencias.at(i)->show();
+	}
+}
+
 //excecoes
 CienciaRepetida::CienciaRepetida(Ciencia* ciencia)
 {

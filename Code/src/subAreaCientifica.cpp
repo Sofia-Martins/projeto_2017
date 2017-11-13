@@ -28,5 +28,10 @@ std::string SubAreaCientifica::getNomeSubAreaCientifica() const
 	return this->nomeSubArea;
 }
 
+//outros metodos
+void SubAreaCientifica::show() const
+{
+	std::cout << "SubArea: "<<this->nomeSubArea << std::endl;
+}
 
 

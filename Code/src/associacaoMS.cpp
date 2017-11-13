@@ -323,7 +323,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -848,6 +848,11 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 			{
 				do {
 						getString(pass, "Password do gestor: ");
+						if (std::cin.eof())
+						{
+							std::cin.clear();
+							this->menuLogin();
+						}
 						if(associacao->getGestores().at(pos)->getPassword() == pass)
 								PassValida = true;
 						if (!PassValida)
@@ -933,7 +938,9 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	std::cout << "_______________ ESPACO ASSOCIACAO ______________\n\n";
 	std::cout << "4. Eventos\n";
 	std::cout << "5. Emails\n";
-	std::cout << "6. Areas e subareas cientificas dos restantes associados\n\n";
+	std::cout << "6. Areas e subareas cientificas dos restantes associados\n";
+	std::cout << "7. Enviar email\n";
+	std::cout << "8. Adicionar subarea cientifica de interesse\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -943,6 +950,29 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 			this->menuLogin();
 		getNumber(opcao, "Opcao: ");
 	} while ((opcao < 0) || (opcao > 6));
+
+	//encaminhamento para cada uma das opcoes do menu
+	switch (opcao)
+	{
+	case 1:
+		clearScreen();
+		associado->show();
+		break;
+
+	case 4:
+		clearScreen();
+		associacao->showEventos(associado);
+		break;
+	}
+
+	std::string lixo = "";
+	getString(lixo, "Pressione ENTER para continuar ");
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+	}
+	this->menuSessaoContributor(associado);
+
 }
 void AssociacaoMS::alteraAssociado(){
 	
@@ -1003,7 +1033,7 @@ void AssociacaoMS::alteraAssociado(){
 
 		if(associacao->getAssociados().at(pos)->getCota()->getEmDia() && emdiaBool) //continua como contributor
 		{
-			Cota *cota(emdiaBool, atraso);
+			Cota *cota=new Cota(emdiaBool, atraso);
 			associacao->getAssociados().at(pos)->setCota(cota);
 			std::cout << "Cota alterada com sucesso!\n\n";
 		}
@@ -1017,7 +1047,7 @@ void AssociacaoMS::alteraAssociado(){
 
 	}
 	
-	this->menuLogin;
+	this->menuLogin();
 
 }
 void AssociacaoMS::apagaGestor(){
@@ -1036,7 +1066,7 @@ void AssociacaoMS::apagaGestor(){
 			temp.erase(temp.begin() + i);
 			associacao->setGestores(temp);
 			std::cout << "Gestor apagado com sucesso! \n\n";
-			this->menuLogin;
+			this->menuLogin();
 		}
 
 }
@@ -1051,7 +1081,7 @@ void AssociacaoMS::apagaAssociado(){
 			temp.erase(temp.begin() + i);
 			associacao->setAssociados(temp);
 			std::cout << "Associado apagado com sucesso! \n\n";
-			this->menuLogin;
+			this->menuLogin();
 		}
 
 }

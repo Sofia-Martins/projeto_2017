@@ -10,6 +10,7 @@
 
 ///////////////////
 #include <string>
+#include <iostream>
 ///////////////////
 
 class SubAreaCientifica
@@ -28,6 +29,9 @@ public:
 
 	//metodos get
 	std::string getNomeSubAreaCientifica() const;
+
+	//outros metodos
+	void show() const;
 	
 };
 

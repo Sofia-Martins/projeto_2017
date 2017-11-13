@@ -76,6 +76,30 @@ void Evento::removeOrganizador(int organizador) {
 			organizadores.erase(organizadores.begin() + i);
 }
 
+void Evento::show() const
+{
+	std::cout << "|1| Tema: " << this->tema << std::endl;
+	std::cout << "|2| Local: " << this->local << std::endl;
+	std::cout << "|3| Data: " << std::endl;
+	this->data.show();
+	std::cout<<std::endl;
+
+	std::cout << "|4| ID's dos planeadores: " << std::endl;
+
+	for (unsigned int i = 0; i < this->planeadores.size(); i++)
+	{
+		std::cout << "-" << planeadores.at(i) << std::endl;
+	}
+	std::cout << "|5| ID's dos organizadores: " << std::endl;
+	for (unsigned int i = 0; i < this->organizadores.size(); i++)
+	{
+		std::cout << "-" << organizadores.at(i) << std::endl;
+	}
+	std::cout << "|6| Apoio da associacao " << std::endl;
+	this->apoioEvento.show();
+	std::cout<<std::endl;
+}
+
 
 
 //////////////////////////
@@ -100,6 +124,16 @@ unsigned int Conferencia::getNumeroParticipantes() const {
 
 void Conferencia::setNumeroParticipantes(unsigned int numeroParticipantes) {
 	this->numeroParticipantes = numeroParticipantes;
+}
+
+//outros metodos
+
+void Conferencia::show() const
+{
+	std::cout << "CONFERENCIA" << std::endl;
+	Evento::show();
+	std::cout << "|7| Estimativa do numero de participantes: " << this->numeroParticipantes << std::endl;
+
 }
 
 
@@ -131,4 +165,16 @@ void EscolaVerao::removeFormador(int formador) {
 	for (unsigned int i = 0; i<formadores.size(); i++)
 		if (formadores.at(i) == formador)
 			formadores.erase(formadores.begin() + i);
+}
+
+void EscolaVerao::show() const
+{
+	std::cout << "ESCOLA DE VERAO" << std::endl;
+	Evento::show();
+	std::cout << "|7| Formadores: " << std::endl;
+
+	for (unsigned int i = 0; i < formadores.size(); i++)
+	{
+		std::cout << "ID do formador " << i + 1 << ": " << formadores.at(i) << std::endl;
+	}
 }

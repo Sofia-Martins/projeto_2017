@@ -10,6 +10,7 @@
 
 ////////////////////////
 #include <vector>
+#include <iostream>
 #include <algorithm>             // std::binary_search
 #include "subAreaCientifica.h"
 ////////////////////////
@@ -36,6 +37,7 @@ public:
 
 	//outros metodos
 	void addSubAreaCientifica(SubAreaCientifica* subArea);
+	void show() const;
 
 };
 

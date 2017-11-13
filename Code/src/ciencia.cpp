@@ -46,7 +46,15 @@ void Ciencia::addAreaCientifica(AreaCientifica* area)
 	this->areas.push_back(area);
 
 }
+void Ciencia::show() const
+{
+	std::cout << "Ciencia: " << this->nomeCiencia << std::endl;
 
+	for (unsigned int i = 0; i < areas.size(); i++)
+	{
+		areas.at(i)->show();
+	}
+}
 //excecoes
 AreaCientificaRepetida::AreaCientificaRepetida(AreaCientifica* area)
 {
