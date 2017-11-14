@@ -79,6 +79,7 @@ public:
 
 	void menuSessaoAssociado(unsigned int id);
 	void menuSessaoContributor(Associado* associado);
+	void modificarConta(Associado* associado);
 	void menuSessaoSubscriber(Associado* associado);
 	void menuSessaoOther(Associado* associado);  //menu do associado que n�o � nem um contributor nem um subscriber
 

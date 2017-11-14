@@ -35,6 +35,7 @@ void AssociacaoMS::menuBemVindo()
 	this->menuBemVindoSelecao();
 
 }
+
 void AssociacaoMS::menuBemVindoSelecao()
 {
 
@@ -62,6 +63,7 @@ void AssociacaoMS::menuFicheiroAssociacoes() {
 	std::cout << "---- ESCOLHER FICHEIRO DAS ASSSOCIACOES ----\n\n";
 	menuFicheiroAssociacoesSelecao(); //invocacao do metodo
 }
+
 void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 
 	std::string nomeFicheiro;
@@ -87,6 +89,7 @@ void AssociacaoMS::menuFicheiroAssociacoesSelecao() {
 
 	this->menuAssociacoes(); //selecionar associacao
 }
+
 void AssociacaoMS::lerAssociacoes()
 {
 	this->associacoes.clear();
@@ -143,6 +146,7 @@ void AssociacaoMS::menuAbrirFicheiroAssociacoes(std::string & nomeFicheiroAssoci
 	streamAssociacoes.close();
 
 }
+
 void AssociacaoMS::menuCriaAssociacao() {
 
 	std::string nomeFicheiroAssociacoes;
@@ -188,6 +192,7 @@ void AssociacaoMS::menuCriaAssociacao() {
 	this->criaFicheirosNovaAssociacao(siglaAssociacao);
 	this->criaGestor(siglaAssociacao,true,0);
 }
+
 void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssociacoes) {
 
 	std::ofstream streamAssociacoes;
@@ -208,6 +213,7 @@ void AssociacaoMS::enviarNovaAssociacaoFicheiro(std::string & nomeFicheiroAssoci
 
 	else std::cout << "Falha ao abrir ficheiro de destino" << std::endl;
 }
+
 void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
 	std::ofstream streamAssociados(siglaAssociacao + "_associados.txt");
 	std::ofstream streamConferencias(siglaAssociacao+"_conferencias.txt");
@@ -215,6 +221,7 @@ void AssociacaoMS::criaFicheirosNovaAssociacao(std::string siglaAssociacao){
 	std::ofstream streamEmails(siglaAssociacao+"_emails.txt");
 	std::ofstream streamEscolaVerao(siglaAssociacao+"_escolaVerao.txt");
 }
+
 void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, int idMenu){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "---------------- CRIAR GESTOR --------------\n\n";
@@ -267,6 +274,7 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 	
 
 }
+
 void AssociacaoMS::enviarNovoGestorFicheiro(std::string & nomeFicheiroGestores) {
 	std::ofstream streamGestores;
 	streamGestores.open(nomeFicheiroGestores);
@@ -345,6 +353,7 @@ void AssociacaoMS::menuAssociacoes() {
 	this->menuLogin();
 
 }
+
 void AssociacaoMS::lerDominios() {
 
 	std::ifstream dac; //Dominios e Areas Cientificas
@@ -402,6 +411,7 @@ void AssociacaoMS::lerDominios() {
 	this->associacao->setDominio(dominio);
 	dac.close();
 }
+
 void AssociacaoMS::lerAssociados() {
 
 	std::ifstream streamAssociados;
@@ -488,6 +498,7 @@ void AssociacaoMS::lerAssociados() {
 		if (std::stoul(ID) >= this->associacao->getID()) this->associacao->setID(std::stoul(ID)+1);
 	}
 }
+
 void AssociacaoMS::lerEmails()
 {
 	bool primeiraLeitura = true;
@@ -521,6 +532,7 @@ void AssociacaoMS::lerEmails()
 
 	in.close();
 }
+
 void AssociacaoMS::lerConferencias()
 {
 	std::ifstream in;
@@ -622,6 +634,7 @@ void AssociacaoMS::lerConferencias()
 
 	in.close();
 }
+
 void AssociacaoMS::lerEscolasVerao()
 {
 	std::ifstream in;
@@ -728,6 +741,7 @@ void AssociacaoMS::lerEscolasVerao()
 	}
 	in.close();
 }
+
 void AssociacaoMS::lerGestores()
 {
 	this->associacao->setGestores({});
@@ -827,6 +841,7 @@ void AssociacaoMS::menuLogin() {
 
 	}
 }
+
 void AssociacaoMS::criaConta() {
 	std::string nome, password, instituicao, email;
 	std::sort(associacao->getAssociados().begin(), associacao->getAssociados().end());
@@ -844,6 +859,7 @@ void AssociacaoMS::criaConta() {
 	associacao->addAssociado(*a);
 
 }
+
 void AssociacaoMS::getID(unsigned int id, std::string pass) {
 	bool IDvalido = false;
 	bool PassValida = false;
@@ -918,6 +934,7 @@ bool procuraAssociado(unsigned int id, Associado* associado)
 {
 	return associado->getID() == id;
 }
+
 void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "Bem-Vindo Gestor \n\n";
@@ -951,17 +968,18 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->menuTermino();
 
 }
+
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 {
 	auto associados = this->associacao->getAssociados();
 	Associado* associado = NULL;
 
 	//procura o associado
-	/*for (unsigned int i = 0; i < associados.size(); i++)
+	for (unsigned int i = 0; i < associados.size(); i++)
 	{
 		if (associados.at(i)->getID() == id)
 			associado = associados.at(i);
-	}*/
+	}
 
 	//verifica que tipo de associado é (contributor, subscriber, ou simplesmente um associado)
 	if (associado->getCota()->getEmDia() == true)
@@ -975,12 +993,13 @@ void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 	*/
 
 }
+
 void AssociacaoMS::menuSessaoContributor(Associado* associado)
 {
 	clearScreen();
 	std::cout << "Bem vindo " << associado->getNome() << "!" << std::endl << std::endl;
 
-	std::cout << "________________ O MEU ESPACO ________________\n\n";
+	std::cout << "_________________ O MEU ESPACO _________________\n\n";
 	std::cout << "1. Informacoes da minha conta\n";
 	std::cout << "2. Modificar a minha conta\n";
 	std::cout << "3. Apagar a minha conta\n\n";
@@ -990,7 +1009,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	std::cout << "5. Emails\n";
 	std::cout << "6. Areas e subareas cientificas dos restantes associados\n";
 	std::cout << "7. Enviar email\n";
-	std::cout << "8. Adicionar subarea cientifica de interesse\n";
+	std::cout << "8. Adicionar subarea cientifica de interesse\n\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -1009,21 +1028,58 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		associado->show();
 		break;
 
+	case 2:
+		clearScreen();
+		modificarConta(associado);
+		break;
+
 	case 4:
 		clearScreen();
 		associacao->showEventos(associado);
 		break;
 	}
 
-	std::string lixo = "";
-	getString(lixo, "Pressione ENTER para continuar ");
-	if (std::cin.eof())
-	{
-		std::cin.clear();
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if(std::cin.get())
+			this->menuSessaoContributor(associado);
+}
+
+
+void AssociacaoMS::modificarConta(Associado* associado) {
+
+	std::string nome, pass;
+
+	std::cout << "O que deseja alterar ? \n\n";
+	std::cout << "1) Nome \n" << "2) Password \n\n";
+
+	unsigned int opcao = 0;
+	do {
+		getNumber(opcao, "Opcao: ");
+		if (std::cin.eof())
+			this->menuTermino();
+	} while (!((opcao == 1) || (opcao == 2)));
+
+	if (opcao == 1) {
+		std::cout << "Nome Atual : " << associado->getNome();
+		getString(nome, "\nNovo Nome : ");
+		associado->setNome(nome);
+		std::cout << "Nome alterado com sucesso!\n\n";
+
+	} else if (opcao == 2) {
+		std::cout << "Password Atual : " << associado->getPassword();
+		getString(pass, "\nNova Password : ");
+		associado->setPassword(pass);
+		std::cout << "Password alterada com sucesso!\n\n";
 	}
-	this->menuSessaoContributor(associado);
+
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+	if (std::cin.get())
+		this->menuSessaoContributor(associado);
 
 }
+
 void AssociacaoMS::alteraAssociado(unsigned int id){
 
 	unsigned int ID, atraso;
@@ -1207,6 +1263,7 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 
 	}
 }
+
 void AssociacaoMS::apagaGestor(unsigned int id){
 	if (associacao->getGestores().size() == 1)
 	{
@@ -1235,6 +1292,7 @@ void AssociacaoMS::apagaGestor(unsigned int id){
 
 
 }
+
 void AssociacaoMS::apagaAssociado(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	unsigned int ID;
@@ -1261,7 +1319,6 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 			if(std::cin.get())
 				this->menuSessaoGestor(id);
 }
-
 
 void AssociacaoMS::envioEmail(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
@@ -1320,6 +1377,7 @@ bool hasChar(std::string &string) {
 
 	return false;
 }
+
 void eliminateSpaces(std::string &string) {
 	for (unsigned int i = 0; i < string.length() - 1; i++) {
 		if ((string.at(i) == ' ') && (string.at(i + 1) == ' ')) {
@@ -1337,6 +1395,7 @@ void eliminateSpaces(std::string &string) {
 	}
 
 }
+
 void getString(std::string &string, const std::string question) {
 	std::string test;
 
@@ -1357,6 +1416,7 @@ void getString(std::string &string, const std::string question) {
 	string = test + string;
 	eliminateSpaces(string);
 }
+
 void getNumber(unsigned int &number, const std::string &question) {
 	bool valid;
 
@@ -1382,6 +1442,7 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 	number = std::stoul(number_string);
 }
+
 void clearScreen() 
 {
 	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
