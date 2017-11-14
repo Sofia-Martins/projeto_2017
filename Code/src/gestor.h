@@ -41,6 +41,13 @@ public:
 	std::string getEmail() const {return this->enderecoEmail;}
 	std::string getPassword() const;
 	std::string getEnderecoEmail() const;
+	std::vector<Email*> getEmailsRecebidos();
+	std::vector<Email*> getEmailsEnviados();
+
+	void enviarEmail(Email &email);
+	void receberEmail(Email &email);
+
+
 
 };
 

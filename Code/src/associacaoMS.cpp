@@ -1355,7 +1355,7 @@ void AssociacaoMS::envioEmail(T* associado){
 
 	std::cout << "Compor nova mensagem \n\n"
 			<< "Remetente : " << associado->getEmail() << "\n";
-	getString(dest, "Destinario : ");
+	getString(dest, "Destinario (Insira o email) : ");
 	std::cout << "\n\n";
 	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' para enviar) : \n";
 
@@ -1368,6 +1368,10 @@ void AssociacaoMS::envioEmail(T* associado){
 		corpo += temp;
 
 	}
+
+	Email *email = new Email(associado->getEmail(), dest, corpo);
+	associado->enviarEmail(email);
+
 	std::cout << "\nEnviado!\n";
 
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
