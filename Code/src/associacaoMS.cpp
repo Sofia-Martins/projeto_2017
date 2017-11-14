@@ -1033,6 +1033,12 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		modificarConta(associado);
 		break;
 
+	case 3:
+		associacao->eraseAssociado(associado);
+		std::cout << "Conta eliminada com sucesso...\n\n";
+		menuBemVindo();
+		break;
+
 	case 4:
 		clearScreen();
 		associacao->showEventos(associado);

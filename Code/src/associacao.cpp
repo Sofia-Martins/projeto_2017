@@ -119,6 +119,13 @@ void Associacao::addEvento(Evento &evento)
 	eventos.push_back(&evento);
 }
 
+void Associacao::eraseAssociado(Associado* associado){
+	for (unsigned int i = 0; i<associados.size(); i++)
+		if (associados.at(i) == associado)
+			associados.erase(associados.begin()+i);
+}
+
+
 void Associacao::showEventos(Associado* associado) const
 {
 	for (unsigned int i = 0; i < eventos.size(); i++)

@@ -59,6 +59,7 @@ public:
 	//outros metodos
 	void addEmail(Email &email);
 	void addAssociado(Associado &associado);
+	void eraseAssociado(Associado* associado);
 	void addGestor(Gestor &gestor);
 	void addEvento(Evento &evento);
 	unsigned int incIdAssociados();
