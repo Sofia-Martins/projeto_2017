@@ -22,7 +22,7 @@ private:
 	std::string nome;
 	std::string password;
 	std::string instituicao;
-	DominioCientifico* dominio;
+
 	Cota* cota;
 	std::string enderecoEmail;
 	std::vector<std::string> eventos = {};
@@ -32,20 +32,22 @@ public:
 	Associado();
 	Associado(std::string nome, int ID, std::string password, std::string instituicao, Cota* cota, std::string enderecoEmail);
 
+
+
 	//metodos get
 	int getID() const;
 	std::string getNome() const;
 	std::string getInstituicao() const;
 	std::string getPassword() const { return this->password; };
-	//DominioCientifico getDominio() const;
 	Cota* getCota() const;
 	std::string getEmail() const;
+	virtual std::vector<Email*> getEmailsRecebidos() {};
+	virtual std::vector<Email*> getEmailsEnviados(){};
 
 	//metodos set
 	void setNome(std::string nome);
 	void setPassword(std::string pass);
 	void setInstituicao(std::string instituicao);
-	//void setDominio(DominioCientifico *dominio){this->dominio->setCiencia(dominio->getCiencia());}
 	void setCota(Cota *cota) {
 		this->cota->setAtraso(cota->getAtraso());
 		this->cota->setEmDia(cota->getEmDia());
@@ -79,6 +81,8 @@ class Contributor : public Associado {
 	std::vector<Email*> emailsRecebidos = {};
 	std::vector<Email*> emailsEnviados = {};
 public:
+
+
 	//construtor sem emails
 	Contributor(std::string nome, int ID, std::string password, std::string instituicao, Cota* cota, std::string enderecoEmail);
 	Contributor(std::string nome, int ID, std::string password, std::string instituicao,

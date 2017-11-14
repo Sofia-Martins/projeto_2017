@@ -21,6 +21,7 @@
 #include <climits>
 #include <utility>  //std::pair
 #include <algorithm>
+#include <iomanip>
 #include "associacao.h"
 #include "associado.h"
 #include "areaCientifica.h"
@@ -81,9 +82,9 @@ public:
 	void menuSessaoSubscriber(Associado* associado);
 	void menuSessaoOther(Associado* associado);  //menu do associado que n�o � nem um contributor nem um subscriber
 
-	void alteraAssociado();
-	void apagaGestor();
-	void apagaAssociado();
+	void alteraAssociado(unsigned int id);
+	void apagaGestor(unsigned int id);
+	void apagaAssociado(unsigned int id);
 
 	//menu final
 	void menuTermino();
