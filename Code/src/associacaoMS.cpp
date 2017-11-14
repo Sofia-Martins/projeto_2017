@@ -924,8 +924,9 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << "1) Criar um novo gestor\n"
 		<< "2) Alterar um associado existente \n"
 		<< "3) Apaga gestor \n"
-		<< "4) Apaga Associado \n"
-		<< "5) Enviar email \n\n";
+		<< "4) Apaga associado \n"
+		<< "5) Enviar email \n"
+		<< "6) Terminar sessao \n\n";
 
 	unsigned int opcao = 0;
 	do
@@ -933,7 +934,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
 			this->menuLogin();
-	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) || (opcao == 4) || (opcao == 5) ) );
+	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
+			(opcao == 4) || (opcao == 5) || (opcao == 6)) );
 
 	if (opcao == 1)
 		this->criaGestor(associacao->getSigla(), false, id);
@@ -945,6 +947,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->apagaAssociado(id);
 	else if (opcao == 5)
 		this->envioEmail(id);
+	else if (opcao == 6)
+		this->menuTermino();
 
 }
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
@@ -1207,7 +1211,9 @@ void AssociacaoMS::apagaGestor(unsigned int id){
 	if (associacao->getGestores().size() == 1)
 	{
 		std::cout << "Impossivel apagar gestor. So existe um! \n\n";
-		this->menuLogin();
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+		if (std::cin.get())
+			this->menuSessaoGestor(id);
 	}
 	clearScreen(); //apagar conteudo do ecra
 	unsigned int ID;
@@ -1220,11 +1226,12 @@ void AssociacaoMS::apagaGestor(unsigned int id){
 			associacao->setGestores(temp);
 			std::cout << "Gestor apagado com sucesso! \n\n";
 
-			std::cout << "Pressione ENTER para continuar... " << std::endl;
-			if (std::cin.get())
-				this->menuSessaoGestor(id);
+
 		}
 
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+	if (std::cin.get())
+		this->menuSessaoGestor(id);
 
 
 }
@@ -1248,15 +1255,16 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 			associacao->setAssociados(temp);
 			std::cout << "Associado apagado com sucesso! \n\n";
 
+
+		}
 			std::cout << "Pressione ENTER para continuar... " << std::endl;
 			if(std::cin.get())
 				this->menuSessaoGestor(id);
-		}
-
 }
 
 
 void AssociacaoMS::envioEmail(unsigned int id){
+	clearScreen(); //apagar conteudo do ecra
 	int pos = -1;
 	std::string dest, corpo = "", temp;
 	bool gestor = true, envio = false;
