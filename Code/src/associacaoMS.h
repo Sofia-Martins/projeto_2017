@@ -86,6 +86,8 @@ public:
 	void apagaGestor(unsigned int id);
 	void apagaAssociado(unsigned int id);
 
+	void envioEmail(unsigned int id);
+
 	//menu final
 	void menuTermino();
 

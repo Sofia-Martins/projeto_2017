@@ -924,7 +924,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << "1) Criar um novo gestor\n"
 		<< "2) Alterar um associado existente \n"
 		<< "3) Apaga gestor \n"
-		<< "4) Apaga Associado \n\n";
+		<< "4) Apaga Associado \n"
+		<< "5) Enviar email \n\n";
 
 	unsigned int opcao = 0;
 	do
@@ -932,7 +933,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
 			this->menuLogin();
-	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) || (opcao == 4)));
+	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) || (opcao == 4) || (opcao == 5) ) );
 
 	if (opcao == 1)
 		this->criaGestor(associacao->getSigla(), false, id);
@@ -942,6 +943,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->apagaGestor(id);
 	else if (opcao == 4)
 		this->apagaAssociado(id);
+	else if (opcao == 5)
+		this->envioEmail(id);
 
 }
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
@@ -1019,7 +1022,8 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 }
 void AssociacaoMS::alteraAssociado(unsigned int id){
 
-	unsigned int ID, pos = -1, atraso;
+	unsigned int ID, atraso;
+	int pos = -1;
 	std::string nome, pass, emdia;
 	bool emdiaBool;
 
@@ -1249,6 +1253,44 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 				this->menuSessaoGestor(id);
 		}
 
+}
+
+
+void AssociacaoMS::envioEmail(unsigned int id){
+	int pos = -1;
+	std::string dest, corpo = "", temp;
+	bool gestor = true, envio = false;
+	for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
+		if (associacao->getAssociados().at(i)->getID() == id){
+			pos = i;
+			gestor = false;
+		}
+
+	if(gestor)
+		for (unsigned int i = 0; i < associacao->getGestores().size(); i++)
+				if (associacao->getGestores().at(i)->getID() == id)
+					pos = i;
+
+	std::cout << "Compor nova mensagem \n\n"
+			<< "Remetente : " << associacao->getAssociados().at(pos)->getEmail() << "\n";
+	getString(dest, "Destinario : ");
+	std::cout << "\n\n";
+	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' para enviar) : \n";
+
+	while(!envio){
+		std::getline(std::cin,temp);
+		if(temp == "ENVIAR")
+		{
+			envio = true;
+		}
+		corpo += temp;
+
+	}
+	std::cout << "\nEnviado!\n";
+
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+	if(std::cin.get())
+		this->menuSessaoGestor(id);
 }
 
 /*------------------------------------------- menu final -------------------------------------------*/

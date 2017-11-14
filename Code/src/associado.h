@@ -42,7 +42,10 @@ public:
 	Cota* getCota() const;
 	std::string getEmail() const;
 	virtual std::vector<Email*> getEmailsRecebidos() {};
-	virtual std::vector<Email*> getEmailsEnviados(){};
+	virtual std::vector<Email*> getEmailsEnviados() {};
+
+	virtual void enviarEmail(Email &email) {};
+	virtual void receberEmail(Email &email) {};
 
 	//metodos set
 	void setNome(std::string nome);
