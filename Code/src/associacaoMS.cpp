@@ -319,11 +319,12 @@ void AssociacaoMS::menuAssociacoes() {
 
 	//atualizar nome da associacao
 	associacao->setNome(associacoes.at(opcao - 1).second);
+
 	//atualizar sigla da associacao
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -339,6 +340,7 @@ void AssociacaoMS::menuAssociacoes() {
 	lerConferencias();
 	lerEscolasVerao();
 	lerGestores();
+
 
 	//proximo menu
 	this->menuLogin();
@@ -372,6 +374,8 @@ void AssociacaoMS::lerDominios() {
 		if (carater == '@')
 		{
 			getline(dac, cienciaS);
+			if(cienciaS == "")
+				break;
 			eliminateSpaces(cienciaS);
 			ciencia = new Ciencia(cienciaS);
 			dominio->addCiencia(ciencia);
@@ -379,6 +383,8 @@ void AssociacaoMS::lerDominios() {
 		else if (carater == '#')
 		{
 			getline(dac, areaCientificaS);
+			if(areaCientificaS == "" )
+				break;
 			eliminateSpaces(areaCientificaS);
 			area = new AreaCientifica(areaCientificaS);
 			ciencia->addAreaCientifica(area);
@@ -386,6 +392,8 @@ void AssociacaoMS::lerDominios() {
 		else if (carater == '*')
 		{
 			getline(dac, subAreaS);
+			if(subAreaS == "" )
+				break;
 			eliminateSpaces(subAreaS);
 			subArea = new SubAreaCientifica(subAreaS);
 			area->addSubAreaCientifica(subArea);
@@ -423,6 +431,9 @@ void AssociacaoMS::lerAssociados() {
 		getline(input, email, ';');
 		getline(input, tema, ';');
 		getline(input, subareas);
+
+		if(nome == "")
+			break;
 
 		eliminateSpaces(nome);
 		eliminateSpaces(ID);
@@ -500,6 +511,8 @@ void AssociacaoMS::lerEmails()
 		getline(in, remetente, ',');
 		getline(in, destinatario, ',');
 		getline(in, conteudo);
+		if(remetente == "")
+			break;
 		eliminateSpaces(remetente);
 		eliminateSpaces(destinatario);
 		eliminateSpaces(conteudo);
@@ -526,15 +539,18 @@ void AssociacaoMS::lerConferencias()
 		}
 		//buscar planeadores
 		std::vector<int> vetorPlaneadores;
-		std::string ID; //id do planeador
-		std::string planeadores;
+		std::string ID=""; //id do planeador
+		std::string planeadores="";
 		getline(in, planeadores, ';');
 		std::istringstream ssPlaneadores(planeadores);
+
+		if(planeadores == "")
+			break;
 
 		while (!ssPlaneadores.eof())
 		{
 			getline(ssPlaneadores, ID, ',');
-			vetorPlaneadores.push_back(stoi(ID)); //adiciona o id ao vetor de planeadores
+			vetorPlaneadores.push_back(std::stoi(ID)); //adiciona o id ao vetor de planeadores
 		}
 
 		//buscar organizadores
@@ -546,7 +562,7 @@ void AssociacaoMS::lerConferencias()
 		while (!ssOrganizadores.eof())
 		{
 			getline(ssOrganizadores, ID, ',');
-			vetorOrganizadores.push_back(stoi(ID)); //adiciona o ID ao vetor de organizadores
+			vetorOrganizadores.push_back(std::stoi(ID)); //adiciona o ID ao vetor de organizadores
 		}
 
 		//buscar local
@@ -556,6 +572,8 @@ void AssociacaoMS::lerConferencias()
 		//buscar tema
 		std::string tema;
 		getline(in, tema, ';');
+		if(tema == "")
+			break;
 		eliminateSpaces(tema);
 
 		//buscar data
@@ -568,13 +586,15 @@ void AssociacaoMS::lerConferencias()
 		getline(ssData, ano, ',');
 		getline(ssData, hora, ',');
 		getline(ssData, minuto);
+		if(dia == "")
+			break;
 		eliminateSpaces(dia);
 		eliminateSpaces(mes);
 		eliminateSpaces(ano);
 		eliminateSpaces(hora);
 		eliminateSpaces(minuto);
 
-		Data dataEvento(stoul(dia), stoul(mes), stoul(ano), stoul(hora), stoul(minuto));
+		Data dataEvento(std::stoul(dia), std::stoul(mes), std::stoul(ano), std::stoul(hora), std::stoul(minuto));
 
 		//buscar apoio da associacao (true/false)
 		std::string apoioAssociacao;
@@ -594,12 +614,13 @@ void AssociacaoMS::lerConferencias()
 		std::string numeroParticipantes;
 		getline(in, numeroParticipantes);
 		eliminateSpaces(numeroParticipantes);
-		unsigned int nParticipantes = stoul(numeroParticipantes);
+		unsigned int nParticipantes = std::stoul(numeroParticipantes);
 
 		//criar conferencia
 		Evento* evento = new Conferencia(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, nParticipantes);
 		this->associacao->addEvento(*evento);
 	}
+
 	in.close();
 }
 void AssociacaoMS::lerEscolasVerao()
@@ -624,6 +645,9 @@ void AssociacaoMS::lerEscolasVerao()
 		getline(in, planeadores, ';');
 		std::istringstream ssPlaneadores(planeadores);
 
+		if(planeadores == "")
+			break;
+
 		while (!ssPlaneadores.eof())
 		{
 			getline(ssPlaneadores, ID, ',');
@@ -661,6 +685,8 @@ void AssociacaoMS::lerEscolasVerao()
 		getline(ssData, ano, ',');
 		getline(ssData, hora, ',');
 		getline(ssData, minuto);
+		if(dia == "")
+			break;
 		eliminateSpaces(dia);
 		eliminateSpaces(mes);
 		eliminateSpaces(ano);
@@ -728,26 +754,44 @@ void AssociacaoMS::lerGestores()
 
 		//buscar nome do gestor
 		getline(in, nome, ';');
+		if(nome == "")
+			break;
 		eliminateSpaces(nome);
 
 		//buscar id do gestor
-		getline(in, idS, ';');
+
+		in >> id;
+		in.ignore(1000, ';');
+
+		std::cout << "ID: "<< id << std::endl;
+
+		/*getline(in, idS, ';');
+		if(idS == "")
+			break;
 		eliminateSpaces(idS);
-		id = stoi(idS);
+		id = stoi(idS);*/
 
 		//buscar password do gestor
 		getline(in, password, ';');
+		if(password == "")
+			break;
 		eliminateSpaces(password);
+
+		std::cout << "3 " << std::endl;
 
 		//buscar endereço de email do gestor
 		getline(in, email);
+		if(email == "")
+			break;
 		eliminateSpaces(email);
 
 		//criar gestor
 		Gestor* gestor = new Gestor(nome, id, password, email);
 		this->associacao->addGestor(*gestor);
 		if (id >= this->associacao->getID()) this->associacao->setID(id+1);
+
 	}
+
 	in.close();
 }
 
@@ -1262,6 +1306,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 }
 void clearScreen() 
 {
-	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-	system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	//system("CLS");
 }
