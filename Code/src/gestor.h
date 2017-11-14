@@ -38,6 +38,7 @@ public:
 	//metodos get
 	std::string getNome() const;
 	unsigned int getID() const;
+	std::string getEmail() const {return this->enderecoEmail;}
 	std::string getPassword() const;
 	std::string getEnderecoEmail() const;
 

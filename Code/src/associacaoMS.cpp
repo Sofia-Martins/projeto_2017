@@ -962,8 +962,20 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->apagaGestor(id);
 	else if (opcao == 4)
 		this->apagaAssociado(id);
-	else if (opcao == 5)
-		this->envioEmail(id);
+	else if (opcao == 5){
+
+		auto gestores = this->associacao->getGestores();
+		Gestor* gestor = NULL;
+
+		for (unsigned int i = 0; i<gestores.size(); i++)
+			if(gestores.at(i)->getID() == id)
+			{
+				gestor = gestores.at(i);
+				this->envioEmail(gestor);
+			}
+
+		this->menuSessaoGestor(id);
+	}
 	else if (opcao == 6)
 		this->menuTermino();
 
@@ -1034,14 +1046,23 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		break;
 
 	case 3:
+		clearScreen();
 		associacao->eraseAssociado(associado);
 		std::cout << "Conta eliminada com sucesso...\n\n";
-		menuBemVindo();
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+			this->menuBemVindo();
 		break;
 
 	case 4:
 		clearScreen();
 		associacao->showEventos(associado);
+		break;
+
+	case 7:
+		clearScreen(); //apagar conteudo do ecra
+		this->envioEmail(associado);
 		break;
 	}
 
@@ -1326,24 +1347,14 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 				this->menuSessaoGestor(id);
 }
 
-void AssociacaoMS::envioEmail(unsigned int id){
-	clearScreen(); //apagar conteudo do ecra
-	int pos = -1;
-	std::string dest, corpo = "", temp;
-	bool gestor = true, envio = false;
-	for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-		if (associacao->getAssociados().at(i)->getID() == id){
-			pos = i;
-			gestor = false;
-		}
+template <class T>
+void AssociacaoMS::envioEmail(T* associado){
 
-	if(gestor)
-		for (unsigned int i = 0; i < associacao->getGestores().size(); i++)
-				if (associacao->getGestores().at(i)->getID() == id)
-					pos = i;
+	std::string dest, corpo = "", temp;
+	bool envio = false;
 
 	std::cout << "Compor nova mensagem \n\n"
-			<< "Remetente : " << associacao->getAssociados().at(pos)->getEmail() << "\n";
+			<< "Remetente : " << associado->getEmail() << "\n";
 	getString(dest, "Destinario : ");
 	std::cout << "\n\n";
 	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' para enviar) : \n";
@@ -1360,8 +1371,8 @@ void AssociacaoMS::envioEmail(unsigned int id){
 	std::cout << "\nEnviado!\n";
 
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
-	if(std::cin.get())
-		this->menuSessaoGestor(id);
+	std::cin.get();
+		//this->menuSessaoGestor(id);
 }
 
 /*------------------------------------------- menu final -------------------------------------------*/

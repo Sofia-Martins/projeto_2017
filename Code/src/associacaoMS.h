@@ -87,7 +87,8 @@ public:
 	void apagaGestor(unsigned int id);
 	void apagaAssociado(unsigned int id);
 
-	void envioEmail(unsigned int id);
+	template <class T>
+	void envioEmail(T* associado);
 
 	//menu final
 	void menuTermino();
