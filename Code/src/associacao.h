@@ -57,13 +57,17 @@ public:
 	void setEventos(std::vector<Evento*> eventos);
 
 	//outros metodos
-	void addEmail(Email &email);
+	void addEmail(Email* email);
 	void addAssociado(Associado &associado);
 	void eraseAssociado(Associado* associado);
 	void addGestor(Gestor &gestor);
 	void addEvento(Evento &evento);
 	unsigned int incIdAssociados();
 	void showEventos(Associado* associado) const;
+	void showContributors() const;
+	void showSubscribers() const;
+	void showGestores() const;
+	bool existeEmail(std::string email) const;
 };
 
 

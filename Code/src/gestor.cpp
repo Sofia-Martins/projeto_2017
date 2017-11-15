@@ -67,10 +67,10 @@ std::vector<Email*> Gestor::getEmailsRecebidos() {
 std::vector<Email*> Gestor::getEmailsEnviados() {
 	return this->emailsEnviados;
 }
-void Gestor::enviarEmail(Email &email) {
-	this->emailsEnviados.push_back(&email);
+void Gestor::enviarEmail(Email* email) {
+	this->emailsEnviados.push_back(email);
 }
-void Gestor::receberEmail(Email &email) {
-	this->emailsRecebidos.push_back(&email);
+void Gestor::receberEmail(Email* email) {
+	this->emailsRecebidos.push_back(email);
 }
 

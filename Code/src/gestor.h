@@ -44,8 +44,8 @@ public:
 	std::vector<Email*> getEmailsRecebidos();
 	std::vector<Email*> getEmailsEnviados();
 
-	void enviarEmail(Email &email);
-	void receberEmail(Email &email);
+	void enviarEmail(Email* email);
+	void receberEmail(Email* email);
 
 
 

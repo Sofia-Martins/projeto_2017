@@ -118,11 +118,11 @@ std::vector<Email*> Contributor::getEmailsEnviados() {
 }
 
 //metodos other
-void Contributor::enviarEmail(Email &email) {
-	this->emailsEnviados.push_back(&email);
+void Contributor::enviarEmail(Email* email) {
+	this->emailsEnviados.push_back(email);
 }
-void Contributor::receberEmail(Email &email) {
-	this->emailsRecebidos.push_back(&email);
+void Contributor::receberEmail(Email* email) {
+	this->emailsRecebidos.push_back(email);
 }
 
 //subclasse subscriber
@@ -142,8 +142,9 @@ std::vector<Email*> Subscriber::getEmailsRecebidos() {
 	return this->emailsRecebidos;
 }
 
+
 //metodos other
-void Subscriber::receberEmail(Email &email) {
-	this->emailsRecebidos.push_back(&email);
+void Subscriber::receberEmail(Email* email) {
+	this->emailsRecebidos.push_back(email);
 }
 

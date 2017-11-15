@@ -31,7 +31,8 @@ private:
 public:
 	Associado();
 	Associado(std::string nome, int ID, std::string password, std::string instituicao, Cota* cota, std::string enderecoEmail);
-
+	virtual bool isContributor() { return false; }
+	virtual bool isSubscriber() { return false; }
 
 
 	//metodos get
@@ -41,11 +42,15 @@ public:
 	std::string getPassword() const { return this->password; };
 	Cota* getCota() const;
 	std::string getEmail() const;
-	virtual std::vector<Email*> getEmailsRecebidos() {};
-	virtual std::vector<Email*> getEmailsEnviados() {};
+	virtual std::vector<Email*> getEmailsRecebidos() {
+		return{};
+	}
+	virtual std::vector<Email*> getEmailsEnviados() {
+		return{};
+	}
 
-	virtual void enviarEmail(Email &email) {};
-	virtual void receberEmail(Email &email) {};
+	virtual void enviarEmail(Email* email) {};
+	virtual void receberEmail(Email* email) {};
 
 	//metodos set
 	void setNome(std::string nome);
@@ -81,10 +86,10 @@ public:
 //subclasse Contributor
 class Contributor : public Associado {
 
-	std::vector<Email*> emailsRecebidos = {};
-	std::vector<Email*> emailsEnviados = {};
+	std::vector<Email*> emailsRecebidos;
+	std::vector<Email*> emailsEnviados;
 public:
-
+	bool isContributor() { return true; }
 
 	//construtor sem emails
 	Contributor(std::string nome, int ID, std::string password, std::string instituicao, Cota* cota, std::string enderecoEmail);
@@ -96,13 +101,14 @@ public:
 	std::vector<Email*> getEmailsEnviados();
 
 	//metodos other
-	void enviarEmail(Email &email);
-	void receberEmail(Email &email);
+	void enviarEmail(Email* email);
+	void receberEmail(Email* email);
 };
 
 class Subscriber : public Associado {
 	std::vector<Email*> emailsRecebidos = {};
 public:
+	bool isSubscriber() { return true; }
 	//construtor sem emails
 	Subscriber(std::string nome, int ID, std::string password, std::string instituicao, Cota* cota, std::string enderecoEmail);
 	Subscriber(std::string nome, int ID, std::string password, std::string instituicao, Cota* cota, std::string enderecoEmail, std::vector<Email*> emailsRecebidos);
@@ -110,8 +116,9 @@ public:
 	//metodos get
 	std::vector<Email*> getEmailsRecebidos();
 
+
 	//metodos other
-	void receberEmail(Email &email);
+	void receberEmail(Email* email);
 };
 
 

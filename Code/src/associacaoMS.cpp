@@ -331,7 +331,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -527,7 +527,7 @@ void AssociacaoMS::lerEmails()
 		eliminateSpaces(destinatario);
 		eliminateSpaces(conteudo);
 		Email* email = new Email(remetente, destinatario, conteudo);
-		associacao->addEmail(*email);
+		associacao->addEmail(email);
 	}
 
 	in.close();
@@ -1031,7 +1031,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		if (std::cin.eof())
 			this->menuLogin();
 		getNumber(opcao, "Opcao: ");
-	} while ((opcao < 0) || (opcao > 6));
+	} while ((opcao < 0) || (opcao > 9));
 
 	//encaminhamento para cada uma das opcoes do menu
 	switch (opcao)
@@ -1053,7 +1053,10 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
 		if (std::cin.get())
-			this->menuBemVindo();
+		{
+			if (std::cin.eof()) std::cin.clear();
+			this->menuLogin();
+		}
 		break;
 
 	case 4:
@@ -1079,8 +1082,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
 
-		if(std::cin.get())
-			this->menuSessaoContributor(associado);
+	if (std::cin.get())
+	{
+		if (std::cin.eof()) std::cin.clear();
+		this->menuSessaoContributor(associado);
+	}
 }
 
 
@@ -1360,13 +1366,20 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 
 template <class T>
 void AssociacaoMS::envioEmail(T* associado){
+	this->associacao->showContributors();
+	this->associacao->showSubscribers();
+	this->associacao->showGestores();
 
 	std::string dest, corpo = "", temp;
 	bool envio = false;
 
 	std::cout << "Compor nova mensagem \n\n"
 			<< "Remetente : " << associado->getEmail() << "\n";
-	getString(dest, "Destinario (Insira o email) : ");
+	do
+	{
+		getString(dest, "Destinario (Insira o email) : ");
+	} while (!(this->associacao->existeEmail(dest)));
+
 	std::cout << "\n\n";
 	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' para enviar) : \n";
 
@@ -1376,26 +1389,25 @@ void AssociacaoMS::envioEmail(T* associado){
 		{
 			envio = true;
 		}
-		corpo += temp;
+		else
+			corpo += temp;
 
 	}
 
-	/*
+	
 	Email *email = new Email(associado->getEmail(), dest, corpo);
-	associado->enviarEmail(email);*/
+	this->associacao->addEmail(email);
+	//T->enviarEmail(email);
 
 	std::cout << "\nEnviado!\n";
 
-	std::cout << "Pressione ENTER para continuar... " << std::endl;
-	std::cin.get();
-		//this->menuSessaoGestor(id);
 }
 
 template <class T>
 void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 {
 	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "... \n";
+		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "\n";
 
 	std::cout << "\n\n";
 }
@@ -1404,7 +1416,7 @@ template <class T>
 void AssociacaoMS::visualizaEmailsEnviados(T* associado)
 {
 	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "... \n";
+		std::cout << "|" << i << "|" << std::setw (15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "\n";
 
 	std::cout << "\n\n";
 }
@@ -1497,6 +1509,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-	//system("CLS");
+//td::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	system("CLS");
 }

@@ -37,6 +37,7 @@ public:
 	std::vector<int> getOrganizadores() const;
 	std::string getLocal() const;
 	std::string getTema() const;
+	virtual std::vector<int> getFormadores() const { return {}; }
 
 	// Metodos set
 
@@ -50,6 +51,8 @@ public:
 	void addOrganizador(int organizador);
 	void removePlaneador(int planeador);
 	void removeOrganizador(int organizador);
+	virtual void removeFormador(int formador) {}
+	virtual bool escolaVerao() { return false;}
 
 };
 
@@ -74,6 +77,7 @@ public:
 
 	//outros metodos
 	void show() const;
+	bool escolaVerao() { return false; }
 };
 
 
@@ -102,6 +106,7 @@ public:
 	void show() const;
 	void addFormador(int formador);
 	void removeFormador(int formador);
+	bool escolaVerao() { return true; }
 };
 
 

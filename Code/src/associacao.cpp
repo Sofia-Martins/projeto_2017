@@ -97,13 +97,80 @@ void Associacao::setGestores(std::vector<Gestor*> gestores) { this->gestores = g
 
 //outros metodos
 
+void Associacao::showContributors() const
+{
+	std::cout << "--- CONTRIBUTORS ---" << std::endl;
+	for (unsigned int i = 0; i < associados.size(); i++)
+	{
+		auto associado = associados.at(i);
+
+		if (associado->isContributor() == true)
+		{
+			std::cout << "ID: " << associado->getID() << std::endl;
+			std::cout << "Instituicao: " << associado->getInstituicao() << std::endl;
+			std::cout << "Nome: " << associado->getNome() << std::endl;
+			std::cout << "Email: " << associado->getEmail() << std::endl << std::endl;
+		}
+	}
+}
+
+void Associacao::showSubscribers() const
+{
+	std::cout << "--- SUBSCRIBERS ---" << std::endl;
+	for (unsigned int i = 0; i < associados.size(); i++)
+	{
+		auto associado = associados.at(i);
+
+		if (associado->isSubscriber() == true)
+		{
+			std::cout << "ID: " << associado->getID() << std::endl;
+			std::cout << "Instituicao: " << associado->getInstituicao() << std::endl;
+			std::cout << "Nome: " << associado->getNome() << std::endl;
+			std::cout << "Email: " << associado->getEmail() << std::endl << std::endl;
+		}
+	}
+}
+
+void Associacao::showGestores() const
+{
+	std::cout << "--- GESTORES ---" << std::endl;
+	for (unsigned int i = 0; i < gestores.size(); i++)
+	{
+			auto gestor = gestores.at(i);
+
+			std::cout << "ID: " << gestor->getID() << std::endl;
+			std::cout << "Nome: " << gestor->getNome() << std::endl;
+			std::cout << "Email: " << gestor->getEmail() << std::endl << std::endl;
+		}
+}
 unsigned int Associacao::incIdAssociados(){
 	id++;
 	return this->id;
 }
 
-void Associacao::addEmail(Email &email) {
-	emails.push_back(&email);
+void Associacao::addEmail(Email* email) {
+
+	auto remetente = email->getRemetente();
+	auto destinatario = email->getDestinatario();
+	emails.push_back(email);
+
+	for (unsigned int i = 0; i < associados.size(); i++)
+	{
+		if (associados.at(i)->getEmail() == remetente)
+			associados.at(i)->enviarEmail(email);
+		
+		if (associados.at(i)->getEmail() == destinatario)
+			associados.at(i)->receberEmail(email);
+	}
+
+	for (unsigned int i = 0; i < gestores.size(); i++)
+	{
+		if (gestores.at(i)->getEmail() == remetente)
+			gestores.at(i)->enviarEmail(email);
+
+		if (gestores.at(i)->getEmail() == destinatario)
+			gestores.at(i)->receberEmail(email);
+	}
 }
 
 void Associacao::addAssociado(Associado &associado) {
@@ -120,11 +187,42 @@ void Associacao::addEvento(Evento &evento)
 }
 
 void Associacao::eraseAssociado(Associado* associado){
+
+	//apagar associado do vetor de associados
 	for (unsigned int i = 0; i<associados.size(); i++)
 		if (associados.at(i) == associado)
-			associados.erase(associados.begin()+i);
-}
+		{
+			associados.erase(associados.begin() + i);
+			//delete associado;
+		}
 
+	//apagar associado dos eventos em que participa
+	for (unsigned int i = 0; i < eventos.size(); i++)
+	{
+		auto planeadores = eventos.at(i)->getPlaneadores();
+		auto organizadores = eventos.at(i)->getOrganizadores();
+		auto posPlaneador = find(planeadores.begin(), planeadores.end(), associado->getID());
+		auto posOrganizador = find(organizadores.begin(), organizadores.end(), associado->getID());
+
+		if (posPlaneador != planeadores.end())
+			eventos.at(i)->removePlaneador(associado->getID());
+
+		if (posOrganizador != organizadores.end())
+			eventos.at(i)->removeOrganizador(associado->getID());
+
+		if (eventos.at(i)->escolaVerao() == true)   //se esse evento for uma escola de Verao existe a possibilidade de esse 
+													  //associado contar da lista de formadores
+		{
+			auto formadores = eventos.at(i)->getFormadores();
+			auto posFormador = find(formadores.begin(), formadores.end(), associado->getID());
+
+			if (posFormador != formadores.end())
+				eventos.at(i)->removeFormador(associado->getID());
+		}
+		
+		
+	}
+}
 
 void Associacao::showEventos(Associado* associado) const
 {
@@ -150,6 +248,28 @@ void Associacao::showEventos(Associado* associado) const
 	}
 }
 
+bool Associacao::existeEmail(std::string email) const
+{
+
+	//verifica se o email existe e se pertence a um subscriber, contributor ou gestor
+	for (unsigned int i = 0; i < associados.size(); i++)
+	{
+		if (associados.at(i)->getEmail() == email)
+		{
+			if((associados.at(i)->isContributor()==true) || (associados.at(i)->isSubscriber()==true))
+			   return true;
+		}
+	}
+
+	for (unsigned int i = 0; i < gestores.size(); i++)
+	{
+		if (gestores.at(i)->getEmail() == email)
+			return true;
+	}
+	return false;
+}
+
 AssociacaoRepetida::AssociacaoRepetida(std::string nome) {
 	this->nome = nome;
 }
+
