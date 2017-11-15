@@ -1018,10 +1018,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 	std::cout << "_______________ ESPACO ASSOCIACAO ______________\n\n";
 	std::cout << "4. Eventos\n";
-	std::cout << "5. Emails\n";
-	std::cout << "6. Areas e subareas cientificas dos restantes associados\n";
-	std::cout << "7. Enviar email\n";
-	std::cout << "8. Adicionar subarea cientifica de interesse\n\n";
+	std::cout << "5. Emails Recebidos\n";
+	std::cout << "6. Emails Enviados\n";
+	std::cout << "7. Areas e subareas cientificas dos restantes associados\n";
+	std::cout << "8. Enviar email\n";
+	std::cout << "9. Adicionar subarea cientifica de interesse\n\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -1060,7 +1061,12 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		associacao->showEventos(associado);
 		break;
 
-	case 7:
+	case 5:
+		clearScreen();
+		this->visualizaEmailsRecebidos(associado);
+		break;
+
+	case 8:
 		clearScreen(); //apagar conteudo do ecra
 		this->envioEmail(associado);
 		break;
@@ -1369,8 +1375,9 @@ void AssociacaoMS::envioEmail(T* associado){
 
 	}
 
+	/*
 	Email *email = new Email(associado->getEmail(), dest, corpo);
-	associado->enviarEmail(email);
+	associado->enviarEmail(email);*/
 
 	std::cout << "\nEnviado!\n";
 
@@ -1378,6 +1385,16 @@ void AssociacaoMS::envioEmail(T* associado){
 	std::cin.get();
 		//this->menuSessaoGestor(id);
 }
+
+
+template <class T>
+void AssociacaoMS::visualizaEmailsRecebidos(T* associado){
+	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
+		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "Assunto: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "... \n";
+
+	std::cout << "\n\n";
+}
+
 
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()
