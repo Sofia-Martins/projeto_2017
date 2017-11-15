@@ -272,23 +272,33 @@ bool Associacao::existeEmail(std::string email) const
 
 void Associacao::organizaEmails()
 {
+	bool organizado = false;
+
 	for (unsigned int i=0; i<this->emails.size(); i++)
 	{
 		for (unsigned int j=0; j<associados.size(); j++)
 		{
 			if (emails.at(i)->getRemetente() == associados.at(j)->getEmail())
+			{
 				associados.at(j)->enviarEmail(emails.at(i));
-			if(emails.at(i)->getDestinatario() == associados.at(j)->getEmail())
+				organizado = true;
+			}
+			else if (emails.at(i)->getDestinatario() == associados.at(j)->getEmail())
+			{
 				associados.at(j)->receberEmail(emails.at(i));
+				organizado = true;
+			}
 		}
 
-		for (unsigned int j = 0; j < gestores.size(); j++)
-		{
-			if (emails.at(i)->getRemetente() == gestores.at(j)->getEmail())
-				gestores.at(j)->enviarEmail(emails.at(i));
-			if (emails.at(i)->getDestinatario() == gestores.at(j)->getEmail())
-				gestores.at(j)->receberEmail(emails.at(i));
-		}
+		if (!organizado)
+			for (unsigned int j = 0; j < gestores.size(); j++)
+			{
+				if (emails.at(i)->getRemetente() == gestores.at(j)->getEmail())
+					gestores.at(j)->enviarEmail(emails.at(i));
+				else if (emails.at(i)->getDestinatario()
+						== gestores.at(j)->getEmail())
+					gestores.at(j)->receberEmail(emails.at(i));
+			}
 	}
 }
 

@@ -777,8 +777,6 @@ void AssociacaoMS::lerGestores()
 		in >> id;
 		in.ignore(1000, ';');
 
-		std::cout << "ID: "<< id << std::endl;
-
 		/*getline(in, idS, ';');
 		if(idS == "")
 			break;
@@ -790,8 +788,6 @@ void AssociacaoMS::lerGestores()
 		if(password == "")
 			break;
 		eliminateSpaces(password);
-
-		std::cout << "3 " << std::endl;
 
 		//buscar endereço de email do gestor
 		getline(in, email);
