@@ -11,6 +11,7 @@
 //////////////////////
 #include <string>
 #include <vector>
+#include <iostream>
 #include "email.h"
 /////////////////////
 
@@ -46,6 +47,9 @@ public:
 
 	void enviarEmail(Email* email);
 	void receberEmail(Email* email);
+
+	//show
+	void show() const;
 
 
 

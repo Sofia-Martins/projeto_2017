@@ -211,7 +211,7 @@ void Associacao::eraseAssociado(Associado* associado){
 			eventos.at(i)->removeOrganizador(associado->getID());
 
 		if (eventos.at(i)->escolaVerao() == true)   //se esse evento for uma escola de Verao existe a possibilidade de esse 
-													  //associado contar da lista de formadores
+													  //associado constar da lista de formadores
 		{
 			auto formadores = eventos.at(i)->getFormadores();
 			auto posFormador = find(formadores.begin(), formadores.end(), associado->getID());
