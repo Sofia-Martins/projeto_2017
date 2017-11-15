@@ -1066,6 +1066,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		this->visualizaEmailsRecebidos(associado);
 		break;
 
+	case 6:
+		clearScreen();
+		this->visualizaEmailsEnviados(associado);
+		break;
+
 	case 8:
 		clearScreen(); //apagar conteudo do ecra
 		this->envioEmail(associado);
@@ -1386,11 +1391,20 @@ void AssociacaoMS::envioEmail(T* associado){
 		//this->menuSessaoGestor(id);
 }
 
+template <class T>
+void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
+{
+	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
+		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "... \n";
+
+	std::cout << "\n\n";
+}
 
 template <class T>
-void AssociacaoMS::visualizaEmailsRecebidos(T* associado){
-	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "Assunto: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "... \n";
+void AssociacaoMS::visualizaEmailsEnviados(T* associado)
+{
+	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
+		std::cout << "|" << i << "|" << std::setw (15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "... \n";
 
 	std::cout << "\n\n";
 }
