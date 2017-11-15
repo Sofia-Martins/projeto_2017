@@ -529,8 +529,6 @@ void AssociacaoMS::lerEmails()
 		associacao->addEmail(email);
 	}
 
-	associacao->organizaEmails();
-
 	in.close();
 }
 

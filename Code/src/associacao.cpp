@@ -250,7 +250,6 @@ void Associacao::showEventos(Associado* associado) const
 
 bool Associacao::existeEmail(std::string email) const
 {
-
 	//verifica se o email existe e se pertence a um subscriber, contributor ou gestor
 	for (unsigned int i = 0; i < associados.size(); i++)
 	{
@@ -276,18 +275,22 @@ void Associacao::organizaEmails()
 
 	for (unsigned int i=0; i<this->emails.size(); i++)
 	{
+		std::cout << "Iteracao " << i+1 << std::endl;
 		for (unsigned int j=0; j<associados.size(); j++)
 		{
 			if (emails.at(i)->getRemetente() == associados.at(j)->getEmail())
 			{
 				associados.at(j)->enviarEmail(emails.at(i));
+				std::cout << "Fiz push para o vetor de emails enviados de " << associados.at(j)->getNome() << std::endl;
 				organizado = true;
 			}
 			else if (emails.at(i)->getDestinatario() == associados.at(j)->getEmail())
 			{
 				associados.at(j)->receberEmail(emails.at(i));
+				std::cout << "Fiz push para o vetor de emails recebidos de " << associados.at(j)->getNome()<< std::endl;
 				organizado = true;
 			}
+			continue;
 		}
 
 		if (!organizado)
@@ -295,8 +298,7 @@ void Associacao::organizaEmails()
 			{
 				if (emails.at(i)->getRemetente() == gestores.at(j)->getEmail())
 					gestores.at(j)->enviarEmail(emails.at(i));
-				else if (emails.at(i)->getDestinatario()
-						== gestores.at(j)->getEmail())
+				else if (emails.at(i)->getDestinatario()== gestores.at(j)->getEmail())
 					gestores.at(j)->receberEmail(emails.at(i));
 			}
 	}
