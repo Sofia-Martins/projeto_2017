@@ -40,6 +40,7 @@ public:
 	std::string getNome() const;
 	std::string getInstituicao() const;
 	std::string getPassword() const { return this->password; };
+	std::vector<std::string> getAreasInteresse() const;
 	Cota* getCota() const;
 	std::string getEmail() const;
 	virtual std::vector<Email*> getEmailsRecebidos() {

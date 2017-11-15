@@ -43,7 +43,10 @@ std::string Associado::getInstituicao() const {
 std::string Associado::getEmail() const {
 	return this->enderecoEmail;
 }
-
+std::vector<std::string> Associado::getAreasInteresse() const
+{
+	return this->areasInteresse;
+}
 Cota* Associado::getCota() const
 {
 	return this->cota;

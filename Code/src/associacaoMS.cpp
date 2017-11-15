@@ -330,7 +330,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -1056,9 +1056,12 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	unsigned int opcao;
 	do
 	{
-		if (std::cin.eof())
-			this->menuLogin();
 		getNumber(opcao, "Opcao: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+		}
+		this->menuLogin();
 	} while ((opcao < 0) || (opcao > 9));
 
 	//encaminhamento para cada uma das opcoes do menu
@@ -1082,7 +1085,10 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 		if (std::cin.get())
 		{
-			if (std::cin.eof()) std::cin.clear();
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+			}
 			this->menuLogin();
 		}
 		break;
@@ -1113,7 +1119,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		break;
 	}
 
-	std::cout << "Pressione ENTER para continuar... " << std::endl;
+	std::cout << "\n\nPressione ENTER para continuar... " << std::endl;
 
 	if (std::cin.get())
 	{
@@ -1122,6 +1128,10 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	}
 }
 
+void AssociacaoMS::menuSessaoSubscriber(Associado* associado)  //para completar
+{
+
+}
 
 void AssociacaoMS::modificarConta(Associado* associado) {
 
@@ -1407,7 +1417,7 @@ void AssociacaoMS::envioEmail(T* associado){
 	bool envio = false;
 
 	std::cout << "Compor nova mensagem \n\n"
-			<< "Remetente : " << associado->getEmail() << "\n";
+		<< "Remetente : " << associado->getEmail() << "\n";
 	do
 	{
 		getString(dest, "Destinario (Insira o email) : ");
@@ -1416,22 +1426,23 @@ void AssociacaoMS::envioEmail(T* associado){
 	std::cout << "\n\n";
 	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' para enviar) : \n";
 
-	while(!envio){
-		std::getline(std::cin,temp);
-		if(temp == "ENVIAR")
+	while (!envio) {
+		std::getline(std::cin, temp);
+		if (temp == "ENVIAR")
 		{
 			envio = true;
 			break;
 		}
 		else
 			corpo += temp;
-		corpo += temp + " ";
+			
+
+
 	}
 
-	
+
 	Email *email = new Email(associado->getEmail(), dest, corpo);
 	this->associacao->addEmail(email);
-	//T->enviarEmail(email);
 
 	std::cout << "\nEnviado!\n";
 
@@ -1440,85 +1451,22 @@ void AssociacaoMS::envioEmail(T* associado){
 template <class T>
 void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 {
-	unsigned int opcao;
 
-	do {
-		clearScreen();
-		std::cout << "Caixa de Entrada\n\n";
+	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
+		std::cout << "|" << i << "|" << std::setw(15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "\n";
 
-		for (unsigned int i = 0; i < associado->getEmailsRecebidos().size();i++)
-			std::cout << "|" << i + 1 << "|" << std::setw(10) << "De: "	<< associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: "	<< associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
-
-		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|" << std::setw(12) << "Voltar";
-		std::cout << "\n\n";
-
-		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
-
-		if (opcao == associado->getEmailsRecebidos().size() + 1)
-			break;
-
-		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
-			std::cout << "Email inexistente...\n\n";
-			continue;
-		}
-
-		clearScreen();
-		std::cout << "\nRemetente: "
-				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
-				<< "\n\n";
-		std::cout << "Conteudo: "
-				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
-				<< "\n";
-
-		std::cout << "\nPressione ENTER para continuar... " << std::endl;
-		std::cin.get();
-
-	} while (opcao != associado->getEmailsRecebidos().size() + 1);
+	std::cout << "\n\n";
 
 }
 
 template <class T>
 void AssociacaoMS::visualizaEmailsEnviados(T* associado)
  {
+	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
+		std::cout << "|" << i << "|" << std::setw(15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "\n";
 
-	unsigned int opcao;
-
-	do {
-		clearScreen();
-		std::cout << "Emails Enviados\n\n";
-
-		for (unsigned int i = 0; i < associado->getEmailsEnviados().size(); i++)
-			std::cout << "|" << i + 1 << "|" << std::setw(10) << "Para: "
-					<< associado->getEmailsEnviados().at(i)->getDestinatario()
-					<< "   Conteudo: "
-					<< associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
-
-		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|"
-				<< std::setw(10) << "Voltar";
-		std::cout << "\n\n";
-
-		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
-
-		if (opcao == associado->getEmailsRecebidos().size() + 1)
-			break;
-
-		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
-			std::cout << "Email inexistente...\n\n";
-			continue;
-		}
-
-		clearScreen();
-		std::cout << "\nRemetente: "
-				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
-				<< "\n\n";
-		std::cout << "Conteudo: "
-				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
-				<< "\n";
-
-		std::cout << "\nPressione ENTER para continuar... " << std::endl;
-		std::cin.get();
-
-	} while (opcao != associado->getEmailsRecebidos().size() + 1);
+	std::cout << "\n\n";
+	
 }
 
 template <class T>
@@ -1548,7 +1496,19 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 
 	do {
 		getString(chave,"Introduza a nova subarea cientifica de interesse (x.x.x) : "); // garante que estao no formato x.x.x
-
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			if (associado->isContributor())
+				menuSessaoContributor(associado);
+			/*
+			else if (associado->isSubscriber())      //descomentar quando o menu do subscriber e do other estiverem completos
+				menuSessaoSubscriber(associado);
+				
+			else
+				menuSessaoOther(associado);
+				*/
+		}
 		std::istringstream codigo(chave);
 
 		codigo >> c >> lixo;
@@ -1565,15 +1525,27 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 		codigo >> sC;
 		invalido = false;
 
-		if(associacao->getDominio()->getCiencia().size() > c-1 && associacao->getDominio()->getCiencia().at(c-1)->getAreas().size() > aC-1 && associacao->getDominio()->getCiencia().at(c-1)->getAreas().at(aC-1)->getsubAreas().size() > sC-1)
-		{
-			associado->addSubAreaInteresse(associacao->getDominio()->getCiencia().at(c-1)->getAreas().at(aC-1)->getsubAreas().at(sC-1)->getNomeSubAreaCientifica());
-			std::cout << "Nova Subarea de interesse adicionada com sucesso. ";
-		}
-		else {
-			std::cout << "Falha ao adicionar Subarea de interesse, tente novamente\n\n";
-			invalido = true;
-		}
+		auto subAreasInteresse = associado->getAreasInteresse();
+	
+
+			if ((!(codigo>>lixo))&&(associacao->getDominio()->getCiencia().size() > c - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().size() > aC - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().size() > sC - 1))
+			{
+				std::string subAreaParaAdicionar = associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().at(sC - 1)->getNomeSubAreaCientifica();
+				if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea já está no vetor 
+				{
+					invalido = true;
+					std::cout << "A sub area " << subAreaParaAdicionar << " ja conta das suas sub areas de interesse \n\n";
+				}
+				else
+				{
+					associado->addSubAreaInteresse(subAreaParaAdicionar);
+					std::cout << "Nova Subarea de interesse adicionada com sucesso. ";
+				}
+			}
+			else {
+				std::cout << "Falha ao adicionar Subarea de interesse, tente novamente\n\n";
+				invalido = true;
+			}
 
 	} while (invalido);
 
@@ -1667,6 +1639,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-	//system("CLS");
+	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    system("CLS");
 }
