@@ -529,6 +529,8 @@ void AssociacaoMS::lerEmails()
 		associacao->addEmail(email);
 	}
 
+	associacao->organizaEmails();
+
 	in.close();
 }
 
@@ -1444,8 +1446,10 @@ void AssociacaoMS::envioEmail(T* associado){
 template <class T>
 void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 {
+	std::cout << "Caixa de Entrada\n\n";
+
 	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "..." << "\n";
+		std::cout << "|" << i+1 << "|" << std::setw (10) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
 
 	std::cout << "\n\n";
 }
@@ -1453,8 +1457,10 @@ void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 template <class T>
 void AssociacaoMS::visualizaEmailsEnviados(T* associado)
 {
+	std::cout << "Emails Enviados\n\n";
+
 	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "..." << "\n";
+		std::cout << "|" << i+1 << "|" << std::setw (10) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
 
 	std::cout << "\n\n";
 }

@@ -68,6 +68,7 @@ public:
 	void showSubscribers() const;
 	void showGestores() const;
 	bool existeEmail(std::string email) const;
+	void organizaEmails();
 };
 
 
