@@ -88,6 +88,11 @@ void Associado::show() const
 
 }
 
+void Associado::addSubAreaInteresse(std::string subArea){
+	this->areasInteresse.push_back(subArea);
+}
+
+
 
 //excecao
 AssociadoRepetido::AssociadoRepetido(std::string nome) {

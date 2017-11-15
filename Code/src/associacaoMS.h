@@ -90,6 +90,7 @@ public:
 	template <class T> void envioEmail(T* associado);
 	template <class T> void visualizaEmailsRecebidos(T* associado);
 	template <class T> void visualizaEmailsEnviados(T* associado);
+	template <class T> void addSubareaCientificaInteresse (T* associado);
 
 	//menu final
 	void menuTermino();

@@ -72,6 +72,7 @@ public:
 
 	//outros metodos
 	void show() const;
+	void addSubAreaInteresse(std::string subArea);
 
 };
 

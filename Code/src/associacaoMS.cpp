@@ -330,7 +330,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -888,28 +888,30 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 			std::cin.clear();
 			this->menuLogin();
 		}
+
 		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
 			if (associacao->getAssociados().at(i)->getID() == id) //ID valido
-				{
+			{
 				IDvalido = true;
 				pos = i;
-				}
+			}
+
 		if (IDvalido)
 		{
 			do {
 					getString(pass, "Password do associado: ");
+					if (std::cin.eof())
+					{
+						std::cin.clear();
+						this->menuLogin();
+					}
 					if(associacao->getAssociados().at(pos)->getPassword() == pass)
 							PassValida = true;
 					if (!PassValida)
-					{
-						if (std::cin.eof())
-							this->menuLogin();
-						std::cout << "Password invalida! \n\n";
-					}
-					else {
-						this->menuSessaoAssociado(id);
-					}
-				} while (!PassValida);
+						std::cout << "Password invalida!! \n\n";
+					else this->menuSessaoAssociado(id);
+			} while (!PassValida);
+
 		}
 
 		else {
@@ -1025,6 +1027,7 @@ void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 	//verifica que tipo de associado Ã© (contributor, subscriber, ou simplesmente um associado)
 	if (associados.at(pos)->getCota()->getEmDia() == true)
 		this->menuSessaoContributor(associados.at(pos));
+
 	/*
 	else if (associado->getCota()->getAtraso() < 5)
 		this->menuSessaoSubscriber(associado);
@@ -1106,6 +1109,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	case 8:
 		clearScreen(); //apagar conteudo do ecra
 		this->envioEmail(associado);
+		break;
+
+	case 9:
+		clearScreen();
+		this->addSubareaCientificaInteresse(associado);
 		break;
 	}
 
@@ -1419,13 +1427,9 @@ void AssociacaoMS::envioEmail(T* associado){
 			envio = true;
 			break;
 		}
-<<<<<<< HEAD
 		else
 			corpo += temp;
-=======
 		corpo += temp + " ";
->>>>>>> 83d62f3e2b9175cb44d8bf784547c1b69409d676
-
 	}
 
 	
@@ -1441,7 +1445,7 @@ template <class T>
 void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 {
 	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "\n";
+		std::cout << "|" << i << "|" << std::setw (15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "..." << "\n";
 
 	std::cout << "\n\n";
 }
@@ -1450,9 +1454,67 @@ template <class T>
 void AssociacaoMS::visualizaEmailsEnviados(T* associado)
 {
 	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
-		std::cout << "|" << i << "|" << std::setw (15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "\n";
+		std::cout << "|" << i << "|" << std::setw (15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "..." << "\n";
 
 	std::cout << "\n\n";
+}
+
+template <class T>
+void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
+
+	std::string chave;
+	char lixo;
+	bool invalido = true;
+
+	unsigned int c, aC, sC;
+
+	for (unsigned int i=0; i<associacao->getDominio()->getCiencia().size(); i++)
+	{
+		std::cout << "|" << i+1 << "| " << associacao->getDominio()->getCiencia().at(i)->getNomeCiencia() << "\n";
+
+		for (unsigned int j=0; j<associacao->getDominio()->getCiencia().at(i)->getAreas().size(); j++)
+		{
+			std::cout << "  |" << i+1  << "." << j+1 << "| " << associacao->getDominio()->getCiencia().at(i)->getAreas().at(j)->getNomeAreaCientifica() << "\n";
+
+			for (unsigned int k=0; k<associacao->getDominio()->getCiencia().at(i)->getAreas().at(j)->getsubAreas().size(); k++)
+				std::cout << "    |" << i+1  << "." << j+1  << "." << k+1 << "| " << associacao->getDominio()->getCiencia().at(i)->getAreas().at(j)->getsubAreas().at(k)->getNomeSubAreaCientifica() << "\n";
+			std::cout << "\n";
+		}
+
+		std::cout << "\n\n";
+	}
+
+	do {
+		getString(chave,"Introduza a nova subarea cientifica de interesse (x.x.x) : "); // garante que estao no formato x.x.x
+
+		std::istringstream codigo(chave);
+
+		codigo >> c >> lixo;
+		if (lixo != '.') {
+			std::cout << "Formato de entrada inválido, tente novamente\n\n";
+			continue;
+		}
+		lixo = ',';
+		codigo >> aC >> lixo;
+		if (lixo != '.') {
+			std::cout << "Formato de entrada inválido, tente novamente\n\n";
+			continue;
+		}
+		codigo >> sC;
+		invalido = false;
+
+		if(associacao->getDominio()->getCiencia().size() > c-1 && associacao->getDominio()->getCiencia().at(c-1)->getAreas().size() > aC-1 && associacao->getDominio()->getCiencia().at(c-1)->getAreas().at(aC-1)->getsubAreas().size() > sC-1)
+		{
+			associado->addSubAreaInteresse(associacao->getDominio()->getCiencia().at(c-1)->getAreas().at(aC-1)->getsubAreas().at(sC-1)->getNomeSubAreaCientifica());
+			std::cout << "Nova Subarea de interesse adicionada com sucesso. ";
+		}
+		else {
+			std::cout << "Falha ao adicionar Subarea de interesse, tente novamente\n\n";
+			invalido = true;
+		}
+
+	} while (invalido);
+
 }
 
 
@@ -1543,6 +1605,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-//td::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-	system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	//system("CLS");
 }
