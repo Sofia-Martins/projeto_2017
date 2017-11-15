@@ -226,7 +226,7 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 	clearScreen(); //apagar conteudo do ecra
 	std::cout << "---------------- CRIAR GESTOR --------------\n\n";
 	std::string nome;
-	unsigned int id = this->associacao->getID();
+	unsigned int id = this->associacao->incIdAssociados();
 	std::string password;
 	std::string enderecoEmail;
 
@@ -256,7 +256,6 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 
 	Gestor* gestor = new Gestor(nome, password, siglaAssociacao,id);
 	this->associacao->addGestor(*gestor);
-	this->associacao->setID(id++);
 
 	std::cout << "ID atribuido: " << gestor->getID() << std::endl;
 	std::cout << "Email: " <<gestor->getEnderecoEmail() << std::endl;
@@ -495,7 +494,7 @@ void AssociacaoMS::lerAssociados() {
 		}
 		a1->setAreasInteresse(v_subareas);
 		associacao->addAssociado(*a1);
-		if (std::stoul(ID) >= this->associacao->getID()) this->associacao->setID(std::stoul(ID)+1);
+		if (std::stoul(ID) >= this->associacao->getID()) this->associacao->setID(std::stoul(ID));
 	}
 }
 
@@ -801,7 +800,8 @@ void AssociacaoMS::lerGestores()
 		//criar gestor
 		Gestor* gestor = new Gestor(nome, id, password, email);
 		this->associacao->addGestor(*gestor);
-		if (id >= this->associacao->getID()) this->associacao->setID(id+1);
+		if (id >= this->associacao->getID())
+			this->associacao->setID(id);
 
 	}
 
@@ -830,6 +830,7 @@ void AssociacaoMS::menuLogin() {
 		std::cout << "---- SIGN UP ----\n\n";
 		this->criaConta();
 
+
 	}
 
 	if (opcao == 2) {
@@ -844,19 +845,35 @@ void AssociacaoMS::menuLogin() {
 
 void AssociacaoMS::criaConta() {
 	std::string nome, password, instituicao, email;
-	std::sort(associacao->getAssociados().begin(), associacao->getAssociados().end());
-	int ID = associacao->getAssociados().at(associacao->getAssociados().size() - 1)->getID() + 1;
+	int ID = associacao->incIdAssociados();
 
 	getString(nome, "Nome: ");
+	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
+		if(associacao->getAssociados().at(i)->getNome() == nome)
+			{
+			std::cout << "Utilizador ja existente! Tente iniciar sessao! \n\n";
+			std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+				if(std::cin.get())
+					this->menuLogin();
+			}
+
 	getString(password, "Password: ");
 	getString(instituicao, "Instituicao: ");
-	getString(email, "Endereco de email: ");
+	email = std::to_string(ID) + "@" + associacao->getSigla() + ".com";
+
+	std::cout << "ID atribuido : " << ID << "\nEmail atribuido : " << email << "\n\n";
 
 	Cota *cota = new Cota(true, 0);
 
 	Contributor *a = new Contributor(nome, ID, password, instituicao, cota, email);
 
 	associacao->addAssociado(*a);
+
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if(std::cin.get())
+			this->menuLogin();
 
 }
 
@@ -943,7 +960,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		<< "3) Apaga gestor \n"
 		<< "4) Apaga associado \n"
 		<< "5) Enviar email \n"
-		<< "6) Terminar sessao \n\n";
+		<< "6) Informacoes da minha conta \n"
+		<< "7) Terminar sessao \n\n";
 
 	unsigned int opcao = 0;
 	do
@@ -952,7 +970,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		if (std::cin.eof())
 			this->menuLogin();
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
-			(opcao == 4) || (opcao == 5) || (opcao == 6)) );
+			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7)) );
 
 	if (opcao == 1)
 		this->criaGestor(associacao->getSigla(), false, id);
@@ -970,13 +988,23 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		for (unsigned int i = 0; i<gestores.size(); i++)
 			if(gestores.at(i)->getID() == id)
 			{
-				gestor = gestores.at(i);
-				this->envioEmail(gestor);
+				//gestor = gestores.at(i);
+				this->envioEmail(this->associacao->getGestores().at(i));
 			}
 
 		this->menuSessaoGestor(id);
 	}
-	else if (opcao == 6)
+	else if(opcao == 6){
+		clearScreen();
+		for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
+			if(this->associacao->getGestores().at(i)->getID() == id)
+				this->associacao->getGestores().at(i)->show();
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+			if(std::cin.get())
+				this->menuSessaoGestor(id);
+	}
+	else if (opcao == 7)
 		this->menuTermino();
 
 }
@@ -984,18 +1012,19 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 {
 	auto associados = this->associacao->getAssociados();
-	Associado* associado = NULL;
+	//Associado* associado = NULL;
+	unsigned int pos;
 
 	//procura o associado
 	for (unsigned int i = 0; i < associados.size(); i++)
 	{
 		if (associados.at(i)->getID() == id)
-			associado = associados.at(i);
+			pos = i;
 	}
 
 	//verifica que tipo de associado é (contributor, subscriber, ou simplesmente um associado)
-	if (associado->getCota()->getEmDia() == true)
-		this->menuSessaoContributor(associado);
+	if (associados.at(pos)->getCota()->getEmDia() == true)
+		this->menuSessaoContributor(associados.at(pos));
 	/*
 	else if (associado->getCota()->getAtraso() < 5)
 		this->menuSessaoSubscriber(associado);
@@ -1375,8 +1404,9 @@ void AssociacaoMS::envioEmail(T* associado){
 		if(temp == "ENVIAR")
 		{
 			envio = true;
+			break;
 		}
-		corpo += temp;
+		corpo += temp + " ";
 
 	}
 
