@@ -330,7 +330,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -810,6 +810,7 @@ void AssociacaoMS::menuLogin() {
 	std::cout << "---- LOGIN ----\n\n";
 	std::cout << "1. Sign up\n";
 	std::cout << "2. Sign in\n";
+	std::cout << "3. Sair\n\n";
 	unsigned int opcao = 0, id = 0;
 	std::string password;
 
@@ -818,7 +819,7 @@ void AssociacaoMS::menuLogin() {
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
 			this->menuAssociacoes();
-	} while (!((opcao == 1) || (opcao == 2)));
+	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ));
 
 	if (opcao == 1) {
 		//cria conta com id automatico
@@ -836,6 +837,10 @@ void AssociacaoMS::menuLogin() {
 		this->getID(id, password);
 		//caso validado acede a menu seguinte. ***Ver funcao getPassword***
 
+	}
+
+	if (opcao == 3){
+		this->menuTermino();
 	}
 }
 
@@ -1050,7 +1055,8 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	std::cout << "6. Emails Enviados\n";
 	std::cout << "7. Areas e subareas cientificas dos restantes associados\n";
 	std::cout << "8. Enviar email\n";
-	std::cout << "9. Adicionar subarea cientifica de interesse\n\n";
+	std::cout << "9. Adicionar subarea cientifica de interesse\n";
+	std::cout << "10. Terminar Sessao\n\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -1060,9 +1066,10 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		if (std::cin.eof())
 		{
 			std::cin.clear();
+			this->menuLogin();
 		}
-		this->menuLogin();
-	} while ((opcao < 0) || (opcao > 9));
+
+	} while ((opcao < 0) || (opcao > 10));
 
 	//encaminhamento para cada uma das opcoes do menu
 	switch (opcao)
@@ -1106,6 +1113,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	case 9:
 		clearScreen();
 		this->addSubareaCientificaInteresse(associado);
+		break;
+
+	case 10:
+		clearScreen();
+		this->menuLogin();
 		break;
 	}
 
@@ -1441,22 +1453,85 @@ void AssociacaoMS::envioEmail(T* associado){
 template <class T>
 void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 {
+	unsigned int opcao;
 
-	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
-		std::cout << "|" << i << "|" << std::setw(15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "\n";
+	do {
+		clearScreen();
+		std::cout << "Caixa de Entrada\n\n";
 
-	std::cout << "\n\n";
+		for (unsigned int i = 0; i < associado->getEmailsRecebidos().size();i++)
+			std::cout << "|" << i + 1 << "|" << std::setw(10) << "De: "	<< associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: "	<< associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
+
+		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|" << std::setw(12) << "Voltar";
+		std::cout << "\n\n";
+
+		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
+
+		if (opcao == associado->getEmailsRecebidos().size() + 1)
+			break;
+
+		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
+			std::cout << "Email inexistente...\n\n";
+			continue;
+		}
+
+		clearScreen();
+		std::cout << "\nRemetente: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
+				<< "\n\n";
+		std::cout << "Conteudo: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
+				<< "\n";
+
+		std::cout << "\nPressione ENTER para continuar... " << std::endl;
+		std::cin.get();
+
+	} while (opcao != associado->getEmailsRecebidos().size() + 1);
 
 }
 
 template <class T>
 void AssociacaoMS::visualizaEmailsEnviados(T* associado)
  {
-	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
-		std::cout << "|" << i << "|" << std::setw(15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "\n";
 
-	std::cout << "\n\n";
-	
+	unsigned int opcao;
+
+	do {
+		clearScreen();
+		std::cout << "Emails Enviados\n\n";
+
+		for (unsigned int i = 0; i < associado->getEmailsEnviados().size(); i++)
+			std::cout << "|" << i + 1 << "|" << std::setw(10) << "Para: "
+					<< associado->getEmailsEnviados().at(i)->getDestinatario()
+					<< "   Conteudo: "
+					<< associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
+
+		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|"
+				<< std::setw(10) << "Voltar";
+		std::cout << "\n\n";
+
+		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
+
+		if (opcao == associado->getEmailsRecebidos().size() + 1)
+			break;
+
+		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
+			std::cout << "Email inexistente...\n\n";
+			continue;
+		}
+
+		clearScreen();
+		std::cout << "\nRemetente: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
+				<< "\n\n";
+		std::cout << "Conteudo: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
+				<< "\n";
+
+		std::cout << "\nPressione ENTER para continuar... " << std::endl;
+		std::cin.get();
+
+	} while (opcao != associado->getEmailsRecebidos().size() + 1);
 }
 
 template <class T>
@@ -1503,13 +1578,13 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 
 		codigo >> c >> lixo;
 		if (lixo != '.') {
-			std::cout << "Formato de entrada inválido, tente novamente\n\n";
+			std::cout << "Formato de entrada invï¿½lido, tente novamente\n\n";
 			continue;
 		}
 		lixo = ',';
 		codigo >> aC >> lixo;
 		if (lixo != '.') {
-			std::cout << "Formato de entrada inválido, tente novamente\n\n";
+			std::cout << "Formato de entrada invï¿½lido, tente novamente\n\n";
 			continue;
 		}
 		codigo >> sC;
@@ -1521,7 +1596,7 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 			if ((!(codigo>>lixo))&&(associacao->getDominio()->getCiencia().size() > c - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().size() > aC - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().size() > sC - 1))
 			{
 				std::string subAreaParaAdicionar = associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().at(sC - 1)->getNomeSubAreaCientifica();
-				if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea já está no vetor 
+				if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea jï¿½ estï¿½ no vetor 
 				{
 					invalido = true;
 					std::cout << "A sub area " << subAreaParaAdicionar << " ja conta das suas sub areas de interesse \n\n";
@@ -1629,6 +1704,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    //system("CLS");
 }
