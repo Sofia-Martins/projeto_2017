@@ -1452,22 +1452,85 @@ void AssociacaoMS::envioEmail(T* associado){
 template <class T>
 void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 {
+	unsigned int opcao;
 
-	for (unsigned int i = 0; i<associado->getEmailsRecebidos().size(); i++)
-		std::cout << "|" << i << "|" << std::setw(15) << "De: " << associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: " << associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 15) << "\n";
+	do {
+		clearScreen();
+		std::cout << "Caixa de Entrada\n\n";
 
-	std::cout << "\n\n";
+		for (unsigned int i = 0; i < associado->getEmailsRecebidos().size();i++)
+			std::cout << "|" << i + 1 << "|" << std::setw(10) << "De: "	<< associado->getEmailsRecebidos().at(i)->getRemetente() << "   Conteudo: "	<< associado->getEmailsRecebidos().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
+
+		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|" << std::setw(12) << "Voltar";
+		std::cout << "\n\n";
+
+		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
+
+		if (opcao == associado->getEmailsRecebidos().size() + 1)
+			break;
+
+		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
+			std::cout << "Email inexistente...\n\n";
+			continue;
+		}
+
+		clearScreen();
+		std::cout << "\nRemetente: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
+				<< "\n\n";
+		std::cout << "Conteudo: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
+				<< "\n";
+
+		std::cout << "\nPressione ENTER para continuar... " << std::endl;
+		std::cin.get();
+
+	} while (opcao != associado->getEmailsRecebidos().size() + 1);
 
 }
 
 template <class T>
 void AssociacaoMS::visualizaEmailsEnviados(T* associado)
  {
-	for (unsigned int i = 0; i<associado->getEmailsEnviados().size(); i++)
-		std::cout << "|" << i << "|" << std::setw(15) << "Para: " << associado->getEmailsEnviados().at(i)->getDestinatario() << "   Conteudo: " << associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 15) << "\n";
 
-	std::cout << "\n\n";
-	
+	unsigned int opcao;
+
+	do {
+		clearScreen();
+		std::cout << "Emails Enviados\n\n";
+
+		for (unsigned int i = 0; i < associado->getEmailsEnviados().size(); i++)
+			std::cout << "|" << i + 1 << "|" << std::setw(10) << "Para: "
+					<< associado->getEmailsEnviados().at(i)->getDestinatario()
+					<< "   Conteudo: "
+					<< associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
+
+		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|"
+				<< std::setw(10) << "Voltar";
+		std::cout << "\n\n";
+
+		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
+
+		if (opcao == associado->getEmailsRecebidos().size() + 1)
+			break;
+
+		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
+			std::cout << "Email inexistente...\n\n";
+			continue;
+		}
+
+		clearScreen();
+		std::cout << "\nRemetente: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
+				<< "\n\n";
+		std::cout << "Conteudo: "
+				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
+				<< "\n";
+
+		std::cout << "\nPressione ENTER para continuar... " << std::endl;
+		std::cin.get();
+
+	} while (opcao != associado->getEmailsRecebidos().size() + 1);
 }
 
 template <class T>
