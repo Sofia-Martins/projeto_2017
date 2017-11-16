@@ -310,7 +310,8 @@ void AssociacaoMS::menuAssociacoes() {
 
 	do
 	{
-		getNumber(opcao, "Opcao: ");
+
+getNumber(opcao, "Opcao: ");
 		if (opcao > associacoes.size())
 			valido = false;
 		else valido = true;
@@ -330,7 +331,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -372,7 +373,6 @@ void AssociacaoMS::lerDominios() {
 	{
 		if (primeiraLeitura)
 		{
-			dac.putback(carater);
 			primeiraLeitura = false;
 		}
 		else
@@ -1045,18 +1045,19 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	std::cout << "Bem vindo " << associado->getNome() << "!" << std::endl << std::endl;
 
 	std::cout << "_________________ O MEU ESPACO _________________\n\n";
-	std::cout << "1. Informacoes da minha conta\n";
-	std::cout << "2. Modificar a minha conta\n";
-	std::cout << "3. Apagar a minha conta\n\n";
+	std::cout << " 1. Informacoes da minha conta\n";
+	std::cout << " 2. Modificar a minha conta\n";
+	std::cout << " 3. Apagar a minha conta\n";
+	std::cout << " 4. Os meus interesses cientificos\n";
+	std::cout << " 5. Adicionar subarea cientifica de interesse\n\n";
 
 	std::cout << "_______________ ESPACO ASSOCIACAO ______________\n\n";
-	std::cout << "4. Eventos\n";
-	std::cout << "5. Emails Recebidos\n";
-	std::cout << "6. Emails Enviados\n";
-	std::cout << "7. Areas e subareas cientificas dos restantes associados\n";
-	std::cout << "8. Enviar email\n";
-	std::cout << "9. Adicionar subarea cientifica de interesse\n";
-	std::cout << "10. Terminar Sessao\n\n";
+	std::cout << " 6. Eventos nos quais eu participo\n";
+	std::cout << " 7. Emails Recebidos\n";
+	std::cout << " 8. Emails Enviados\n";
+	std::cout << " 9. Areas e subareas cientificas dos restantes associados\n";
+	std::cout << "10. Enviar email\n";
+	std::cout << "11. Terminar Sessao\n\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -1092,30 +1093,35 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 	case 4:
 		clearScreen();
-		associacao->showEventos(associado);
+		associacao->showInteressesAssociado(associado);
 		break;
 
 	case 5:
 		clearScreen();
-		this->visualizaEmailsRecebidos(associado);
+		this->addSubareaCientificaInteresse(associado);
 		break;
 
 	case 6:
 		clearScreen();
-		this->visualizaEmailsEnviados(associado);
+		associacao->showEventos(associado);
+		break;
+
+	case 7:
+		clearScreen();
+		this->visualizaEmailsRecebidos(associado);
 		break;
 
 	case 8:
+		clearScreen();
+		this->visualizaEmailsEnviados(associado);
+		break;
+
+	case 10:
 		clearScreen(); //apagar conteudo do ecra
 		this->envioEmail(associado);
 		break;
 
-	case 9:
-		clearScreen();
-		this->addSubareaCientificaInteresse(associado);
-		break;
-
-	case 10:
+	case 11:
 		clearScreen();
 		this->menuLogin();
 		break;
@@ -1704,6 +1710,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    //system("CLS");
+	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    system("CLS");
 }

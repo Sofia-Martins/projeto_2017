@@ -51,9 +51,9 @@
 	{
 		if (apoioAssociacao)
 		{
-			std::cout << "Evento apoiado " << std::endl;
-			std::cout << "Tipo de apoio: " << tipoApoio << std::endl;
+			std::cout << "    Evento apoiado " << std::endl;
+			std::cout << "    Tipo de apoio: " << tipoApoio << std::endl;
 		}
 		else
-			std::cout << "Evento nao apoiado " << std::endl;
+			std::cout << "    Evento nao apoiado " << std::endl;
 	}

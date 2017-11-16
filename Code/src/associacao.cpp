@@ -304,6 +304,58 @@ void Associacao::organizaEmails()
 	}
 }
 
+void Associacao::showInteressesAssociado(Associado* associado) const
+{
+	
+	auto interesses = associado->getAreasInteresse();  //vetor de subAreas de interesse do associado (vetor de strings)
+	auto ciencias = dominioAssociacao->getCiencia();   //vetor de ciencias da associacao
+	DominioCientifico dominioInteresse;
+
+	for (unsigned int w = 0; w < interesses.size(); w++)
+	{
+		auto subAreaInteresseAtual = interesses.at(w);
+
+		for (unsigned int i = 0; i < ciencias.size(); i++)
+		{
+			auto cienciaAtual = ciencias.at(i);
+			auto areas = cienciaAtual->getAreas();
+
+			for (unsigned int j = 0; j < areas.size(); j++)
+			{
+				auto areaAtual = areas.at(j);
+				auto subAreas = areaAtual->getsubAreas();
+
+				for (unsigned int k = 0; k < subAreas.size(); k++)
+				{
+					if (subAreas.at(k)->getNomeSubAreaCientifica() == subAreaInteresseAtual)  //se encontrar a subArea de interesse no dominio da associacao
+					{
+						/*
+						try
+						{
+							dominioInteresse.addCiencia(cienciaAtual);
+						}
+						catch (const CienciaRepetida& c)  //se essa ciencia ja pertencer ao dominio de interesse
+						{
+
+						}
+
+						try
+						{
+							dominioInteresse.
+						}
+						*/
+
+						std::cout << "SubArea: " << subAreaInteresseAtual << std::endl;
+						std::cout << "   Area: " << areaAtual->getNomeAreaCientifica() << std::endl;
+						std::cout << "     Ciencia: " << cienciaAtual->getNomeCiencia() << std::endl << std::endl;
+
+					}
+				}
+			}
+		}
+	}
+}
+
 
 AssociacaoRepetida::AssociacaoRepetida(std::string nome) {
 	this->nome = nome;

@@ -69,6 +69,7 @@ public:
 	void showGestores() const;
 	bool existeEmail(std::string email) const;
 	void organizaEmails();
+	void showInteressesAssociado(Associado* associado) const;
 };
 
 

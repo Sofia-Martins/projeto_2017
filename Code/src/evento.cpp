@@ -78,24 +78,23 @@ void Evento::removeOrganizador(int organizador) {
 
 void Evento::show() const
 {
-	std::cout << "|1| Tema: " << this->tema << std::endl;
-	std::cout << "|2| Local: " << this->local << std::endl;
-	std::cout << "|3| Data: " << std::endl;
+	std::cout << "\n|1| Tema: " << this->tema;
+	std::cout << "\n\n|2| Local: " << this->local;
+	std::cout << "\n\n|3| Data: " << std::endl;
 	this->data.show();
-	std::cout<<std::endl;
 
-	std::cout << "|4| ID's dos planeadores: " << std::endl;
+	std::cout << "\n|4| ID's dos planeadores: " << std::endl;
 
 	for (unsigned int i = 0; i < this->planeadores.size(); i++)
 	{
-		std::cout << "-" << planeadores.at(i) << std::endl;
+		std::cout << "    |" << planeadores.at(i) << std::endl;
 	}
-	std::cout << "|5| ID's dos organizadores: " << std::endl;
+	std::cout << "\n|5| ID's dos organizadores: " << std::endl;
 	for (unsigned int i = 0; i < this->organizadores.size(); i++)
 	{
-		std::cout << "-" << organizadores.at(i) << std::endl;
+		std::cout << "    |" << organizadores.at(i) << std::endl;
 	}
-	std::cout << "|6| Apoio da associacao " << std::endl;
+	std::cout << "\n|6| Apoio da associacao " << std::endl;
 	this->apoioEvento.show();
 	std::cout<<std::endl;
 }
@@ -130,9 +129,9 @@ void Conferencia::setNumeroParticipantes(unsigned int numeroParticipantes) {
 
 void Conferencia::show() const
 {
-	std::cout << "CONFERENCIA" << std::endl;
+	std::cout << "----------------- CONFERENCIA -----------------" << std::endl;
 	Evento::show();
-	std::cout << "|7| Estimativa do numero de participantes: " << this->numeroParticipantes << std::endl;
+	std::cout << "\n|7| Estimativa do numero de participantes: " << this->numeroParticipantes << std::endl;
 
 }
 
@@ -169,12 +168,12 @@ void EscolaVerao::removeFormador(int formador) {
 
 void EscolaVerao::show() const
 {
-	std::cout << "ESCOLA DE VERAO" << std::endl;
+	std::cout << "----------------- ESCOLA DE VERAO -----------------" << std::endl;
 	Evento::show();
-	std::cout << "|7| Formadores: " << std::endl;
+	std::cout << "\n|7| ID's dos formadores: " << std::endl;
 
 	for (unsigned int i = 0; i < formadores.size(); i++)
 	{
-		std::cout << "ID do formador " << i + 1 << ": " << formadores.at(i) << std::endl;
+		std::cout << "    |" << formadores.at(i) << std::endl;
 	}
 }

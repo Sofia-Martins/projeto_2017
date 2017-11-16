@@ -21,11 +21,16 @@ void DominioCientifico::addCiencia(Ciencia* ciencia)
 
 	std::vector<Ciencia*>::const_iterator inicio=ciencias.begin(); //apontador para a primeira ciencia
 	std::vector<Ciencia*>::const_iterator fim=ciencias.end(); //apontador para o final do vector ciencias
-	bool existeCiencia=binary_search(inicio, fim, ciencia,cienciasIguais);
+	bool existeCiencia = false;
 
-	/*if(existeCiencia)
+	for (unsigned int i = 0; i < ciencias.size(); i++)
+	{
+		if (ciencias.at(i)->getNomeCiencia() == ciencia->getNomeCiencia())
+			existeCiencia = true;
+	}
+	if(existeCiencia)
 		throw  CienciaRepetida(ciencia);
-	else*/
+	else
 	{
 		ciencias.push_back(ciencia);
 	}

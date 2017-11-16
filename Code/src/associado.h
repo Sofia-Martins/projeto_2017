@@ -25,8 +25,8 @@ private:
 
 	Cota* cota;
 	std::string enderecoEmail;
-	std::vector<std::string> eventos = {};
-	std::vector<std::string> areasInteresse = {};
+	std::vector<std::string> eventos;
+	std::vector<std::string> areasInteresse;
 
 public:
 	Associado();

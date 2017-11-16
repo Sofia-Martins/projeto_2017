@@ -98,8 +98,8 @@ std::string Data::getData() const
 //outros metodos
 void Data::show() const
 {
-	std::cout << "Dia: " << dia << "/" << mes << "/" << ano << std::endl;
-	std::cout << "Hora: " << hora << ":" << minuto << std::endl;
+	std::cout << "    Dia: " << dia << "/" << mes << "/" << ano << std::endl;
+	std::cout << "    Hora: " << hora << ":" << minuto << std::endl;
 }
 
 
