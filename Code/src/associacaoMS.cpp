@@ -1083,16 +1083,6 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		std::cout << "Conta eliminada com sucesso...\n\n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
-		if (std::cin.get())
-		{
-			if (std::cin.eof())
-			{
-				std::cin.clear();
-			}
-			this->menuLogin();
-		}
-		break;
-
 	case 4:
 		clearScreen();
 		associacao->showEventos(associado);
