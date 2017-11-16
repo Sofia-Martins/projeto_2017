@@ -810,6 +810,7 @@ void AssociacaoMS::menuLogin() {
 	std::cout << "---- LOGIN ----\n\n";
 	std::cout << "1. Sign up\n";
 	std::cout << "2. Sign in\n";
+	std::cout << "3. Sair\n\n";
 	unsigned int opcao = 0, id = 0;
 	std::string password;
 
@@ -818,7 +819,7 @@ void AssociacaoMS::menuLogin() {
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
 			this->menuAssociacoes();
-	} while (!((opcao == 1) || (opcao == 2)));
+	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ));
 
 	if (opcao == 1) {
 		//cria conta com id automatico
@@ -836,6 +837,10 @@ void AssociacaoMS::menuLogin() {
 		this->getID(id, password);
 		//caso validado acede a menu seguinte. ***Ver funcao getPassword***
 
+	}
+
+	if (opcao == 3){
+		this->menuTermino();
 	}
 }
 
@@ -1050,7 +1055,8 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	std::cout << "6. Emails Enviados\n";
 	std::cout << "7. Areas e subareas cientificas dos restantes associados\n";
 	std::cout << "8. Enviar email\n";
-	std::cout << "9. Adicionar subarea cientifica de interesse\n\n";
+	std::cout << "9. Adicionar subarea cientifica de interesse\n";
+	std::cout << "10. Terminar Sessao\n\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -1063,7 +1069,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 			this->menuLogin();
 		}
 
-	} while ((opcao < 0) || (opcao > 9));
+	} while ((opcao < 0) || (opcao > 10));
 
 	//encaminhamento para cada uma das opcoes do menu
 	switch (opcao)
@@ -1117,6 +1123,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	case 9:
 		clearScreen();
 		this->addSubareaCientificaInteresse(associado);
+		break;
+
+	case 10:
+		clearScreen();
+		this->menuLogin();
 		break;
 	}
 
