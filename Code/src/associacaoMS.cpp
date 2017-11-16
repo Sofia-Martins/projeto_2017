@@ -330,7 +330,7 @@ void AssociacaoMS::menuAssociacoes() {
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -1060,8 +1060,9 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		if (std::cin.eof())
 		{
 			std::cin.clear();
+			this->menuLogin();
 		}
-		this->menuLogin();
+
 	} while ((opcao < 0) || (opcao > 9));
 
 	//encaminhamento para cada uma das opcoes do menu
@@ -1513,13 +1514,13 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 
 		codigo >> c >> lixo;
 		if (lixo != '.') {
-			std::cout << "Formato de entrada inválido, tente novamente\n\n";
+			std::cout << "Formato de entrada invï¿½lido, tente novamente\n\n";
 			continue;
 		}
 		lixo = ',';
 		codigo >> aC >> lixo;
 		if (lixo != '.') {
-			std::cout << "Formato de entrada inválido, tente novamente\n\n";
+			std::cout << "Formato de entrada invï¿½lido, tente novamente\n\n";
 			continue;
 		}
 		codigo >> sC;
@@ -1531,7 +1532,7 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 			if ((!(codigo>>lixo))&&(associacao->getDominio()->getCiencia().size() > c - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().size() > aC - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().size() > sC - 1))
 			{
 				std::string subAreaParaAdicionar = associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().at(sC - 1)->getNomeSubAreaCientifica();
-				if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea já está no vetor 
+				if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea jï¿½ estï¿½ no vetor 
 				{
 					invalido = true;
 					std::cout << "A sub area " << subAreaParaAdicionar << " ja conta das suas sub areas de interesse \n\n";
@@ -1639,6 +1640,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    //system("CLS");
 }
