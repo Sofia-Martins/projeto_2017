@@ -46,13 +46,13 @@ void Ciencia::addAreaCientifica(AreaCientifica* area)
 	this->areas.push_back(area);
 
 }
-void Ciencia::show() const
+void Ciencia::show(unsigned int i) const
 {
-	std::cout << "Ciencia: " << this->nomeCiencia << std::endl;
 
-	for (unsigned int i = 0; i < areas.size(); i++)
+	for (unsigned int j = 0; j < areas.size(); j++)
 	{
-		areas.at(i)->show();
+		std::cout << "  |" << i + 1 << "." << j + 1 << "| " << areas.at(j)->getNomeAreaCientifica() << "\n";
+		areas.at(j)->show(i,j);	
 	}
 }
 //excecoes

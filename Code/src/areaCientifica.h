@@ -37,7 +37,10 @@ public:
 
 	//outros metodos
 	void addSubAreaCientifica(SubAreaCientifica* subArea);
-	void show() const;
+	void show(unsigned int i, unsigned int j) const;
+
+	//friends
+	friend class Associacao;
 
 };
 

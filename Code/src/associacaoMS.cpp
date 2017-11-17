@@ -1070,7 +1070,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 			this->menuLogin();
 		}
 
-	} while ((opcao < 0) || (opcao > 10));
+	} while ((opcao < 0) || (opcao > 11));
 
 	//encaminhamento para cada uma das opcoes do menu
 	switch (opcao)
@@ -1548,22 +1548,9 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 	bool invalido = true;
 
 	unsigned int c, aC, sC;
-
-	for (unsigned int i=0; i<associacao->getDominio()->getCiencia().size(); i++)
-	{
-		std::cout << "|" << i+1 << "| " << associacao->getDominio()->getCiencia().at(i)->getNomeCiencia() << "\n";
-
-		for (unsigned int j=0; j<associacao->getDominio()->getCiencia().at(i)->getAreas().size(); j++)
-		{
-			std::cout << "  |" << i+1  << "." << j+1 << "| " << associacao->getDominio()->getCiencia().at(i)->getAreas().at(j)->getNomeAreaCientifica() << "\n";
-
-			for (unsigned int k=0; k<associacao->getDominio()->getCiencia().at(i)->getAreas().at(j)->getsubAreas().size(); k++)
-				std::cout << "    |" << i+1  << "." << j+1  << "." << k+1 << "| " << associacao->getDominio()->getCiencia().at(i)->getAreas().at(j)->getsubAreas().at(k)->getNomeSubAreaCientifica() << "\n";
-			std::cout << "\n";
-		}
-
-		std::cout << "\n\n";
-	}
+	
+	associacao->getDominio()->show();
+	std::cout << "\n\n";
 
 	do {
 		getString(chave,"Introduza a nova subarea cientifica de interesse (x.x.x) : "); // garante que estao no formato x.x.x
@@ -1627,7 +1614,7 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 void AssociacaoMS::menuTermino()
 {
 	clearScreen(); //apagar conteudo do ecra
-	std::cout << "Obrigada pela visita! Ate `a proxima! :-D\n\n";
+	std::cout << "Obrigada pela visita! Ate `a proxima! \n\n";
 	//sleep(5);
 	exit(0);
 

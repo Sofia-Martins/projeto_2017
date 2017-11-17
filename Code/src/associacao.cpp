@@ -310,10 +310,12 @@ void Associacao::showInteressesAssociado(Associado* associado) const
 	auto interesses = associado->getAreasInteresse();  //vetor de subAreas de interesse do associado (vetor de strings)
 	auto ciencias = dominioAssociacao->getCiencia();   //vetor de ciencias da associacao
 	DominioCientifico dominioInteresse;
+	
 
 	for (unsigned int w = 0; w < interesses.size(); w++)
 	{
 		auto subAreaInteresseAtual = interesses.at(w);
+		SubAreaCientifica* subAreaAdicionar = new SubAreaCientifica(subAreaInteresseAtual);
 
 		for (unsigned int i = 0; i < ciencias.size(); i++)
 		{
@@ -329,31 +331,62 @@ void Associacao::showInteressesAssociado(Associado* associado) const
 				{
 					if (subAreas.at(k)->getNomeSubAreaCientifica() == subAreaInteresseAtual)  //se encontrar a subArea de interesse no dominio da associacao
 					{
-						/*
+						
 						try
 						{
-							dominioInteresse.addCiencia(cienciaAtual);
+							auto cienciaAdicionar = new Ciencia(cienciaAtual->getNomeCiencia());
+							dominioInteresse.addCiencia(cienciaAdicionar);
 						}
 						catch (const CienciaRepetida& c)  //se essa ciencia ja pertencer ao dominio de interesse
 						{
 
 						}
+						
+							for (unsigned int l=0;l<dominioInteresse.ciencias.size();l++)
+							{
+								if (dominioInteresse.ciencias.at(l)->getNomeCiencia() == cienciaAtual->getNomeCiencia())
+								{
+									try
+									{
+										auto areaAdicionar = new AreaCientifica(areaAtual->getNomeAreaCientifica());
+										dominioInteresse.ciencias.at(l)->addAreaCientifica(areaAdicionar);
+									}
+									catch (const AreaCientificaRepetida& a)
+									{
 
-						try
-						{
-							dominioInteresse.
+									}
+
+									for (unsigned int m = 0; m < dominioInteresse.ciencias.at(l)->areas.size(); m++)
+									{
+										if (dominioInteresse.ciencias.at(l)->areas.at(m)->getNomeAreaCientifica() == areaAtual->getNomeAreaCientifica())
+										{
+											try
+											{
+												dominioInteresse.ciencias.at(l)->areas.at(m)->addSubAreaCientifica(subAreaAdicionar);
+											}
+											catch(const SubAreaCientificaRepetida& s)
+											{
+
+											}
+										}
+									}
+								}
+							
 						}
-						*/
-
+						
+						/*
 						std::cout << "SubArea: " << subAreaInteresseAtual << std::endl;
 						std::cout << "   Area: " << areaAtual->getNomeAreaCientifica() << std::endl;
 						std::cout << "     Ciencia: " << cienciaAtual->getNomeCiencia() << std::endl << std::endl;
-
+						*/
 					}
 				}
 			}
 		}
 	}
+
+	//mostrar o novo dominio
+	dominioInteresse.show();
 }
 
 

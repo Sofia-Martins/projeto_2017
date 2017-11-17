@@ -47,7 +47,8 @@ void DominioCientifico::show() const
 {
 	for (unsigned int i = 0; i < ciencias.size(); i++)
 	{
-		ciencias.at(i)->show();
+		std::cout << "|" << i + 1 << "| " << ciencias.at(i)->getNomeCiencia() << "\n";
+		ciencias.at(i)->show(i);
 	}
 }
 

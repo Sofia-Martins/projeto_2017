@@ -12,8 +12,9 @@
 /////////////////////////////
 #include "areaCientifica.h"
 #include <iostream>
-#include <algorithm>             // std::binary_search
+#include <algorithm>  
 /////////////////////////////
+
 
 class Ciencia
 {
@@ -35,7 +36,10 @@ public:
 
 	//outros metodos
 	void addAreaCientifica(AreaCientifica* area);
-	void show() const;
+	void show(unsigned int i) const;
+
+	//friends
+	friend class Associacao;
 };
 
 //excecoes

@@ -34,6 +34,9 @@ public:
 
 	//outros metodos
 	void show() const;
+
+	//friends
+	friend class Associacao;
 };
 
 

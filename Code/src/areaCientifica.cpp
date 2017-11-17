@@ -50,13 +50,12 @@ void AreaCientifica::addSubAreaCientifica(SubAreaCientifica* subArea)
 
 	subAreas.push_back(subArea);
 }
-void AreaCientifica::show() const
+void AreaCientifica::show(unsigned int i,unsigned int j) const
 {
-	std::cout << "AREA CIENTIFICA: " << this->nomeArea << std::endl;
 
-	for (unsigned int i = 0; i < subAreas.size(); i++)
+	for (unsigned int k = 0; k < subAreas.size(); k++)
 	{
-		subAreas.at(i)->show();
+		std::cout << "    |" << i + 1 << "." << j + 1 << "." << k + 1 << "| " << subAreas.at(k)->getNomeSubAreaCientifica() << "\n";
 	}
 }
 //excecoes
