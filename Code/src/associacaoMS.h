@@ -86,6 +86,7 @@ public:
 	void alteraAssociado(unsigned int id);
 	void apagaGestor(unsigned int id);
 	void apagaAssociado(unsigned int id);
+	
 
 	template <class T> void envioEmail(T* associado);
 	template <class T> void visualizaEmailsRecebidos(T* associado);

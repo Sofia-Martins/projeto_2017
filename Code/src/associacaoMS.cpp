@@ -960,7 +960,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << "Bem-Vindo Gestor \n\n";
 	std::cout << "1) Criar um novo gestor\n"
 		<< "2) Alterar um associado existente \n"
-		<< "3) Apaga gestor \n"
+		<< "3) Apagar a minha conta\n"
 		<< "4) Apaga associado \n"
 		<< "5) Enviar email \n"
 		<< "6) Informacoes da minha conta \n"
@@ -1114,6 +1114,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	case 8:
 		clearScreen();
 		this->visualizaEmailsEnviados(associado);
+		break;
+
+	case 9:
+		clearScreen();
+		this->associacao->showInteressesOutrosAssociados();
 		break;
 
 	case 10:
@@ -1360,30 +1365,35 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 }
 
 void AssociacaoMS::apagaGestor(unsigned int id){
+	clearScreen(); //apagar conteudo do ecra
 	if (associacao->getGestores().size() == 1)
 	{
-		std::cout << "Impossivel apagar gestor. So existe um! \n\n";
+		std::cout << "Impossivel apagar a sua conta. Existe um só gestor da associacao! \n\n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 		if (std::cin.get())
+		{
+			if (std::cin.eof()) std::cin.clear();
 			this->menuSessaoGestor(id);
+		}
 	}
-	clearScreen(); //apagar conteudo do ecra
-	unsigned int ID;
+	
 	std::vector<Gestor*> temp = associacao->getGestores();
-	getNumber(ID, "Insira o id do gestor a eliminar : ");
+
 	for (unsigned int i = 0; i < associacao->getGestores().size(); i++)
-		if (associacao->getGestores().at(i)->getID() == ID)
+		if (associacao->getGestores().at(i)->getID() == id)
 		{
 			temp.erase(temp.begin() + i);
 			associacao->setGestores(temp);
-			std::cout << "Gestor apagado com sucesso! \n\n";
-
-
+			std::cout << "A sua conta foi apagada com sucesso! \n\n";
 		}
 
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
 	if (std::cin.get())
-		this->menuSessaoGestor(id);
+	{
+		if (std::cin.eof()) std::cin.clear();
+		 
+		this->menuLogin();
+	}
 
 
 }
@@ -1392,6 +1402,7 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	unsigned int ID;
 	std::vector<Associado*> temp = associacao->getAssociados();
+	bool existeID = false;
 
 	std::cout << "Associados disponiveis : \n\n";
 	std::cout << std::setw(20) << "ID" << std::setw(20) << "Nome" << "\n";
@@ -1400,19 +1411,35 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 
 	std::cout << "\n";
 
-	getNumber(ID, "Insira o id do associado a eliminar : ");
-	for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-		if (associacao->getAssociados().at(i)->getID() == ID)
+	do
+	{
+		getNumber(ID, "Insira o id do associado a eliminar : ");
+		if (std::cin.eof())
 		{
-			temp.erase(temp.begin() + i);
-			associacao->setAssociados(temp);
-			std::cout << "Associado apagado com sucesso! \n\n";
-
-
+			std::cin.clear();
+			this->menuSessaoGestor(id);
 		}
-			std::cout << "Pressione ENTER para continuar... " << std::endl;
-			if(std::cin.get())
-				this->menuSessaoGestor(id);
+
+
+		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
+			if (associacao->getAssociados().at(i)->getID() == ID)
+			{
+				existeID = true;
+				temp.erase(temp.begin() + i);
+				associacao->setAssociados(temp);
+				std::cout << "Associado apagado com sucesso! \n\n";
+
+				std::cout << "Pressione ENTER para continuar... " << std::endl;
+				if (std::cin.get())
+				{
+					if (std::cin.eof()) std::cin.clear();
+					this->menuSessaoGestor(id);
+				}
+
+
+			}
+
+	} while (!existeID);
 }
 
 template <class T>

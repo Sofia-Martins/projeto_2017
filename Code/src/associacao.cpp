@@ -147,6 +147,107 @@ unsigned int Associacao::incIdAssociados(){
 	id++;
 	return this->id;
 }
+void Associacao::showInteressesOutrosAssociados() const
+{
+	//função que mostra os interesses cientificos de todos os associados, exceto do associado com o ID id
+
+	typedef std::vector<std::pair< unsigned int, std::string >> vetorInfo; //vetor de informações dos associados
+																		  //cada elemento do vetor é um par que contém
+																		  //o id do associado e o respetivo nome
+
+	typedef	std::vector<std::pair<std::string, vetorInfo>> subAreasAssociados; //vetor que contém a correspondência entre
+																			  //as subáreas e os associados que partilham interesse por essa
+																			  //mesma subárea
+
+	subAreasAssociados interesses;
+
+	// Primeiro passo - Inicializar a subArea de cada par 
+	auto ciencias = this->dominioAssociacao->ciencias;
+
+	for (unsigned int i = 0; i < ciencias.size(); i++)
+	{
+		auto cienciaAtual = ciencias.at(i);
+		auto areas = cienciaAtual->areas;
+
+		for (unsigned int j = 0; j < areas.size(); j++)
+		{
+			auto areaAtual = areas.at(j);
+			auto subAreas = areaAtual->subAreas;
+
+			for (unsigned int k = 0; k < subAreas.size(); k++)
+			{
+				std::pair<std::string, vetorInfo> pair;
+				pair.first = subAreas.at(k)->getNomeSubAreaCientifica();
+				interesses.push_back(pair);  //adicionar o par ao vetor 'interesses'
+			}
+		}
+	}
+
+	// Segundo passo - Adicionar os associados ao vetor 'interesses'
+	
+	for (unsigned int i = 0; i < associados.size(); i++)
+	{
+		auto associadoAtual = associados.at(i);
+
+	
+
+			std::vector<std::string> interessesAssociado = associadoAtual->getAreasInteresse();
+
+			std::pair< unsigned int, std::string > infoAssociado;  //criar info do associado
+			infoAssociado.first = associadoAtual->getID();
+			infoAssociado.second = associadoAtual->getNome();
+
+			//percorrer o vetor de subAreas de interesse do associado
+			for (unsigned int j = 0; j < interessesAssociado.size(); j++)
+			{
+
+				//percorrer o vetor de interesses dos associados de modo a adicionar o associado atual à respetiva categoria
+				for (unsigned int k = 0; k < interesses.size(); k++)
+				{
+					if (interesses.at(k).first == interessesAssociado.at(j))
+					{
+						interesses.at(k).second.push_back(infoAssociado); //adiciona o associado ao vetor
+					}
+				}
+			
+		}
+
+	}
+
+	unsigned int posicaoInteresses = 0; //posicao no vetor 'interesses'
+
+
+		//mostrar os interesses dos associados
+		for (unsigned int i = 0; i < ciencias.size(); i++)
+		{
+			auto areas = ciencias.at(i)->areas;
+			std::cout << "|" << i + 1 << "| " << ciencias.at(i)->getNomeCiencia() << "\n";
+
+
+			for (unsigned int j = 0; j < areas.size(); j++)
+			{
+				auto subAreas = areas.at(j)->subAreas;
+				std::cout << "  |" << i + 1 << "." << j + 1 << "| " << areas.at(j)->getNomeAreaCientifica() << "\n";
+
+				for (unsigned int k = 0; k < subAreas.size(); k++)
+				{
+					std::cout << "    |" << i + 1 << "." << j + 1 << "." << k + 1 << "| " << subAreas.at(k)->getNomeSubAreaCientifica() << "\n";
+					vetorInfo associadosAtuais = interesses.at(posicaoInteresses).second;
+					posicaoInteresses++;
+					for (unsigned int m = 0; m < associadosAtuais.size(); m++)
+					{
+						HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+						SetConsoleTextAttribute(hConsole, 10);
+						std::cout << "             " << std::setw(15)<<associadosAtuais.at(m).second << " (ID " << associadosAtuais.at(m).first << ")" << std::endl;
+						SetConsoleTextAttribute(hConsole, 7);
+						
+					}
+				}
+			}
+		}
+	
+}
+
 
 void Associacao::addEmail(Email* email) {
 
@@ -374,11 +475,6 @@ void Associacao::showInteressesAssociado(Associado* associado) const
 							
 						}
 						
-						/*
-						std::cout << "SubArea: " << subAreaInteresseAtual << std::endl;
-						std::cout << "   Area: " << areaAtual->getNomeAreaCientifica() << std::endl;
-						std::cout << "     Ciencia: " << cienciaAtual->getNomeCiencia() << std::endl << std::endl;
-						*/
 					}
 				}
 			}

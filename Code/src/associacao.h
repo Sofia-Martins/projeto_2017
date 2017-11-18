@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <windows.h>  // só em windows!
 #include "dominioCientifico.h"
 #include "email.h"
 #include "associado.h"
@@ -67,6 +68,7 @@ public:
 	void showContributors() const;
 	void showSubscribers() const;
 	void showGestores() const;
+	void showInteressesOutrosAssociados() const;
 	bool existeEmail(std::string email) const;
 	void organizaEmails();
 	void showInteressesAssociado(Associado* associado) const;
