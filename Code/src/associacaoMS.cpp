@@ -1057,7 +1057,8 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 	std::cout << " 8. Emails Enviados\n";
 	std::cout << " 9. Areas e subareas cientificas dos restantes associados\n";
 	std::cout << "10. Enviar email\n";
-	std::cout << "11. Terminar Sessao\n\n";
+	std::cout << "11. Criar evento\n";
+	std::cout << "12. Terminar Sessao\n\n";
 
 	/* ---- variaveis ---- */
 	unsigned int opcao;
@@ -1128,6 +1129,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 	case 11:
 		clearScreen();
+		this->criarEvento(associado);
+		break;
+
+	case 12:
+		clearScreen();
 		this->menuLogin();
 		break;
 	}
@@ -1177,6 +1183,318 @@ void AssociacaoMS::modificarConta(Associado* associado) {
 
 	if (std::cin.get())
 		this->menuSessaoContributor(associado);
+
+}
+
+template <class T> 
+void AssociacaoMS::criarEvento(T* associado)
+{
+	std::cout << "----------- CRIAR EVENTO -----------\n\n";
+
+	/* ----- Variaveis ----- */
+	unsigned int opcao;
+	bool conferencia = false;  //indica se o evento é uma conferencia (se nao o for, será uma escola de verao)
+	std::vector<unsigned int> planeadores;   //id's dos planeadores
+	std::vector<unsigned int> organizadores; //id's dos organizadores
+	std::string tema;  //tema do evento
+	std::string local; //local do evento
+	unsigned int contador = 1;  //contador do numero de planeadores do evento
+
+	unsigned int dia;
+	unsigned int mes;
+	unsigned int ano;
+	unsigned int hora;
+	unsigned int minuto;
+	/* ------- Passo 1 - Escolher tipo de evento --------*/
+
+	std::cout << "PASSO 1: Escolher tipo de evento\n";
+	std::cout << "   1 - Conferencia\n";
+	std::cout << "   2 - Escola de Verao\n\n";
+
+	do
+	{
+		getNumber(opcao, "Opcao: ");
+
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			/*
+			else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+			else
+				this->menuSessaoOther(associado);
+				*/
+		}
+	} while ((opcao != 1) && (opcao != 2));
+
+	if (opcao == 1)
+		conferencia = true;
+
+	/* ------- Passo 2 - Escolher planeadores do evento --------*/
+	clearScreen();
+	std::cout << "PASSO 2: Escolher planeadores do evento\n";
+	std::cout << "   Instrucoes:\n   - Escolha mais 2 associados para planearem o evento.\n";
+	std::cout << "   - Quando terminar insira 0\n";
+	std::cout << "   - Listam-se aqui os associados disponiveis:\n\n";
+	auto associados = this->associacao->showAssociados(associado->getID()); //id's dos associados (exceto do associado atual)
+	std::cout << "\n\n";
+	planeadores.push_back(associado->getID());
+	do
+	{
+		do
+		{
+			getNumber(opcao, "Planeador: ");
+
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+
+				if (associado->isContributor())
+					this->menuSessaoContributor(associado);
+				/*
+				else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+				else
+				this->menuSessaoOther(associado);
+				*/
+			}
+			if (opcao == 0)
+				break;
+		} while ((opcao > (this->associacao->getAssociados().size() - 1)) || (find(planeadores.begin(), planeadores.end(), associados.at(opcao-1)) != planeadores.end()));
+		//repete enquanto a opcao for invalida (o associado nao existe ou ja foi escolhido)
+
+		if (opcao != 0)
+		{
+			std::cout << "Planeador " << opcao << " selecionado com sucesso\n\n";
+			planeadores.push_back(associados.at(opcao-1));
+			contador++;
+		}
+		else
+		{
+			if (contador < 3)
+			{
+				std::cout << "Precisa de pelo menos 3 planeadores (nos quais voce esta incluido)\n\n";
+				opcao = 1;
+			}
+		}
+	} while (opcao != 0);
+
+	organizadores = planeadores; //os planeadores tambem sao organizadores do evento
+
+    /* ------- Passo 3 - Escolher organizadores do evento --------*/
+	clearScreen();
+	std::cout << "PASSO 3: Escolher organizadores do evento\n";
+	std::cout << "   Instrucoes:\n   - Escolha os organizadores do evento.\n";
+	std::cout << "   - Nao se esqueca que os planeadores do evento sao tambem seus organizadores\n";
+	std::cout << "   - Quando terminar insira 0\n";
+	std::cout << "   - Listam-se aqui os associados disponiveis:\n\n";
+
+	this->associacao->showAssociados(associado->getID());
+	std::cout << "\n";
+
+	std::cout << "   - ID's dos planeadores do evento: ";
+	for (int i = 0; i < planeadores.size(); i++)
+	{
+		if (i ==( planeadores.size() - 1))
+			std::cout << planeadores.at(i) << std::endl << std::endl;
+		else 
+		    std::cout << planeadores.at(i)<<", ";
+	}
+	do
+	{
+		do
+		{
+			getNumber(opcao, "Organizador: ");
+
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+
+				if (associado->isContributor())
+					this->menuSessaoContributor(associado);
+				/*
+				else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+				else
+				this->menuSessaoOther(associado);
+				*/
+			}
+			if (opcao == 0)
+				break;
+		} while ((opcao > (this->associacao->getAssociados().size() - 1)) || (find(organizadores.begin(), organizadores.end(), associados.at(opcao - 1)) != organizadores.end()));
+		//repete enquanto a opcao for invalida (o associado nao existe ou ja foi escolhido)
+
+		if (opcao != 0)
+		{
+			std::cout << "Organizador " << opcao << " selecionado com sucesso\n\n";
+			organizadores.push_back(associados.at(opcao - 1));
+		}
+	} while (opcao != 0);
+
+	/* ------- Passo 4 - Escolher tema do evento --------*/
+	clearScreen();
+	std::cout << "PASSO 4: Escolher tema do evento\n\n";
+	getString(tema, "Tema do evento: ");
+
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+
+		if (associado->isContributor())
+			this->menuSessaoContributor(associado);
+		/*
+		else if (associado->isSubscriber())
+		this->menuSessaoSubscriber(associado);
+		else
+		this->menuSessaoOther(associado);
+		*/
+	}
+
+	eliminateSpaces(tema);
+
+	/* ------- Passo 5 - Escolher local do evento --------*/
+	clearScreen();
+	std::cout << "PASSO 5: Escolher local do evento\n\n";
+	getString(local, "Local do evento: ");
+
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+
+		if (associado->isContributor())
+			this->menuSessaoContributor(associado);
+		/*
+		else if (associado->isSubscriber())
+		this->menuSessaoSubscriber(associado);
+		else
+		this->menuSessaoOther(associado);
+		*/
+	}
+
+	eliminateSpaces(local);
+
+	/* ------- Passo 6 - Escolher data do evento --------*/
+	clearScreen();
+	std::cout << "PASSO 6: Escolher data do evento\n\n";
+
+	
+	getNumber(ano, "Ano: ");
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+
+		if (associado->isContributor())
+			this->menuSessaoContributor(associado);
+		/*
+		else if (associado->isSubscriber())
+		this->menuSessaoSubscriber(associado);
+		else
+		this->menuSessaoOther(associado);
+		*/
+	}
+
+	do
+	{
+		getNumber(mes, "Mes: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			/*
+			else if (associado->isSubscriber())
+			this->menuSessaoSubscriber(associado);
+			else
+			this->menuSessaoOther(associado);
+			*/
+		}
+
+	}while ((mes == 0) || (mes > 12));
+
+	bool diaValido = false;
+	do
+	{
+		getNumber(dia, "Dia: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			/*
+			else if (associado->isSubscriber())
+			this->menuSessaoSubscriber(associado);
+			else
+			this->menuSessaoOther(associado);
+			*/
+		}
+
+		switch (mes)
+		{
+		case 11,4,6,9:
+			if (dia <= 30)
+				diaValido = true;
+			break;
+		case 2:
+			if (dia <= 29)
+				diaValido = true;
+			break;
+		default:
+			if (dia <= 31)
+				diaValido = true;
+			break;
+		}
+
+		if (!diaValido)
+			std::cout << "Numero de dias incompativel com o mes apontado\n";
+	} while (!diaValido);
+
+	do
+	{
+		getNumber(hora, "Hora: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			/*
+			else if (associado->isSubscriber())
+			this->menuSessaoSubscriber(associado);
+			else
+			this->menuSessaoOther(associado);
+			*/
+		}
+
+	} while (hora > 24);
+
+	do
+	{
+		getNumber(minuto, "Minuto: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			/*
+			else if (associado->isSubscriber())
+			this->menuSessaoSubscriber(associado);
+			else
+			this->menuSessaoOther(associado);
+			*/
+		}
+
+	} while (minuto>=60);
+
+	Data data(dia,mes,ano,hora,minuto); //data do evento
+
+	//falta criar os paramentros da conferencia/escola de verao
+
 
 }
 
