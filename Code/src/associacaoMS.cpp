@@ -1032,10 +1032,9 @@ void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 
 	else if (associados.at(pos)->getCota()->getAtraso() < 5)
 		this->menuSessaoSubscriber(associados.at(pos));
-	/*else
-		this->menuSessaoOther(associado);
-	}
-	*/
+	else
+		this->menuSessaoOther(associados.at(pos));
+
 
 }
 
@@ -1177,7 +1176,7 @@ void AssociacaoMS::menuSessaoSubscriber(Associado* associado)  //para completar
 				this->menuLogin();
 			}
 
-		} while ((opcao < 0) || (opcao > 12));
+		} while ((opcao < 0) || (opcao > 10));
 
 		//encaminhamento para cada uma das opcoes do menu
 		switch (opcao)
@@ -1240,6 +1239,90 @@ void AssociacaoMS::menuSessaoSubscriber(Associado* associado)  //para completar
 		{
 			if (std::cin.eof()) std::cin.clear();
 			this->menuSessaoSubscriber(associado);
+		}
+}
+
+void AssociacaoMS::menuSessaoOther(Associado * associado){
+
+	clearScreen();
+		std::cout << "Bem vindo " << associado->getNome() << "!" << std::endl << std::endl;
+
+		std::cout << "_________________ O MEU ESPACO _________________\n\n";
+		std::cout << " 1. Informacoes da minha conta\n";
+		std::cout << " 2. Modificar a minha conta\n";
+		std::cout << " 3. Apagar a minha conta\n";
+		std::cout << " 4. Os meus interesses cientificos\n";
+		std::cout << " 5. Adicionar subarea cientifica de interesse\n\n";
+
+		std::cout << "_______________ ESPACO ASSOCIACAO ______________\n\n";
+		std::cout << " 6. Eventos nos quais eu participo\n";
+		std::cout << " 7. Areas e subareas cientificas dos restantes associados\n";
+		std::cout << " 8. Terminar Sessao\n\n";
+
+		/* ---- variaveis ---- */
+		unsigned int opcao;
+		do
+		{
+			getNumber(opcao, "Opcao: ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				this->menuLogin();
+			}
+
+		} while ((opcao < 0) || (opcao > 8));
+
+		//encaminhamento para cada uma das opcoes do menu
+		switch (opcao)
+		{
+		case 1:
+			clearScreen();
+			associado->show();
+			break;
+
+		case 2:
+			clearScreen();
+			modificarConta(associado);
+			break;
+
+		case 3:
+			clearScreen();
+			associacao->eraseAssociado(associado);
+			std::cout << "Conta eliminada com sucesso...\n\n";
+			std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		case 4:
+			clearScreen();
+			associacao->showInteressesAssociado(associado);
+			break;
+
+		case 5:
+			clearScreen();
+			this->addSubareaCientificaInteresse(associado);
+			break;
+
+		case 6:
+			clearScreen();
+			associacao->showEventos(associado);
+			break;
+
+		case 7:
+			clearScreen();
+			this->associacao->showInteressesOutrosAssociados();
+			break;
+
+		case 8:
+			clearScreen();
+			this->menuLogin();
+			break;
+		}
+
+		std::cout << "\n\nPressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+		{
+			if (std::cin.eof()) std::cin.clear();
+			this->menuSessaoOther(associado);
 		}
 }
 
