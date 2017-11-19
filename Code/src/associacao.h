@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <windows.h>  // só em windows!
+//#include <windows.h>  // sï¿½ em windows!
 #include "dominioCientifico.h"
 #include "email.h"
 #include "associado.h"

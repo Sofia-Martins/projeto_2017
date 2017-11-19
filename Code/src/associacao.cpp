@@ -149,15 +149,15 @@ unsigned int Associacao::incIdAssociados(){
 }
 void Associacao::showInteressesOutrosAssociados() const
 {
-	//função que mostra os interesses cientificos de todos os associados, exceto do associado com o ID id
+	//funï¿½ï¿½o que mostra os interesses cientificos de todos os associados, exceto do associado com o ID id
 
-	typedef std::vector<std::pair< unsigned int, std::string >> vetorInfo; //vetor de informações dos associados
-																		  //cada elemento do vetor é um par que contém
+	typedef std::vector<std::pair< unsigned int, std::string >> vetorInfo; //vetor de informaï¿½ï¿½es dos associados
+																		  //cada elemento do vetor ï¿½ um par que contï¿½m
 																		  //o id do associado e o respetivo nome
 
-	typedef	std::vector<std::pair<std::string, vetorInfo>> subAreasAssociados; //vetor que contém a correspondência entre
-																			  //as subáreas e os associados que partilham interesse por essa
-																			  //mesma subárea
+	typedef	std::vector<std::pair<std::string, vetorInfo>> subAreasAssociados; //vetor que contï¿½m a correspondï¿½ncia entre
+																			  //as subï¿½reas e os associados que partilham interesse por essa
+																			  //mesma subï¿½rea
 
 	subAreasAssociados interesses;
 
@@ -201,7 +201,7 @@ void Associacao::showInteressesOutrosAssociados() const
 			for (unsigned int j = 0; j < interessesAssociado.size(); j++)
 			{
 
-				//percorrer o vetor de interesses dos associados de modo a adicionar o associado atual à respetiva categoria
+				//percorrer o vetor de interesses dos associados de modo a adicionar o associado atual ï¿½ respetiva categoria
 				for (unsigned int k = 0; k < interesses.size(); k++)
 				{
 					if (interesses.at(k).first == interessesAssociado.at(j))
@@ -236,10 +236,10 @@ void Associacao::showInteressesOutrosAssociados() const
 					posicaoInteresses++;
 					for (unsigned int m = 0; m < associadosAtuais.size(); m++)
 					{
-						HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-						SetConsoleTextAttribute(hConsole, 10);
+						//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+						//SetConsoleTextAttribute(hConsole, 10);
 						std::cout << "             " << std::setw(15)<<associadosAtuais.at(m).second << " (ID " << associadosAtuais.at(m).first << ")" << std::endl;
-						SetConsoleTextAttribute(hConsole, 7);
+						//SetConsoleTextAttribute(hConsole, 7);
 						
 					}
 				}

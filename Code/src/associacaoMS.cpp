@@ -331,7 +331,7 @@ getNumber(opcao, "Opcao: ");
 	associacao->setSigla(associacoes.at(opcao - 1).first);
 
 	//atualizar nomes dos ficheiros da associacaoMS
-	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados2.txt";
+	ficheiroAssociados = associacoes.at(opcao - 1).first + "_associados.txt";
 	ficheiroConferencias = associacoes.at(opcao - 1).first + "_conferencias.txt";
 	ficheiroDominios = associacoes.at(opcao - 1).first + "_dominios.txt";
 	ficheiroEmails = associacoes.at(opcao - 1).first + "_emails.txt";
@@ -1008,7 +1008,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 				this->menuSessaoGestor(id);
 	}
 	else if (opcao == 7)
-		this->menuTermino();
+		this->menuLogin();
 
 }
 
@@ -1029,10 +1029,10 @@ void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 	if (associados.at(pos)->getCota()->getEmDia() == true)
 		this->menuSessaoContributor(associados.at(pos));
 
-	/*
-	else if (associado->getCota()->getAtraso() < 5)
-		this->menuSessaoSubscriber(associado);
-	else
+
+	else if (associados.at(pos)->getCota()->getAtraso() < 5)
+		this->menuSessaoSubscriber(associados.at(pos));
+	/*else
 		this->menuSessaoOther(associado);
 	}
 	*/
@@ -1071,7 +1071,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 			this->menuLogin();
 		}
 
-	} while ((opcao < 0) || (opcao > 11));
+	} while ((opcao < 0) || (opcao > 12));
 
 	//encaminhamento para cada uma das opcoes do menu
 	switch (opcao)
@@ -1149,7 +1149,98 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 void AssociacaoMS::menuSessaoSubscriber(Associado* associado)  //para completar
 {
+	clearScreen();
+		std::cout << "Bem vindo " << associado->getNome() << "!" << std::endl << std::endl;
 
+		std::cout << "_________________ O MEU ESPACO _________________\n\n";
+		std::cout << " 1. Informacoes da minha conta\n";
+		std::cout << " 2. Modificar a minha conta\n";
+		std::cout << " 3. Apagar a minha conta\n";
+		std::cout << " 4. Os meus interesses cientificos\n";
+		std::cout << " 5. Adicionar subarea cientifica de interesse\n\n";
+
+		std::cout << "_______________ ESPACO ASSOCIACAO ______________\n\n";
+		std::cout << " 6. Eventos nos quais eu participo\n";
+		std::cout << " 7. Emails Recebidos\n";
+		std::cout << " 8. Areas e subareas cientificas dos restantes associados\n";
+		std::cout << " 9. Criar evento\n";
+		std::cout << "10. Terminar Sessao\n\n";
+
+		/* ---- variaveis ---- */
+		unsigned int opcao;
+		do
+		{
+			getNumber(opcao, "Opcao: ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				this->menuLogin();
+			}
+
+		} while ((opcao < 0) || (opcao > 12));
+
+		//encaminhamento para cada uma das opcoes do menu
+		switch (opcao)
+		{
+		case 1:
+			clearScreen();
+			associado->show();
+			break;
+
+		case 2:
+			clearScreen();
+			modificarConta(associado);
+			break;
+
+		case 3:
+			clearScreen();
+			associacao->eraseAssociado(associado);
+			std::cout << "Conta eliminada com sucesso...\n\n";
+			std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		case 4:
+			clearScreen();
+			associacao->showInteressesAssociado(associado);
+			break;
+
+		case 5:
+			clearScreen();
+			this->addSubareaCientificaInteresse(associado);
+			break;
+
+		case 6:
+			clearScreen();
+			associacao->showEventos(associado);
+			break;
+
+		case 7:
+			clearScreen();
+			this->visualizaEmailsRecebidos(associado);
+			break;
+
+		case 8:
+			clearScreen();
+			this->associacao->showInteressesOutrosAssociados();
+			break;
+
+		case 9:
+			clearScreen();
+			this->criarEvento(associado);
+			break;
+
+		case 10:
+			clearScreen();
+			this->menuLogin();
+			break;
+		}
+
+		std::cout << "\n\nPressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+		{
+			if (std::cin.eof()) std::cin.clear();
+			this->menuSessaoSubscriber(associado);
+		}
 }
 
 void AssociacaoMS::modificarConta(Associado* associado) {
@@ -1435,7 +1526,19 @@ void AssociacaoMS::criarEvento(T* associado)
 
 		switch (mes)
 		{
-		case 11,4,6,9:
+		case 11:
+			if (dia <= 30)
+				diaValido = true;
+			break;
+		case 4:
+			if (dia <= 30)
+				diaValido = true;
+			break;
+		case 6:
+			if (dia <= 30)
+				diaValido = true;
+			break;
+		case 9:
 			if (dia <= 30)
 				diaValido = true;
 			break;
@@ -1777,7 +1880,7 @@ void AssociacaoMS::envioEmail(T* associado){
 	} while (!(this->associacao->existeEmail(dest)));
 
 	std::cout << "\n\n";
-	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' para enviar) : \n";
+	std::cout << "Corpo Mensagem (Escreva 'ENVIAR' numa nova linha para enviar) : \n";
 
 	while (!envio) {
 		std::getline(std::cin, temp);
@@ -2042,6 +2145,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    //system("CLS");
 }
