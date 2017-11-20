@@ -484,15 +484,24 @@ void Associacao::showInteressesAssociado(Associado* associado) const
 	dominioInteresse.show();
 }
 
-std::vector<unsigned int> Associacao::showAssociados(unsigned int id) const
+std::vector<unsigned int> Associacao::showAssociados(unsigned int id, bool ignorarAssociado) const
 {
 	std::vector<unsigned int> IDs;
 	unsigned int contador = 1;
 	for (unsigned int i = 0; i < associados.size(); i++)
 	{
-		if (associados.at(i)->getID() != id)
+		if (ignorarAssociado)
 		{
-			std::cout << contador<<". "<<associados.at(i)->getNome() << " (ID " << associados.at(i)->getID() << ")\n";
+			if (associados.at(i)->getID() != id)
+			{
+				std::cout << contador << ". " << associados.at(i)->getNome() << " (ID " << associados.at(i)->getID() << ")\n";
+				IDs.push_back(associados.at(i)->getID());
+				contador++;
+			}
+		}
+		else
+		{
+			std::cout << contador << ". " << associados.at(i)->getNome() << " (ID " << associados.at(i)->getID() << ")\n";
 			IDs.push_back(associados.at(i)->getID());
 			contador++;
 		}

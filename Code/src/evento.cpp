@@ -14,7 +14,7 @@
 
 //Construtor
 
-Evento::Evento(std::vector <int> planeadores, std::vector<int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento)
+Evento::Evento(std::vector <unsigned int> planeadores, std::vector<unsigned int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento)
 {
 	this->planeadores = planeadores;
 	this->organizadores = organizadores;
@@ -26,11 +26,11 @@ Evento::Evento(std::vector <int> planeadores, std::vector<int> organizadores, st
 
 // Metodos get
 
-std::vector<int> Evento::getPlaneadores() const {
+std::vector<unsigned int> Evento::getPlaneadores() const {
 	return this->planeadores;
 }
 
-std::vector<int> Evento::getOrganizadores() const {
+std::vector<unsigned int> Evento::getOrganizadores() const {
 	return this->organizadores;
 }
 
@@ -56,21 +56,21 @@ void Evento::setTema(std::string tema) {
 
 // Outros metodos
 
-void Evento::addPlaneador(int planeador) {
+void Evento::addPlaneador(unsigned int planeador) {
 	planeadores.push_back(planeador);
 }
 
-void Evento::addOrganizador(int organizador) {
+void Evento::addOrganizador(unsigned int organizador) {
 	organizadores.push_back(organizador);
 }
 
-void Evento::removePlaneador(int planeador) {
+void Evento::removePlaneador(unsigned int planeador) {
 	for (unsigned int i = 0; i<planeadores.size(); i++)
 		if (planeadores.at(i) == planeador)
 			planeadores.erase(planeadores.begin() + i);
 }
 
-void Evento::removeOrganizador(int organizador) {
+void Evento::removeOrganizador(unsigned int organizador) {
 	for (unsigned int i = 0; i<organizadores.size(); i++)
 		if (organizadores.at(i) == organizador)
 			organizadores.erase(organizadores.begin() + i);
@@ -107,7 +107,7 @@ void Evento::show() const
 
 //Construtor
 
-Conferencia::Conferencia(std::vector<int> planeadores, std::vector<int> organizadores, std::string local,
+Conferencia::Conferencia(std::vector<unsigned int> planeadores, std::vector<unsigned int> organizadores, std::string local,
 	std::string tema, Data data, Apoio apoioEvento,
 	unsigned int numeroParticipantes) :Evento(planeadores, organizadores, local, tema, data, apoioEvento) {
 	this->numeroParticipantes = numeroParticipantes;
@@ -142,25 +142,25 @@ void Conferencia::show() const
 
 //Construtor
 
-EscolaVerao::EscolaVerao(std::vector<int> planeadores, std::vector<int> organizadores, std::string local,
+EscolaVerao::EscolaVerao(std::vector<unsigned int> planeadores, std::vector<unsigned int> organizadores, std::string local,
 	std::string tema, Data data, Apoio apoioEvento,
-	std::vector<int> formadores) :Evento(planeadores, organizadores, local, tema, data, apoioEvento) {
+	std::vector<unsigned int> formadores) :Evento(planeadores, organizadores, local, tema, data, apoioEvento) {
 	this->formadores = formadores;
 }
 
 // Metodos get
 
-std::vector<int> EscolaVerao::getFormadores() const {
+std::vector<unsigned int> EscolaVerao::getFormadores() const {
 	return this->formadores;
 }
 
 // Outros metodos
 
-void EscolaVerao::addFormador(int formador) {
+void EscolaVerao::addFormador(unsigned int formador) {
 	formadores.push_back(formador);
 }
 
-void EscolaVerao::removeFormador(int formador) {
+void EscolaVerao::removeFormador(unsigned int formador) {
 	for (unsigned int i = 0; i<formadores.size(); i++)
 		if (formadores.at(i) == formador)
 			formadores.erase(formadores.begin() + i);

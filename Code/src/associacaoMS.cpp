@@ -548,7 +548,7 @@ void AssociacaoMS::lerConferencias()
 			primeiraLeitura = false;
 		}
 		//buscar planeadores
-		std::vector<int> vetorPlaneadores;
+		std::vector<unsigned int> vetorPlaneadores;
 		std::string ID=""; //id do planeador
 		std::string planeadores="";
 		getline(in, planeadores, ';');
@@ -564,7 +564,7 @@ void AssociacaoMS::lerConferencias()
 		}
 
 		//buscar organizadores
-		std::vector<int> vetorOrganizadores;
+		std::vector<unsigned int> vetorOrganizadores;
 		std::string organizadores;
 		getline(in, organizadores, ';');
 		std::istringstream ssOrganizadores(organizadores);
@@ -578,6 +578,7 @@ void AssociacaoMS::lerConferencias()
 		//buscar local
 		std::string local;
 		getline(in, local, ';');
+		eliminateSpaces(local);
 
 		//buscar tema
 		std::string tema;
@@ -650,7 +651,7 @@ void AssociacaoMS::lerEscolasVerao()
 			primeiraLeitura = false;
 		}
 		//buscar planeadores
-		std::vector<int> vetorPlaneadores;
+		std::vector<unsigned int> vetorPlaneadores;
 		std::string ID; //id do planeador
 		std::string planeadores;
 		getline(in, planeadores, ';');
@@ -666,7 +667,7 @@ void AssociacaoMS::lerEscolasVerao()
 		}
 
 		//buscar organizadores
-		std::vector<int> vetorOrganizadores;
+		std::vector<unsigned int> vetorOrganizadores;
 		std::string organizadores;
 		getline(in, organizadores, ';');
 		std::istringstream ssOrganizadores(organizadores);
@@ -680,6 +681,7 @@ void AssociacaoMS::lerEscolasVerao()
 		//buscar local
 		std::string local;
 		getline(in, local, ';');
+		eliminateSpaces(local);
 
 		//buscar tema
 		std::string tema;
@@ -721,7 +723,7 @@ void AssociacaoMS::lerEscolasVerao()
 		Apoio apoio(apoioB, tipoApoio);
 
 		//buscar formadores
-		std::vector <int> vetorFormadores;
+		std::vector <unsigned int> vetorFormadores;
 		std::string formadoresS;
 		getline(in, formadoresS);
 		std::istringstream ssFormadores(formadoresS);
@@ -1370,9 +1372,12 @@ void AssociacaoMS::criarEvento(T* associado)
 	bool conferencia = false;  //indica se o evento é uma conferencia (se nao o for, será uma escola de verao)
 	std::vector<unsigned int> planeadores;   //id's dos planeadores
 	std::vector<unsigned int> organizadores; //id's dos organizadores
+	std::vector<unsigned int> associados; //id's dos associados
 	std::string tema;  //tema do evento
 	std::string local; //local do evento
 	unsigned int contador = 1;  //contador do numero de planeadores do evento
+	unsigned int numeroParticipantes; //numero de participantes da conferencia
+	std::vector<unsigned int> formadores; //id's dos formadores da escola de Verao
 
 	unsigned int dia;
 	unsigned int mes;
@@ -1395,12 +1400,11 @@ void AssociacaoMS::criarEvento(T* associado)
 			
 			if (associado->isContributor())
 				this->menuSessaoContributor(associado);
-			/*
 			else if (associado->isSubscriber())
 				this->menuSessaoSubscriber(associado);
 			else
 				this->menuSessaoOther(associado);
-				*/
+				
 		}
 	} while ((opcao != 1) && (opcao != 2));
 
@@ -1413,7 +1417,7 @@ void AssociacaoMS::criarEvento(T* associado)
 	std::cout << "   Instrucoes:\n   - Escolha mais 2 associados para planearem o evento.\n";
 	std::cout << "   - Quando terminar insira 0\n";
 	std::cout << "   - Listam-se aqui os associados disponiveis:\n\n";
-	auto associados = this->associacao->showAssociados(associado->getID()); //id's dos associados (exceto do associado atual)
+	associados = this->associacao->showAssociados(associado->getID(),true); //id's dos associados (exceto do associado atual)
 	std::cout << "\n\n";
 	planeadores.push_back(associado->getID());
 	do
@@ -1428,12 +1432,11 @@ void AssociacaoMS::criarEvento(T* associado)
 
 				if (associado->isContributor())
 					this->menuSessaoContributor(associado);
-				/*
 				else if (associado->isSubscriber())
-				this->menuSessaoSubscriber(associado);
+				    this->menuSessaoSubscriber(associado);
 				else
-				this->menuSessaoOther(associado);
-				*/
+				    this->menuSessaoOther(associado);
+				
 			}
 			if (opcao == 0)
 				break;
@@ -1466,7 +1469,7 @@ void AssociacaoMS::criarEvento(T* associado)
 	std::cout << "   - Quando terminar insira 0\n";
 	std::cout << "   - Listam-se aqui os associados disponiveis:\n\n";
 
-	this->associacao->showAssociados(associado->getID());
+	this->associacao->showAssociados(associado->getID(),true);
 	std::cout << "\n";
 
 	std::cout << "   - ID's dos planeadores do evento: ";
@@ -1489,15 +1492,19 @@ void AssociacaoMS::criarEvento(T* associado)
 
 				if (associado->isContributor())
 					this->menuSessaoContributor(associado);
-				/*
 				else if (associado->isSubscriber())
-				this->menuSessaoSubscriber(associado);
+				    this->menuSessaoSubscriber(associado);
 				else
-				this->menuSessaoOther(associado);
-				*/
+				    this->menuSessaoOther(associado);
+				 
 			}
 			if (opcao == 0)
 				break;
+
+			if ((opcao <= (this->associacao->getAssociados().size() - 1)) && (find(organizadores.begin(), organizadores.end(), associados.at(opcao - 1)) != organizadores.end())) //o organizador ja foi escolhido
+			{
+				std::cout << "O organizador " << opcao << " ja foi selecionado\n\n";
+			}
 		} while ((opcao > (this->associacao->getAssociados().size() - 1)) || (find(organizadores.begin(), organizadores.end(), associados.at(opcao - 1)) != organizadores.end()));
 		//repete enquanto a opcao for invalida (o associado nao existe ou ja foi escolhido)
 
@@ -1519,12 +1526,10 @@ void AssociacaoMS::criarEvento(T* associado)
 
 		if (associado->isContributor())
 			this->menuSessaoContributor(associado);
-		/*
 		else if (associado->isSubscriber())
-		this->menuSessaoSubscriber(associado);
+		    this->menuSessaoSubscriber(associado);
 		else
-		this->menuSessaoOther(associado);
-		*/
+		    this->menuSessaoOther(associado);
 	}
 
 	eliminateSpaces(tema);
@@ -1540,12 +1545,10 @@ void AssociacaoMS::criarEvento(T* associado)
 
 		if (associado->isContributor())
 			this->menuSessaoContributor(associado);
-		/*
 		else if (associado->isSubscriber())
-		this->menuSessaoSubscriber(associado);
+		    this->menuSessaoSubscriber(associado);
 		else
-		this->menuSessaoOther(associado);
-		*/
+		    this->menuSessaoOther(associado);
 	}
 
 	eliminateSpaces(local);
@@ -1562,12 +1565,10 @@ void AssociacaoMS::criarEvento(T* associado)
 
 		if (associado->isContributor())
 			this->menuSessaoContributor(associado);
-		/*
 		else if (associado->isSubscriber())
-		this->menuSessaoSubscriber(associado);
+	     	this->menuSessaoSubscriber(associado);
 		else
-		this->menuSessaoOther(associado);
-		*/
+		    this->menuSessaoOther(associado);
 	}
 
 	do
@@ -1579,12 +1580,10 @@ void AssociacaoMS::criarEvento(T* associado)
 
 			if (associado->isContributor())
 				this->menuSessaoContributor(associado);
-			/*
 			else if (associado->isSubscriber())
-			this->menuSessaoSubscriber(associado);
+			    this->menuSessaoSubscriber(associado);
 			else
-			this->menuSessaoOther(associado);
-			*/
+			    this->menuSessaoOther(associado);
 		}
 
 	}while ((mes == 0) || (mes > 12));
@@ -1599,12 +1598,10 @@ void AssociacaoMS::criarEvento(T* associado)
 
 			if (associado->isContributor())
 				this->menuSessaoContributor(associado);
-			/*
 			else if (associado->isSubscriber())
-			this->menuSessaoSubscriber(associado);
+			    this->menuSessaoSubscriber(associado);
 			else
-			this->menuSessaoOther(associado);
-			*/
+			    this->menuSessaoOther(associado);
 		}
 
 		switch (mes)
@@ -1648,12 +1645,10 @@ void AssociacaoMS::criarEvento(T* associado)
 
 			if (associado->isContributor())
 				this->menuSessaoContributor(associado);
-			/*
 			else if (associado->isSubscriber())
-			this->menuSessaoSubscriber(associado);
+			    this->menuSessaoSubscriber(associado);
 			else
-			this->menuSessaoOther(associado);
-			*/
+			    this->menuSessaoOther(associado);
 		}
 
 	} while (hora > 24);
@@ -1667,20 +1662,109 @@ void AssociacaoMS::criarEvento(T* associado)
 
 			if (associado->isContributor())
 				this->menuSessaoContributor(associado);
-			/*
 			else if (associado->isSubscriber())
-			this->menuSessaoSubscriber(associado);
+			    this->menuSessaoSubscriber(associado);
 			else
-			this->menuSessaoOther(associado);
-			*/
+			    this->menuSessaoOther(associado);
 		}
 
 	} while (minuto>=60);
 
 	Data data(dia,mes,ano,hora,minuto); //data do evento
 
-	//falta criar os paramentros da conferencia/escola de verao
+	/* ------- Passo 7 - Paramtros proprios da conferencia/escola de verao --------*/
 
+	if (conferencia) //se for uma conferencia
+	{
+		clearScreen();
+		std::cout << "PASSO 7: Estimativa do numero de participantes da conferencia\n\n";
+
+		do
+		{
+			getNumber(numeroParticipantes, "Numero de participantes: ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+
+				if (associado->isContributor())
+					this->menuSessaoContributor(associado);
+				else if (associado->isSubscriber())
+				    this->menuSessaoSubscriber(associado);
+				else
+				    this->menuSessaoOther(associado);
+			}
+
+			if (numeroParticipantes == 0)
+				std::cout << "A conferencia deve ter pelo menos 1 participante\n\n";
+		} while (numeroParticipantes == 0);
+
+	}
+	else //se for uma escola de verao
+	{
+
+		clearScreen();
+		std::cout << "PASSO 7: Formadores da escola de Verao\n\n";
+		std::cout << "   Instrucoes:\n   - Escolha os formadores da escola de verao.\n";
+		std::cout << "   - Quando terminar insira 0\n";
+		std::cout << "   - Listam-se aqui os associados disponiveis:\n\n";
+		associados=this->associacao->showAssociados(associado->getID(),false);
+		std::cout << "\n";
+
+		do
+		{
+			do
+			{
+				getNumber(opcao, "Formador: ");
+
+				if (std::cin.eof())
+				{
+					std::cin.clear();
+
+					if (associado->isContributor())
+						this->menuSessaoContributor(associado);
+					else if (associado->isSubscriber())
+					    this->menuSessaoSubscriber(associado);
+					else
+					    this->menuSessaoOther(associado);
+					
+				}
+
+				if (opcao == 0)
+					break;
+			} while ((opcao > (this->associacao->getAssociados().size())) || (find(formadores.begin(), formadores.end(), associados.at(opcao - 1)) != formadores.end()));
+
+			if (opcao != 0)
+			{
+				formadores.push_back(associados.at(opcao - 1));
+				std::cout << "Formador adicionado com sucesso!\n\n";
+			}
+			else
+			{
+				if (formadores.size() == 0)
+				{
+					std::cout << "Deve escolher pelo menos 1 formador\n\n";
+					opcao = 1;
+				}
+			}
+		} while (opcao != 0);
+	}
+
+	/* ------- Passo 8 - Criar evento e adicionar ao vetor de eventos da associacao --------*/
+    Apoio apoio; //ao ser criado o evento este nao é apoiado
+	Evento* evento;
+
+	if (conferencia)
+	{
+		evento = new Conferencia(planeadores, organizadores, local, tema, data, apoio, numeroParticipantes);
+	} 
+	else
+	{
+		evento = new EscolaVerao(planeadores, organizadores, local, tema, data, apoio, formadores);
+	}
+
+	this->associacao->addEvento(*evento);
+	clearScreen();
+	std::cout << "Evento adicionado com sucesso! \n\n";
 
 }
 
@@ -2090,13 +2174,10 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 			std::cin.clear();
 			if (associado->isContributor())
 				menuSessaoContributor(associado);
-			/*
-			else if (associado->isSubscriber())      //descomentar quando o menu do subscriber e do other estiverem completos
+			else if (associado->isSubscriber())      
 				menuSessaoSubscriber(associado);
-				
 			else
 				menuSessaoOther(associado);
-				*/
 		}
 		std::istringstream codigo(chave);
 
@@ -2228,6 +2309,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    //system("CLS");
+	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    system("CLS");
 }

@@ -20,8 +20,8 @@
 class Evento {
 
 private:
-	std::vector<int> planeadores;
-	std::vector<int> organizadores;
+	std::vector<unsigned int> planeadores;
+	std::vector<unsigned int> organizadores;
 	std::string local;
 	std::string tema;
 	Data data;
@@ -29,15 +29,15 @@ private:
 
 public:
 	// Construtor
-	Evento(std::vector <int> planeadores, std::vector<int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento);
+	Evento(std::vector <unsigned int> planeadores, std::vector<unsigned int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento);
 
 	// Metodos get
 
-	std::vector<int> getPlaneadores() const;
-	std::vector<int> getOrganizadores() const;
+	std::vector<unsigned int> getPlaneadores() const;
+	std::vector<unsigned int> getOrganizadores() const;
 	std::string getLocal() const;
 	std::string getTema() const;
-	virtual std::vector<int> getFormadores() const { return {}; }
+	virtual std::vector<unsigned int> getFormadores() const { return {}; }
 
 	// Metodos set
 
@@ -47,11 +47,11 @@ public:
 	// Outros metodos
 
 	virtual void show() const;
-	void addPlaneador(int planeador);
-	void addOrganizador(int organizador);
-	void removePlaneador(int planeador);
-	void removeOrganizador(int organizador);
-	virtual void removeFormador(int formador) {}
+	void addPlaneador(unsigned int planeador);
+	void addOrganizador(unsigned int organizador);
+	void removePlaneador(unsigned int planeador);
+	void removeOrganizador(unsigned int organizador);
+	virtual void removeFormador(unsigned int formador) {}
 	virtual bool escolaVerao() { return false;}
 
 };
@@ -67,7 +67,7 @@ private:
 
 public:
 	// Construtor
-	Conferencia(std::vector<int> planeadores, std::vector<int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
+	Conferencia(std::vector<unsigned int> planeadores, std::vector<unsigned int> organizadores, std::string local, std::string tema, Data data, Apoio apoioEvento, unsigned int numeroParticipantes);
 
 	// Metodos get
 	unsigned int getNumeroParticipantes() const;
@@ -87,25 +87,25 @@ public:
 class EscolaVerao : public Evento {
 
 private:
-	std::vector <int> formadores;
+	std::vector <unsigned int> formadores;
 
 public:
 	//Construtor
-	EscolaVerao(std::vector <int> planeadores,
-		std::vector<int> organizadores,
+	EscolaVerao(std::vector <unsigned int> planeadores,
+		std::vector<unsigned int> organizadores,
 		std::string local,
 		std::string tema,
 		Data data,
 		Apoio apoioEvento,
-		std::vector<int> formadores);
+		std::vector<unsigned int> formadores);
 
 	// Metodos get
-	std::vector<int> getFormadores() const;
+	std::vector<unsigned int> getFormadores() const;
 
 	// Outros metodos
 	void show() const;
-	void addFormador(int formador);
-	void removeFormador(int formador);
+	void addFormador(unsigned int formador);
+	void removeFormador(unsigned int formador);
 	bool escolaVerao() { return true; }
 };
 

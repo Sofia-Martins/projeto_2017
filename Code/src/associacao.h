@@ -65,7 +65,7 @@ public:
 	void addEvento(Evento &evento);
 	unsigned int incIdAssociados();
 	void showEventos(Associado* associado) const;
-	std::vector<unsigned int> showAssociados(unsigned int id) const; //mostra todos os associados exceto aquele que tem o id 'id'
+	std::vector<unsigned int> showAssociados(unsigned int id, bool ignorarAssociado) const; //mostra todos os associados exceto aquele que tem o id 'id' (se ignorarAssociado==true)
 	void showContributors() const;
 	void showSubscribers() const;
 	void showGestores() const;
