@@ -92,6 +92,9 @@ public:
 	void menuSessaoSubscriber(Associado* associado);
 	void menuSessaoOther(Associado* associado);  //menu do associado que n�o � nem um contributor nem um subscriber
 
+	void apoiarEvento(unsigned int id);
+	void alteraGestor(Gestor* gestor);
+
 	void alteraAssociado(unsigned int id);
 	void apagaGestor(unsigned int id);
 	void apagaAssociado(unsigned int id);

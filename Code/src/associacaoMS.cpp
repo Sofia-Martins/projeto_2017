@@ -986,20 +986,19 @@ bool procuraAssociado(unsigned int id, Associado* associado)
 
 void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
-	std::cout << "Bem-Vindo Gestor \n\n";
-	std::cout << "1) Criar um novo gestor\n"
-		<< "2) Alterar um associado existente \n"
-		<< "3) Apagar a minha conta\n"
-		<< "4) Apaga associado \n"
-		<< "5) Enviar email \n"
-		<< "6) Informacoes da minha conta \n"
-		<< "7) Terminar sessao \n\n";
 
-	std::cout << "Bem vindo !" << std::endl << std::endl;
+	Gestor* gestor;
+	for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
+		if(this->associacao->getGestores().at(i)->getID() == id)
+		{
+			gestor = this->associacao->getGestores().at(i);
+		}
+
+	std::cout << "Bem vindo " << gestor->getNome() << "!" << std::endl << std::endl;
 
 	std::cout << "_________________ O MEU ESPACO _________________\n\n";
 	std::cout << " 1. Informacoes da minha conta\n";
-	std::cout << " 2. Modificar a minha conta\n"; //FAZER
+	std::cout << " 2. Modificar a minha conta\n";
 	std::cout << " 3. Apagar a minha conta\n";
 
 	std::cout << "_________________ ESPACO GESTOR ________________\n\n";
@@ -1020,44 +1019,113 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
 			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7) || (opcao == 8) || (opcao == 9) ) );
 
-	if (opcao == 4)
-		this->criaGestor(associacao->getSigla(), false, id);
+	if(opcao == 1){
+			clearScreen();
+			for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
+				if(this->associacao->getGestores().at(i)->getID() == id)
+					this->associacao->getGestores().at(i)->show();
+			std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+				if(std::cin.get())
+					this->menuSessaoGestor(id);
+		}
+
 	else if (opcao == 5)
 		this->alteraAssociado(id);
 	else if (opcao == 3)
 		this->apagaGestor(id);
 	else if (opcao == 6)
 		this->apagaAssociado(id);
-	else if (opcao == 8){
+	else if (opcao == 8) {
 
-		auto gestores = this->associacao->getGestores();
-		Gestor* gestor = NULL;
-
-		for (unsigned int i = 0; i<gestores.size(); i++)
-			if(gestores.at(i)->getID() == id)
-			{
-				//gestor = gestores.at(i);
-				this->envioEmail(this->associacao->getGestores().at(i));
-			}
+		this->envioEmail(gestor);
 
 		this->menuSessaoGestor(id);
 	}
-	else if(opcao == 1){
-		clearScreen();
-		for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
-			if(this->associacao->getGestores().at(i)->getID() == id)
-				this->associacao->getGestores().at(i)->show();
+	else if (opcao == 4)
+		this->criaGestor(associacao->getSigla(), false, id);
+	else if (opcao == 9)
+	{
+		this->menuLogin();
+	}
+	else if(opcao == 2)
+		this->alteraGestor(gestor);
+	else if(opcao == 7)
+		this->apoiarEvento(id);
+
+
+}
+
+void AssociacaoMS::apoiarEvento(unsigned int id) {
+	int n = 0;
+	std::cout << "Eventos sem apoio da associacao\n\n";
+	for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
+		if (!associacao->getEventos().at(i)->getApoioEvento().getApoioAssociacao())
+		{	n++;
+			std::cout << n << ". Nome : "
+					<< associacao->getEventos().at(i)->getTema() << " \nLocal : "
+					<< associacao->getEventos().at(i)->getLocal() << "\n\n";
+		}
+	unsigned int opcao;
+	std::string tipoApoio;
+	do {
+		getNumber(opcao, "Indique o numero do evento que pretende dar apoio : ");
+
+		if (opcao == associacao->getEventos().size() + 1)
+			break;
+
+		if (opcao - 1 >= associacao->getEventos().size()) {
+			std::cout << "Evento inexistente...\n\n";
+			continue;
+		}
+
+		getString(tipoApoio, "\nIndique o tipo de apoio : ");
+		associacao->getEventos().at(opcao - 1)->getApoioEvento().setApoioAssociacao(true);
+		associacao->getEventos().at(opcao - 1)->getApoioEvento().setTipoApoio(tipoApoio);
+
+		std::cout << "\nEvento alterado com sucesso!\n\n"
+
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
-			if(std::cin.get())
-				this->menuSessaoGestor(id);
+		if (std::cin.get())
+			this->menuSessaoGestor(id);
+
+	} while (opcao >= associacao->getEventos().size());
+
+
+}
+
+void AssociacaoMS::alteraGestor(Gestor* gestor) {
+
+	std::string nome, pass;
+
+	std::cout << "O que deseja alterar ? \n\n";
+	std::cout << "1. Nome \n" << "2. Password \n\n";
+
+	unsigned int opcao = 0;
+	do {
+		getNumber(opcao, "Opcao: ");
+		if (std::cin.eof())
+			this->menuTermino();
+	} while (!((opcao == 1) || (opcao == 2)));
+
+	if (opcao == 1) {
+		std::cout << "Nome Atual : " << gestor->getNome();
+		getString(nome, "\nNovo Nome : ");
+		gestor->setNome(nome);
+		std::cout << "Nome alterado com sucesso!\n\n";
+
+	} else if (opcao == 2) {
+		std::cout << "Password Atual : " << gestor->getPassword();
+		getString(pass, "\nNova Password : ");
+		gestor->setPassword(pass);
+		std::cout << "Password alterada com sucesso!\n\n";
 	}
-	else if (opcao == 9)
-		this->menuLogin();
-	/*else if(opcao == 2)
-		this->alteraGestor();
-	else if(opcao == 7)
-		this->apoiarEvento();*/
+
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+	if (std::cin.get())
+		this->menuSessaoGestor(gestor->getID());
 
 }
 
