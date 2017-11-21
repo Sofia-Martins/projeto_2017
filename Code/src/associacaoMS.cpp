@@ -1057,15 +1057,13 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 }
 
 void AssociacaoMS::apoiarEvento(unsigned int id) {
-	int n = 0;
 	std::cout << "Eventos sem apoio da associacao\n\n";
 	for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
 		if (!associacao->getEventos().at(i)->getApoioEvento().getApoioAssociacao())
-		{	n++;
-			std::cout << n << ". Nome : "
+			std::cout << "Evento n." << i + 1 << " \nNome : "
 					<< associacao->getEventos().at(i)->getTema() << " \nLocal : "
 					<< associacao->getEventos().at(i)->getLocal() << "\n\n";
-		}
+
 	unsigned int opcao;
 	std::string tipoApoio;
 	do {
@@ -1083,7 +1081,7 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 		associacao->getEventos().at(opcao - 1)->getApoioEvento().setApoioAssociacao(true);
 		associacao->getEventos().at(opcao - 1)->getApoioEvento().setTipoApoio(tipoApoio);
 
-		std::cout << "\nEvento alterado com sucesso!\n\n"
+		std::cout << "\nEvento alterado com sucesso!\n\n";
 
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
