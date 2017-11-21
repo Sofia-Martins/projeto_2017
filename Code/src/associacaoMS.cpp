@@ -352,6 +352,19 @@ getNumber(opcao, "Opcao: ");
 	//proximo menu
 	this->menuLogin();
 
+	//ao sair da associacao atual, atualiza informacao dos ficheiros
+	
+	enviarDominios();
+	enviarAssociados();
+	/*
+	envarEmails();
+	enviarConferencias();
+	enviarEscolasVerao();
+	enviarGestores();
+	*/
+
+	this->menuAssociacoes();
+
 }
 
 void AssociacaoMS::lerDominios() {
@@ -820,7 +833,10 @@ void AssociacaoMS::menuLogin() {
 	{
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
+		{
+			std::cin.clear();
 			this->menuAssociacoes();
+		}
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ));
 
 	if (opcao == 1) {
@@ -842,7 +858,7 @@ void AssociacaoMS::menuLogin() {
 	}
 
 	if (opcao == 3){
-		this->menuTermino();
+		this->menuAssociacoes();
 	}
 }
 
@@ -1763,6 +1779,7 @@ void AssociacaoMS::criarEvento(T* associado)
 	}
 
 	this->associacao->addEvento(*evento);
+	associado->addEvento(tema);
 	clearScreen();
 	std::cout << "Evento adicionado com sucesso! \n\n";
 
@@ -2162,65 +2179,150 @@ void AssociacaoMS::addSubareaCientificaInteresse (T* associado){
 	char lixo;
 	bool invalido = true;
 
-	unsigned int c, aC, sC;
-	
-	associacao->getDominio()->show();
-	std::cout << "\n\n";
+unsigned int c, aC, sC;
 
-	do {
-		getString(chave,"Introduza a nova subarea cientifica de interesse (x.x.x) : "); // garante que estao no formato x.x.x
-		if (std::cin.eof())
+associacao->getDominio()->show();
+std::cout << "\n\n";
+
+do {
+	getString(chave, "Introduza a nova subarea cientifica de interesse (x.x.x) : "); // garante que estao no formato x.x.x
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		if (associado->isContributor())
+			menuSessaoContributor(associado);
+		else if (associado->isSubscriber())
+			menuSessaoSubscriber(associado);
+		else
+			menuSessaoOther(associado);
+	}
+	std::istringstream codigo(chave);
+
+	codigo >> c >> lixo;
+	if (lixo != '.') {
+		std::cout << "Formato de entrada inv�lido, tente novamente\n\n";
+		continue;
+	}
+	lixo = ',';
+	codigo >> aC >> lixo;
+	if (lixo != '.') {
+		std::cout << "Formato de entrada inv�lido, tente novamente\n\n";
+		continue;
+	}
+	codigo >> sC;
+	invalido = false;
+
+	auto subAreasInteresse = associado->getAreasInteresse();
+
+
+	if ((!(codigo >> lixo)) && (associacao->getDominio()->getCiencia().size() > c - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().size() > aC - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().size() > sC - 1))
+	{
+		std::string subAreaParaAdicionar = associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().at(sC - 1)->getNomeSubAreaCientifica();
+		if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea j� est� no vetor 
 		{
-			std::cin.clear();
-			if (associado->isContributor())
-				menuSessaoContributor(associado);
-			else if (associado->isSubscriber())      
-				menuSessaoSubscriber(associado);
-			else
-				menuSessaoOther(associado);
+			invalido = true;
+			std::cout << "A sub area " << subAreaParaAdicionar << " ja conta das suas sub areas de interesse \n\n";
 		}
-		std::istringstream codigo(chave);
-
-		codigo >> c >> lixo;
-		if (lixo != '.') {
-			std::cout << "Formato de entrada inv�lido, tente novamente\n\n";
-			continue;
+		else
+		{
+			associado->addSubAreaInteresse(subAreaParaAdicionar);
+			std::cout << "Nova Subarea de interesse adicionada com sucesso. ";
 		}
-		lixo = ',';
-		codigo >> aC >> lixo;
-		if (lixo != '.') {
-			std::cout << "Formato de entrada inv�lido, tente novamente\n\n";
-			continue;
-		}
-		codigo >> sC;
-		invalido = false;
+	}
+	else {
+		std::cout << "Falha ao adicionar Subarea de interesse, tente novamente\n\n";
+		invalido = true;
+	}
 
-		auto subAreasInteresse = associado->getAreasInteresse();
-	
-
-			if ((!(codigo>>lixo))&&(associacao->getDominio()->getCiencia().size() > c - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().size() > aC - 1 && associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().size() > sC - 1))
-			{
-				std::string subAreaParaAdicionar = associacao->getDominio()->getCiencia().at(c - 1)->getAreas().at(aC - 1)->getsubAreas().at(sC - 1)->getNomeSubAreaCientifica();
-				if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea j� est� no vetor 
-				{
-					invalido = true;
-					std::cout << "A sub area " << subAreaParaAdicionar << " ja conta das suas sub areas de interesse \n\n";
-				}
-				else
-				{
-					associado->addSubAreaInteresse(subAreaParaAdicionar);
-					std::cout << "Nova Subarea de interesse adicionada com sucesso. ";
-				}
-			}
-			else {
-				std::cout << "Falha ao adicionar Subarea de interesse, tente novamente\n\n";
-				invalido = true;
-			}
-
-	} while (invalido);
+} while (invalido);
 
 }
 
+void AssociacaoMS::enviarDominios() const
+{
+	std::ofstream out;
+	out.open(this->ficheiroDominios);
+
+	auto dominio = this->associacao->getDominio();
+	auto ciencias = dominio->getCiencia();
+
+	for (int i = 0; i < ciencias.size(); i++)
+	{
+		auto nomeCiencia = ciencias.at(i)->getNomeCiencia();
+		auto areas = ciencias.at(i)->getAreas();
+
+		if (i == 0)
+			out << "@" << nomeCiencia;
+		else
+			out << "\n@" << nomeCiencia;
+
+		for (int j = 0; j < areas.size(); j++)
+		{
+			auto nomeArea = areas.at(j)->getNomeAreaCientifica();
+			auto subAreas = areas.at(j)->getsubAreas();
+			out << "\n" << "#" << nomeArea;
+
+			for (int k = 0; k < subAreas.size(); k++)
+			{
+				auto nomeSubArea = subAreas.at(k)->getNomeSubAreaCientifica();
+				out << "\n" << "*" << nomeSubArea;
+			}
+		}
+	}
+
+	out.close();
+}
+
+void AssociacaoMS::enviarAssociados() const
+{
+	std::ofstream out;
+	out.open(this->ficheiroAssociados);
+
+	auto associados = this->associacao->getAssociados();
+
+	for (int i = 0; i < associados.size(); i++)
+	{
+		auto associado = associados.at(i);
+		auto nome = associado->getNome();
+		auto id = associado->getID();
+		auto password = associado->getPassword();
+		auto instituicao = associado->getInstituicao();
+		std::string emDia;
+		if (associado->getCota()->getEmDia() == true)
+			emDia = "sim";
+		else
+			emDia = "nao";
+		auto atraso = associado->getCota()->getAtraso();
+		auto email = associado->getEmail();
+		auto eventos = associado->getEventos();
+		auto areas = associado->getAreasInteresse();
+
+		if (i != 0)
+		{
+			out << "\n";
+		}
+		out << nome << "," << id << "," << password << "," << instituicao << "," << emDia << "," << atraso << "," << email << ";";
+
+		for (int i = 0; i < eventos.size(); i++)
+		{
+			if (i != 0)
+			{
+				out << ",";
+			}
+			out << eventos.at(i);
+		}
+		out << ";";
+		for (int i = 0; i < areas.size(); i++)
+		{
+			if (i != 0)
+			{
+				out << ",";
+			}
+			out << areas.at(i);
+		}
+    }
+
+}
 
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()

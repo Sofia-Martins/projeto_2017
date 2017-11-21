@@ -8,6 +8,7 @@
 #include "apoio.h"
 
 
+
 	//Construtor
 	Apoio::Apoio(){
 		this->apoioAssociacao = false;

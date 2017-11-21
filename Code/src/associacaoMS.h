@@ -69,6 +69,16 @@ public:
 	void lerEscolasVerao();
 	void lerGestores();
 
+	void enviarDominios() const;
+	void enviarAssociados() const;
+	/*
+	void envarEmails() const;
+	void enviarConferencias() const;
+	void enviarEscolasVerao() const;
+	void enviarGestores() const;
+	*/
+	
+
 	//menu 4
 	void menuLogin();
 	void getID(unsigned int id, std::string pass);

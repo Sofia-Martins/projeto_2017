@@ -41,6 +41,7 @@ public:
 	std::string getInstituicao() const;
 	std::string getPassword() const { return this->password; };
 	std::vector<std::string> getAreasInteresse() const;
+	std::vector<std::string> getEventos() const { return eventos; }
 	Cota* getCota() const;
 	std::string getEmail() const;
 	virtual std::vector<Email*> getEmailsRecebidos() {
@@ -64,7 +65,7 @@ public:
 	void setEmail(std::string email);
 	void setEventos(std::vector<std::string> eventos) { this->eventos = eventos; }
 	void setAreasInteresse(std::vector<std::string> areasInteresse) { this->areasInteresse=areasInteresse; }
-
+	void addEvento(std::string tema) { eventos.push_back(tema); }
 	//operators
 	const Associado & operator= (const Associado & a);
 	bool operator < (const Associado & a) const{
