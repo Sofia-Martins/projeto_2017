@@ -311,7 +311,7 @@ void AssociacaoMS::menuAssociacoes() {
 	do
 	{
 
-getNumber(opcao, "Opcao: ");
+		getNumber(opcao, "Opcao: ");
 		if (opcao > associacoes.size())
 			valido = false;
 		else valido = true;
@@ -352,19 +352,16 @@ getNumber(opcao, "Opcao: ");
 	//proximo menu
 	this->menuLogin();
 
+/*
 	//ao sair da associacao atual, atualiza informacao dos ficheiros
-	
 	enviarDominios();
 	enviarAssociados();
-	/*
-	envarEmails();
+	//envarEmails();
 	enviarConferencias();
 	enviarEscolasVerao();
-	enviarGestores();
-	*/
 
 	this->menuAssociacoes();
-
+*/
 }
 
 void AssociacaoMS::lerDominios() {
@@ -454,6 +451,9 @@ void AssociacaoMS::lerAssociados() {
 		getline(input, subareas);
 
 		if(nome == "")
+			break;
+
+		if(subareas == "")
 			break;
 
 		eliminateSpaces(nome);
@@ -630,7 +630,9 @@ void AssociacaoMS::lerConferencias()
 		//buscar tipo de apoio
 		std::string tipoApoio;
 		getline(in, tipoApoio, ';');
-		eliminateSpaces(tipoApoio);
+
+		if(tipoApoio != "")
+			eliminateSpaces(tipoApoio);
 
 		Apoio apoio(apoioB, tipoApoio);
 
@@ -731,7 +733,9 @@ void AssociacaoMS::lerEscolasVerao()
 		//buscar tipo de apoio
 		std::string tipoApoio;
 		getline(in, tipoApoio, ';');
-		eliminateSpaces(tipoApoio);
+
+		if(tipoApoio != "")
+			eliminateSpaces(tipoApoio);
 
 		Apoio apoio(apoioB, tipoApoio);
 
@@ -858,6 +862,13 @@ void AssociacaoMS::menuLogin() {
 	}
 
 	if (opcao == 3){
+		//ao sair da associacao atual, atualiza informacao dos ficheiros
+		enviarDominios();
+		enviarAssociados();
+		enviarEmails();
+		enviarConferencias();
+		enviarEscolasVerao();
+
 		this->menuAssociacoes();
 	}
 }
@@ -2324,6 +2335,138 @@ void AssociacaoMS::enviarAssociados() const
 
 }
 
+void AssociacaoMS::enviarConferencias() const {
+	std::ofstream out;
+	out.open(this->ficheiroConferencias);
+
+	auto eventos = this->associacao->getEventos();
+
+	for (int i = 0; i < eventos.size(); i++) {
+		if (!eventos.at(i)->escolaVerao()) {
+			for (unsigned int j = 0; j < eventos.at(i)->getPlaneadores().size();
+					j++) {
+				if (j != 0) {
+					out << ",";
+				}
+				out << eventos.at(i)->getPlaneadores().at(j);
+			}
+			out << ";";
+
+			for (unsigned int j = 0;
+					j < eventos.at(i)->getOrganizadores().size(); j++) {
+				if (j != 0) {
+					out << ",";
+				}
+				out << eventos.at(i)->getOrganizadores().at(j);
+			}
+			out << ";";
+
+			out << eventos.at(i)->getLocal() << ";" << eventos.at(i)->getTema()
+					<< ";";
+
+			auto date = eventos.at(i)->getData();
+
+			out << date.getData();
+			out << ";";
+			if (eventos.at(i)->getApoioEvento().getApoioAssociacao())
+				out << "1";
+			else
+				out << "0";
+			out << ";";
+			out << eventos.at(i)->getApoioEvento().getTipoApoio();
+			out << ";";
+			out << eventos.at(i)->getNumeroParticipantes();
+		}
+		out << std::endl;
+	}
+}
+
+void AssociacaoMS::enviarEscolasVerao() const{
+	std::ofstream out;
+	out.open(this->ficheiroEscolasVerao);
+
+	auto eventos = this->associacao->getEventos();
+
+	for (int i = 0; i < eventos.size(); i++)
+		{
+			if (eventos.at(i)->escolaVerao())
+			{
+				for (unsigned int j = 0; j<eventos.at(i)->getPlaneadores().size(); j++)
+				{
+					if (j != 0)
+					{
+						out << ",";
+					}
+					out << eventos.at(i)->getPlaneadores().at(j);
+				}
+				out << ";";
+
+				for (unsigned int j = 0; j<eventos.at(i)->getOrganizadores().size(); j++)
+				{
+					if (j != 0)
+					{
+						out << ",";
+					}
+					out << eventos.at(i)->getOrganizadores().at(j);
+				}
+				out << ";";
+
+				out << eventos.at(i)->getLocal() << ";" << eventos.at(i)->getTema() << ";";
+
+				auto date = eventos.at(i)->getData();
+
+				out << date.getData();
+				out << ";";
+
+				if(eventos.at(i)->getApoioEvento().getApoioAssociacao())
+				out << "1";
+				else out << "0";
+
+				out << ";";
+				out << eventos.at(i)->getApoioEvento().getTipoApoio();
+				out << ";";
+
+				for (unsigned int j = 0; j<eventos.at(i)->getFormadores().size(); j++)
+				{
+					if (j != 0)
+					{
+						out << ",";
+					}
+					out << eventos.at(i)->getFormadores().at(j);
+				}
+
+
+			}
+			out << std::endl;
+
+		}
+}
+
+void AssociacaoMS::enviarEmails() const
+{
+	std::ofstream out;
+	out.open(this->ficheiroEmails);
+
+	auto emails = this->associacao->getEmails();
+
+	for (int i = 0; i < emails.size(); i++)
+	{
+		auto remetente = emails.at(i)->getRemetente();
+		auto destinario = emails.at(i)->getDestinatario();
+		auto conteudo = emails.at(i)->getConteudo();
+
+		if (i != 0)
+		{
+			out << "\n";
+		}
+		out << remetente << "," << destinario << "," << conteudo;
+
+
+    }
+
+}
+
+
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()
 {
@@ -2411,6 +2554,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    //system("CLS");
 }

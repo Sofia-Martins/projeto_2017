@@ -71,12 +71,11 @@ public:
 
 	void enviarDominios() const;
 	void enviarAssociados() const;
-	/*
-	void envarEmails() const;
+
+	void enviarEmails() const;
 	void enviarConferencias() const;
 	void enviarEscolasVerao() const;
-	void enviarGestores() const;
-	*/
+
 	
 
 	//menu 4

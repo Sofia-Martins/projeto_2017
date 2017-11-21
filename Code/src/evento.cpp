@@ -42,6 +42,14 @@ std::string Evento::getTema() const {
 	return this->tema;
 }
 
+Data Evento::getData() const {
+	return this->data;
+}
+
+Apoio Evento::getApoioEvento() const{
+	return this->apoioEvento;
+}
+
 
 // Metodos set
 

@@ -1,40 +1,40 @@
 @Ci�ncias da Vida e da Sa�de
 #Neuroci�ncias, Envelhecimento e Doen�as Degenerativas
-*Neuroci�ncias - Molecular e Celular 
-*Neuroci�ncias - Sistemas, Cl�nica e Comportamento 
-*Biologia do Envelhecimento 
-*Degenera��o de Org�os e Sistemas 
+*Neuroci�ncias - Molecular e Celular
+*Neuroci�ncias - Sistemas, Cl�nica e Comportamento
+*Biologia do Envelhecimento
+*Degenera��o de Org�os e Sistemas
 #Imunologia e Infe��o
-*Imunologia e Inflama��o 
-*Microbiologia e Infe��o 
+*Imunologia e Inflama��o
+*Microbiologia e Infe��o
 #Diagn�stico, Terap�utica e Sa�de P�blica
-*Epidemiologia 
-*Sa�de P�blica e Fatores Ambientais 
-*Farmacologia e Toxicologia 
-*Fisiologia do Exerc�cio e Ci�ncias do Desporto 
-*Investiga��o Cl�nica 
+*Epidemiologia
+*Sa�de P�blica e Fatores Ambientais
+*Farmacologia e Toxicologia
+*Fisiologia do Exerc�cio e Ci�ncias do Desporto
+*Investiga��o Cl�nica
 #Biomedicina
-*Oncobiologia 
-*Mecanismos da Doen�a 
-*Metabolismo e Nutri��o 
-*Medicina Regenerativa 
+*Oncobiologia
+*Mecanismos da Doen�a
+*Metabolismo e Nutri��o
+*Medicina Regenerativa
 #Biologia Experimental
 *Gen�tica e Gen�mica
-*Biologia Celular e Molecular 
-*Biologia do Desenvolvimento 
+*Biologia Celular e Molecular
+*Biologia do Desenvolvimento
 *Biologia Computacional e Bioinform�tica
 @Ci�ncias Exatas e da Engenharia
 #Ci�ncia e Engenharia de Materiais
-*Biomateriais 
-*Cer�mica e Vidro 
-*Materiais para Produ��o e Armazenamento de Energia 
-*Nanomateriais e Dispositivos 
-*Pol�meros e Comp�sitos 
-*Materiais Estruturais 
+*Biomateriais
+*Cer�mica e Vidro
+*Materiais para Produ��o e Armazenamento de Energia
+*Nanomateriais e Dispositivos
+*Pol�meros e Comp�sitos
+*Materiais Estruturais
 #Bioengenharia, Biotecnologia e Bioqu�mica
 *Engenharia Biol�gica
 *Engenharia Metab�lica e Fisiologia Microbiana
-*Biologia Sint�tica e de Sistemas 
-*Engenharia de Bioprocessos e Biocat�lise 
-*Engenharia Celular e de Tecidos 
+*Biologia Sint�tica e de Sistemas
+*Engenharia de Bioprocessos e Biocat�lise
+*Engenharia Celular e de Tecidos
 *Biotecnologia

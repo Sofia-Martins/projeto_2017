@@ -91,7 +91,7 @@ std::string Data::getData() const
 	string stringHora=to_string((unsigned long)hora);
 	string stringMinuto=to_string((unsigned long)minuto);
 
-	string s = stringDia + "/" + stringMes+"/"+stringAno+" "+stringHora+":"+stringMinuto;
+	string s = stringDia + "," + stringMes+","+stringAno+","+stringHora+","+stringMinuto;
 	return s;
 }
 

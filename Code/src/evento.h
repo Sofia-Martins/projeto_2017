@@ -37,7 +37,11 @@ public:
 	std::vector<unsigned int> getOrganizadores() const;
 	std::string getLocal() const;
 	std::string getTema() const;
+	Data getData() const;
 	virtual std::vector<unsigned int> getFormadores() const { return {}; }
+	Apoio getApoioEvento() const;
+
+
 
 	// Metodos set
 
@@ -51,6 +55,7 @@ public:
 	void addOrganizador(unsigned int organizador);
 	void removePlaneador(unsigned int planeador);
 	void removeOrganizador(unsigned int organizador);
+	virtual unsigned int getNumeroParticipantes() const {}
 	virtual void removeFormador(unsigned int formador) {}
 	virtual bool escolaVerao() { return false;}
 
