@@ -995,6 +995,22 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		<< "6) Informacoes da minha conta \n"
 		<< "7) Terminar sessao \n\n";
 
+	std::cout << "Bem vindo !" << std::endl << std::endl;
+
+	std::cout << "_________________ O MEU ESPACO _________________\n\n";
+	std::cout << " 1. Informacoes da minha conta\n";
+	std::cout << " 2. Modificar a minha conta\n"; //FAZER
+	std::cout << " 3. Apagar a minha conta\n";
+
+	std::cout << "_________________ ESPACO GESTOR ________________\n\n";
+	std::cout << " 4. Criar um novo gestor\n\n";
+	std::cout << " 5. Modificar conta de um associado\n\n";
+	std::cout << " 6. Apagar associado\n\n";
+	std::cout << " 7. Apoiar evento\n\n"; //FAZER
+	std::cout << " 8. Enviar email\n\n";
+	std::cout << " 9. Terminar Sessao\n\n";
+
+
 	unsigned int opcao = 0;
 	do
 	{
@@ -1002,17 +1018,17 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		if (std::cin.eof())
 			this->menuLogin();
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
-			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7)) );
+			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7) || (opcao == 8) || (opcao == 9) ) );
 
-	if (opcao == 1)
+	if (opcao == 4)
 		this->criaGestor(associacao->getSigla(), false, id);
-	else if (opcao == 2)
+	else if (opcao == 5)
 		this->alteraAssociado(id);
 	else if (opcao == 3)
 		this->apagaGestor(id);
-	else if (opcao == 4)
+	else if (opcao == 6)
 		this->apagaAssociado(id);
-	else if (opcao == 5){
+	else if (opcao == 8){
 
 		auto gestores = this->associacao->getGestores();
 		Gestor* gestor = NULL;
@@ -1026,7 +1042,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 
 		this->menuSessaoGestor(id);
 	}
-	else if(opcao == 6){
+	else if(opcao == 1){
 		clearScreen();
 		for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
 			if(this->associacao->getGestores().at(i)->getID() == id)
@@ -1036,8 +1052,12 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 			if(std::cin.get())
 				this->menuSessaoGestor(id);
 	}
-	else if (opcao == 7)
+	else if (opcao == 9)
 		this->menuLogin();
+	/*else if(opcao == 2)
+		this->alteraGestor();
+	else if(opcao == 7)
+		this->apoiarEvento();*/
 
 }
 
@@ -2376,8 +2396,9 @@ void AssociacaoMS::enviarConferencias() const {
 			out << eventos.at(i)->getApoioEvento().getTipoApoio();
 			out << ";";
 			out << eventos.at(i)->getNumeroParticipantes();
+			out << std::endl;
 		}
-		out << std::endl;
+
 	}
 }
 
@@ -2435,9 +2456,9 @@ void AssociacaoMS::enviarEscolasVerao() const{
 					out << eventos.at(i)->getFormadores().at(j);
 				}
 
-
+				out << std::endl;
 			}
-			out << std::endl;
+
 
 		}
 }
