@@ -1080,8 +1080,8 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 		}
 
 		getString(tipoApoio, "\nIndique o tipo de apoio : ");
-		associacao->getEventos().at(opcao - 1)->getApoioEvento().setApoioAssociacao(true);
-		associacao->getEventos().at(opcao - 1)->getApoioEvento().setTipoApoio(tipoApoio);
+		Apoio a(true,tipoApoio);
+		associacao->getEventos().at(opcao - 1)->setApoio(a);
 
 		std::cout << "\nEvento alterado com sucesso!\n\n";
 

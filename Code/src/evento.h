@@ -47,6 +47,7 @@ public:
 
 	void setLocal(std::string local);
 	void setTema(std::string tema);
+	void setApoio(Apoio apoio);
 
 	// Outros metodos
 

@@ -60,6 +60,9 @@ void Evento::setLocal(std::string local) {
 void Evento::setTema(std::string tema) {
 	this->tema = tema;
 }
+void Evento::setApoio(Apoio apoio){
+	this->apoioEvento = apoio;
+}
 
 
 // Outros metodos
