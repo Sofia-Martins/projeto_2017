@@ -987,12 +987,14 @@ bool procuraAssociado(unsigned int id, Associado* associado)
 void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 
-	Gestor* gestor;
-	for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
-		if(this->associacao->getGestores().at(i)->getID() == id)
+	Gestor* gestor = NULL;
+	for (unsigned int i = 0; i < this->associacao->getGestores().size(); i++)
+	{
+		if (this->associacao->getGestores().at(i)->getID() == id)
 		{
 			gestor = this->associacao->getGestores().at(i);
 		}
+	}
 
 	std::cout << "Bem vindo " << gestor->getNome() << "!" << std::endl << std::endl;
 
@@ -2641,6 +2643,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    //system("CLS");
+	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    system("CLS");
 }

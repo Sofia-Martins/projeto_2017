@@ -55,7 +55,7 @@ public:
 	void addOrganizador(unsigned int organizador);
 	void removePlaneador(unsigned int planeador);
 	void removeOrganizador(unsigned int organizador);
-	virtual unsigned int getNumeroParticipantes() const {}
+	virtual unsigned int getNumeroParticipantes() const { return 0; }
 	virtual void removeFormador(unsigned int formador) {}
 	virtual bool escolaVerao() { return false;}
 
