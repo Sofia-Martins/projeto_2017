@@ -14,7 +14,7 @@ bool hasChar(std::string &string);
 void eliminateSpaces(std::string &string);
 void getString(std::string &string, const std::string question);
 void getNumber(unsigned int &number, const std::string &question);
-void clearScreen(); //pode (e deve) ser procurado um metodo melhor!!!
+void clearScreen(); 
 
 //variaveis globais
 std::string retornoMenu = "/";
@@ -258,18 +258,19 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 	this->associacao->addGestor(*gestor);
 
 	std::cout << "ID atribuido: " << gestor->getID() << std::endl;
-	std::cout << "Email: " <<gestor->getEnderecoEmail() << std::endl;
-
-	std::cout << this->associacao->getNome();
+	std::cout << "Email: " << gestor->getEnderecoEmail() << std::endl << std::endl;
 
 	std::string nomeFicheiroGestores = siglaAssociacao+"_gestores.txt";
 
 	this->enviarNovoGestorFicheiro(nomeFicheiroGestores);
 
-	std::cout << "Pressione ENTER para continuar... " << std::endl;
+	std::cout << std::endl<< "Pressione ENTER para continuar... " << std::endl;
 
-	if(std::cin.get())
-		this->menuBemVindo();
+	if (std::cin.get())
+	{
+		if (std::cin.eof()) std::cin.clear();
+		this->menuSessaoGestor(idMenu);
+	}
 	
 
 }
@@ -839,6 +840,11 @@ void AssociacaoMS::menuLogin() {
 		if (std::cin.eof())
 		{
 			std::cin.clear();
+			enviarDominios();
+			enviarAssociados();
+			enviarEmails();
+			enviarConferencias();
+			enviarEscolasVerao();
 			this->menuAssociacoes();
 		}
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ));
@@ -1002,14 +1008,16 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << " 1. Informacoes da minha conta\n";
 	std::cout << " 2. Modificar a minha conta\n";
 	std::cout << " 3. Apagar a minha conta\n";
+	std::cout << " 4. Emails recebidos\n";
+	std::cout << " 5. Emails enviados\n\n";
 
 	std::cout << "_________________ ESPACO GESTOR ________________\n\n";
-	std::cout << " 4. Criar um novo gestor\n\n";
-	std::cout << " 5. Modificar conta de um associado\n\n";
-	std::cout << " 6. Apagar associado\n\n";
-	std::cout << " 7. Apoiar evento\n\n"; //FAZER
-	std::cout << " 8. Enviar email\n\n";
-	std::cout << " 9. Terminar Sessao\n\n";
+	std::cout << " 6. Criar um novo gestor\n";
+	std::cout << " 7. Modificar conta de um associado\n";
+	std::cout << " 8. Apagar associado\n";
+	std::cout << " 9. Apoiar evento\n"; 
+	std::cout << "10. Enviar email\n";
+	std::cout << "11. Terminar Sessao\n\n";
 
 
 	unsigned int opcao = 0;
@@ -1017,52 +1025,98 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	{
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
+		{
+			std::cin.clear();
 			this->menuLogin();
-	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
-			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7) || (opcao == 8) || (opcao == 9) ) );
-
-	if(opcao == 1){
-			clearScreen();
-			for (unsigned int i = 0; i<this->associacao->getGestores().size(); i++)
-				if(this->associacao->getGestores().at(i)->getID() == id)
-					this->associacao->getGestores().at(i)->show();
-			std::cout << "Pressione ENTER para continuar... " << std::endl;
-
-				if(std::cin.get())
-					this->menuSessaoGestor(id);
 		}
+	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
+			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7) || (opcao == 8) || (opcao == 9) || (opcao==10) || (opcao==11)));
 
-	else if (opcao == 5)
+	if (opcao == 1) {
+		clearScreen();
+		for (unsigned int i = 0; i < this->associacao->getGestores().size(); i++)
+			if (this->associacao->getGestores().at(i)->getID() == id)
+				this->associacao->getGestores().at(i)->show();
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+			}
+		}
+		this->menuSessaoGestor(id);
+	}
+
+	else if (opcao == 7)
 		this->alteraAssociado(id);
 	else if (opcao == 3)
 		this->apagaGestor(id);
-	else if (opcao == 6)
+	else if (opcao == 8)
 		this->apagaAssociado(id);
-	else if (opcao == 8) {
+	else if (opcao == 10) {
 
 		this->envioEmail(gestor);
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
+		if (std::cin.get())
+		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+			}
+		}
 		this->menuSessaoGestor(id);
 	}
-	else if (opcao == 4)
+	else if (opcao == 6)
 		this->criaGestor(associacao->getSigla(), false, id);
-	else if (opcao == 9)
+	else if (opcao == 11)
 	{
 		this->menuLogin();
 	}
-	else if(opcao == 2)
+	else if (opcao == 2)
 		this->alteraGestor(gestor);
-	else if(opcao == 7)
+	else if (opcao == 9)
 		this->apoiarEvento(id);
+	else if (opcao == 4)
+	{
+		this->visualizaEmailsRecebidos(gestor);
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+			}
+		}
+		this->menuSessaoGestor(id);
+	}
+	else if (opcao == 5)
+	{
+		this->visualizaEmailsEnviados(gestor);
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+			}
+		}
+		this->menuSessaoGestor(id);
+	}
 
 
 }
 
 void AssociacaoMS::apoiarEvento(unsigned int id) {
+	clearScreen();
 	std::cout << "Eventos sem apoio da associacao\n\n";
 	for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
 		if (!associacao->getEventos().at(i)->getApoioEvento().getApoioAssociacao())
-			std::cout << "Evento n." << i + 1 << " \nNome : "
+			std::cout << "Evento numero " << i + 1 << " \nNome : "
 					<< associacao->getEventos().at(i)->getTema() << " \nLocal : "
 					<< associacao->getEventos().at(i)->getLocal() << "\n\n";
 
@@ -1070,7 +1124,11 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 	std::string tipoApoio;
 	do {
 		getNumber(opcao, "Indique o numero do evento que pretende dar apoio : ");
-
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(id);
+		}
 		if (opcao == associacao->getEventos().size() + 1)
 			break;
 
@@ -1088,7 +1146,10 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
 		if (std::cin.get())
+		{
+			if (std::cin.eof()) std::cin.clear();
 			this->menuSessaoGestor(id);
+		}
 
 	} while (opcao >= associacao->getEventos().size());
 
@@ -1098,6 +1159,7 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 void AssociacaoMS::alteraGestor(Gestor* gestor) {
 
 	std::string nome, pass;
+	clearScreen();
 
 	std::cout << "O que deseja alterar ? \n\n";
 	std::cout << "1. Nome \n" << "2. Password \n\n";
@@ -1106,18 +1168,45 @@ void AssociacaoMS::alteraGestor(Gestor* gestor) {
 	do {
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
-			this->menuTermino();
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(gestor->getID());
+		}
 	} while (!((opcao == 1) || (opcao == 2)));
 
 	if (opcao == 1) {
 		std::cout << "Nome Atual : " << gestor->getNome();
-		getString(nome, "\nNovo Nome : ");
+		do
+		{
+			getString(nome, "\nNovo Nome : ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				this->menuSessaoGestor(gestor->getID());
+			}
+			if (nome == gestor->getNome())
+			{
+				std::cout << "Manteve o mesmo nome! Por favor insira outro\n\n";
+			}
+		} while (nome == gestor->getNome());
 		gestor->setNome(nome);
 		std::cout << "Nome alterado com sucesso!\n\n";
 
 	} else if (opcao == 2) {
 		std::cout << "Password Atual : " << gestor->getPassword();
-		getString(pass, "\nNova Password : ");
+		do
+		{
+			getString(pass, "\nNova Password : ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				this->menuSessaoGestor(gestor->getID());
+			}
+			if (pass == gestor->getPassword())
+			{
+				std::cout << "Manteve a mesma password! Por favor insira outra\n\n";
+			}
+		} while (pass == gestor->getPassword());
 		gestor->setPassword(pass);
 		std::cout << "Password alterada com sucesso!\n\n";
 	}
@@ -1125,7 +1214,14 @@ void AssociacaoMS::alteraGestor(Gestor* gestor) {
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
 
 	if (std::cin.get())
+	{
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(gestor->getID());
+		}
 		this->menuSessaoGestor(gestor->getID());
+	}
 
 }
 
@@ -1207,6 +1303,11 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 		associacao->eraseAssociado(associado);
 		std::cout << "Conta eliminada com sucesso...\n\n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
+		if (std::cin.get())
+		{
+			if (std::cin.eof()) std::cin.clear();
+			this->menuLogin();
+		}
 
 	case 4:
 		clearScreen();
@@ -1313,6 +1414,11 @@ void AssociacaoMS::menuSessaoSubscriber(Associado* associado)  //para completar
 			associacao->eraseAssociado(associado);
 			std::cout << "Conta eliminada com sucesso...\n\n";
 			std::cout << "Pressione ENTER para continuar... " << std::endl;
+			if (std::cin.get())
+			{
+				if (std::cin.eof()) std::cin.clear();
+				this->menuLogin();
+			}
 
 		case 4:
 			clearScreen();
@@ -1407,6 +1513,11 @@ void AssociacaoMS::menuSessaoOther(Associado * associado){
 			associacao->eraseAssociado(associado);
 			std::cout << "Conta eliminada com sucesso...\n\n";
 			std::cout << "Pressione ENTER para continuar... " << std::endl;
+			if (std::cin.get())
+			{
+				if (std::cin.eof()) std::cin.clear();
+				this->menuLogin();
+			}
 
 		case 4:
 			clearScreen();
@@ -1454,18 +1565,49 @@ void AssociacaoMS::modificarConta(Associado* associado) {
 	do {
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
-			this->menuTermino();
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+			else
+				this->menuSessaoOther(associado);
+		}
 	} while (!((opcao == 1) || (opcao == 2)));
 
 	if (opcao == 1) {
 		std::cout << "Nome Atual : " << associado->getNome();
 		getString(nome, "\nNovo Nome : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+			else
+				this->menuSessaoOther(associado);
+		}
 		associado->setNome(nome);
 		std::cout << "Nome alterado com sucesso!\n\n";
 
 	} else if (opcao == 2) {
 		std::cout << "Password Atual : " << associado->getPassword();
 		getString(pass, "\nNova Password : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+			else
+				this->menuSessaoOther(associado);
+		}
 		associado->setPassword(pass);
 		std::cout << "Password alterada com sucesso!\n\n";
 	}
@@ -1473,7 +1615,18 @@ void AssociacaoMS::modificarConta(Associado* associado) {
 	std::cout << "Pressione ENTER para continuar... " << std::endl;
 
 	if (std::cin.get())
-		this->menuSessaoContributor(associado);
+	{
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+		}
+		if (associado->isContributor())
+			this->menuSessaoContributor(associado);
+		else if (associado->isSubscriber())
+			this->menuSessaoSubscriber(associado);
+		else
+			this->menuSessaoOther(associado);
+	}
 
 }
 
@@ -1891,6 +2044,7 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 	std::string nome, pass, emdia;
 	bool emdiaBool;
 
+	clearScreen();
 	std::cout << "Associados disponiveis : \n\n";
 	std::cout << std::setw(20) << "ID" << std::setw(20) << "Nome" << "\n";
 	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
@@ -1900,6 +2054,11 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 
 	do {
 		getNumber(ID, "Introduza o ID do associado a alterar : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(id);
+		}
 		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
 			if (associacao->getAssociados().at(i)->getID() == ID)
 				pos = i;
@@ -1914,7 +2073,10 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 	do {
 		getNumber(opcao, "Opcao: ");
 		if (std::cin.eof())
+		{
+			std::cin.clear();
 			this->menuTermino();
+		}
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3)));
 
 	if (opcao == 1) {
@@ -1923,7 +2085,6 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 		getString(nome, "\nNovo Nome : ");
 		associacao->getAssociados().at(pos)->setNome(nome);
 		std::cout << "Nome alterado com sucesso!\n\n";
-
 	}
 	else if (opcao == 2) {
 		std::cout << "Password Atual : "
@@ -1931,14 +2092,15 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 		getString(pass, "\nNova Password : ");
 		associacao->getAssociados().at(pos)->setPassword(pass);
 		std::cout << "Password alterada com sucesso!\n\n";
+		this->menuSessaoGestor(id);
 	}
 	else if (opcao == 3) {
 		std::cout << "Estado da cota atual : ";
-				if(associacao->getAssociados().at(pos)->getCota()->getEmDia())
-					std::cout << "Em dia !\n\n";
-				else std::cout << "Nao esta em dia, com um atraso de "
-						<< associacao->getAssociados().at(pos)->getCota()->getAtraso()
-					<< " anos ! \n\n";
+		if (associacao->getAssociados().at(pos)->getCota()->getEmDia())
+			std::cout << "Em dia !\n\n";
+		else std::cout << "Nao esta em dia, com um atraso de "
+			<< associacao->getAssociados().at(pos)->getCota()->getAtraso()
+			<< " anos ! \n\n";
 		std::cout << "Novo estado da cota : ";
 		getString(emdia, "Em dia ? (true/false) ");
 		if (emdia == "true")
@@ -1951,7 +2113,7 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 			atraso = 0;
 
 		Associado *a1;
-		Cota *cota=new Cota(emdiaBool, atraso);
+		Cota *cota = new Cota(emdiaBool, atraso);
 		std::vector<Associado*> temp = associacao->getAssociados();
 
 		if (associacao->getAssociados().at(pos)->getCota()->getEmDia()) //inicialmente como contributor
@@ -2059,20 +2221,23 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
 		}
-
+	}
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
-		if(std::cin.get())
+		if (std::cin.get())
+		{
+			if (std::cin.eof())
+				std::cin.clear();
 			this->menuSessaoGestor(id);
+		}
 
-	}
 }
 
 void AssociacaoMS::apagaGestor(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	if (associacao->getGestores().size() == 1)
 	{
-		std::cout << "Impossivel apagar a sua conta. Existe um só gestor da associacao! \n\n";
+		std::cout << "Impossivel apagar a sua conta. Existe um unico gestor da associacao! \n\n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 		if (std::cin.get())
 		{
@@ -2148,6 +2313,7 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 
 template <class T>
 void AssociacaoMS::envioEmail(T* associado){
+	clearScreen();
 	this->associacao->showContributors();
 	this->associacao->showSubscribers();
 	this->associacao->showGestores();
@@ -2160,6 +2326,11 @@ void AssociacaoMS::envioEmail(T* associado){
 	do
 	{
 		getString(dest, "Destinario (Insira o email) : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			return;
+		}
 	} while (!(this->associacao->existeEmail(dest)));
 
 	std::cout << "\n\n";
@@ -2167,6 +2338,11 @@ void AssociacaoMS::envioEmail(T* associado){
 
 	while (!envio) {
 		std::getline(std::cin, temp);
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			return;
+		}
 		if (temp == "ENVIAR")
 		{
 			envio = true;
@@ -2174,9 +2350,6 @@ void AssociacaoMS::envioEmail(T* associado){
 		}
 		else
 			corpo += temp;
-			
-
-
 	}
 
 
@@ -2203,6 +2376,11 @@ void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 		std::cout << "\n\n";
 
 		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			return;
+		}
 
 		if (opcao == associado->getEmailsRecebidos().size() + 1)
 			break;
@@ -2220,8 +2398,7 @@ void AssociacaoMS::visualizaEmailsRecebidos(T* associado)
 				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
 				<< "\n";
 
-		std::cout << "\nPressione ENTER para continuar... " << std::endl;
-		std::cin.get();
+		return;
 
 	} while (opcao != associado->getEmailsRecebidos().size() + 1);
 
@@ -2243,30 +2420,29 @@ void AssociacaoMS::visualizaEmailsEnviados(T* associado)
 					<< "   Conteudo: "
 					<< associado->getEmailsEnviados().at(i)->getConteudo().substr(0, 20) << "..." << "\n";
 
-		std::cout << "|" << associado->getEmailsRecebidos().size() + 1 << "|"
+		std::cout << "|" << associado->getEmailsEnviados().size() + 1 << "|"
 				<< std::setw(10) << "Voltar";
 		std::cout << "\n\n";
 
 		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
 
-		if (opcao == associado->getEmailsRecebidos().size() + 1)
+		if (opcao == associado->getEmailsEnviados().size() + 1)
 			break;
 
-		if (opcao - 1 >= associado->getEmailsRecebidos().size()) {
+		if (opcao - 1 >= associado->getEmailsEnviados().size()) {
 			std::cout << "Email inexistente...\n\n";
 			continue;
 		}
 
 		clearScreen();
 		std::cout << "\nRemetente: "
-				<< associado->getEmailsRecebidos().at(opcao - 1)->getRemetente()
+				<< associado->getEmailsEnviados().at(opcao - 1)->getRemetente()
 				<< "\n\n";
 		std::cout << "Conteudo: "
-				<< associado->getEmailsRecebidos().at(opcao - 1)->getConteudo()
+				<< associado->getEmailsEnviados().at(opcao - 1)->getConteudo()
 				<< "\n";
 
-		std::cout << "\nPressione ENTER para continuar... " << std::endl;
-		std::cin.get();
+		return;
 
 	} while (opcao != associado->getEmailsRecebidos().size() + 1);
 }

@@ -26,7 +26,6 @@ private:
 	std::vector<Email*> emailsRecebidos;
 	std::vector<Email*> emailsEnviados;
 public:
-	//construtor
 	/**
 		 * @brief Le o gestor do ficheiro de gestores
 		 * @param nome Especifica nome do gestor

@@ -144,8 +144,9 @@ void Associacao::showGestores() const
 		}
 }
 unsigned int Associacao::incIdAssociados(){
+	//auto id_disponivel = this->id;
 	id++;
-	return this->id;
+	return id;
 }
 void Associacao::showInteressesOutrosAssociados() const
 {

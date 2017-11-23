@@ -50,7 +50,7 @@ private:
 	/**
 	 * @brief ID do próximo gestor ou associado que for adicionado à associação
 	 */
-	unsigned int id;  //id do associado/gestor seguinte da associacao
+	unsigned int id;  
 
 public:
 	/**
