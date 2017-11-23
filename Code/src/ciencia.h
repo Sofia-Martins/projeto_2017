@@ -20,72 +20,69 @@ class Ciencia
 {
 
 private:
+	/**
+	 * @brief Nome da ciência
+	 */
 	std::string nomeCiencia;
+	/**
+	 * @brief Vetor de apontadores para as áreas cinetíficas que compõem a ciência
+	 */
 	std::vector<AreaCientifica*> areas;
 public:
-	//construtor
-	/*
-	 * @brief Construtor da ciencia sem parametros
+	/**
+	 * @brief Construtor sem parâmetros da ciência
 	 *
-	 * Inicializa o nomeCiencia com a string vazia
-	 *
-	 * @return void
+	 * Inicializa o atributo nomeCiencia com a string vazia
 	 */
 	Ciencia(){nomeCiencia = "";};
-	/*
-	 * @brief Construtor da classe ciencia
-	 * @param nomeCiencia Define o nome da ciencia
-	 * @return void
+	/**
+	 * @brief Construtor com parâmetros da classe Ciencia
+	 * @param nomeCiencia Define o valor do atributo nomeCiencia
 	 */
 	Ciencia(std::string nomeCiencia);
-
-	//metodos set
-	/*
-	 * @brief Altera nome da ciencia
-	 * @param nomeCiencia Especifica novo valor do nome da ciencia
+	/**
+	 * @brief Altera nome da ciência
+	 * @param nomeCiencia Especifica novo valor do atributo nomeCiencia
 	 * @return void
 	 */
 	void setNomeCiencia(std::string nomeCiencia);
-
-	//metodos get
-	/*
+	/**
 	 * @brief Retorna valor do atributo nomeCiencia
 	 * @return String nomeCiencia
 	 */
 	std::string getNomeCiencia() const;
-	/*
+	/**
 	 * @brief Retorna vetor de areas da ciencia
 	 * @return Vector areas
 	 */
 	std::vector<AreaCientifica*> getAreas() const{return areas;};
-
-	//outros metodos
-	/*
+	/**
 	 * @brief Adiciona uma area cientifica ao vetor de areas
 	 * @param area area a adicionar
 	 * @return void
 	 */
 	void addAreaCientifica(AreaCientifica* area);
-	/*
+	/**
 	 * @brief Imprime a ciencia na consola
 	 * @return void
 	 */
 	void show(unsigned int i) const;
 
-	//friends
+
 	friend class Associacao;
 };
 
-//excecoes
+
 
 class AreaCientificaRepetida
 {
-
-
 private:
+	/**
+     * @brief Apontador para a área científica que se repete
+     */
 	AreaCientifica* area;
 public:
-	/*
+	/**
 	 * @brief Construtor da area cientifica repetida
 	 * @param area Especifica a area cientifica repetida
 	 * @return void

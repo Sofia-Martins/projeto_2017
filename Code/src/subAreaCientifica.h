@@ -16,24 +16,40 @@
 class SubAreaCientifica
 {
 private:
+	/**
+	 * @brief Nome da sub-área científica
+	 */
 	std::string nomeSubArea;
 
 public:
-	//construtor
+	/**
+	 * @brief Construtor sem parâmetros
+	 *
+	 * Atribui 'string vazia' ao atributo nomeSubArea
+	 */
 	SubAreaCientifica() { nomeSubArea = ""; }
+	/**
+	 * @brief Construtor com parâmetros
+	 * @param nomeSubArea Nome da sub-área científica que se pretende criar
+	 */
 	SubAreaCientifica(std::string nomeSubArea);
-
-	//metodos set
+	/**
+	 * @brief Atribui valor do argumento ao atributo nomeSubArea
+	 * @param nomeSubArea Valor que será atribuído ao atributo nomeSubArea
+	 * @return void
+	 */
 	void setNomeSubAreaCientifica(std::string nomeSubArea);
-	
-
-	//metodos get
+	/**
+	 * @brief Retorna valor do atributo nomeSubArea
+	 * @return Valor do atributo nomeSubArea
+	 */
 	std::string getNomeSubAreaCientifica() const;
-
-	//outros metodos
+	/**
+	 * @brief Imprime a sub-área científica na consola
+	 */
 	void show() const;
 
-	//friends
+
 	friend class Associacao;
 	
 };
