@@ -7,6 +7,5 @@ var searchData=
   ['ficheiroemails',['ficheiroEmails',['../classAssociacaoMS.html#a93aac60cf02b3683e5b76da084d83032',1,'AssociacaoMS']]],
   ['ficheiroescolasverao',['ficheiroEscolasVerao',['../classAssociacaoMS.html#acea9379528a52fcf90d6a8c0e9b4c393',1,'AssociacaoMS']]],
   ['ficheirogestores',['ficheiroGestores',['../classAssociacaoMS.html#a599c32c746a1722f6cc3bf0b57854594',1,'AssociacaoMS']]],
-  ['formadores',['formadores',['../classEscolaVerao.html#adfd74285d7384b989269f819eaa2458a',1,'EscolaVerao']]],
-  ['freire',['Freire',['../apic__associados_8txt.html#acdb97090c94afb1645678c96a6082841',1,'apic_associados.txt']]]
+  ['formadores',['formadores',['../classEscolaVerao.html#adfd74285d7384b989269f819eaa2458a',1,'EscolaVerao']]]
 ];
