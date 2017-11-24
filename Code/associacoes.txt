@@ -1,2 +1,1 @@
 apic;Associacao Portuguesa de Investigação Científica
-scp;Sporting Clube de Portugal

@@ -1,1 +1,3 @@
-3@apic.com, 2@apic.com, conteudo
+2@apic.com,3@apic.com,Bom dia. Serve este email para testar o funcionamento da rede de distribuicao de emails da associacao
+3@apic.com,2@apic.com,Boa tarde. Serve este email para confirmar o funcionamento da rede de distribuicao de emails da associacao
+4@apic.com,3@apic.com,Boa noite. Serve este email para nao excluir nenhum associado do sistema de emails

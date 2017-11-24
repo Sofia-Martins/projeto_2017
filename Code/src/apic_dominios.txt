@@ -1,40 +1,40 @@
-@Ciências da Vida e da Saúde
-#Neurociências, Envelhecimento e Doenças Degenerativas
-*Neurociências - Molecular e Celular 
-*Neurociências - Sistemas, Clínica e Comportamento 
-*Biologia do Envelhecimento 
-*Degeneração de Orgãos e Sistemas 
-#Imunologia e Infeção
-*Imunologia e Inflamação 
-*Microbiologia e Infeção 
-#Diagnóstico, Terapêutica e Saúde Pública
-*Epidemiologia 
-*Saúde Pública e Fatores Ambientais 
-*Farmacologia e Toxicologia 
-*Fisiologia do Exercício e Ciências do Desporto 
-*Investigação Clínica 
+@Ciï¿½ncias da Vida e da Saï¿½de
+#Neurociï¿½ncias, Envelhecimento e Doenï¿½as Degenerativas
+*Neurociï¿½ncias - Molecular e Celular
+*Neurociï¿½ncias - Sistemas, Clï¿½nica e Comportamento
+*Biologia do Envelhecimento
+*Degeneraï¿½ï¿½o de Orgï¿½os e Sistemas
+#Imunologia e Infeï¿½ï¿½o
+*Imunologia e Inflamaï¿½ï¿½o
+*Microbiologia e Infeï¿½ï¿½o
+#Diagnï¿½stico, Terapï¿½utica e Saï¿½de Pï¿½blica
+*Epidemiologia
+*Saï¿½de Pï¿½blica e Fatores Ambientais
+*Farmacologia e Toxicologia
+*Fisiologia do Exercï¿½cio e Ciï¿½ncias do Desporto
+*Investigaï¿½ï¿½o Clï¿½nica
 #Biomedicina
-*Oncobiologia 
-*Mecanismos da Doença 
-*Metabolismo e Nutrição 
-*Medicina Regenerativa 
+*Oncobiologia
+*Mecanismos da Doenï¿½a
+*Metabolismo e Nutriï¿½ï¿½o
+*Medicina Regenerativa
 #Biologia Experimental
-*Genética e Genómica
-*Biologia Celular e Molecular 
-*Biologia do Desenvolvimento 
-*Biologia Computacional e Bioinformática
-@Ciências Exatas e da Engenharia
-#Ciência e Engenharia de Materiais
-*Biomateriais 
-*Cerâmica e Vidro 
-*Materiais para Produção e Armazenamento de Energia 
-*Nanomateriais e Dispositivos 
-*Polímeros e Compósitos 
-*Materiais Estruturais 
-#Bioengenharia, Biotecnologia e Bioquímica
-*Engenharia Biológica
-*Engenharia Metabólica e Fisiologia Microbiana
-*Biologia Sintética e de Sistemas 
-*Engenharia de Bioprocessos e Biocatálise 
-*Engenharia Celular e de Tecidos 
-*Biotecnologia 
+*Genï¿½tica e Genï¿½mica
+*Biologia Celular e Molecular
+*Biologia do Desenvolvimento
+*Biologia Computacional e Bioinformï¿½tica
+@Ciï¿½ncias Exatas e da Engenharia
+#Ciï¿½ncia e Engenharia de Materiais
+*Biomateriais
+*Ceramica e Vidro
+*Materiais para Producao e Armazenamento de Energia
+*Nanomateriais e Dispositivos
+*Polï¿½meros e Compï¿½sitos
+*Materiais Estruturais
+#Bioengenharia, Biotecnologia e Bioquï¿½mica
+*Engenharia Biologica
+*Engenharia Metabï¿½lica e Fisiologia Microbiana
+*Biologia Sintï¿½tica e de Sistemas
+*Engenharia de Bioprocessos e Biocatï¿½lise
+*Engenharia Celular e de Tecidos
+*Biotecnologia

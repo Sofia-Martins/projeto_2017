@@ -1,1 +1,1 @@
-2,4;2,4,3;gondomar;dominios cientificos;24,12,2017,23,45;1;monetario;20
+2,4;2,4;FEUP;HiTech;1,12,2017,9,30;1;monetario;200
