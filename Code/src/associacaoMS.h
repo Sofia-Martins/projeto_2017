@@ -336,6 +336,12 @@ public:
 	 * @return void
 	 */
 	void menuTermino();
+	/**
+	 *Função que atualiza o ficheiro contendo a informação dos gestores da associação a ser gerida. O ficheiro atualizado
+	 *é o ficheiro de nome ficheiroGestores
+	 *@return void
+	 */
+	void enviarGestores() const;
 
 
 

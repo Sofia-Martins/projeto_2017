@@ -163,7 +163,18 @@ void AssociacaoMS::menuCriaAssociacao() {
 		encontrou = false;
 
 		getString(nomeAssociacao, "Nome: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuFicheiroAssociacoes();
+
+		}
 		getString(siglaAssociacao, "Sigla: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuFicheiroAssociacoes();
+		}
 
 		std::transform(siglaAssociacao.begin(), siglaAssociacao.end(),
 				siglaAssociacao.begin(), ::tolower); //converter sigla para letras minusculas
@@ -172,7 +183,7 @@ void AssociacaoMS::menuCriaAssociacao() {
 			if (siglaAssociacao == associacoes.at(i).first) {
 				encontrou = true;
 				std::cout
-						<< "A sigla da associacao já esta a ser usada, tente outra! "
+						<< "A sigla '"<<siglaAssociacao<<"' esta a ser utilizada por outra associacao, por favor tente novamente."
 						<< std::endl << std::endl;
 			}
 
@@ -845,6 +856,7 @@ void AssociacaoMS::menuLogin() {
 			enviarEmails();
 			enviarConferencias();
 			enviarEscolasVerao();
+			enviarGestores();
 			this->menuAssociacoes();
 		}
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ));
@@ -874,6 +886,7 @@ void AssociacaoMS::menuLogin() {
 		enviarEmails();
 		enviarConferencias();
 		enviarEscolasVerao();
+		enviarGestores();
 
 		this->menuAssociacoes();
 	}
@@ -1113,12 +1126,18 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 
 void AssociacaoMS::apoiarEvento(unsigned int id) {
 	clearScreen();
+	std::vector<std::pair<Evento*,int>> eventosSemApoio;
+	int numeroEvento = 1;
 	std::cout << "Eventos sem apoio da associacao\n\n";
 	for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
 		if (!associacao->getEventos().at(i)->getApoioEvento().getApoioAssociacao())
-			std::cout << "Evento numero " << i + 1 << " \nNome : "
-					<< associacao->getEventos().at(i)->getTema() << " \nLocal : "
-					<< associacao->getEventos().at(i)->getLocal() << "\n\n";
+		{
+			std::cout << "Evento numero " << numeroEvento << " \nNome : "
+				<< associacao->getEventos().at(i)->getTema() << " \nLocal : "
+				<< associacao->getEventos().at(i)->getLocal() << "\n\n";
+			numeroEvento++;
+			eventosSemApoio.push_back(std::pair<Evento*,int>(associacao->getEventos().at(i),i));
+		}
 
 	unsigned int opcao;
 	std::string tipoApoio;
@@ -1129,17 +1148,15 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 			std::cin.clear();
 			this->menuSessaoGestor(id);
 		}
-		if (opcao == associacao->getEventos().size() + 1)
-			break;
 
-		if (opcao - 1 >= associacao->getEventos().size()) {
+		if ((opcao - 1) >= eventosSemApoio.size()) {
 			std::cout << "Evento inexistente...\n\n";
 			continue;
 		}
 
 		getString(tipoApoio, "\nIndique o tipo de apoio : ");
 		Apoio a(true,tipoApoio);
-		associacao->getEventos().at(opcao - 1)->setApoio(a);
+		associacao->getEventos().at(eventosSemApoio.at(opcao-1).second)->setApoio(a);
 
 		std::cout << "\nEvento alterado com sucesso!\n\n";
 
@@ -2102,13 +2119,28 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 			<< associacao->getAssociados().at(pos)->getCota()->getAtraso()
 			<< " anos ! \n\n";
 		std::cout << "Novo estado da cota : ";
-		getString(emdia, "Em dia ? (true/false) ");
+		do
+		{
+			getString(emdia, "Em dia ? (true/false) ");
+		} while (!((emdia== "true") || (emdia == "false")));
 		if (emdia == "true")
 			emdiaBool = true;
 		else
 			emdiaBool = false;
 		if (!emdiaBool)
-			getNumber(atraso, "Atraso (em anos) : ");
+		{
+			do
+			{
+				getNumber(atraso, "Atraso (em anos) : ");
+				if (std::cin.eof())
+				{
+					std::cin.clear();
+					this->menuSessaoGestor(id);
+				}
+				if (atraso == 0)
+					std::cout << "Atraso devera ter pelo menos um ano\n\n";
+			} while (atraso == 0);
+		}
 		else
 			atraso = 0;
 
@@ -2425,6 +2457,11 @@ void AssociacaoMS::visualizaEmailsEnviados(T* associado)
 		std::cout << "\n\n";
 
 		getNumber(opcao, "Indique o numero do email que pretende visualizar: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			return;
+		}
 
 		if (opcao == associado->getEmailsEnviados().size() + 1)
 			break;
@@ -2596,17 +2633,24 @@ void AssociacaoMS::enviarAssociados() const
 			out << areas.at(i);
 		}
     }
-
+	out.close();
 }
 
 void AssociacaoMS::enviarConferencias() const {
 	std::ofstream out;
 	out.open(this->ficheiroConferencias);
+	int numeroConf = 0;
 
 	auto eventos = this->associacao->getEventos();
 
 	for (int i = 0; i < eventos.size(); i++) {
 		if (!eventos.at(i)->escolaVerao()) {
+			if (numeroConf != 0)
+			{
+				out << "\n";
+			}
+			else
+				numeroConf++;
 			for (unsigned int j = 0; j < eventos.at(i)->getPlaneadores().size();
 					j++) {
 				if (j != 0) {
@@ -2640,15 +2684,20 @@ void AssociacaoMS::enviarConferencias() const {
 			out << eventos.at(i)->getApoioEvento().getTipoApoio();
 			out << ";";
 			out << eventos.at(i)->getNumeroParticipantes();
-			out << std::endl;
+			/*
+			if(i!=(eventos.size()-1))
+			  out << std::endl;
+			  */
 		}
 
 	}
+	out.close();
 }
 
 void AssociacaoMS::enviarEscolasVerao() const{
 	std::ofstream out;
 	out.open(this->ficheiroEscolasVerao);
+	int numeroEscola = 0;
 
 	auto eventos = this->associacao->getEventos();
 
@@ -2656,6 +2705,12 @@ void AssociacaoMS::enviarEscolasVerao() const{
 		{
 			if (eventos.at(i)->escolaVerao())
 			{
+				if (numeroEscola != 0)
+				{
+					out << "\n";
+				}
+				else
+					numeroEscola++;
 				for (unsigned int j = 0; j<eventos.at(i)->getPlaneadores().size(); j++)
 				{
 					if (j != 0)
@@ -2699,12 +2754,10 @@ void AssociacaoMS::enviarEscolasVerao() const{
 					}
 					out << eventos.at(i)->getFormadores().at(j);
 				}
-
-				out << std::endl;
+				//out << std::endl;
 			}
-
-
 		}
+	out.close();
 }
 
 void AssociacaoMS::enviarEmails() const
@@ -2725,12 +2778,30 @@ void AssociacaoMS::enviarEmails() const
 			out << "\n";
 		}
 		out << remetente << "," << destinario << "," << conteudo;
-
-
     }
-
+	out.close();
 }
 
+void AssociacaoMS::enviarGestores() const
+{
+	std::ofstream out;
+	out.open(this->ficheiroGestores);
+
+	auto gestores = this->associacao->getGestores();
+
+	for (int i = 0; i < gestores.size(); i++)
+	{
+		auto nome = gestores.at(i)->getNome();
+		auto id = gestores.at(i)->getID();
+		auto password = gestores.at(i)->getPassword();
+		auto email = gestores.at(i)->getEmail();
+
+		if (i != 0) out << "\n";
+		out << nome << ";" << id << ";" << password << ";" << email;
+	}
+	out.close();
+
+}
 
 /*------------------------------------------- menu final -------------------------------------------*/
 void AssociacaoMS::menuTermino()
