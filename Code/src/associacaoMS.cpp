@@ -1663,6 +1663,7 @@ void AssociacaoMS::criarEvento(T* associado)
 	unsigned int contador = 1;  //contador do numero de planeadores do evento
 	unsigned int numeroParticipantes; //numero de participantes da conferencia
 	std::vector<unsigned int> formadores; //id's dos formadores da escola de Verao
+	bool temaNovo = true; //verificar se ja existe tema com mesmo nome
 
 	unsigned int dia;
 	unsigned int mes;
@@ -1803,7 +1804,16 @@ void AssociacaoMS::criarEvento(T* associado)
 	/* ------- Passo 4 - Escolher tema do evento --------*/
 	clearScreen();
 	std::cout << "PASSO 4: Escolher tema do evento\n\n";
-	getString(tema, "Tema do evento: ");
+
+	do{
+		temaNovo = true;
+		getString(tema, "Tema do evento: ");
+		for(unsigned int i = 0; i < associacao->getEventos().size();i++)
+			if(associacao->getEventos().at(i)->getTema() == tema)
+				temaNovo = false;
+
+
+	}while(!temaNovo);
 
 	if (std::cin.eof())
 	{
@@ -2890,6 +2900,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    //system("CLS");
 }
