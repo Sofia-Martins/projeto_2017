@@ -1,3 +1,4 @@
-Tiago Rodrigues,2,pass2,apic,sim,0,2@apic.com;C_For_Beginners,HiTech;Oncobiologia,Materiais para Producao e Armazenamento de Energia
-Luisa Freire,3,pass3,apic,nao,6,3@apic.com;C_For_Beginners;Nanomateriais e Dispositivos
-Sofia Martins,4,pass4,apic,nao,3,4@apic.com;C_For_Beginners,HiTech;Biotecnologia,Engenharia Celular e de Tecidos,Engenharia Biologica
+Maria Cardoso,2,maria,FBAUP,nao,2,2@apic.com;Seca em Portugal - Que consequencias?,Inspira(-te)!,A Brief History of Time,Quero ser um Engenheiro!;Degeneracao de Orgaos e Sistemas
+Sofia Martins,3,sofia,FEUP,sim,0,3@apic.com;Seca em Portugal - Que consequencias?,Inspira(-te)!,A Brief History of Time,Quero ser um Engenheiro!;Neurociencias - Sistemas (Clinica e Comportamento),Biologia do Envelhecimento
+Tiago Martins,4,tiago,FADEUP,sim,0,4@apic.com;Seca em Portugal - Que consequencias?,Inspira(-te)!,A Brief History of Time,Quero ser um Engenheiro!;
+Ricardo Cardoso,5,ricardo,FEUP,nao,8,5@apic.com;Seca em Portugal - Que consequencias?,A Brief History of Time;

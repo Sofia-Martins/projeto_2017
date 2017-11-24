@@ -1,3 +1,4 @@
-2@apic.com,3@apic.com,Bom dia. Serve este email para testar o funcionamento da rede de distribuicao de emails da associacao
-3@apic.com,2@apic.com,Boa tarde. Serve este email para confirmar o funcionamento da rede de distribuicao de emails da associacao
-4@apic.com,3@apic.com,Boa noite. Serve este email para nao excluir nenhum associado do sistema de emails
+1@apic.com,6@apic.com,Ola Joao!Que achas de apoiar o evento 'A Brief History of Time'?Parece ter um tema bastante interessante.Aguardo a tua resposta.
+3@apic.com,2@apic.com,Ola Maria!Temos de combinar um dia para preparar a nossa conferencia!Sexta feira estas disponivel?
+4@apic.com,3@apic.com,Estou a sentir-me inspirado!Gostavas de organizar uma conferencia?Estava a pensar em reunir com a Maria no proximo sabado para debater este assunto.Que achas?
+3@apic.com,4@apic.com,Ola Tiago!Obrigada pelo convite!Tambem me ocorreu essa ideia.Qual seria o tema do evento?

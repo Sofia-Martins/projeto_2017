@@ -922,7 +922,17 @@ void AssociacaoMS::criaConta() {
 			}
 
 	getString(password, "Password: ");
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		this->menuLogin();
+	}
 	getString(instituicao, "Instituicao: ");
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		this->menuLogin();
+	}
 	email = std::to_string(ID) + "@" + associacao->getSigla() + ".com";
 
 	std::cout << "ID atribuido : " << ID << "\nEmail atribuido : " << email << "\n\n";
@@ -2082,7 +2092,22 @@ void AssociacaoMS::criarEvento(T* associado)
 	}
 
 	this->associacao->addEvento(*evento);
-	associado->addEvento(tema);
+
+	for (int i = 0; i < this->associacao->getAssociados().size(); i++)
+	{
+		auto id = this->associacao->getAssociados().at(i)->getID();
+		auto planeador = find(planeadores.begin(), planeadores.end(), id);
+		auto organizador = find(organizadores.begin(), organizadores.end(), id);
+		auto formador = find(formadores.begin(), formadores.end(), id);
+
+		if ((planeador != planeadores.end()) || (organizador != organizadores.end()) || (formador != formadores.end()))
+		{
+			auto associadoEvento=this->associacao->getAssociados().at(i);
+			associadoEvento->addEvento(tema);
+		}
+
+		if (this->associacao->getAssociados().at(i)->getID());
+	}
 	clearScreen();
 	std::cout << "Evento adicionado com sucesso! \n\n";
 
@@ -2566,16 +2591,16 @@ do {
 		if (std::find(subAreasInteresse.begin(), subAreasInteresse.end(), subAreaParaAdicionar) != subAreasInteresse.end()) //se essa subarea j� est� no vetor 
 		{
 			invalido = true;
-			std::cout << "A sub area " << subAreaParaAdicionar << " ja conta das suas sub areas de interesse \n\n";
+			std::cout << "A subarea " << subAreaParaAdicionar << " ja consta das suas sub areas de interesse \n\n";
 		}
 		else
 		{
 			associado->addSubAreaInteresse(subAreaParaAdicionar);
-			std::cout << "Nova Subarea de interesse adicionada com sucesso. ";
+			std::cout << "Nova subarea de interesse adicionada com sucesso. ";
 		}
 	}
 	else {
-		std::cout << "Falha ao adicionar Subarea de interesse, tente novamente\n\n";
+		std::cout << "Falha ao adicionar subarea de interesse, tente novamente\n\n";
 		invalido = true;
 	}
 

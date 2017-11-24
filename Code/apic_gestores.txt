@@ -1,1 +1,2 @@
-Bertilio Alberto; 1; pass1; 1@apic.com
+Sandra Cardoso;1;sandra;1@apic.com
+Joao Martins;6;joao;6@apic.com

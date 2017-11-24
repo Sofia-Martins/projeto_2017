@@ -1,1 +1,1 @@
-apic;Associacao Portuguesa de Investigação Científica
+﻿apic;Associacao Portuguesa de Investigacao Cientifica
