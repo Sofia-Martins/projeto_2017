@@ -46,7 +46,10 @@ void AssociacaoMS::menuBemVindoSelecao()
 		getNumber(numeroOpcao, "Opcao: ");
 
 		if (std::cin.eof())
+		{
+			std::cin.clear();
 			this->menuTermino();
+		}
 
 	} while (!((numeroOpcao == 1) || (numeroOpcao == 2)));
 
@@ -243,6 +246,7 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 
 	do
 	{
+		if (std::cin.eof()) std::cin.clear();
 		getString(nome, "Nome: ");
 	} while (std::cin.eof() && criaAssociacao);
 
@@ -255,6 +259,7 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 
 	do
 	{
+		if (std::cin.eof()) std::cin.clear();
 		getString(password, "Password: ");
 	} while (std::cin.eof() && criaAssociacao);
 
@@ -324,15 +329,15 @@ void AssociacaoMS::menuAssociacoes() {
 	{
 
 		getNumber(opcao, "Opcao: ");
-		if (opcao > associacoes.size())
-			valido = false;
-		else valido = true;
-
 		if (std::cin.eof())
 		{
 			std::cin.clear();
 			this->menuFicheiroAssociacoes();
 		}
+		if (opcao > associacoes.size())
+			valido = false;
+		else valido = true;
+
 	} while (!valido);
 
 
@@ -911,6 +916,11 @@ void AssociacaoMS::criaConta() {
 	int ID = associacao->incIdAssociados();
 
 	getString(nome, "Nome: ");
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		this->menuLogin();
+	}
 	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
 		if(associacao->getAssociados().at(i)->getNome() == nome)
 			{
@@ -1179,6 +1189,11 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 		}
 
 		getString(tipoApoio, "\nIndique o tipo de apoio : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(id);
+		}
 		Apoio a(true,tipoApoio);
 		associacao->getEventos().at(eventosSemApoio.at(opcao-1).second)->setApoio(a);
 
@@ -2159,6 +2174,11 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 		std::cout << "Nome Atual : "
 			<< associacao->getAssociados().at(pos)->getNome();
 		getString(nome, "\nNovo Nome : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(id);
+		}
 		associacao->getAssociados().at(pos)->setNome(nome);
 		std::cout << "Nome alterado com sucesso!\n\n";
 	}
@@ -2166,6 +2186,11 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 		std::cout << "Password Atual : "
 			<< associacao->getAssociados().at(pos)->getPassword();
 		getString(pass, "\nNova Password : ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(id);
+		}
 		associacao->getAssociados().at(pos)->setPassword(pass);
 		std::cout << "Password alterada com sucesso!\n\n";
 		this->menuSessaoGestor(id);
@@ -2181,6 +2206,11 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 		do
 		{
 			getString(emdia, "Em dia ? (true/false) ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				this->menuSessaoGestor(id);
+			}
 		} while (!((emdia== "true") || (emdia == "false")));
 		if (emdia == "true")
 			emdiaBool = true;
