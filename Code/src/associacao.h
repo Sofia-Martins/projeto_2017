@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <windows.h>
 #include <algorithm>
 #include "dominioCientifico.h"
 #include "email.h"
@@ -252,6 +253,26 @@ public:
 	 * @return void
 	 */
 	void showInteressesAssociado(Associado* associado) const;
+	/**
+	*@brief Organiza o vetor de associados recorrendo ao algoritmo de ordenação sort
+	*@return void
+	*/
+	void sortAssociados();
+	/**
+	*@brief Organiza o vetor de gestores recorrendo ao algoritmo de ordenação sort
+	*@return void
+	*/
+	void sortGestores();
+	/**
+	*@brief Organiza o vetor de eventos recorrendo ao algoritmo de ordenação sort
+	*@return void
+	*/
+	void sortEventos();
+	/**
+	*@brief Organiza o domínio científico recorrendo ao algoritmo de ordenação sort
+	*@return void
+	*/
+	void sortDominio();
 };
 
 
@@ -272,5 +293,27 @@ public:
 	AssociacaoRepetida(std::string nome);
 };
 
+
+/**
+*@brief Função que compara dois associados e que serve como função de comparação no algoritmo sort
+*@param a1 Apontador para o primeiro associado
+*@param a2 Apontador para o segundo associado
+*@return bool Retorna 'true' se o ID do associado 'a1' for menor que o ID do associado 'a2'. Retorna 'false' em caso contrário.
+*/
+bool comparaAssociados(const Associado* a1, const Associado* a2);
+/**
+*@brief Função que compara dois gestores e que serve como função de comparação no algoritmo sort
+*@param a1 Apontador para o primeiro gestor
+*@param a2 Apontador para o segundo gestor
+*@return bool Retorna 'true' se o ID do gestor 'g1' for menor que o ID do gestor 'g2'. Retorna 'false' em caso contrário.
+*/
+bool comparaGestores(const Gestor* g1, const Gestor* g2);
+/**
+*@brief Função que compara dois eventos e que serve como função de comparação no algoritmo sort
+*@param a1 Apontador para o primeiro evento
+*@param a2 Apontador para o segundo evento
+*@return bool Retorna 'true' se o tema do evento 'e1' vier antes do tema do evento 'e2' (ordenação alfabética)
+*/
+bool comparaEventos(const Evento* e1, const Evento* e2);
 
 #endif

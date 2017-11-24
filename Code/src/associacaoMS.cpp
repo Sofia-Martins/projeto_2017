@@ -462,11 +462,13 @@ void AssociacaoMS::lerAssociados() {
 		getline(input, tema, ';');
 		getline(input, subareas);
 
+		/*
 		if(nome == "")
 			break;
 
 		if(subareas == "")
 			break;
+*/
 
 		eliminateSpaces(nome);
 		eliminateSpaces(ID);
@@ -475,8 +477,14 @@ void AssociacaoMS::lerAssociados() {
 		eliminateSpaces(emDiaString);
 		eliminateSpaces(atraso);
 		eliminateSpaces(email);
-		eliminateSpaces(tema);
-		eliminateSpaces(subareas);
+		if (tema != "")
+		{
+			eliminateSpaces(tema);
+		}
+		if (subareas != "")
+		{
+			eliminateSpaces(subareas);
+		}
 
 		bool emDia;
 		if (emDiaString == "sim")
@@ -497,12 +505,15 @@ void AssociacaoMS::lerAssociados() {
 		//guardar temas de eventos
 		std::istringstream ssEventos(tema);
 		std::vector<std::string> v_eventos;
-		while (!ssEventos.eof())
+		if (tema != "")
 		{
-			std::string evento;
-			getline(ssEventos, evento, ',');
-			eliminateSpaces(evento);
-			v_eventos.push_back(evento);
+			while (!ssEventos.eof())
+			{
+				std::string evento;
+				getline(ssEventos, evento, ',');
+				eliminateSpaces(evento);
+				v_eventos.push_back(evento);
+			}
 		}
 		a1->setEventos(v_eventos);
 
@@ -510,12 +521,15 @@ void AssociacaoMS::lerAssociados() {
 		//guardar subareas de interesse
 		std::istringstream ssSubAreas(subareas);
 		std::vector<std::string> v_subareas;
-		while (!ssSubAreas.eof())
+		if (subareas != "")
 		{
-			std::string subArea;
-			getline(ssSubAreas, subArea, ',');
-			eliminateSpaces(subArea);
-			v_subareas.push_back(subArea);
+			while (!ssSubAreas.eof())
+			{
+				std::string subArea;
+				getline(ssSubAreas, subArea, ',');
+				eliminateSpaces(subArea);
+				v_subareas.push_back(subArea);
+			}
 		}
 		a1->setAreasInteresse(v_subareas);
 		associacao->addAssociado(*a1);
@@ -1808,6 +1822,16 @@ void AssociacaoMS::criarEvento(T* associado)
 	do{
 		temaNovo = true;
 		getString(tema, "Tema do evento: ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			if (associado->isContributor())
+				this->menuSessaoContributor(associado);
+			else if (associado->isSubscriber())
+				this->menuSessaoSubscriber(associado);
+			else
+				this->menuSessaoOther(associado);
+		}
 		for(unsigned int i = 0; i < associacao->getEventos().size();i++)
 			if(associacao->getEventos().at(i)->getTema() == tema)
 				temaNovo = false;
@@ -2336,8 +2360,7 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 			if (associacao->getAssociados().at(i)->getID() == ID)
 			{
 				existeID = true;
-				temp.erase(temp.begin() + i);
-				associacao->setAssociados(temp);
+				this->associacao->eraseAssociado(temp.at(i));
 				std::cout << "Associado apagado com sucesso! \n\n";
 
 				std::cout << "Pressione ENTER para continuar... " << std::endl;
@@ -2564,7 +2587,7 @@ void AssociacaoMS::enviarDominios() const
 {
 	std::ofstream out;
 	out.open(this->ficheiroDominios);
-
+	this->associacao->sortDominio();
 	auto dominio = this->associacao->getDominio();
 	auto ciencias = dominio->getCiencia();
 
@@ -2600,6 +2623,7 @@ void AssociacaoMS::enviarAssociados() const
 	std::ofstream out;
 	out.open(this->ficheiroAssociados);
 
+	this->associacao->sortAssociados(); //organizar vetor de associados
 	auto associados = this->associacao->getAssociados();
 
 	for (int i = 0; i < associados.size(); i++)
@@ -2651,6 +2675,7 @@ void AssociacaoMS::enviarConferencias() const {
 	out.open(this->ficheiroConferencias);
 	int numeroConf = 0;
 
+	this->associacao->sortEventos();
 	auto eventos = this->associacao->getEventos();
 
 	for (int i = 0; i < eventos.size(); i++) {
@@ -2797,6 +2822,7 @@ void AssociacaoMS::enviarGestores() const
 	std::ofstream out;
 	out.open(this->ficheiroGestores);
 
+	this->associacao->sortGestores();
 	auto gestores = this->associacao->getGestores();
 
 	for (int i = 0; i < gestores.size(); i++)
@@ -2900,6 +2926,5 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    //system("CLS");
+    system("CLS");
 }

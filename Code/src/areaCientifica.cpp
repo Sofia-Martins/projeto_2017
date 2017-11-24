@@ -64,3 +64,13 @@ SubAreaCientificaRepetida::SubAreaCientificaRepetida(SubAreaCientifica* subArea)
 	this->subArea=subArea;
 
 }
+
+bool comparaSubAreas(const SubAreaCientifica* s1, const SubAreaCientifica* s2)
+{
+	return (s1->getNomeSubAreaCientifica() < s2->getNomeSubAreaCientifica());
+}
+
+void AreaCientifica::sortSubAreas()
+{
+	sort(subAreas.begin(), subAreas.end(), comparaSubAreas);
+}

@@ -237,10 +237,10 @@ void Associacao::showInteressesOutrosAssociados() const
 					posicaoInteresses++;
 					for (unsigned int m = 0; m < associadosAtuais.size(); m++)
 					{
-						//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-						//SetConsoleTextAttribute(hConsole, 10);
+						HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+						SetConsoleTextAttribute(hConsole, 10);
 						std::cout << "             " << std::setw(15)<<associadosAtuais.at(m).second << " (ID " << associadosAtuais.at(m).first << ")" << std::endl;
-						//SetConsoleTextAttribute(hConsole, 7);
+						SetConsoleTextAttribute(hConsole, 7);
 						
 					}
 				}
@@ -309,17 +309,26 @@ void Associacao::eraseAssociado(Associado* associado){
 		if (posPlaneador != planeadores.end())
 			eventos.at(i)->removePlaneador(associado->getID());
 
-		if (posOrganizador != organizadores.end())
-			eventos.at(i)->removeOrganizador(associado->getID());
-
-		if (eventos.at(i)->escolaVerao() == true)   //se esse evento for uma escola de Verao existe a possibilidade de esse 
-													  //associado constar da lista de formadores
+		if (eventos.at(i)->getPlaneadores().size() < 3) //os eventos têm de ter no mínimo 3 planeadores
 		{
-			auto formadores = eventos.at(i)->getFormadores();
-			auto posFormador = find(formadores.begin(), formadores.end(), associado->getID());
+			eventos.erase(eventos.begin() + i);
+			i--;
+		}
+		else
+		{
 
-			if (posFormador != formadores.end())
-				eventos.at(i)->removeFormador(associado->getID());
+			if (posOrganizador != organizadores.end())
+				eventos.at(i)->removeOrganizador(associado->getID());
+
+			if (eventos.at(i)->escolaVerao() == true)   //se esse evento for uma escola de Verao existe a possibilidade de esse 
+														  //associado constar da lista de formadores
+			{
+				auto formadores = eventos.at(i)->getFormadores();
+				auto posFormador = find(formadores.begin(), formadores.end(), associado->getID());
+
+				if (posFormador != formadores.end())
+					eventos.at(i)->removeFormador(associado->getID());
+			}
 		}
 		
 		
@@ -511,6 +520,40 @@ std::vector<unsigned int> Associacao::showAssociados(unsigned int id, bool ignor
 	return IDs;
 }
 
+bool comparaAssociados(const Associado* a1, const Associado* a2)
+{
+	return (a1->getID() < a2->getID());
+}
+
+void Associacao::sortAssociados()
+{
+	sort(associados.begin(), associados.end(), comparaAssociados);
+}
+
+bool comparaGestores(const Gestor* g1, const Gestor* g2)
+{
+	return (g1->getID() < g2->getID());
+}
+
+void Associacao::sortGestores()
+{
+	sort(gestores.begin(), gestores.end(), comparaGestores);
+}
+
+bool comparaEventos(const Evento* e1, const Evento* e2)
+{
+	return (e1->getTema() < e2->getTema());
+}
+
+void Associacao::sortEventos()
+{
+	sort(eventos.begin(), eventos.end(), comparaEventos);
+}
+
+void Associacao::sortDominio()
+{
+	this->dominioAssociacao->sortCiencias();
+}
 AssociacaoRepetida::AssociacaoRepetida(std::string nome) {
 	this->nome = nome;
 }

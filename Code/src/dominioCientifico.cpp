@@ -52,9 +52,22 @@ void DominioCientifico::show() const
 	}
 }
 
+void DominioCientifico::sortCiencias()
+{
+	for (int i = 0; i < ciencias.size(); i++)
+	{
+		ciencias.at(i)->sortAreas();
+	}
+
+	sort(ciencias.begin(), ciencias.end(), comparaCiencias);
+}
 //excecoes
 CienciaRepetida::CienciaRepetida(Ciencia* ciencia)
 {
 	this->ciencia=ciencia;
 }
 
+bool comparaCiencias(const Ciencia* c1, const Ciencia* c2)
+{
+	return (c1->getNomeCiencia() < c2->getNomeCiencia());
+}

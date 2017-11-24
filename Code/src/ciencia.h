@@ -67,7 +67,11 @@ public:
 	 * @return void
 	 */
 	void show(unsigned int i) const;
-
+	/**
+	*@brief Organiza vetor de áreas científicas
+	*@return void
+	*/
+	void sortAreas();
 
 	friend class Associacao;
 };
@@ -90,6 +94,13 @@ public:
 	AreaCientificaRepetida(AreaCientifica* area);
 };
 
+/**
+*@brief Função que compara duas áreas e que serve como função de comparação no algoritmo sort
+*@param a1 Apontador para a primeira área
+*@param a2 Apontador para a segunda área
+*@return bool Retorna 'true' se o nome da área 's1' vier antes do nome da área 's2' (ordenação alfabética)
+*/
+bool comparaAreas(const AreaCientifica* a1, const AreaCientifica* a2);
 
 
 #endif /* CODE_SRC_CIENCIA_H_ */

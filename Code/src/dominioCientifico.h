@@ -49,7 +49,11 @@ public:
 	 * @brief Imprime na consola o domínio científico
 	 */
 	void show() const;
-
+	/**
+	*@brief Organiza vetor de ciências
+	*@return void
+	*/
+	void sortCiencias();
 
 	friend class Associacao;
 };
@@ -70,5 +74,12 @@ public:
 	CienciaRepetida(Ciencia* ciencia);
 };
 
+/**
+*@brief Função que compara duas ciências e que serve como função de comparação no algoritmo sort
+*@param a1 Apontador para a primeira ciência
+*@param a2 Apontador para a segunda ciência
+*@return bool Retorna 'true' se o nome da ciência 's1' vier antes do nome da ciência 's2' (ordenação alfabética)
+*/
+bool comparaCiencias(const Ciencia* c1, const Ciencia* c2);
 
 #endif /* CODE_SRC_DOMINIOCIENTIFICO_H_ */

@@ -55,8 +55,25 @@ void Ciencia::show(unsigned int i) const
 		areas.at(j)->show(i,j);	
 	}
 }
+
+void Ciencia::sortAreas()
+{
+	//organizar cada um dos vetores de subáreas científicas
+	for (int i = 0; i < areas.size(); i++)
+	{
+		areas.at(i)->sortSubAreas();
+	}
+
+	//organizar vetor de áreas científicas
+	sort(areas.begin(), areas.end(), comparaAreas);
+}
 //excecoes
 AreaCientificaRepetida::AreaCientificaRepetida(AreaCientifica* area)
 {
 	this->area=area;
+}
+
+bool comparaAreas(const AreaCientifica* a1, const AreaCientifica* a2)
+{
+	return (a1->getNomeAreaCientifica() < a2->getNomeAreaCientifica());
 }

@@ -68,6 +68,11 @@ public:
 	 * @return void
 	 */
 	void show(unsigned int i, unsigned int j) const;
+	/**
+	*@brief Organiza vetor de subáreas
+	*@return void
+	*/
+	void sortSubAreas();
 
 	friend class Associacao;
 
@@ -89,7 +94,13 @@ public:
 	SubAreaCientificaRepetida(SubAreaCientifica* subArea);
 };
 
-
+/**
+*@brief Função que compara duas subáreas e que serve como função de comparação no algoritmo sort
+*@param a1 Apontador para a primeira subárea
+*@param a2 Apontador para a segunda subárea
+*@return bool Retorna 'true' se o nome da subárea 's1' vier antes do nome da subárea 's2' (ordenação alfabética)
+*/
+bool comparaSubAreas(const SubAreaCientifica* s1, const SubAreaCientifica* s2);
 
 
 #endif
