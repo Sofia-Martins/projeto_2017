@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Trabalho AEDA: src/dominioCientifico.cpp File Reference</title>
+<title>Projeto AEDA - Parte 1: src/dominioCientifico.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Trabalho AEDA
+   <div id="projectname">Projeto AEDA - Parte 1
    </div>
   </td>
  </tr>
@@ -96,6 +96,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr class="memitem:ab00ba63275ccadcf502e1c4d6efd7a32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dominioCientifico_8cpp.html#ab00ba63275ccadcf502e1c4d6efd7a32">cienciasIguais</a> (const <a class="el" href="classCiencia.html">Ciencia</a> *ciencia1, const <a class="el" href="classCiencia.html">Ciencia</a> *ciencia2)</td></tr>
 <tr class="separator:ab00ba63275ccadcf502e1c4d6efd7a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0d36561b4bb09633f5626a7122897e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dominioCientifico_8cpp.html#af0d36561b4bb09633f5626a7122897e9">comparaCiencias</a> (const <a class="el" href="classCiencia.html">Ciencia</a> *c1, const <a class="el" href="classCiencia.html">Ciencia</a> *c2)</td></tr>
+<tr class="memdesc:af0d36561b4bb09633f5626a7122897e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que compara duas ciências e que serve como função de comparação no algoritmo sort.  <a href="#af0d36561b4bb09633f5626a7122897e9">More...</a><br /></td></tr>
+<tr class="separator:af0d36561b4bb09633f5626a7122897e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="ab00ba63275ccadcf502e1c4d6efd7a32"></a>
@@ -121,6 +124,42 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af0d36561b4bb09633f5626a7122897e9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool comparaCiencias </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classCiencia.html">Ciencia</a> *&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classCiencia.html">Ciencia</a> *&#160;</td>
+          <td class="paramname"><em>c2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que compara duas ciências e que serve como função de comparação no algoritmo sort. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Apontador para a primeira ciência </td></tr>
+    <tr><td class="paramname">a2</td><td>Apontador para a segunda ciência </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool Retorna 'true' se o nome da ciência 's1' vier antes do nome da ciência 's2' (ordenação alfabética) </dd></dl>
 
 </div>
 </div>

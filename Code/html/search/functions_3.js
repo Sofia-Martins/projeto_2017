@@ -8,6 +8,7 @@ var searchData=
   ['enviaremail',['enviarEmail',['../classAssociado.html#a1a7f37226f70d296dc6d7f52ff3bb9d7',1,'Associado::enviarEmail()'],['../classContributor.html#a1e23114b8fb68a74035709566413ed91',1,'Contributor::enviarEmail()'],['../classGestor.html#aebe322d0ae23bff7d0e40c4f216ba5ed',1,'Gestor::enviarEmail()']]],
   ['enviaremails',['enviarEmails',['../classAssociacaoMS.html#a943c9815abe54083ab3a6b01e08c4149',1,'AssociacaoMS']]],
   ['enviarescolasverao',['enviarEscolasVerao',['../classAssociacaoMS.html#a0a3f81fad76d116ce937d617b9e02ce5',1,'AssociacaoMS']]],
+  ['enviargestores',['enviarGestores',['../classAssociacaoMS.html#a236b841db2a84becd672870da2e0619c',1,'AssociacaoMS']]],
   ['enviarnovaassociacaoficheiro',['enviarNovaAssociacaoFicheiro',['../classAssociacaoMS.html#a7832bbf7eec178e2ed8c3812729f800b',1,'AssociacaoMS']]],
   ['enviarnovogestorficheiro',['enviarNovoGestorFicheiro',['../classAssociacaoMS.html#a218404427fa3b15b1cf3894b2434c73d',1,'AssociacaoMS']]],
   ['envioemail',['envioEmail',['../classAssociacaoMS.html#a899ab019a300dd73ab6b536f6a8db4a3',1,'AssociacaoMS']]],

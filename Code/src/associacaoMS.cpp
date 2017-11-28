@@ -285,7 +285,10 @@ void AssociacaoMS::criaGestor(std::string siglaAssociacao, bool criaAssociacao, 
 	if (std::cin.get())
 	{
 		if (std::cin.eof()) std::cin.clear();
-		this->menuSessaoGestor(idMenu);
+		if (!criaAssociacao)
+			this->menuSessaoGestor(idMenu);
+		else
+			this->menuAssociacoes();
 	}
 	
 

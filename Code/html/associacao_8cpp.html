@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Trabalho AEDA: src/associacao.cpp File Reference</title>
+<title>Projeto AEDA - Parte 1: src/associacao.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Trabalho AEDA
+   <div id="projectname">Projeto AEDA - Parte 1
    </div>
   </td>
  </tr>
@@ -96,8 +96,125 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr class="memitem:ab2fbc76b8344fe22653a673baa2cabe0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="associacao_8cpp.html#ab2fbc76b8344fe22653a673baa2cabe0">equalGestor</a> (<a class="el" href="classGestor.html">Gestor</a> *g1, <a class="el" href="classGestor.html">Gestor</a> *g2)</td></tr>
 <tr class="separator:ab2fbc76b8344fe22653a673baa2cabe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa30d02b1ea4101d9c1826e43eee24431"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="associacao_8cpp.html#aa30d02b1ea4101d9c1826e43eee24431">comparaAssociados</a> (const <a class="el" href="classAssociado.html">Associado</a> *a1, const <a class="el" href="classAssociado.html">Associado</a> *a2)</td></tr>
+<tr class="memdesc:aa30d02b1ea4101d9c1826e43eee24431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que compara dois associados e que serve como função de comparação no algoritmo sort.  <a href="#aa30d02b1ea4101d9c1826e43eee24431">More...</a><br /></td></tr>
+<tr class="separator:aa30d02b1ea4101d9c1826e43eee24431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5758916e4d98e78c08b247a97b4510"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="associacao_8cpp.html#a0d5758916e4d98e78c08b247a97b4510">comparaGestores</a> (const <a class="el" href="classGestor.html">Gestor</a> *g1, const <a class="el" href="classGestor.html">Gestor</a> *g2)</td></tr>
+<tr class="memdesc:a0d5758916e4d98e78c08b247a97b4510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que compara dois gestores e que serve como função de comparação no algoritmo sort.  <a href="#a0d5758916e4d98e78c08b247a97b4510">More...</a><br /></td></tr>
+<tr class="separator:a0d5758916e4d98e78c08b247a97b4510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d18e7faaed10445c4626095e34b892a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="associacao_8cpp.html#a1d18e7faaed10445c4626095e34b892a">comparaEventos</a> (const <a class="el" href="classEvento.html">Evento</a> *e1, const <a class="el" href="classEvento.html">Evento</a> *e2)</td></tr>
+<tr class="memdesc:a1d18e7faaed10445c4626095e34b892a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que compara dois eventos e que serve como função de comparação no algoritmo sort.  <a href="#a1d18e7faaed10445c4626095e34b892a">More...</a><br /></td></tr>
+<tr class="separator:a1d18e7faaed10445c4626095e34b892a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="aa30d02b1ea4101d9c1826e43eee24431"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool comparaAssociados </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classAssociado.html">Associado</a> *&#160;</td>
+          <td class="paramname"><em>a1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classAssociado.html">Associado</a> *&#160;</td>
+          <td class="paramname"><em>a2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que compara dois associados e que serve como função de comparação no algoritmo sort. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Apontador para o primeiro associado </td></tr>
+    <tr><td class="paramname">a2</td><td>Apontador para o segundo associado </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool Retorna 'true' se o ID do associado 'a1' for menor que o ID do associado 'a2'. Retorna 'false' em caso contrário. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1d18e7faaed10445c4626095e34b892a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool comparaEventos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classEvento.html">Evento</a> *&#160;</td>
+          <td class="paramname"><em>e1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classEvento.html">Evento</a> *&#160;</td>
+          <td class="paramname"><em>e2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que compara dois eventos e que serve como função de comparação no algoritmo sort. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Apontador para o primeiro evento </td></tr>
+    <tr><td class="paramname">a2</td><td>Apontador para o segundo evento </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool Retorna 'true' se o tema do evento 'e1' vier antes do tema do evento 'e2' (ordenação alfabética) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0d5758916e4d98e78c08b247a97b4510"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool comparaGestores </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classGestor.html">Gestor</a> *&#160;</td>
+          <td class="paramname"><em>g1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classGestor.html">Gestor</a> *&#160;</td>
+          <td class="paramname"><em>g2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que compara dois gestores e que serve como função de comparação no algoritmo sort. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Apontador para o primeiro gestor </td></tr>
+    <tr><td class="paramname">a2</td><td>Apontador para o segundo gestor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool Retorna 'true' se o ID do gestor 'g1' for menor que o ID do gestor 'g2'. Retorna 'false' em caso contrário. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ab2fbc76b8344fe22653a673baa2cabe0"></a>
 <div class="memitem">
 <div class="memproto">

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Trabalho AEDA: src/ciencia.cpp File Reference</title>
+<title>Projeto AEDA - Parte 1: src/ciencia.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Trabalho AEDA
+   <div id="projectname">Projeto AEDA - Parte 1
    </div>
   </td>
  </tr>
@@ -94,8 +94,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a329055d3b0a4fe28f6ee1aa3d750026a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ciencia_8cpp.html#a329055d3b0a4fe28f6ee1aa3d750026a">areasIguais</a> (<a class="el" href="classAreaCientifica.html">AreaCientifica</a> *<a class="el" href="apic__associados_8txt.html#ae01c6e3ce3f96ecc37fa7a2b26bfa8cc">area1</a>, <a class="el" href="classAreaCientifica.html">AreaCientifica</a> *<a class="el" href="apic__associados_8txt.html#ab0279057c358fa15e7c26adc4a95a5e3">area2</a>)</td></tr>
+<tr class="memitem:a329055d3b0a4fe28f6ee1aa3d750026a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ciencia_8cpp.html#a329055d3b0a4fe28f6ee1aa3d750026a">areasIguais</a> (<a class="el" href="classAreaCientifica.html">AreaCientifica</a> *area1, <a class="el" href="classAreaCientifica.html">AreaCientifica</a> *area2)</td></tr>
 <tr class="separator:a329055d3b0a4fe28f6ee1aa3d750026a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76297a9560145b4a6d5c8dc9fb2ed0fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ciencia_8cpp.html#a76297a9560145b4a6d5c8dc9fb2ed0fc">comparaAreas</a> (const <a class="el" href="classAreaCientifica.html">AreaCientifica</a> *a1, const <a class="el" href="classAreaCientifica.html">AreaCientifica</a> *a2)</td></tr>
+<tr class="memdesc:a76297a9560145b4a6d5c8dc9fb2ed0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que compara duas áreas e que serve como função de comparação no algoritmo sort.  <a href="#a76297a9560145b4a6d5c8dc9fb2ed0fc">More...</a><br /></td></tr>
+<tr class="separator:a76297a9560145b4a6d5c8dc9fb2ed0fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a329055d3b0a4fe28f6ee1aa3d750026a"></a>
@@ -121,6 +124,42 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a76297a9560145b4a6d5c8dc9fb2ed0fc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool comparaAreas </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classAreaCientifica.html">AreaCientifica</a> *&#160;</td>
+          <td class="paramname"><em>a1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classAreaCientifica.html">AreaCientifica</a> *&#160;</td>
+          <td class="paramname"><em>a2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função que compara duas áreas e que serve como função de comparação no algoritmo sort. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a1</td><td>Apontador para a primeira área </td></tr>
+    <tr><td class="paramname">a2</td><td>Apontador para a segunda área </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool Retorna 'true' se o nome da área 's1' vier antes do nome da área 's2' (ordenação alfabética) </dd></dl>
 
 </div>
 </div>

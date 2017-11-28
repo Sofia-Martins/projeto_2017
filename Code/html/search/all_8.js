@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['lerassociacoes',['lerAssociacoes',['../classAssociacaoMS.html#a18aa2dd46617d73407a574cadfe7a997',1,'AssociacaoMS']]],
-  ['lerassociados',['lerAssociados',['../classAssociacaoMS.html#a1177c59754adccb91ebbe94672d4538d',1,'AssociacaoMS']]],
-  ['lerconferencias',['lerConferencias',['../classAssociacaoMS.html#a839c8d04e9923df1deab499bd65c8262',1,'AssociacaoMS']]],
-  ['lerdominios',['lerDominios',['../classAssociacaoMS.html#a9d5d455bd7db9643f9a7a0f6fd823e64',1,'AssociacaoMS']]],
-  ['leremails',['lerEmails',['../classAssociacaoMS.html#a48853b09036f2a6ea17c2b6912dbb732',1,'AssociacaoMS']]],
-  ['lerescolasverao',['lerEscolasVerao',['../classAssociacaoMS.html#af9d60e20240f636d204d145db5cc84f6',1,'AssociacaoMS']]],
-  ['lergestores',['lerGestores',['../classAssociacaoMS.html#ab45962b97321b49d71e14765e8dbb88a',1,'AssociacaoMS']]],
-  ['local',['local',['../classEvento.html#a3c81461732eb76827d94503c0f11ed4d',1,'Evento::local()'],['../apic__escolaVerao_8txt.html#a96db3da3652c2ce91fd6b07f397ab3f5',1,'local():&#160;apic_escolaVerao.txt']]]
+  ['id',['ID',['../classAssociado.html#a205fdafcc04f09be49f71312fc1a7e2f',1,'Associado::ID()'],['../classAssociacao.html#a4353d61ce88fc4d4d9ac399a47028eee',1,'Associacao::id()'],['../classGestor.html#a97a51dc6f7bdc43b16fe0e29c5c40070',1,'Gestor::id()']]],
+  ['incidassociados',['incIdAssociados',['../classAssociacao.html#ad149b796c1631f8dca7bb03aeb0eb991',1,'Associacao']]],
+  ['instituicao',['instituicao',['../classAssociado.html#a0dd27638f6d4cd0d201c53c2b3f55ef9',1,'Associado']]],
+  ['iscontributor',['isContributor',['../classAssociado.html#a8375d83ed7067e5e0b99f543b33d81e1',1,'Associado::isContributor()'],['../classContributor.html#a0f1b1c435727b169cef19dda29109ebc',1,'Contributor::isContributor()']]],
+  ['issubscriber',['isSubscriber',['../classAssociado.html#ac463b76dc242bbb17fd04fc62feb5d42',1,'Associado::isSubscriber()'],['../classSubscriber.html#a8d3459482fa1a7ffed7a44d7fc9412c4',1,'Subscriber::isSubscriber()']]]
 ];
