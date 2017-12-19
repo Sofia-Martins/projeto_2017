@@ -320,6 +320,12 @@ public:
 	 */
 	template <class T> void visualizaEmailsEnviados(T* associado);
 	/**
+	* @param gestor Apontador para um gestor
+	* Função que imprime no ecrã os associados por categoria
+	* @return void
+	*/
+	void visualizaAssociados(unsigned int id);
+	/**
 	 * @param associado Apontador para um associado ('contributor', 'subscriber', associado sem outro estatuto)
 	 * Função que permite adicionar uma sub-área científica ao conjunto de sub-áreas científicas de interesse do associado especificado como argumento
 	 * @return void

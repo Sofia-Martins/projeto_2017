@@ -322,7 +322,7 @@ struct AssociadoCmp {
 		{
 			if (!(b->isContributor()))
 			{
-				return false;
+				return true;
 			}
 			else
 				return (a->getNome() < b->getNome());
@@ -330,16 +330,16 @@ struct AssociadoCmp {
 		else if (a->isSubscriber())
 		{
 			if (b->isContributor())
-				return true;
+				return false;
 			else if (b->isSubscriber())
 				return (a->getNome() < b->getNome());
 			else
-				return false;
+				return true;
 		}
 		else
 		{
 			if (b->isContributor() || b->isSubscriber())
-				return true;
+				return false;
 			else
 				return (a->getNome() < b->getNome());
 		}

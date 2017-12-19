@@ -184,6 +184,7 @@ public:
 	 * @param associado Especifica associado a apagar
 	 * @return void
 	 */
+	void showAssociadosCategoria() const;
 	void eraseAssociado(Associado* associado, bool apagaEventos);
 	/**
 	 * @brief Adiciona gestor ao vetor de gestores

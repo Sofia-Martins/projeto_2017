@@ -502,6 +502,52 @@ void Associacao::showInteressesAssociado(Associado* associado) const
 	dominioInteresse.show();
 }
 
+void Associacao::showAssociadosCategoria() const
+{
+	auto it = this->associados.begin();
+
+	std::cout << "   ID" << "        " << "NOME" << std::endl << std::endl;
+
+	std::cout << "--- CONTRIBUTORS ---------------\n\n";
+	
+	
+	for (; it != associados.end(); it++)
+	{
+		Associado* associado = (*it);
+
+		if (!(associado->isContributor()))
+			break;
+
+		std::cout << std::setw(5) << associado->getID() << "        " << associado->getNome() << std::endl;
+	}
+	std::cout<<std::endl;
+
+	std::cout << "--- SUBSCRIBERS ----------------\n\n";
+	
+
+	for (; it != associados.end(); it++)
+	{
+		Associado* associado = (*it);
+
+		if (!(associado->isSubscriber()))
+			break;
+
+		std::cout << std::setw(5) << associado->getID() <<"        " << associado->getNome() << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << "--- OUTROS ASSOCIADOS ----------\n\n";
+
+	for (; it != associados.end(); it++)
+	{
+		Associado* associado = (*it);
+
+		std::cout << std::setw(5) << associado->getID() << "        " << associado->getNome() << std::endl;
+	}
+	std::cout<<std::endl;
+
+}
+
 std::vector<unsigned int> Associacao::showAssociados(unsigned int id, bool ignorarAssociado) const
 {
 	std::vector<unsigned int> IDs;

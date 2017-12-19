@@ -1074,7 +1074,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << " 8. Apagar associado\n";
 	std::cout << " 9. Apoiar evento\n"; 
 	std::cout << "10. Enviar email\n";
-	std::cout << "11. Terminar Sessao\n\n";
+	std::cout << "11. Lista de associados\n";
+	std::cout << "12. Terminar Sessao\n\n";
 
 
 	unsigned int opcao = 0;
@@ -1112,6 +1113,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->apagaGestor(id);
 	else if (opcao == 8)
 		this->apagaAssociado(id);
+	else if (opcao == 11)
+		visualizaAssociados(id);
 	else if (opcao == 10) {
 
 		this->envioEmail(gestor);
@@ -1128,7 +1131,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	}
 	else if (opcao == 6)
 		this->criaGestor(associacao->getSigla(), false, id);
-	else if (opcao == 11)
+	else if (opcao == 12)
 	{
 		this->menuLogin();
 	}
@@ -1166,6 +1169,23 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	}
 
 
+}
+
+void AssociacaoMS::visualizaAssociados(unsigned int id)
+{
+	clearScreen();
+	this->associacao->showAssociadosCategoria();
+
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+	if (std::cin.get())
+	{
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+		}
+	}
+	this->menuSessaoGestor(id);
 }
 
 void AssociacaoMS::apoiarEvento(unsigned int id) {
@@ -2422,9 +2442,9 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 	std::cout << "Associados disponiveis : \n\n";
 	std::cout << std::setw(20) << "ID" << std::setw(20) << "Nome" << "\n";
 	auto associados = this->associacao->getAssociados();
-	std::set<Associado*, AssociadoCmp>::reverse_iterator it = associados.rbegin();
+	std::set<Associado*, AssociadoCmp>::const_iterator it = associados.begin();
 
-	for(;it!=associados.rend();it++)
+	for(;it!=associados.end();it++)
 		std::cout << std::setw(20) << (*it)->getID() << std::setw(20) << (*it)->getNome() << "\n";
 
 	std::cout << "\n";
@@ -2438,9 +2458,9 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 			this->menuSessaoGestor(id);
 		}
 
-		it = associados.rbegin();
+		it = associados.begin();
 
-		for (; it != associados.rend(); it++)
+		for (; it != associados.end(); it++)
 			if ((*it)->getID() == ID)
 			{
 				existeID = true;
