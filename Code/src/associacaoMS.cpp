@@ -924,8 +924,11 @@ void AssociacaoMS::criaConta() {
 		std::cin.clear();
 		this->menuLogin();
 	}
-	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-		if(associacao->getAssociados().at(i)->getNome() == nome)
+	auto associados = this->associacao->getAssociados();
+	auto it = associados.begin();
+
+	for(;it!=associados.end();it++)
+		if((*it)->getNome() == nome)
 			{
 			std::cout << "Utilizador ja existente! Tente iniciar sessao! \n\n";
 			std::cout << "Pressione ENTER para continuar... " << std::endl;
@@ -975,11 +978,15 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 			this->menuLogin();
 		}
 
-		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-			if (associacao->getAssociados().at(i)->getID() == id) //ID valido
+		auto associados = this->associacao->getAssociados();
+		auto it = associados.begin();
+		Associado* associado = NULL;
+
+		for (;it!=associados.end();it++)
+			if ((*it)->getID() == id) //ID valido
 			{
 				IDvalido = true;
-				pos = i;
+				associado = (*it);
 			}
 
 		if (IDvalido)
@@ -991,7 +998,7 @@ void AssociacaoMS::getID(unsigned int id, std::string pass) {
 						std::cin.clear();
 						this->menuLogin();
 					}
-					if(associacao->getAssociados().at(pos)->getPassword() == pass)
+					if(associado->getPassword() == pass)
 							PassValida = true;
 					if (!PassValida)
 						std::cout << "Password invalida!! \n\n";
@@ -1287,25 +1294,27 @@ void AssociacaoMS::alteraGestor(Gestor* gestor) {
 void AssociacaoMS::menuSessaoAssociado(unsigned int id)
 {
 	auto associados = this->associacao->getAssociados();
-	//Associado* associado = NULL;
+	auto it = associados.begin();
+	Associado* associado = NULL;
 	unsigned int pos;
 
 	//procura o associado
-	for (unsigned int i = 0; i < associados.size(); i++)
+
+	for (;it!=associados.end();it++)
 	{
-		if (associados.at(i)->getID() == id)
-			pos = i;
+		if ((*it)->getID() == id)
+			associado = (*it);
 	}
 
 	//verifica que tipo de associado é (contributor, subscriber, ou simplesmente um associado)
-	if (associados.at(pos)->getCota()->getEmDia() == true)
-		this->menuSessaoContributor(associados.at(pos));
+	if (associado->getCota()->getEmDia() == true)
+		this->menuSessaoContributor(associado);
 
 
-	else if (associados.at(pos)->getCota()->getAtraso() < 5)
-		this->menuSessaoSubscriber(associados.at(pos));
+	else if (associado->getCota()->getAtraso() < 5)
+		this->menuSessaoSubscriber(associado);
 	else
-		this->menuSessaoOther(associados.at(pos));
+		this->menuSessaoOther(associado);
 
 
 }
@@ -1359,7 +1368,7 @@ void AssociacaoMS::menuSessaoContributor(Associado* associado)
 
 	case 3:
 		clearScreen();
-		associacao->eraseAssociado(associado);
+		associacao->eraseAssociado(associado,true);
 		std::cout << "Conta eliminada com sucesso...\n\n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 		if (std::cin.get())
@@ -1470,7 +1479,7 @@ void AssociacaoMS::menuSessaoSubscriber(Associado* associado)  //para completar
 
 		case 3:
 			clearScreen();
-			associacao->eraseAssociado(associado);
+			associacao->eraseAssociado(associado,true);
 			std::cout << "Conta eliminada com sucesso...\n\n";
 			std::cout << "Pressione ENTER para continuar... " << std::endl;
 			if (std::cin.get())
@@ -1569,7 +1578,7 @@ void AssociacaoMS::menuSessaoOther(Associado * associado){
 
 		case 3:
 			clearScreen();
-			associacao->eraseAssociado(associado);
+			associacao->eraseAssociado(associado,true);
 			std::cout << "Conta eliminada com sucesso...\n\n";
 			std::cout << "Pressione ENTER para continuar... " << std::endl;
 			if (std::cin.get())
@@ -2110,21 +2119,22 @@ void AssociacaoMS::criarEvento(T* associado)
 	}
 
 	this->associacao->addEvento(*evento);
-
-	for (int i = 0; i < this->associacao->getAssociados().size(); i++)
+	auto grupo_associados = this->associacao->getAssociados();
+	auto it = grupo_associados.begin();
+	for (;it!=grupo_associados.end();it++)
 	{
-		auto id = this->associacao->getAssociados().at(i)->getID();
+		auto id = (*it)->getID();
 		auto planeador = find(planeadores.begin(), planeadores.end(), id);
 		auto organizador = find(organizadores.begin(), organizadores.end(), id);
 		auto formador = find(formadores.begin(), formadores.end(), id);
 
 		if ((planeador != planeadores.end()) || (organizador != organizadores.end()) || (formador != formadores.end()))
 		{
-			auto associadoEvento=this->associacao->getAssociados().at(i);
+			auto associadoEvento = (*it);
 			associadoEvento->addEvento(tema);
 		}
 
-		if (this->associacao->getAssociados().at(i)->getID());
+		if ((*it)->getID());
 	}
 	clearScreen();
 	std::cout << "Evento adicionado com sucesso! \n\n";
@@ -2141,10 +2151,15 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 	clearScreen();
 	std::cout << "Associados disponiveis : \n\n";
 	std::cout << std::setw(20) << "ID" << std::setw(20) << "Nome" << "\n";
-	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-		std::cout << std::setw(20) << associacao->getAssociados().at(i)->getID() << std::setw(20) << associacao->getAssociados().at(i)->getNome() << "\n";
+	auto associados = this->associacao->getAssociados();
+	auto it = associados.begin();
+
+	for(;it!=associados.end();it++)
+		std::cout << std::setw(20) << (*it)->getID() << std::setw(20) << (*it)->getNome() << "\n";
 
 	std::cout << "\n";
+
+	Associado* associado = NULL;
 
 	do {
 		getNumber(ID, "Introduza o ID do associado a alterar : ");
@@ -2153,12 +2168,17 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 			std::cin.clear();
 			this->menuSessaoGestor(id);
 		}
-		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-			if (associacao->getAssociados().at(i)->getID() == ID)
-				pos = i;
-		if (pos == -1)
+		
+		it = associados.begin();
+		for (; it != associados.end(); it++)
+		{
+			if ((*it)->getID() == ID)
+				associado = (*it);
+			
+		}
+		if (associado==NULL)
 			std::cout << "ID invalido!!\n\n";
-	} while (pos == -1);
+	} while (associado==NULL);
 
 	std::cout << "O que deseja alterar ? \n\n";
 	std::cout << "1) Nome \n" << "2) Password \n" << "3) Cota \n\n";
@@ -2175,35 +2195,35 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 
 	if (opcao == 1) {
 		std::cout << "Nome Atual : "
-			<< associacao->getAssociados().at(pos)->getNome();
+			<< associado->getNome();
 		getString(nome, "\nNovo Nome : ");
 		if (std::cin.eof())
 		{
 			std::cin.clear();
 			this->menuSessaoGestor(id);
 		}
-		associacao->getAssociados().at(pos)->setNome(nome);
+		associado->setNome(nome);
 		std::cout << "Nome alterado com sucesso!\n\n";
 	}
 	else if (opcao == 2) {
 		std::cout << "Password Atual : "
-			<< associacao->getAssociados().at(pos)->getPassword();
+			<< associado->getPassword();
 		getString(pass, "\nNova Password : ");
 		if (std::cin.eof())
 		{
 			std::cin.clear();
 			this->menuSessaoGestor(id);
 		}
-		associacao->getAssociados().at(pos)->setPassword(pass);
+		associado->setPassword(pass);
 		std::cout << "Password alterada com sucesso!\n\n";
 		this->menuSessaoGestor(id);
 	}
 	else if (opcao == 3) {
 		std::cout << "Estado da cota atual : ";
-		if (associacao->getAssociados().at(pos)->getCota()->getEmDia())
+		if (associado->getCota()->getEmDia())
 			std::cout << "Em dia !\n\n";
 		else std::cout << "Nao esta em dia, com um atraso de "
-			<< associacao->getAssociados().at(pos)->getCota()->getAtraso()
+			<<associado->getCota()->getAtraso()
 			<< " anos ! \n\n";
 		std::cout << "Novo estado da cota : ";
 		do
@@ -2238,75 +2258,77 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 
 		Associado *a1;
 		Cota *cota = new Cota(emdiaBool, atraso);
-		std::vector<Associado*> temp = associacao->getAssociados();
+		auto temp = associacao->getAssociados();
+		auto position = temp.find(associado);
 
-		if (associacao->getAssociados().at(pos)->getCota()->getEmDia()) //inicialmente como contributor
+		if (associado->getCota()->getEmDia()) //inicialmente como contributor
 		{
 			if (emdiaBool) //continua
 			{
 
-				associacao->getAssociados().at(pos)->setCota(cota);
+				associado->setCota(cota);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
 			else if (!emdiaBool && atraso < 5) //passa a subscriber
 			{
 				a1 = new Subscriber(
-					associacao->getAssociados().at(pos)->getNome(),
-					associacao->getAssociados().at(pos)->getID(),
-					associacao->getAssociados().at(pos)->getPassword(),
-					associacao->getAssociados().at(pos)->getInstituicao(),
-					cota, associacao->getAssociados().at(pos)->getEmail());
-				temp.erase(temp.begin() + pos);
-				temp.push_back(a1);
-				associacao->setAssociados(temp);
+					associado->getNome(),
+					associado->getID(),
+					associado->getPassword(),
+					associado->getInstituicao(),
+					cota, associado->getEmail(),
+					associado->getEmailsRecebidos());
+				this->associacao->eraseAssociado(associado,false);
+				this->associacao->addAssociado(*a1);
+				//associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 
 			}
 			else { //passa a so associado
 				a1 = new Associado(
-					associacao->getAssociados().at(pos)->getNome(),
-					associacao->getAssociados().at(pos)->getID(),
-					associacao->getAssociados().at(pos)->getPassword(),
-					associacao->getAssociados().at(pos)->getInstituicao(),
-					cota, associacao->getAssociados().at(pos)->getEmail());
-				temp.erase(temp.begin() + pos);
-				temp.push_back(a1);
+					associado->getNome(),
+					associado->getID(),
+					associado->getPassword(),
+					associado->getInstituicao(),
+					cota, associado->getEmail());
+				temp.erase(position);
+				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
 		}
-		else if (associacao->getAssociados().at(pos)->getCota()->getEmDia()
-			&& (associacao->getAssociados().at(pos)->getCota()->getAtraso()
+		else if (associado->getCota()->getEmDia()
+			&& (associado->getCota()->getAtraso()
 				< 5)) //inicialemnte como subscriber
 		{
 			if (emdiaBool) //passa a contributor
 			{
 				a1 = new Contributor(
-					associacao->getAssociados().at(pos)->getNome(),
-					associacao->getAssociados().at(pos)->getID(),
-					associacao->getAssociados().at(pos)->getPassword(),
-					associacao->getAssociados().at(pos)->getInstituicao(),
-					cota, associacao->getAssociados().at(pos)->getEmail());
-				temp.erase(temp.begin() + pos);
-				temp.push_back(a1);
+					associado->getNome(),
+					associado->getID(),
+					associado->getPassword(),
+					associado->getInstituicao(),
+					cota, associado->getEmail());
+				temp.erase(position);
+				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 
 			}
 			else if (!emdiaBool && atraso < 5) //continua
 			{
-				associacao->getAssociados().at(pos)->setCota(cota);
+				associado->setCota(cota);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
 			else { //passa a so associado
 				a1 = new Associado(
-					associacao->getAssociados().at(pos)->getNome(),
-					associacao->getAssociados().at(pos)->getID(),
-					associacao->getAssociados().at(pos)->getPassword(),
-					associacao->getAssociados().at(pos)->getInstituicao(),
-					cota, associacao->getAssociados().at(pos)->getEmail());
-				temp.erase(temp.begin() + pos);
-				temp.push_back(a1);
+					associado->getNome(),
+					associado->getID(),
+					associado->getPassword(),
+					associado->getInstituicao(),
+					cota, associado->getEmail());
+				temp.erase(position);
+				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
@@ -2316,13 +2338,13 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 			if (emdiaBool) //passa a contributor
 			{
 				a1 = new Contributor(
-					associacao->getAssociados().at(pos)->getNome(),
-					associacao->getAssociados().at(pos)->getID(),
-					associacao->getAssociados().at(pos)->getPassword(),
-					associacao->getAssociados().at(pos)->getInstituicao(),
-					cota, associacao->getAssociados().at(pos)->getEmail());
-				temp.erase(temp.begin() + pos);
-				temp.push_back(a1);
+					associado->getNome(),
+					associado->getID(),
+					associado->getPassword(),
+					associado->getInstituicao(),
+					cota, associado->getEmail());
+				temp.erase(position);
+				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 
@@ -2330,18 +2352,18 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 			else if (!emdiaBool && atraso < 5) //passa a subscriber
 			{
 				a1 = new Subscriber(
-					associacao->getAssociados().at(pos)->getNome(),
-					associacao->getAssociados().at(pos)->getID(),
-					associacao->getAssociados().at(pos)->getPassword(),
-					associacao->getAssociados().at(pos)->getInstituicao(),
-					cota, associacao->getAssociados().at(pos)->getEmail());
-				temp.erase(temp.begin() + pos);
-				temp.push_back(a1);
+					associado->getNome(),
+					associado->getID(),
+					associado->getPassword(),
+					associado->getInstituicao(),
+					cota, associado->getEmail());
+				temp.erase(position);
+				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
 			else { //continua
-				associacao->getAssociados().at(pos)->setCota(cota);
+				associado->setCota(cota);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
 		}
@@ -2394,13 +2416,16 @@ void AssociacaoMS::apagaGestor(unsigned int id){
 void AssociacaoMS::apagaAssociado(unsigned int id){
 	clearScreen(); //apagar conteudo do ecra
 	unsigned int ID;
-	std::vector<Associado*> temp = associacao->getAssociados();
+	auto temp = associacao->getAssociados();
 	bool existeID = false;
 
 	std::cout << "Associados disponiveis : \n\n";
 	std::cout << std::setw(20) << "ID" << std::setw(20) << "Nome" << "\n";
-	for(unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-		std::cout << std::setw(20) << associacao->getAssociados().at(i)->getID() << std::setw(20) << associacao->getAssociados().at(i)->getNome() << "\n";
+	auto associados = this->associacao->getAssociados();
+	std::set<Associado*, AssociadoCmp>::reverse_iterator it = associados.rbegin();
+
+	for(;it!=associados.rend();it++)
+		std::cout << std::setw(20) << (*it)->getID() << std::setw(20) << (*it)->getNome() << "\n";
 
 	std::cout << "\n";
 
@@ -2413,12 +2438,13 @@ void AssociacaoMS::apagaAssociado(unsigned int id){
 			this->menuSessaoGestor(id);
 		}
 
+		it = associados.rbegin();
 
-		for (unsigned int i = 0; i < associacao->getAssociados().size(); i++)
-			if (associacao->getAssociados().at(i)->getID() == ID)
+		for (; it != associados.rend(); it++)
+			if ((*it)->getID() == ID)
 			{
 				existeID = true;
-				this->associacao->eraseAssociado(temp.at(i));
+				this->associacao->eraseAssociado(*it,true);
 				std::cout << "Associado apagado com sucesso! \n\n";
 
 				std::cout << "Pressione ENTER para continuar... " << std::endl;
@@ -2681,12 +2707,13 @@ void AssociacaoMS::enviarAssociados() const
 	std::ofstream out;
 	out.open(this->ficheiroAssociados);
 
-	this->associacao->sortAssociados(); //organizar vetor de associados
+	
 	auto associados = this->associacao->getAssociados();
+	auto it = associados.begin();
 
-	for (int i = 0; i < associados.size(); i++)
+	for (; it != associados.end(); it++)
 	{
-		auto associado = associados.at(i);
+		auto associado = *it;
 		auto nome = associado->getNome();
 		auto id = associado->getID();
 		auto password = associado->getPassword();
@@ -2701,7 +2728,7 @@ void AssociacaoMS::enviarAssociados() const
 		auto eventos = associado->getEventos();
 		auto areas = associado->getAreasInteresse();
 
-		if (i != 0)
+		if (it != associados.begin())
 		{
 			out << "\n";
 		}

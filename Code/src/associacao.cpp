@@ -20,7 +20,7 @@ Associacao::Associacao() {
 
 
 Associacao::Associacao(std::string nome, std::vector<Evento*> eventos,
-	std::vector<Email*> emails, std::vector<Associado*> associados, std::vector<Gestor*> gestores) {
+	std::vector<Email*> emails, std::set<Associado*, AssociadoCmp> associados, std::vector<Gestor*> gestores) {
 	this->dominioAssociacao = NULL;
 	this->nome = nome;
 	this->eventos = eventos;
@@ -57,7 +57,7 @@ Gestor* Associacao::getGestor(int id) const
 	if()
 }
 */
-std::vector<Associado*> Associacao::getAssociados() const {
+std::set<Associado*, AssociadoCmp>  Associacao::getAssociados() const {
 	return this->associados;
 }
 
@@ -91,7 +91,7 @@ void Associacao::setID(unsigned int id)
 
 void Associacao::setEventos(std::vector<Evento*> eventos) { this->eventos = eventos; }
 void Associacao::setEmails(std::vector<Email*> emails) { this->emails = emails; }
-void Associacao::setAssociados(std::vector<Associado*> associados) { this->associados = associados; }
+void Associacao::setAssociados(std::set<Associado*, AssociadoCmp> associados) { this->associados = associados; }
 void Associacao::setGestores(std::vector<Gestor*> gestores) { this->gestores = gestores; }
 
 
@@ -100,9 +100,11 @@ void Associacao::setGestores(std::vector<Gestor*> gestores) { this->gestores = g
 void Associacao::showContributors() const
 {
 	std::cout << "--- CONTRIBUTORS ---" << std::endl;
-	for (unsigned int i = 0; i < associados.size(); i++)
+
+	auto it = this->associados.begin();
+	for (;it!=associados.end();it++)
 	{
-		auto associado = associados.at(i);
+		auto associado = *it;
 
 		if (associado->isContributor() == true)
 		{
@@ -117,9 +119,10 @@ void Associacao::showContributors() const
 void Associacao::showSubscribers() const
 {
 	std::cout << "--- SUBSCRIBERS ---" << std::endl;
-	for (unsigned int i = 0; i < associados.size(); i++)
+	auto it = this->associados.begin();
+	for (;it!=associados.end();it++)
 	{
-		auto associado = associados.at(i);
+		auto associado = *it;
 
 		if (associado->isSubscriber() == true)
 		{
@@ -186,9 +189,10 @@ void Associacao::showInteressesOutrosAssociados() const
 
 	// Segundo passo - Adicionar os associados ao vetor 'interesses'
 	
-	for (unsigned int i = 0; i < associados.size(); i++)
+	auto it = associados.begin();
+	for (;it!=associados.end();it++)
 	{
-		auto associadoAtual = associados.at(i);
+		auto associadoAtual = *it;
 
 	
 
@@ -256,13 +260,16 @@ void Associacao::addEmail(Email* email) {
 	auto destinatario = email->getDestinatario();
 	emails.push_back(email);
 
-	for (unsigned int i = 0; i < associados.size(); i++)
+	auto it = associados.begin();
+	for (;it!=associados.end();it++)
 	{
-		if (associados.at(i)->getEmail() == remetente)
-			associados.at(i)->enviarEmail(email);
+		auto associadoAtual = *it;
+
+		if (associadoAtual->getEmail() == remetente)
+			associadoAtual->enviarEmail(email);
 		
-		if (associados.at(i)->getEmail() == destinatario)
-			associados.at(i)->receberEmail(email);
+		if (associadoAtual->getEmail() == destinatario)
+			associadoAtual->receberEmail(email);
 	}
 
 	for (unsigned int i = 0; i < gestores.size(); i++)
@@ -276,7 +283,7 @@ void Associacao::addEmail(Email* email) {
 }
 
 void Associacao::addAssociado(Associado &associado) {
-	associados.push_back(&associado);
+	associados.insert(&associado);
 }
 
 void Associacao::addGestor(Gestor &gestor) {
@@ -288,17 +295,15 @@ void Associacao::addEvento(Evento &evento)
 	eventos.push_back(&evento);
 }
 
-void Associacao::eraseAssociado(Associado* associado){
+void Associacao::eraseAssociado(Associado* associado, bool apagaEventos){
 
 	//apagar associado do vetor de associados
-	for (unsigned int i = 0; i<associados.size(); i++)
-		if (associados.at(i) == associado)
-		{
-			associados.erase(associados.begin() + i);
-			//delete associado;
-		}
+	this->associados.erase(associado);
 
 	//apagar associado dos eventos em que participa
+	if (!apagaEventos)
+		return;
+
 	for (unsigned int i = 0; i < eventos.size(); i++)
 	{
 		auto planeadores = eventos.at(i)->getPlaneadores();
@@ -362,11 +367,12 @@ void Associacao::showEventos(Associado* associado) const
 bool Associacao::existeEmail(std::string email) const
 {
 	//verifica se o email existe e se pertence a um subscriber, contributor ou gestor
-	for (unsigned int i = 0; i < associados.size(); i++)
+	auto it = associados.begin();
+	for (;it!=associados.end();it++)
 	{
-		if (associados.at(i)->getEmail() == email)
+		if ((*it)->getEmail() == email)
 		{
-			if((associados.at(i)->isContributor()==true) || (associados.at(i)->isSubscriber()==true))
+			if(((*it)->isContributor()==true) || ((*it)->isSubscriber()==true))
 			   return true;
 		}
 	}
@@ -379,6 +385,7 @@ bool Associacao::existeEmail(std::string email) const
 	return false;
 }
 
+/*
 void Associacao::organizaEmails()
 {
 	bool organizado = false;
@@ -413,6 +420,7 @@ void Associacao::organizaEmails()
 			}
 	}
 }
+*/
 
 void Associacao::showInteressesAssociado(Associado* associado) const
 {
@@ -498,21 +506,23 @@ std::vector<unsigned int> Associacao::showAssociados(unsigned int id, bool ignor
 {
 	std::vector<unsigned int> IDs;
 	unsigned int contador = 1;
-	for (unsigned int i = 0; i < associados.size(); i++)
+	auto it = associados.begin();
+
+	for (;it!=associados.end();it++)
 	{
 		if (ignorarAssociado)
 		{
-			if (associados.at(i)->getID() != id)
+			if ((*it)->getID() != id)
 			{
-				std::cout << contador << ". " << associados.at(i)->getNome() << " (ID " << associados.at(i)->getID() << ")\n";
-				IDs.push_back(associados.at(i)->getID());
+				std::cout << contador << ". " << (*it)->getNome() << " (ID " << (*it)->getID() << ")\n";
+				IDs.push_back((*it)->getID());
 				contador++;
 			}
 		}
 		else
 		{
-			std::cout << contador << ". " << associados.at(i)->getNome() << " (ID " << associados.at(i)->getID() << ")\n";
-			IDs.push_back(associados.at(i)->getID());
+			std::cout << contador << ". " << (*it)->getNome() << " (ID " << (*it)->getID() << ")\n";
+			IDs.push_back((*it)->getID());
 			contador++;
 		}
 	}
@@ -523,11 +533,6 @@ std::vector<unsigned int> Associacao::showAssociados(unsigned int id, bool ignor
 bool comparaAssociados(const Associado* a1, const Associado* a2)
 {
 	return (a1->getID() < a2->getID());
-}
-
-void Associacao::sortAssociados()
-{
-	sort(associados.begin(), associados.end(), comparaAssociados);
 }
 
 bool comparaGestores(const Gestor* g1, const Gestor* g2)

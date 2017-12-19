@@ -43,7 +43,7 @@ private:
 	/**
 	 * @brief Vetor de associados (subscribers, contributors, e associados sem outro estatuto)
 	 */
-	std::vector<Associado*> associados;
+	std::set<Associado*, AssociadoCmp> associados;
 	/**
 	 * @brief Vetor de gestores da associação
 	 */
@@ -72,7 +72,7 @@ public:
 	 * @return void
 	 */
 	Associacao(std::string nome, std::vector<Evento*> eventos, std::vector<Email*> emails,
-		std::vector<Associado*> associados, std::vector<Gestor*> gestores);
+		std::set<Associado*, AssociadoCmp> associados, std::vector<Gestor*> gestores);
 	/**
 	 * @brief Retorna valor do atributo nome
 	 * @return String nome
@@ -98,7 +98,7 @@ public:
 	 * @brief Retorna valor do vetor associados
 	 * @return Vector associados
 	 */
-	std::vector<Associado*> getAssociados() const;
+	std::set<Associado*, AssociadoCmp> getAssociados() const;
 	/**
 	 * @brief Retorna valor do vetor gestores
 	 * @return Vector gestores
@@ -154,7 +154,7 @@ public:
 	 * @param associados Especifica novo valor do associadps
 	 * @return void
 	 */
-	void setAssociados(std::vector<Associado*> associados);
+	void setAssociados(std::set<Associado*, AssociadoCmp> associados);
 	/**
 	 * @brief Altera vetor de gestores da associacao
 	 * @param gestores Especifica novo valor do gestores
@@ -184,7 +184,7 @@ public:
 	 * @param associado Especifica associado a apagar
 	 * @return void
 	 */
-	void eraseAssociado(Associado* associado);
+	void eraseAssociado(Associado* associado, bool apagaEventos);
 	/**
 	 * @brief Adiciona gestor ao vetor de gestores
 	 * @param gestor Especifica gestor a adicionar
@@ -243,21 +243,11 @@ public:
 	 */
 	bool existeEmail(std::string email) const;
 	/**
-	 * @brief Atribui os emails aos respetivos remetentes e destinatarios
-	 * @return void
-	 */
-	void organizaEmails();
-	/**
 	 * @brief Imprime os interesses de um associado na consola
 	 * @param associado Especifica o associado para imprimir os interesses
 	 * @return void
 	 */
 	void showInteressesAssociado(Associado* associado) const;
-	/**
-	*@brief Organiza o vetor de associados recorrendo ao algoritmo de ordenação sort
-	*@return void
-	*/
-	void sortAssociados();
 	/**
 	*@brief Organiza o vetor de gestores recorrendo ao algoritmo de ordenação sort
 	*@return void

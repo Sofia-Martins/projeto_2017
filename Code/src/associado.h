@@ -12,9 +12,11 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <set> //BST
 #include "cota.h"
 #include "email.h"
 #include "dominioCientifico.h"
+
 
 class Associado {
 private:
@@ -49,12 +51,12 @@ public:
 	 * @brief Funcao virtual para verificar se e contributer
 	 * @return false
 	 */
-	virtual bool isContributor() { return false; }
+	virtual bool isContributor() const { return false; }
 	/**
 	 * @brief Funcao virtual para verificar se e subscriber
 	 * @return false
 	 */
-	virtual bool isSubscriber() { return false; }
+	virtual bool isSubscriber() const { return false; }
 
 
 	//metodos get
@@ -218,7 +220,7 @@ public:
 	 * @brief Verifica se e contributor
 	 * @return true
 	 */
-	bool isContributor() { return true; }
+	bool isContributor() const { return true; }
 
 	//construtor sem emails
 	/**
@@ -273,7 +275,7 @@ public:
 class Subscriber : public Associado {
 	std::vector<Email*> emailsRecebidos = {};
 public:
-	bool isSubscriber() { return true; }
+	bool isSubscriber() const { return true; }
 	//construtor sem emails
 	/**
 	 * @brief Construtor com parâmetros mas sem os emails
@@ -311,6 +313,38 @@ public:
 	 * @param email Valor a adicionar ao atributo emailsRecebidos
 	 */
 	void receberEmail(Email* email);
+};
+
+struct AssociadoCmp {
+	bool operator()(const Associado* a, const Associado* b) const
+	{
+		if (a->isContributor())
+		{
+			if (!(b->isContributor()))
+			{
+				return false;
+			}
+			else
+				return (a->getNome() < b->getNome());
+		}
+		else if (a->isSubscriber())
+		{
+			if (b->isContributor())
+				return true;
+			else if (b->isSubscriber())
+				return (a->getNome() < b->getNome());
+			else
+				return false;
+		}
+		else
+		{
+			if (b->isContributor() || b->isSubscriber())
+				return true;
+			else
+				return (a->getNome() < b->getNome());
+		}
+
+	}
 };
 
 
