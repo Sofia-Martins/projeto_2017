@@ -1188,11 +1188,38 @@ void AssociacaoMS::visualizaAssociados(unsigned int id)
 	this->menuSessaoGestor(id);
 }
 
+void AssociacaoMS::apoiarEvento2(Gestor * gestor) {
+	while(gestor->getVerba() > 0 || !associacao->getPedidos().empty()){
+		std::cout << "Verba disponivel : \n" << gestor->getVerba() << "\n";
+		std::cout << "Evento a apoiar : \n" << associacao->getPedidos().top()->getTema() << "\n\n";
+		unsigned int num;
+		getNumber(num, "Verba a disponibilizar ? \n");
+		gestor->setVerba(gestor->getVerba() - num);
+		for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
+			if(associacao->getEventos().at(i)->getTema() == associacao->getPedidos().top()->getTema())
+			{
+				Apoio a(true,"monetario");
+				associacao->getEventos().at(i)->setApoio(a);
+				associacao->getPedidos().pop();
+			}
+
+		if(gestor->getVerba() == 0){
+			std::cout << "Verba esgotada para esta fase de candidatura! \n\n";
+			break;
+		}
+		if(associacao->getPedidos().empty()){
+			std::cout << "Pedidos esgotados nesta fase de candidatura! \n\n";
+			break;
+		}
+	}
+}
+
 void AssociacaoMS::apoiarEvento(unsigned int id) {
 	clearScreen();
 	std::vector<std::pair<Evento*,int>> eventosSemApoio;
 	int numeroEvento = 1;
 	std::cout << "Eventos sem apoio da associacao\n\n";
+
 	for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
 		if (!associacao->getEventos().at(i)->getApoioEvento().getApoioAssociacao())
 		{
@@ -3031,5 +3058,6 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-    system("CLS");
+    //system("CLS");
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }

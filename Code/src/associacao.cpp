@@ -241,10 +241,10 @@ void Associacao::showInteressesOutrosAssociados() const
 					posicaoInteresses++;
 					for (unsigned int m = 0; m < associadosAtuais.size(); m++)
 					{
-						HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-						SetConsoleTextAttribute(hConsole, 10);
+						//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+						//SetConsoleTextAttribute(hConsole, 10);
 						std::cout << "             " << std::setw(15)<<associadosAtuais.at(m).second << " (ID " << associadosAtuais.at(m).first << ")" << std::endl;
-						SetConsoleTextAttribute(hConsole, 7);
+						//SetConsoleTextAttribute(hConsole, 7);
 						
 					}
 				}
@@ -293,6 +293,8 @@ void Associacao::addGestor(Gestor &gestor) {
 void Associacao::addEvento(Evento &evento)
 {
 	eventos.push_back(&evento);
+	if(!evento.getApoioEvento().getApoioAssociacao())
+		pedidos.push(&evento);
 }
 
 void Associacao::eraseAssociado(Associado* associado, bool apagaEventos){

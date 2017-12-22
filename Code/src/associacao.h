@@ -10,8 +10,9 @@
 
 #include <string>
 #include <vector>
-#include <windows.h>
+//#include <windows.h>
 #include <algorithm>
+#include <queue>
 #include "dominioCientifico.h"
 #include "email.h"
 #include "associado.h"
@@ -52,6 +53,7 @@ private:
 	 * @brief ID do próximo gestor ou associado que for adicionado à associação
 	 */
 	unsigned int id;  
+	std::priority_queue<Evento*> pedidos;
 
 public:
 	/**
@@ -119,6 +121,9 @@ public:
 	 * @return Atributo id
 	 */
 	unsigned int getID() const;
+
+	std::priority_queue<Evento*> getPedidos() const{ return pedidos; }
+
 	/**
 	 * @brief Altera nome da associacao
 	 * @param nome Especifica novo valor do nome

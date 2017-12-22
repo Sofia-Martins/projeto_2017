@@ -349,6 +349,8 @@ public:
 	 */
 	void enviarGestores() const;
 
+	void AssociacaoMS::apoiarEvento2(Gestor * gestor);
+
 
 
 

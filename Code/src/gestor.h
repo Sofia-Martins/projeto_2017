@@ -25,6 +25,7 @@ private:
 	std::string enderecoEmail;
 	std::vector<Email*> emailsRecebidos;
 	std::vector<Email*> emailsEnviados;
+	unsigned int verba; //verba para apoiar eventos
 public:
 	/**
 		 * @brief Le o gestor do ficheiro de gestores
@@ -74,6 +75,7 @@ public:
 	 */
 	void setEnderecoEmail(std::string enderecoEmail);
 
+	void setVerba(unsigned int verba){this->verba = verba;}
 	//metodos get
 	/**
 	 * @brief Retorna valor do atributo nome
@@ -110,6 +112,8 @@ public:
 	 * @return Valor do atributo emailsEnviados
 	 */
 	std::vector<Email*> getEmailsEnviados();
+
+	unsigned int getVerba(){return verba;}
 
 	/**
 	 * @brief Adiciona um email ao atributo emailsEnviados

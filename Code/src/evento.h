@@ -191,6 +191,10 @@ public:
 	 * @return false
 	 */
 	bool escolaVerao() { return false; }
+
+	bool operator < (const Conferencia & c) const{
+		return this->getOrganizadores().size() < c.getOrganizadores().size();
+	}
 };
 
 
@@ -251,6 +255,10 @@ public:
 	 * @return true
 	 */
 	bool escolaVerao() { return true; }
+
+	bool operator < (const EscolaVerao & e) const{
+		return this->getOrganizadores().size() < e.getOrganizadores().size();
+	}
 };
 
 
