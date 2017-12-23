@@ -470,13 +470,13 @@ void AssociacaoMS::lerAssociados() {
 		getline(input, tema, ';');
 		getline(input, subareas);
 
-		/*
+
 		if(nome == "")
 			break;
 
 		if(subareas == "")
 			break;
-*/
+
 
 		eliminateSpaces(nome);
 		eliminateSpaces(ID);
