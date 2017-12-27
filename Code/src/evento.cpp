@@ -147,6 +147,8 @@ void Conferencia::show() const
 }
 
 
+
+
 //////////////////////////
 //Sub-class EscolaVerao //
 //////////////////////////

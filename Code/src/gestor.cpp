@@ -17,6 +17,7 @@ Gestor::Gestor(std::string nome,unsigned int id,std::string password,std::string
 	this->id = id;
 	this->password=password;
 	this->enderecoEmail=enderecoEmail;
+	this->verba = 0;
 }
 Gestor::Gestor(std::string nome, std::string password,std::string siglaAssociacao,unsigned int id)
 {
@@ -24,6 +25,7 @@ Gestor::Gestor(std::string nome, std::string password,std::string siglaAssociaca
 	this->password = password;
 	this->id = id;
 	this->enderecoEmail = std::to_string(this->id) + "@" + siglaAssociacao + ".com";
+	this->verba = 0;
 }
 
 //metodos set
@@ -83,4 +85,3 @@ void Gestor::show() const
 	std::cout << " | Endereco de email: " <<this->enderecoEmail << std::endl << std::endl;
 
 }
-

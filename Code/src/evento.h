@@ -27,6 +27,10 @@ private:
 	Data data;
 	Apoio apoioEvento;
 
+protected:
+	int numContributers;
+	int numSubscribers;
+
 public:
 	// Construtor
 	/**
@@ -78,7 +82,6 @@ public:
 	Apoio getApoioEvento() const;
 
 
-
 	// Metodos set
 	/**
 	 * @brief Atribui valor do argumento ao atributo local
@@ -98,6 +101,7 @@ public:
 	 * @return void
 	 */
 	void setApoio(Apoio apoio);
+
 
 	// Outros metodos
 
@@ -141,6 +145,11 @@ public:
 	 * @brief Funcao virtual para verificar o tipo de evento
 	 */
 	virtual bool escolaVerao() { return false;}
+
+	void setNumContributers(int num) { numContributers = num; }
+	void setNumSubscribers(int num) { numSubscribers = num; }
+
+
 
 };
 
@@ -192,9 +201,19 @@ public:
 	 */
 	bool escolaVerao() { return false; }
 
-	bool operator < (const Conferencia & c) const{
-		return this->getOrganizadores().size() < c.getOrganizadores().size();
+
+	int getNumContributers() const { return Evento::numContributers; }
+
+	int getNumSubscribers() const { return Evento::numSubscribers; }
+
+	bool operator < (const Conferencia & e) const{
+
+		if (this->getNumContributers() == e.getNumContributers())
+			return this->getOrganizadores().size() < e.getOrganizadores().size() || this->getNumSubscribers() < e.getNumSubscribers();
+		else return this->getOrganizadores().size() < e.getOrganizadores().size() || this->getNumContributers() < e.getNumContributers();
+
 	}
+
 };
 
 
@@ -256,9 +275,20 @@ public:
 	 */
 	bool escolaVerao() { return true; }
 
-	bool operator < (const EscolaVerao & e) const{
-		return this->getOrganizadores().size() < e.getOrganizadores().size();
+
+	int getNumContributers() const { return Evento::numContributers; }
+
+	int getNumSubscribers() const { return Evento::numSubscribers; }
+
+	bool operator < (const EscolaVerao & e) const {
+
+		if (this->getNumContributers() == e.getNumContributers())
+			return this->getOrganizadores().size() < e.getOrganizadores().size() || this->getNumSubscribers() < e.getNumSubscribers();
+		else return this->getOrganizadores().size() < e.getOrganizadores().size() || this->getNumContributers() < e.getNumContributers();
+
 	}
+
+
 };
 
 

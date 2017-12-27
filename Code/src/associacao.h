@@ -53,6 +53,7 @@ private:
 	 * @brief ID do próximo gestor ou associado que for adicionado à associação
 	 */
 	unsigned int id;  
+
 	std::priority_queue<Evento*> pedidos;
 
 public:
@@ -172,6 +173,8 @@ public:
 	 * @return void
 	 */
 	void setEventos(std::vector<Evento*> eventos);
+
+	void setPedidos(std::priority_queue<Evento*> p) { pedidos = p; }
 	/**
 	 * @brief Adiciona email ao vetor de emails
 	 * @param email Especifica email a adicionar
@@ -269,9 +272,8 @@ public:
 	*@return void
 	*/
 	void sortDominio();
+
 };
-
-
 
 class AssociacaoRepetida
 {

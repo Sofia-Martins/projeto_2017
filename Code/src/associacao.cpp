@@ -293,6 +293,7 @@ void Associacao::addGestor(Gestor &gestor) {
 void Associacao::addEvento(Evento &evento)
 {
 	eventos.push_back(&evento);
+
 	if(!evento.getApoioEvento().getApoioAssociacao())
 		pedidos.push(&evento);
 }
@@ -610,4 +611,3 @@ void Associacao::sortDominio()
 AssociacaoRepetida::AssociacaoRepetida(std::string nome) {
 	this->nome = nome;
 }
-

@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="projeto_2017"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="projeto_2017">
+				<Option output="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/projeto_2017" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 projeto_2017"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="projeto_2017/fast">
+				<Option output="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/projeto_2017" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 projeto_2017/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/luisa/Documents/FEUP/projeto_2017/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/Code/src/cota.d">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/Code/src/cota.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/Code/src/main.d">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/Code/src/main.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/Code/src/subdir.mk">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/Code/subdir.mk">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/codigo">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/makefile">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/objects.mk">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/projeto_2017.exe">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/sources.mk">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/apoio.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/areaCientifica.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/associacao.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/associacaoMS.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/associado.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/ciencia.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/cota.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/data.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/dominioCientifico.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/email.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/evento.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/gestor.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/main.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/Debug/src/subAreaCientifica.o">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/apic_associados.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/apic_conferencias.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/apic_dominios.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/apic_emails.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/apic_escolaVerao.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/apic_gestores.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/associacoes.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/doxyfile">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/annotated.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apic__associados_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apic__conferencias_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apic__dominios_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apic__emails_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apic__escolaVerao_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apic__gestores_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apoio_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apoio_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/apoio_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/areaCientifica_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/areaCientifica_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/areaCientifica_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/arrowdown.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/arrowright.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacaoMS_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacaoMS_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacaoMS_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacao_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacao_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacao_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associacoes_8txt.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associado_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associado_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/associado_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/bc_s.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/bdwn.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/ciencia_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/ciencia_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/ciencia_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classApoio-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classApoio.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAreaCientifica-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAreaCientifica.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAreaCientificaRepetida-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAreaCientificaRepetida.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociacao-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociacao.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociacaoMS-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociacaoMS.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociacaoRepetida-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociacaoRepetida.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociado-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociado.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociado.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociadoRepetido-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classAssociadoRepetido.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classCiencia-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classCiencia.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classCienciaRepetida-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classCienciaRepetida.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classConferencia-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classConferencia.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classConferencia.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classContributor-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classContributor.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classContributor.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classCota-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classCota.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classData-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classData.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classDominioCientifico-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classDominioCientifico.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEmail-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEmail.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEscolaVerao-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEscolaVerao.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEscolaVerao.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEvento-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEvento.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classEvento.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classGestor-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classGestor.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubAreaCientifica-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubAreaCientifica.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubAreaCientificaRepetida-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubAreaCientificaRepetida.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubscriber-members.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubscriber.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classSubscriber.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/classes.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/closed.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/cota_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/cota_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/cota_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/data_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/data_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/data_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/dir_68267d1309a1af8e8297ef4c3efbcdba.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/doc.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/dominioCientifico_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/dominioCientifico_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/dominioCientifico_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/doxygen.css">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/doxygen.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/dynsections.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/email_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/email_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/email_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/evento_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/evento_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/evento_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/files.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/folderclosed.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/folderopen.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_c.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_d.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_e.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_f.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_c.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_d.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_e.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_g.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_i.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_l.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_m.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_o.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_r.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_s.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_func_v.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_g.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_i.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_l.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_m.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_n.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_o.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_p.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_r.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_rela.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_s.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_t.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_v.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/functions_vars.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/gestor_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/gestor_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/gestor_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/globals.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/globals_func.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/globals_vars.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/hierarchy.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/index.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/jquery.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/main_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/menu.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/menudata.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/nav_f.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/nav_g.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/nav_h.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/open.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_0.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_0.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_1.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_1.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_10.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_10.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_11.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_11.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_2.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_2.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_3.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_3.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_4.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_4.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_5.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_5.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_6.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_6.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_7.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_7.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_8.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_8.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_9.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_9.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_a.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_a.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_b.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_b.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_c.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_c.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_d.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_d.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_e.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_e.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_f.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/all_f.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_0.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_0.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_1.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_1.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_2.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_2.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_3.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_3.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_4.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_4.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_5.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/classes_5.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/close.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_0.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_0.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_1.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_1.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_2.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_2.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_3.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_3.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_4.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_4.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_5.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_5.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_6.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/files_6.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_0.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_0.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_1.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_1.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_2.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_2.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_3.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_3.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_4.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_4.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_5.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_5.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_6.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_6.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_7.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_7.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_8.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_8.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_9.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_9.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_a.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_a.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_b.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_b.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_c.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_c.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_d.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/functions_d.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/mag_sel.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/nomatches.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/related_0.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/related_0.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/search.css">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/search.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/search_l.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/search_m.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/search_r.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/searchdata.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_0.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_0.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_1.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_1.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_10.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_10.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_2.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_2.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_3.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_3.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_4.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_4.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_5.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_5.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_6.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_6.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_7.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_7.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_8.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_8.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_9.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_9.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_a.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_a.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_b.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_b.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_c.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_c.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_d.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_d.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_e.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_e.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_f.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/search/variables_f.js">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/splitbar.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/subAreaCientifica_8cpp.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/subAreaCientifica_8h.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/subAreaCientifica_8h_source.html">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/sync_off.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/sync_on.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/tab_a.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/tab_b.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/tab_h.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/tab_s.png">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/html/tabs.css">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apic_associados.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apic_conferencias.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apic_dominios.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apic_emails.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apic_escolaVerao.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apic_gestores.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apoio.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/apoio.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/areaCientifica.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/areaCientifica.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associacao.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associacao.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associacaoMS.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associacaoMS.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associacoes.txt">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associado.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/associado.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/ciencia.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/ciencia.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/cota.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/cota.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/data.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/data.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/dominioCientifico.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/dominioCientifico.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/email.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/email.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/evento.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/evento.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/gestor.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/gestor.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/main.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/subAreaCientifica.cpp">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/Code/src/subAreaCientifica.h">
+			<Option target="projeto_2017"/>
+		</Unit>
+		<Unit filename="/home/luisa/Documents/FEUP/projeto_2017/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

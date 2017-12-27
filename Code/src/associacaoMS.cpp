@@ -343,7 +343,6 @@ void AssociacaoMS::menuAssociacoes() {
 
 	} while (!valido);
 
-
 	//atualizar nome da associacao
 	associacao->setNome(associacoes.at(opcao - 1).second);
 
@@ -616,11 +615,24 @@ void AssociacaoMS::lerConferencias()
 		getline(in, organizadores, ';');
 		std::istringstream ssOrganizadores(organizadores);
 
+		auto associados = this->associacao->getAssociados();
+		auto it = associados.begin();
+		int numC = 0, numS = 0;
+
 		while (!ssOrganizadores.eof())
 		{
 			getline(ssOrganizadores, ID, ',');
 			vetorOrganizadores.push_back(std::stoi(ID)); //adiciona o ID ao vetor de organizadores
 		}
+
+		for (unsigned int i = 0; i < vetorOrganizadores.size(); i++)
+			for (; it != associados.end(); it++)
+				if ((*it)->getID() == vetorOrganizadores.at(i))
+					if ((*it)->isContributor())
+						numC++;
+					else if ((*it)->isSubscriber())
+						numS++;
+
 
 		//buscar local
 		std::string local;
@@ -668,7 +680,14 @@ void AssociacaoMS::lerConferencias()
 		if(tipoApoio != "")
 			eliminateSpaces(tipoApoio);
 
-		Apoio apoio(apoioB, tipoApoio);
+		//buscar verba para o evento
+		std::string verba;
+		getline(in, verba, ';');
+
+		if (verba != "")
+			eliminateSpaces(verba);
+
+		Apoio apoio(apoioB, tipoApoio, std::stoul(verba));
 
 		//buscar numero de participantes
 		std::string numeroParticipantes;
@@ -678,6 +697,8 @@ void AssociacaoMS::lerConferencias()
 
 		//criar conferencia
 		Evento* evento = new Conferencia(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, nParticipantes);
+		evento->setNumContributers(numC);
+		evento->setNumSubscribers(numS);
 		this->associacao->addEvento(*evento);
 	}
 
@@ -721,11 +742,24 @@ void AssociacaoMS::lerEscolasVerao()
 		getline(in, organizadores, ';');
 		std::istringstream ssOrganizadores(organizadores);
 
+		auto associados = this->associacao->getAssociados();
+		auto it = associados.begin();
+		int numC = 0, numS = 0;
+
 		while (!ssOrganizadores.eof())
 		{
 			getline(ssOrganizadores, ID, ',');
 			vetorOrganizadores.push_back(stoi(ID)); //adiciona o ID ao vetor de organizadores
 		}
+
+		for (unsigned int i = 0; i < vetorOrganizadores.size(); i++)
+			for (; it != associados.end(); it++)
+				if ((*it)->getID() == vetorOrganizadores.at(i))
+					if ((*it)->isContributor())
+						numC++;
+					else if ((*it)->isSubscriber())
+						numS++;
+
 
 		//buscar local
 		std::string local;
@@ -771,7 +805,15 @@ void AssociacaoMS::lerEscolasVerao()
 		if(tipoApoio != "")
 			eliminateSpaces(tipoApoio);
 
-		Apoio apoio(apoioB, tipoApoio);
+
+		//buscar verba evento
+		std::string verba;
+		getline(in, verba, ';');
+
+		if (verba != "")
+			eliminateSpaces(verba);
+
+		Apoio apoio(apoioB, tipoApoio, std::stoul(verba));
 
 		//buscar formadores
 		std::vector <unsigned int> vetorFormadores;
@@ -789,6 +831,8 @@ void AssociacaoMS::lerEscolasVerao()
 
 		//criar EscolaVerao
 		Evento* evento = new EscolaVerao(vetorPlaneadores, vetorOrganizadores, local, tema, dataEvento, apoio, vetorFormadores);
+		evento->setNumContributers(numC);
+		evento->setNumSubscribers(numS);
 		this->associacao->addEvento(*evento);
 	}
 	in.close();
@@ -1072,6 +1116,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << " 6. Criar um novo gestor\n";
 	std::cout << " 7. Modificar conta de um associado\n";
 	std::cout << " 8. Apagar associado\n";
+	std::cout << " 13. Verba para eventos\n";
 	std::cout << " 9. Apoiar evento\n"; 
 	std::cout << "10. Enviar email\n";
 	std::cout << "11. Lista de associados\n";
@@ -1088,7 +1133,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 			this->menuLogin();
 		}
 	} while (!((opcao == 1) || (opcao == 2) || (opcao == 3) ||
-			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7) || (opcao == 8) || (opcao == 9) || (opcao==10) || (opcao==11)));
+			(opcao == 4) || (opcao == 5) || (opcao == 6) || (opcao == 7) || (opcao == 8) || (opcao == 9) || (opcao==10) || (opcao==11) || (opcao == 12) || (opcao == 13)));
 
 	if (opcao == 1) {
 		clearScreen();
@@ -1138,7 +1183,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	else if (opcao == 2)
 		this->alteraGestor(gestor);
 	else if (opcao == 9)
-		this->apoiarEvento(id);
+		this->apoiarEvento2(gestor);
 	else if (opcao == 4)
 	{
 		this->visualizaEmailsRecebidos(gestor);
@@ -1156,6 +1201,25 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	else if (opcao == 5)
 	{
 		this->visualizaEmailsEnviados(gestor);
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+		if (std::cin.get())
+		{
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+			}
+		}
+		this->menuSessaoGestor(id);
+	}
+	else if (opcao == 13) {
+		unsigned int verba;
+		std::cout << "Escolha o montante a disponibilizar, pela associacao, para o apoio a eventos \n\n";
+		getNumber(verba, "Verba ? ");
+
+		gestor->setVerba(verba);
+
+		std::cout << "Verba alterada com sucesso \n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
 		if (std::cin.get())
@@ -1189,32 +1253,63 @@ void AssociacaoMS::visualizaAssociados(unsigned int id)
 }
 
 void AssociacaoMS::apoiarEvento2(Gestor * gestor) {
-	while(gestor->getVerba() > 0 || !associacao->getPedidos().empty()){
-		std::cout << "Verba disponivel : \n" << gestor->getVerba() << "\n";
-		std::cout << "Evento a apoiar : \n" << associacao->getPedidos().top()->getTema() << "\n\n";
-		unsigned int num;
-		getNumber(num, "Verba a disponibilizar ? \n");
-		gestor->setVerba(gestor->getVerba() - num);
-		for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
-			if(associacao->getEventos().at(i)->getTema() == associacao->getPedidos().top()->getTema())
-			{
-				Apoio a(true,"monetario");
-				associacao->getEventos().at(i)->setApoio(a);
-				associacao->getPedidos().pop();
-			}
 
-		if(gestor->getVerba() == 0){
+	std::priority_queue<Evento*> temp = associacao->getPedidos();
+
+	while(gestor->getVerba() > 0 || !temp.empty()){
+
+		if (gestor->getVerba() == 0) {
 			std::cout << "Verba esgotada para esta fase de candidatura! \n\n";
 			break;
 		}
-		if(associacao->getPedidos().empty()){
+		if (temp.empty()) {
 			std::cout << "Pedidos esgotados nesta fase de candidatura! \n\n";
 			break;
 		}
+
+		std::cout << "Verba disponivel : \n" << gestor->getVerba() << "\n";
+		std::cout << "Evento a apoiar : \n" << temp.top()->getTema() << "\n\n";
+		unsigned int num;
+		getNumber(num, "Verba a disponibilizar ? \n");
+		if (gestor->getVerba() < num)
+		{
+			std::cout << "Montante demasiado elevado!\n";
+			break;
+		}
+		else gestor->setVerba(gestor->getVerba() - num);
+
+		for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
+			if(associacao->getEventos().at(i)->getTema() == temp.top()->getTema())
+			{
+				Apoio a(true,"monetario",num);
+				associacao->getEventos().at(i)->setApoio(a);
+				temp.pop();
+			}
+
+		std::cout << "\n";
+		if (temp.empty()) {
+			std::cout << "Pedidos esgotados nesta fase de candidatura! \n\n";
+			break;
+		}
+
 	}
+
+	associacao->setPedidos(temp);
+
+	std::cout << "Pressione ENTER para continuar... " << std::endl;
+
+	if (std::cin.get())
+	{
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+		}
+	}
+	this->menuSessaoGestor(gestor->getID());
 }
 
 void AssociacaoMS::apoiarEvento(unsigned int id) {
+	/*
 	clearScreen();
 	std::vector<std::pair<Evento*,int>> eventosSemApoio;
 	int numeroEvento = 1;
@@ -1266,7 +1361,7 @@ void AssociacaoMS::apoiarEvento(unsigned int id) {
 
 	} while (opcao >= associacao->getEventos().size());
 
-
+	*/
 }
 
 void AssociacaoMS::alteraGestor(Gestor* gestor) {

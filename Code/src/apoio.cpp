@@ -12,12 +12,13 @@
 	//Construtor
 	Apoio::Apoio(){
 		this->apoioAssociacao = false;
-		
+		this->verba = 0;
 	}
-	Apoio::Apoio (bool apoioAssociacao, std::string tipoApoio)
+	Apoio::Apoio (bool apoioAssociacao, std::string tipoApoio, unsigned int verba)
 	{
 		this->apoioAssociacao=apoioAssociacao;
 		this->tipoApoio=tipoApoio;
+		this->verba = verba;
 	}
 
 
@@ -54,6 +55,7 @@
 		{
 			std::cout << "    Evento apoiado " << std::endl;
 			std::cout << "    Tipo de apoio: " << tipoApoio << std::endl;
+			std::cout << "    Verba para o evento: " << verba << std::endl;
 		}
 		else
 			std::cout << "    Evento nao apoiado " << std::endl;
