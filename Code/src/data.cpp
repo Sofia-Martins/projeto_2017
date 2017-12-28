@@ -81,7 +81,7 @@ unsigned int Data::getMinuto () const
 }
 
 
-
+/*
 std::string Data::getData() const
 {
 	using namespace std;
@@ -93,7 +93,7 @@ std::string Data::getData() const
 
 	string s = stringDia + "," + stringMes+","+stringAno+","+stringHora+","+stringMinuto;
 	return s;
-}
+}*/
 
 //outros metodos
 void Data::show() const

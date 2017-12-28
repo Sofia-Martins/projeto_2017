@@ -286,6 +286,12 @@ void Associacao::addAssociado(Associado &associado) {
 	associados.insert(&associado);
 }
 
+ void Associacao::addApenasAssociado(Associado* associado) {
+	AssociadoPtr aPt;
+	aPt.setAssociado(associado);
+	//apenasAssociados.insert(aPt);
+}
+
 void Associacao::addGestor(Gestor &gestor) {
 	gestores.push_back(&gestor);
 }

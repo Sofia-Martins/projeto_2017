@@ -407,6 +407,9 @@ void AssociacaoMS::lerDominios() {
 		else
 			dac.get(carater);
 
+		if (carater == NULL)
+			break;
+
 		if (carater == '@')
 		{
 			getline(dac, cienciaS);
@@ -1099,7 +1102,8 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	{
 		if (this->associacao->getGestores().at(i)->getID() == id)
 		{
-			gestor = this->associacao->getGestores().at(i);
+			Gestor* gestor1 = this->associacao->getGestores().at(i);
+			gestor = gestor1;
 		}
 	}
 
@@ -3156,3 +3160,4 @@ void clearScreen()
     //system("CLS");
 	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
+

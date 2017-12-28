@@ -13,11 +13,40 @@
 //#include <windows.h>
 #include <algorithm>
 #include <queue>
+#include <tr1/unordered_set>
 #include "dominioCientifico.h"
 #include "email.h"
 #include "associado.h"
 #include "gestor.h"
 #include "evento.h"
+
+using namespace std;
+
+class AssociadoPtr {
+private:
+	Associado* associado;
+public:
+	AssociadoPtr() {associado = NULL;};
+	void setAssociado(Associado* a) {this->associado = a;};
+};
+
+struct hstr
+{
+	int operator() (const Associado & a) const
+	{
+		return a.getCota()->getAtraso();
+	}
+};
+
+struct eqstr
+{
+	bool operator() (const Associado & a1, const Associado & a2) const
+	{
+		return a1.getCota()->getAtraso() == a2.getCota()->getAtraso();
+	}
+};
+
+typedef tr1::unordered_set <AssociadoPtr, hstr, eqstr> HashTabAssociados;
 
 class Associacao {
 private:
@@ -45,6 +74,10 @@ private:
 	 * @brief Vetor de associados (subscribers, contributors, e associados sem outro estatuto)
 	 */
 	std::set<Associado*, AssociadoCmp> associados;
+	/**
+	 * @brief Tabela de dispersão de associados (associados sem estatuto)
+	 */
+	HashTabAssociados apenasAssociados;
 	/**
 	 * @brief Vetor de gestores da associação
 	 */
@@ -188,6 +221,12 @@ public:
 	 */
 	void addAssociado(Associado &associado);
 	/**
+	 * @brief Adiciona associado com cota em atraso superior a 5 anos à tabela de dispersão
+	 * @param associado Especifica associado a adicionar
+	 * @return void
+	 */
+	void addApenasAssociado(Associado* associado);
+	/**
 	 * @brief Apaga associado do vetor de associados
 	 * @param associado Especifica associado a apagar
 	 * @return void
@@ -315,3 +354,4 @@ bool comparaGestores(const Gestor* g1, const Gestor* g2);
 bool comparaEventos(const Evento* e1, const Evento* e2);
 
 #endif
+
