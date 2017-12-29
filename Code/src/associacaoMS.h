@@ -272,11 +272,11 @@ public:
 	 */
 	void menuSessaoOther(Associado* associado);
 	/**
-	 * @param id ID do evento que passa a ser apoiado pela associação a ser gerida
-	 * Função que permite atualizar o atributo 'apoio' de um evento da associação
+	 * @param gestor Gestor que vai gerir a verba e atribui-la aos eventos
+	 * Função que permite atualizar o atributo 'apoio' dos eventos da associacao numa fase de candidatura
 	 * @return void
 	 */
-	void apoiarEvento(unsigned int id);
+	void apoiarEvento(Gestor * gestor);
 	/**
 	 * @param gestor Gestor a ser alterado
 	 * Função que permite a modificação do perfil de um gestor da associação
@@ -348,11 +348,6 @@ public:
 	 *@return void
 	 */
 	void enviarGestores() const;
-
-	void apoiarEvento2(Gestor * gestor);
-
-
-
 
 };
 

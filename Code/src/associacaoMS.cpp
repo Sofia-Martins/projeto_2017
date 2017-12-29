@@ -1120,11 +1120,11 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << " 6. Criar um novo gestor\n";
 	std::cout << " 7. Modificar conta de um associado\n";
 	std::cout << " 8. Apagar associado\n";
-	std::cout << " 13. Verba para eventos\n";
-	std::cout << " 9. Apoiar evento\n"; 
-	std::cout << "10. Enviar email\n";
-	std::cout << "11. Lista de associados\n";
-	std::cout << "12. Terminar Sessao\n\n";
+	std::cout << " 9. Verba para eventos\n";
+	std::cout << " 10. Apoiar evento\n";
+	std::cout << "11. Enviar email\n";
+	std::cout << "12. Lista de associados\n";
+	std::cout << "13. Terminar Sessao\n\n";
 
 
 	unsigned int opcao = 0;
@@ -1162,9 +1162,9 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->apagaGestor(id);
 	else if (opcao == 8)
 		this->apagaAssociado(id);
-	else if (opcao == 11)
+	else if (opcao == 12)
 		visualizaAssociados(id);
-	else if (opcao == 10) {
+	else if (opcao == 11) {
 
 		this->envioEmail(gestor);
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
@@ -1180,18 +1180,18 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	}
 	else if (opcao == 6)
 		this->criaGestor(associacao->getSigla(), false, id);
-	else if (opcao == 12)
+	else if (opcao == 13)
 	{
 		this->menuLogin();
 	}
 	else if (opcao == 2)
 		this->alteraGestor(gestor);
-	else if (opcao == 9)
-		this->apoiarEvento2(gestor);
+	else if (opcao == 10)
+		this->apoiarEvento(gestor);
 	else if (opcao == 4)
 	{
 		this->visualizaEmailsRecebidos(gestor);
-		std::cout << "Pressione ENTER para continuar... " << std::endl;
+		std::cout << "Pression13e ENTER para continuar... " << std::endl;
 
 		if (std::cin.get())
 		{
@@ -1216,9 +1216,9 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		}
 		this->menuSessaoGestor(id);
 	}
-	else if (opcao == 13) {
+	else if (opcao == 9) {
 		unsigned int verba;
-		std::cout << "Escolha o montante a disponibilizar, pela associacao, para o apoio a eventos \n\n";
+		std::cout << "Escolha o montante a disponibilizar, pela associacao, para o apoio a eventos nesta fase de candidaturas\n\n";
 		getNumber(verba, "Verba ? ");
 
 		gestor->setVerba(verba);
@@ -1256,7 +1256,7 @@ void AssociacaoMS::visualizaAssociados(unsigned int id)
 	this->menuSessaoGestor(id);
 }
 
-void AssociacaoMS::apoiarEvento2(Gestor * gestor) {
+void AssociacaoMS::apoiarEvento(Gestor * gestor) {
 
 	std::priority_queue<Evento*> temp = associacao->getPedidos();
 
@@ -1310,62 +1310,6 @@ void AssociacaoMS::apoiarEvento2(Gestor * gestor) {
 		}
 	}
 	this->menuSessaoGestor(gestor->getID());
-}
-
-void AssociacaoMS::apoiarEvento(unsigned int id) {
-	/*
-	clearScreen();
-	std::vector<std::pair<Evento*,int>> eventosSemApoio;
-	int numeroEvento = 1;
-	std::cout << "Eventos sem apoio da associacao\n\n";
-
-	for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
-		if (!associacao->getEventos().at(i)->getApoioEvento().getApoioAssociacao())
-		{
-			std::cout << "Evento numero " << numeroEvento << " \nNome : "
-				<< associacao->getEventos().at(i)->getTema() << " \nLocal : "
-				<< associacao->getEventos().at(i)->getLocal() << "\n\n";
-			numeroEvento++;
-			eventosSemApoio.push_back(std::pair<Evento*,int>(associacao->getEventos().at(i),i));
-		}
-
-	unsigned int opcao;
-	std::string tipoApoio;
-	do {
-		getNumber(opcao, "Indique o numero do evento que pretende dar apoio : ");
-		if (std::cin.eof())
-		{
-			std::cin.clear();
-			this->menuSessaoGestor(id);
-		}
-
-		if ((opcao - 1) >= eventosSemApoio.size()) {
-			std::cout << "Evento inexistente...\n\n";
-			continue;
-		}
-
-		getString(tipoApoio, "\nIndique o tipo de apoio : ");
-		if (std::cin.eof())
-		{
-			std::cin.clear();
-			this->menuSessaoGestor(id);
-		}
-		Apoio a(true,tipoApoio);
-		associacao->getEventos().at(eventosSemApoio.at(opcao-1).second)->setApoio(a);
-
-		std::cout << "\nEvento alterado com sucesso!\n\n";
-
-		std::cout << "Pressione ENTER para continuar... " << std::endl;
-
-		if (std::cin.get())
-		{
-			if (std::cin.eof()) std::cin.clear();
-			this->menuSessaoGestor(id);
-		}
-
-	} while (opcao >= associacao->getEventos().size());
-
-	*/
 }
 
 void AssociacaoMS::alteraGestor(Gestor* gestor) {
@@ -2252,7 +2196,7 @@ void AssociacaoMS::criarEvento(T* associado)
 	}
 
 	/* ------- Passo 8 - Criar evento e adicionar ao vetor de eventos da associacao --------*/
-    Apoio apoio; //ao ser criado o evento este nao é apoiado
+    Apoio apoio; //ao ser criado o evento este nao é apoiado, logo nao tem verba disponivel
 	Evento* evento;
 
 	if (conferencia)

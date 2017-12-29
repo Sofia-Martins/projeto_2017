@@ -145,8 +145,17 @@ public:
 	 * @brief Funcao virtual para verificar o tipo de evento
 	 */
 	virtual bool escolaVerao() { return false;}
-
+	/**
+	 * @brief Atribui valor do argumento ao atributo numContributers
+	 * @param num Valor que será atribuído ao atributo numContributers
+	 * @return void
+	 */
 	void setNumContributers(int num) { numContributers = num; }
+	/**
+	 * @brief Atribui valor do argumento ao atributo numSubscribers
+	 * @param num Valor que será atribuído ao atributo numSubscribers
+	 * @return void
+	 */
 	void setNumSubscribers(int num) { numSubscribers = num; }
 
 
@@ -200,17 +209,26 @@ public:
 	 * @return false
 	 */
 	bool escolaVerao() { return false; }
-
-
+	/**
+	 * @brief Retorna valor do atributo numContributers
+	 * @return Valor do atributo numContributers
+	 */
 	int getNumContributers() const { return Evento::numContributers; }
-
+	/**
+	 * @brief Retorna valor do atributo numSubscribers
+	 * @return Valor do atributo numSubscribers
+	 */
 	int getNumSubscribers() const { return Evento::numSubscribers; }
+	/**
+	 * @brief Overloading do operador de menor
+	 * @param c Conferencia a comparar
+	 * @return true caso o parametro seja maior
+	 */
+	bool operator < (const Conferencia & c) const{
 
-	bool operator < (const Conferencia & e) const{
-
-		if (this->getNumContributers() == e.getNumContributers())
-			return this->getOrganizadores().size() < e.getOrganizadores().size() || this->getNumSubscribers() < e.getNumSubscribers();
-		else return this->getOrganizadores().size() < e.getOrganizadores().size() || this->getNumContributers() < e.getNumContributers();
+		if (this->getNumContributers() == c.getNumContributers())
+			return this->getOrganizadores().size() < c.getOrganizadores().size() || this->getNumSubscribers() < c.getNumSubscribers();
+		else return this->getOrganizadores().size() < c.getOrganizadores().size() || this->getNumContributers() < c.getNumContributers();
 
 	}
 
@@ -274,12 +292,21 @@ public:
 	 * @return true
 	 */
 	bool escolaVerao() { return true; }
-
-
+	/**
+	 * @brief Retorna valor do atributo numContributers
+	 * @return Valor do atributo numContributers
+	 */
 	int getNumContributers() const { return Evento::numContributers; }
-
+	/**
+	 * @brief Retorna valor do atributo numSubscribers
+	 * @return Valor do atributo numSubscribers
+	 */
 	int getNumSubscribers() const { return Evento::numSubscribers; }
-
+	/**
+	 * @brief Overloading do operador de menor
+	 * @param e Escola de Verao a comparar
+	 * @return true caso o parametro seja maior
+	 */
 	bool operator < (const EscolaVerao & e) const {
 
 		if (this->getNumContributers() == e.getNumContributers())

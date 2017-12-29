@@ -28,7 +28,7 @@ private:
 	unsigned int verba; //verba para apoiar eventos
 public:
 	/**
-		 * @brief Le o gestor do ficheiro de gestores
+		 * @brief Le o gestor do ficheiro de gestores, Verba e sempre inicializada a zero
 		 * @param nome Especifica nome do gestor
 		 * @param id Especifica id do gestor
 		 * @param password Especifica password do gestor
@@ -40,6 +40,7 @@ public:
 		 * @brief Construtor do gestor
 		 *
 		 *	Email e atribuido automaticamente
+		 *	Verba e sempre inicializada a zero
 		 *
 		 * @param nome Especifica nome do gestor
 		 * @param password Especifica password do gestor
@@ -74,7 +75,11 @@ public:
 	 * @return void
 	 */
 	void setEnderecoEmail(std::string enderecoEmail);
-
+	/**
+	 * @brief Atribui valor do argumento ao atributo verba
+	 * @param verba Valor que será atribuído ao atributo verba
+	 * @return void
+	 */
 	void setVerba(unsigned int verba){this->verba = verba;}
 	//metodos get
 	/**
@@ -112,7 +117,10 @@ public:
 	 * @return Valor do atributo emailsEnviados
 	 */
 	std::vector<Email*> getEmailsEnviados();
-
+	/**
+	 * @brief Retorna valor do atributo verba
+	 * @return Valor do atributo verba
+	 */
 	unsigned int getVerba(){return verba;}
 
 	/**

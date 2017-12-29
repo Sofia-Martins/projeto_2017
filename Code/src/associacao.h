@@ -86,7 +86,9 @@ private:
 	 * @brief ID do próximo gestor ou associado que for adicionado à associação
 	 */
 	unsigned int id;  
-
+	/**
+	 * @brief Fila de prioridade dos eventos sem apoio
+	 */
 	std::priority_queue<Evento*> pedidos;
 
 public:
@@ -155,7 +157,10 @@ public:
 	 * @return Atributo id
 	 */
 	unsigned int getID() const;
-
+	/**
+	 * @brief Retorna a fila de pedidos
+	 * @return priority_queue pedidos
+	 */
 	std::priority_queue<Evento*> getPedidos() const{ return pedidos; }
 
 	/**
@@ -206,7 +211,11 @@ public:
 	 * @return void
 	 */
 	void setEventos(std::vector<Evento*> eventos);
-
+	/**
+	 * @brief Altera vetor de pedidos da associacao
+	 * @param p Especifica novo valor do pedidos
+	 * @return void
+	 */
 	void setPedidos(std::priority_queue<Evento*> p) { pedidos = p; }
 	/**
 	 * @brief Adiciona email ao vetor de emails
@@ -232,6 +241,12 @@ public:
 	 * @return void
 	 */
 	void showAssociadosCategoria() const;
+	/**
+	 * @brief Apaga associado e apaga-o dos eventos em q se inclui
+	 * @param associado Especifica associado a apagar
+	 * @param apagaEventos Especifica se o associado ja foi apagado dos eventos
+	 * @return void
+	 */
 	void eraseAssociado(Associado* associado, bool apagaEventos);
 	/**
 	 * @brief Adiciona gestor ao vetor de gestores

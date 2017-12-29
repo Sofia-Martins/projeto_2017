@@ -1,2 +1,2 @@
-3,2,4;3,2,4;ALA Gondomar;Inspira(-te)!;23,10,2018,11,30;0;;0;3
-2,3,4;2,3,4;FEUP;Quero ser um Engenheiro!;10,12,2017,13,45;1;Formadores;0;2,3
+3,2,4;3,2,4;ALA Gondomar;Inspira(-te)!;23,10,2018,11,30;0;Financeiro;0;3
+2,3,4;2,3,4;FEUP;Quero ser um Engenheiro!;10,12,2017,13,45;1;Financeiro;0;2,3

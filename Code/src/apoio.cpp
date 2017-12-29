@@ -12,6 +12,7 @@
 	//Construtor
 	Apoio::Apoio(){
 		this->apoioAssociacao = false;
+		this->tipoApoio = "Financeiro";
 		this->verba = 0;
 	}
 	Apoio::Apoio (bool apoioAssociacao, std::string tipoApoio, unsigned int verba)
