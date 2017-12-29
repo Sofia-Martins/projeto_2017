@@ -1287,7 +1287,12 @@ void AssociacaoMS::apoiarEvento(Gestor * gestor) {
 			{
 				Apoio a(true,"monetario",num);
 				associacao->getEventos().at(i)->setApoio(a);
-				temp.pop();
+				if(temp.size() == 1)
+				{
+					temp.pop();
+					break;
+				}
+				else temp.pop();
 			}
 
 		std::cout << "\n";
