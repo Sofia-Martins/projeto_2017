@@ -2256,6 +2256,12 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 	for(;it!=associados.end();it++)
 		std::cout << std::setw(20) << (*it)->getID() << std::setw(20) << (*it)->getNome() << "\n";
 
+	auto apenasAssociados = this->associacao->getApenasAssociados();
+	auto itr = apenasAssociados.begin();
+
+	for(;itr!=apenasAssociados.end();itr++)
+		std::cout << std::setw(20) << itr->getID() << std::setw(20) << itr->getNome() << "\n";
+
 	std::cout << "\n";
 
 	Associado* associado = NULL;
@@ -2275,8 +2281,15 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 				associado = (*it);
 			
 		}
-		if (associado==NULL)
-			std::cout << "ID invalido!!\n\n";
+		if (associado==NULL){
+			itr = apenasAssociados.begin();
+				for (; itr != apenasAssociados.end(); itr++)
+				{
+					if (itr->getID() == ID)
+						associado = new Associado(itr->getNome(), itr->getID(), itr->getPassword(), itr->getInstituicao(), itr->getCota(), itr->getEmail());
+				}
+		} else std::cout << "ID invalido!!\n\n";
+
 	} while (associado==NULL);
 
 	std::cout << "O que deseja alterar ? \n\n";
@@ -2477,7 +2490,6 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 				std::cin.clear();
 			this->menuSessaoGestor(id);
 		}
-
 }
 
 void AssociacaoMS::apagaGestor(unsigned int id){
@@ -2853,6 +2865,55 @@ void AssociacaoMS::enviarAssociados() const
 			out << areas.at(i);
 		}
     }
+
+	auto apenasAssociados = this->associacao->getApenasAssociados();
+	auto itr = apenasAssociados.begin();
+
+	for (; itr != apenasAssociados.end(); itr++)
+		{
+			auto associado = (*itr);
+			auto nome = associado.getNome();
+			auto id = associado.getID();
+			auto password = associado.getPassword();
+			auto instituicao = associado.getInstituicao();
+
+			std::string emDia;
+			if (associado.getCota()->getEmDia() == true)
+				emDia = "sim";
+			else
+				emDia = "nao";
+
+			auto atraso = associado.getCota()->getAtraso();
+			auto email = associado.getEmail();
+			auto eventos = associado.getEventos();
+			auto areas = associado.getAreasInteresse();
+
+			if (itr != apenasAssociados.begin())
+			{
+				out << "\n";
+			}
+			out << nome << "," << id << "," << password << "," << instituicao << "," << emDia << "," << atraso << "," << email << ";";
+
+			for (int i = 0; i < eventos.size(); i++)
+			{
+				if (i != 0)
+				{
+					out << ",";
+				}
+				out << eventos.at(i);
+			}
+			out << ";";
+			for (int i = 0; i < areas.size(); i++)
+			{
+				if (i != 0)
+				{
+					out << ",";
+				}
+				out << areas.at(i);
+			}
+	    }
+
+
 	out.close();
 }
 
