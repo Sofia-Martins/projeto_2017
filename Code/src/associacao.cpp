@@ -49,6 +49,11 @@ bool equalGestor(Gestor* g1, Gestor* g2)
 {
 	return (g1->getID() == g2->getID());
 }
+
+HashTabAssociados Associacao::getApenasAssociados() const{
+	return this->apenasAssociados;
+}
+
 /*
 Gestor* Associacao::getGestor(int id) const
 {
@@ -286,10 +291,12 @@ void Associacao::addAssociado(Associado &associado) {
 	associados.insert(&associado);
 }
 
- void Associacao::addApenasAssociado(Associado* associado) {
-	AssociadoPtr aPt;
-	aPt.setAssociado(associado);
-	//apenasAssociados.insert(aPt);
+void Associacao::addApenasAssociado(Associado associado) {
+	apenasAssociados.insert(associado);
+}
+
+void Associacao::eraseApenasAssociado(Associado associado) {
+	apenasAssociados.erase(associado);
 }
 
 void Associacao::addGestor(Gestor &gestor) {

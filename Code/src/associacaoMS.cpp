@@ -542,7 +542,11 @@ void AssociacaoMS::lerAssociados() {
 			}
 		}
 		a1->setAreasInteresse(v_subareas);
-		associacao->addAssociado(*a1);
+
+		if (a1->getCota()->getAtraso() >= 5)
+			associacao->addApenasAssociado(*a1);
+		else associacao->addAssociado(*a1);
+
 		if (std::stoul(ID) >= this->associacao->getID()) this->associacao->setID(std::stoul(ID));
 	}
 }
@@ -2387,7 +2391,8 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 					associado->getInstituicao(),
 					cota, associado->getEmail());
 				temp.erase(position);
-				temp.insert(a1);
+				this->associacao->addApenasAssociado(*a1);
+				//temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
@@ -2423,7 +2428,8 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 					associado->getInstituicao(),
 					cota, associado->getEmail());
 				temp.erase(position);
-				temp.insert(a1);
+				this->associacao->addApenasAssociado(*a1);
+				//temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
 			}
@@ -2438,7 +2444,7 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 					associado->getPassword(),
 					associado->getInstituicao(),
 					cota, associado->getEmail());
-				temp.erase(position);
+				this->associacao->eraseApenasAssociado(*associado);
 				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";
@@ -2452,7 +2458,7 @@ void AssociacaoMS::alteraAssociado(unsigned int id){
 					associado->getPassword(),
 					associado->getInstituicao(),
 					cota, associado->getEmail());
-				temp.erase(position);
+				this->associacao->eraseApenasAssociado(*associado);
 				temp.insert(a1);
 				associacao->setAssociados(temp);
 				std::cout << "\nCota alterada com sucesso!\n\n";

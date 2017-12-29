@@ -21,14 +21,14 @@
 #include "evento.h"
 
 using namespace std;
-
+/*
 class AssociadoPtr {
 private:
 	Associado* associado;
 public:
 	AssociadoPtr() {associado = NULL;};
 	void setAssociado(Associado* a) {this->associado = a;};
-};
+};*/
 
 struct hstr
 {
@@ -46,7 +46,7 @@ struct eqstr
 	}
 };
 
-typedef tr1::unordered_set <AssociadoPtr, hstr, eqstr> HashTabAssociados;
+typedef tr1::unordered_set <Associado, hstr, eqstr> HashTabAssociados;
 
 class Associacao {
 private:
@@ -137,6 +137,11 @@ public:
 	 * @return Vector associados
 	 */
 	std::set<Associado*, AssociadoCmp> getAssociados() const;
+	/**
+	 * @brief Retorna a tabela de dispersão que contém os associados com atraso superior a 5 anos
+	 * @return HashTabAssociados
+	 */
+	HashTabAssociados getApenasAssociados() const;
 	/**
 	 * @brief Retorna valor do vetor gestores
 	 * @return Vector gestores
@@ -234,6 +239,12 @@ public:
 	 * @param associado Especifica associado a adicionar
 	 * @return void
 	 */
+	void addApenasAssociado(Associado associado);
+	/**
+	 * @brief Adiciona associado com cota em atraso superior a 5 anos à tabela de dispersão
+	 * @param associado Especifica associado a adicionar
+	 * @return void
+	 */
 	void addApenasAssociado(Associado* associado);
 	/**
 	 * @brief Apaga associado do vetor de associados
@@ -248,6 +259,12 @@ public:
 	 * @return void
 	 */
 	void eraseAssociado(Associado* associado, bool apagaEventos);
+	/**
+	 * @brief Apaga associado da tabela de dispersão
+	 * @param associado Especifica associado a apagar
+	 * @return void
+	 */
+	void eraseApenasAssociado(Associado associado);
 	/**
 	 * @brief Adiciona gestor ao vetor de gestores
 	 * @param gestor Especifica gestor a adicionar
