@@ -54,7 +54,10 @@ public:
 	*@return void
 	*/
 	void sortCiencias();
-
+    /**
+     * @brief Class amiga Associacao
+     * @relates Associacao
+     */
 	friend class Associacao;
 };
 

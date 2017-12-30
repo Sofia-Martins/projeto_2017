@@ -72,7 +72,10 @@ public:
 	*@return void
 	*/
 	void sortAreas();
-
+    /**
+     * @brief Class amiga Associacao
+     * @relates Associacao
+     */
 	friend class Associacao;
 };
 

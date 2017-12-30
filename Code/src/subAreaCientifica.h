@@ -48,8 +48,10 @@ public:
 	 * @brief Imprime a sub-área científica na consola
 	 */
 	void show() const;
-
-
+    /**
+     * @brief Class amiga Associacao
+     * @relates Associacao
+     */
 	friend class Associacao;
 	
 };

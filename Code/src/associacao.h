@@ -71,7 +71,7 @@ private:
 	 */
 	std::vector<Email*> emails;
 	/**
-	 * @brief Vetor de associados (subscribers, contributors, e associados sem outro estatuto)
+	 * @brief Arvore Binaria de associados (subscribers, contributors, e associados sem outro estatuto)
 	 */
 	std::set<Associado*, AssociadoCmp> associados;
 	/**
@@ -133,8 +133,8 @@ public:
 	 */
 	DominioCientifico* getDominio() const { return dominioAssociacao; }
 	/**
-	 * @brief Retorna valor do vetor associados
-	 * @return Vector associados
+	 * @brief Retorna valor da arvore binaria de associados
+	 * @return set<Associado*, AssociadoCmp> associados
 	 */
 	std::set<Associado*, AssociadoCmp> getAssociados() const;
 	/**
