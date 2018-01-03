@@ -2876,6 +2876,8 @@ void AssociacaoMS::enviarAssociados() const
 		}
     }
 
+
+
 	auto apenasAssociados = this->associacao->getApenasAssociados();
 	auto itr = apenasAssociados.begin();
 
@@ -2898,10 +2900,14 @@ void AssociacaoMS::enviarAssociados() const
 			auto eventos = associado.getEventos();
 			auto areas = associado.getAreasInteresse();
 
-			if (itr != apenasAssociados.begin())
+			if (itr == apenasAssociados.begin())
 			{
-				out << "\n";
+				if (associados.size() != 0)
+					out << "\n";
 			}
+			else
+				out << "\n";
+
 			out << nome << "," << id << "," << password << "," << instituicao << "," << emDia << "," << atraso << "," << email << ";";
 
 			for (int i = 0; i < eventos.size(); i++)
