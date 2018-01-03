@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['emails',['emails',['../classAssociacao.html#a0621339a95ee9be25dc785e669214683',1,'Associacao']]],
-  ['emailsenviados',['emailsEnviados',['../classContributor.html#a8f384a8e726decc74ec3e8db0781f659',1,'Contributor::emailsEnviados()'],['../classGestor.html#a47702a27c600033f1eab2fd02d57b68a',1,'Gestor::emailsEnviados()']]],
-  ['emailsrecebidos',['emailsRecebidos',['../classContributor.html#ad7ee6e1dbaf0bfa61228df41e1e5787e',1,'Contributor::emailsRecebidos()'],['../classSubscriber.html#aed4f80909fbc09de060f7bb0a2438a1a',1,'Subscriber::emailsRecebidos()'],['../classGestor.html#a495ab04e9c3e3fe4eff818443ef8e75a',1,'Gestor::emailsRecebidos()']]],
-  ['emdia',['emDia',['../classCota.html#ac4c149f165956934e653876328c0a2ba',1,'Cota']]],
-  ['enderecoemail',['enderecoEmail',['../classAssociado.html#a9c1831c0e1a9d64918643c16c4bb297f',1,'Associado::enderecoEmail()'],['../classGestor.html#a3e3420a8202eaeb4f55bd184d3a11d7b',1,'Gestor::enderecoEmail()']]],
-  ['eventos',['eventos',['../classAssociacao.html#ad10a346481b58be5c98cabecfcc8b7aa',1,'Associacao::eventos()'],['../classAssociado.html#a4234a8975b75b02868d1435e86638cd2',1,'Associado::eventos()']]]
+  ['ficheiroassociacoes',['ficheiroAssociacoes',['../classAssociacaoMS.html#ad5f35e8e282d2f8425225c102244e081',1,'AssociacaoMS']]],
+  ['ficheiroassociados',['ficheiroAssociados',['../classAssociacaoMS.html#aad43d5d3b05e39d449a55a8f35cb9837',1,'AssociacaoMS']]],
+  ['ficheiroconferencias',['ficheiroConferencias',['../classAssociacaoMS.html#a20eb875de279e5700d251cdd18e438c1',1,'AssociacaoMS']]],
+  ['ficheirodominios',['ficheiroDominios',['../classAssociacaoMS.html#af57de754c1d281ba79325bd1e36aceb2',1,'AssociacaoMS']]],
+  ['ficheiroemails',['ficheiroEmails',['../classAssociacaoMS.html#a93aac60cf02b3683e5b76da084d83032',1,'AssociacaoMS']]],
+  ['ficheiroescolasverao',['ficheiroEscolasVerao',['../classAssociacaoMS.html#acea9379528a52fcf90d6a8c0e9b4c393',1,'AssociacaoMS']]],
+  ['ficheirogestores',['ficheiroGestores',['../classAssociacaoMS.html#a599c32c746a1722f6cc3bf0b57854594',1,'AssociacaoMS']]],
+  ['formadores',['formadores',['../classEscolaVerao.html#adfd74285d7384b989269f819eaa2458a',1,'EscolaVerao']]]
 ];
