@@ -1231,9 +1231,15 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	else if (opcao == 9) {
 		clearScreen();
 		unsigned int verba;
-		std::cout << "Verba ainda disponível: " << gestor->getVerba() << std::endl;
+		std::cout << "Verba ainda disponivel: " << gestor->getVerba() << std::endl;
 		std::cout << "Escolha o montante a disponibilizar, pela associacao, para o apoio a eventos nesta fase de candidaturas\n\n";
+	
 		getNumber(verba, "Verba a adicionar? ");
+		if (std::cin.eof())
+		{
+			std::cin.clear();
+			this->menuSessaoGestor(id);
+		}
 
 		gestor->setVerba(verba+gestor->getVerba());
 
@@ -1285,16 +1291,25 @@ void AssociacaoMS::apoiarEvento(Gestor * gestor) {
 			break;
 		}
 
-		std::cout << "Verba disponivel : \n" << gestor->getVerba() << "\n";
-		std::cout << "Evento a apoiar : \n" << temp.top()->getTema() << "\n\n";
+		std::cout << "Verba disponivel : " << gestor->getVerba() << "\n";
+		std::cout << "Evento a apoiar : " << temp.top()->getTema() << "\n\n";
 		unsigned int num;
-		getNumber(num, "Verba a disponibilizar ? \n");
-		if (gestor->getVerba() < num)
+		do
 		{
-			std::cout << "Montante demasiado elevado!\n";
-			break;
-		}
-		else gestor->setVerba(gestor->getVerba() - num);
+			getNumber(num, "Verba a disponibilizar ? ");
+			if (std::cin.eof())
+			{
+				std::cin.clear();
+				this->menuSessaoGestor(gestor->getID());
+			}
+			if (gestor->getVerba() < num)
+			{
+				std::cout << "Montante demasiado elevado!\n\n";
+				
+			}
+		} while ((gestor->getVerba() < num) || (num == 0));
+		
+		gestor->setVerba(gestor->getVerba() - num);
 
 		for (unsigned int i = 0; i < associacao->getEventos().size(); i++)
 			if(associacao->getEventos().at(i)->getTema() == temp.top()->getTema())
@@ -1304,9 +1319,14 @@ void AssociacaoMS::apoiarEvento(Gestor * gestor) {
 				if(temp.size() == 1)
 				{
 					temp.pop();
+					associacao->setPedidos(temp);
 					break;
 				}
-				else temp.pop();
+				else
+				{
+					temp.pop();
+					associacao->setPedidos(temp);
+				}
 			}
 
 		std::cout << "\n";
