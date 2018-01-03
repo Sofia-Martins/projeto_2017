@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['pass1',['pass1',['../apic__gestores_8txt.html#a13dfc2970140a182262e35a05c0792c6',1,'apic_gestores.txt']]],
-  ['pass2',['pass2',['../apic__associados_8txt.html#a457eadcfc59681e2109fe03951e0ba4f',1,'apic_associados.txt']]],
-  ['pass3',['pass3',['../apic__associados_8txt.html#aa0eb43ab4e6238e0c43e64f72c1c3287',1,'apic_associados.txt']]],
-  ['pass4',['pass4',['../apic__associados_8txt.html#a0468faaf096720c57cec05e5c4e42683',1,'apic_associados.txt']]],
-  ['password',['password',['../classAssociado.html#a6fe634c331b9e28d8507f381288054b2',1,'Associado::password()'],['../classGestor.html#ad3c0e709045754c744402581329e584e',1,'Gestor::password()']]],
-  ['planeadores',['planeadores',['../classEvento.html#ae9993cd6f7b83d2567dfe4d4160a228c',1,'Evento']]],
-  ['procuraassociado',['procuraAssociado',['../associacaoMS_8cpp.html#a69c6c58ca865a231f3e766f851a86374',1,'associacaoMS.cpp']]]
+  ['receberemail',['receberEmail',['../classAssociado.html#a5c3cff1900f75eb7c784ae4f0668f43b',1,'Associado::receberEmail()'],['../classContributor.html#a5c5cd3e264b9ab136f03afa0ac3b01ae',1,'Contributor::receberEmail()'],['../classSubscriber.html#a7e98f8c38c07f68875eeea3c83a24f5a',1,'Subscriber::receberEmail()'],['../classGestor.html#af5bf27b32b71f62991addfd3b7723cd1',1,'Gestor::receberEmail()']]],
+  ['remetente',['remetente',['../classEmail.html#a40ef6aa53a09ba87ec478a8c2e4080d7',1,'Email']]],
+  ['removeformador',['removeFormador',['../classEvento.html#a6cd7cd49aa492ff5bd530276acdcfef6',1,'Evento::removeFormador()'],['../classEscolaVerao.html#a1c55d78d10fc8bd7e412887855dd42d3',1,'EscolaVerao::removeFormador()']]],
+  ['removeorganizador',['removeOrganizador',['../classEvento.html#ae260e649779c65540d8914fdd7e9ea50',1,'Evento']]],
+  ['removeplaneador',['removePlaneador',['../classEvento.html#af9a9b1a64910789d6437c0fb77b940e7',1,'Evento']]],
+  ['retornomenu',['retornoMenu',['../associacaoMS_8cpp.html#ac03cc16b4d2f5e8eae7ab1f7c916d0f4',1,'associacaoMS.cpp']]]
 ];

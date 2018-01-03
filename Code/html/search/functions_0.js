@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['addapenasassociado',['addApenasAssociado',['../classAssociacao.html#abfa5fc6dd01b66e480af948ceb2e6d54',1,'Associacao::addApenasAssociado(Associado associado)'],['../classAssociacao.html#a993442c4270ca5e2c2497fbb10e190f3',1,'Associacao::addApenasAssociado(Associado *associado)']]],
   ['addareacientifica',['addAreaCientifica',['../classCiencia.html#a14d85ff7a8fe6a6ddc83d273cb64a2d4',1,'Ciencia']]],
   ['addassociado',['addAssociado',['../classAssociacao.html#ad3f2a2fc77f67171596339817c2a8859',1,'Associacao']]],
   ['addciencia',['addCiencia',['../classDominioCientifico.html#a788fb712ec7216de603f85e9158b7b35',1,'DominioCientifico']]],
@@ -16,12 +17,12 @@ var searchData=
   ['alteragestor',['alteraGestor',['../classAssociacaoMS.html#adc0845a7ff0be887563b9b3c5e110807',1,'AssociacaoMS']]],
   ['apagaassociado',['apagaAssociado',['../classAssociacaoMS.html#a5388b0f4622d2fb365e91a6952b6fbd6',1,'AssociacaoMS']]],
   ['apagagestor',['apagaGestor',['../classAssociacaoMS.html#a439fea076e8cc819d6f09ece03e089fa',1,'AssociacaoMS']]],
-  ['apoiarevento',['apoiarEvento',['../classAssociacaoMS.html#af1b430e9fc6dae508cc7003fe3955d4d',1,'AssociacaoMS']]],
-  ['apoio',['Apoio',['../classApoio.html#adcc4560631b88989e1561e8b090ab758',1,'Apoio::Apoio(bool apoioAssociacao, std::string tipoApoio)'],['../classApoio.html#ab7d8ebda6081cc674c81f0d65952d614',1,'Apoio::Apoio()']]],
+  ['apoiarevento',['apoiarEvento',['../classAssociacaoMS.html#a34aba87edea5d974d105827a08c96f5c',1,'AssociacaoMS']]],
+  ['apoio',['Apoio',['../classApoio.html#aa903605c579455165fe4bf7899cb6e26',1,'Apoio::Apoio(bool apoioAssociacao, std::string tipoApoio, unsigned int verba)'],['../classApoio.html#ab7d8ebda6081cc674c81f0d65952d614',1,'Apoio::Apoio()']]],
   ['areacientifica',['AreaCientifica',['../classAreaCientifica.html#ad97d3165d3c0a19eca8b48bf23434ff1',1,'AreaCientifica::AreaCientifica()'],['../classAreaCientifica.html#a7953da53554bcbda80b64f8f8833840e',1,'AreaCientifica::AreaCientifica(std::string nomeArea)']]],
   ['areacientificarepetida',['AreaCientificaRepetida',['../classAreaCientificaRepetida.html#aa88332df13ec4e49e1c9fb9ab3e2df0c',1,'AreaCientificaRepetida']]],
   ['areasiguais',['areasIguais',['../ciencia_8cpp.html#a329055d3b0a4fe28f6ee1aa3d750026a',1,'ciencia.cpp']]],
-  ['associacao',['Associacao',['../classAssociacao.html#a3087135c08188b55fbf6d8f7d4867f9f',1,'Associacao::Associacao()'],['../classAssociacao.html#a3426521f72c6a536fb7cc03f71c9dc2e',1,'Associacao::Associacao(std::string nome, std::vector&lt; Evento * &gt; eventos, std::vector&lt; Email * &gt; emails, std::vector&lt; Associado * &gt; associados, std::vector&lt; Gestor * &gt; gestores)']]],
+  ['associacao',['Associacao',['../classAssociacao.html#aee9a8eac32f951ab4b16dfaab498928b',1,'Associacao::Associacao()'],['../classAssociacao.html#a0f3d371a500a14117088caf375fa4b19',1,'Associacao::Associacao(std::string nome, std::vector&lt; Evento *&gt; eventos, std::vector&lt; Email *&gt; emails, std::set&lt; Associado *, AssociadoCmp &gt; associados, std::vector&lt; Gestor *&gt; gestores)']]],
   ['associacaorepetida',['AssociacaoRepetida',['../classAssociacaoRepetida.html#a175793fb964f789b31e2838bc0b430cc',1,'AssociacaoRepetida']]],
   ['associado',['Associado',['../classAssociado.html#ad90abc3759be59b2cc5d9bb6e8f1ce8e',1,'Associado::Associado()'],['../classAssociado.html#a3fa65860a3ef4cb3939d668695c89bfe',1,'Associado::Associado(std::string nome, int ID, std::string password, std::string instituicao, Cota *cota, std::string enderecoEmail)']]],
   ['associadorepetido',['AssociadoRepetido',['../classAssociadoRepetido.html#afd145913edde9024aac3f38cf1ff357e',1,'AssociadoRepetido']]]

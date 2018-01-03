@@ -7,5 +7,6 @@ var searchData=
   ['associacaoms',['AssociacaoMS',['../classAssociacaoMS.html',1,'']]],
   ['associacaorepetida',['AssociacaoRepetida',['../classAssociacaoRepetida.html',1,'']]],
   ['associado',['Associado',['../classAssociado.html',1,'']]],
+  ['associadocmp',['AssociadoCmp',['../structAssociadoCmp.html',1,'']]],
   ['associadorepetido',['AssociadoRepetido',['../classAssociadoRepetido.html',1,'']]]
 ];

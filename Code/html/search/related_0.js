@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['associacao',['Associacao',['../classAreaCientifica.html#a28da109f61061e959048569a364253aa',1,'AreaCientifica::Associacao()'],['../classCiencia.html#a28da109f61061e959048569a364253aa',1,'Ciencia::Associacao()'],['../classDominioCientifico.html#a28da109f61061e959048569a364253aa',1,'DominioCientifico::Associacao()'],['../classSubAreaCientifica.html#a28da109f61061e959048569a364253aa',1,'SubAreaCientifica::Associacao()']]]
+  ['associacao',['Associacao',['../classAssociacao.html#a087dc9392239028ed85ee43af63952c4',1,'Associacao']]]
 ];
