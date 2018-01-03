@@ -554,11 +554,12 @@ void Associacao::showAssociadosCategoria() const
 
 	std::cout << "--- OUTROS ASSOCIADOS ----------\n\n";
 
-	for (; it != associados.end(); it++)
+	auto it2 = this->apenasAssociados.begin();
+	for (; it2 != apenasAssociados.end(); it2++)
 	{
-		Associado* associado = (*it);
+		Associado associado = (*it2);
 
-		std::cout << std::setw(5) << associado->getID() << "        " << associado->getNome() << std::endl;
+		std::cout << std::setw(5) << associado.getID() << "        " << associado.getNome() << std::endl;
 	}
 	std::cout<<std::endl;
 

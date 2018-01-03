@@ -21,14 +21,7 @@
 #include "evento.h"
 
 using namespace std;
-/*
-class AssociadoPtr {
-private:
-	Associado* associado;
-public:
-	AssociadoPtr() {associado = NULL;};
-	void setAssociado(Associado* a) {this->associado = a;};
-};*/
+
 
 struct hstr
 {
