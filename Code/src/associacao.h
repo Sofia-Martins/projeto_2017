@@ -10,10 +10,10 @@
 
 #include <string>
 #include <vector>
-//#include <windows.h>
+#include <windows.h>
 #include <algorithm>
 #include <queue>
-#include <tr1/unordered_set>
+#include <unordered_set>
 #include "dominioCientifico.h"
 #include "email.h"
 #include "associado.h"

@@ -476,9 +476,6 @@ void AssociacaoMS::lerAssociados() {
 		if(nome == "")
 			break;
 
-		if(subareas == "")
-			break;
-
 
 		eliminateSpaces(nome);
 		eliminateSpaces(ID);
@@ -892,13 +889,21 @@ void AssociacaoMS::lerGestores()
 		eliminateSpaces(password);
 
 		//buscar endereço de email do gestor
-		getline(in, email);
+		getline(in, email, ';');
 		if(email == "")
 			break;
 		eliminateSpaces(email);
 
+		//buscar verba 
+		std::string verba;
+		int verba_int;
+		getline(in, verba);
+		verba_int=stoi(verba);
+
+
 		//criar gestor
 		Gestor* gestor = new Gestor(nome, id, password, email);
+		gestor->setVerba(verba_int);
 		this->associacao->addGestor(*gestor);
 		if (id >= this->associacao->getID())
 			this->associacao->setID(id);
@@ -1125,7 +1130,7 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	std::cout << " 7. Modificar conta de um associado\n";
 	std::cout << " 8. Apagar associado\n";
 	std::cout << " 9. Verba para eventos\n";
-	std::cout << " 10. Apoiar evento\n";
+	std::cout << "10. Apoiar evento\n";
 	std::cout << "11. Enviar email\n";
 	std::cout << "12. Lista de associados\n";
 	std::cout << "13. Terminar Sessao\n\n";
@@ -1191,11 +1196,14 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 	else if (opcao == 2)
 		this->alteraGestor(gestor);
 	else if (opcao == 10)
+	{
+		clearScreen();
 		this->apoiarEvento(gestor);
+	}
 	else if (opcao == 4)
 	{
 		this->visualizaEmailsRecebidos(gestor);
-		std::cout << "Pression13e ENTER para continuar... " << std::endl;
+		std::cout << "Pressione ENTER para continuar... " << std::endl;
 
 		if (std::cin.get())
 		{
@@ -1221,11 +1229,13 @@ void AssociacaoMS::menuSessaoGestor(unsigned int id){
 		this->menuSessaoGestor(id);
 	}
 	else if (opcao == 9) {
+		clearScreen();
 		unsigned int verba;
+		std::cout << "Verba ainda disponível: " << gestor->getVerba() << std::endl;
 		std::cout << "Escolha o montante a disponibilizar, pela associacao, para o apoio a eventos nesta fase de candidaturas\n\n";
-		getNumber(verba, "Verba ? ");
+		getNumber(verba, "Verba a adicionar? ");
 
-		gestor->setVerba(verba);
+		gestor->setVerba(verba+gestor->getVerba());
 
 		std::cout << "Verba alterada com sucesso \n";
 		std::cout << "Pressione ENTER para continuar... " << std::endl;
@@ -2965,6 +2975,8 @@ void AssociacaoMS::enviarConferencias() const {
 			out << ";";
 			out << eventos.at(i)->getApoioEvento().getTipoApoio();
 			out << ";";
+			out << eventos.at(i)->getApoioEvento().getVerbaEvento();
+			out << ";";
 			out << eventos.at(i)->getNumeroParticipantes();
 			/*
 			if(i!=(eventos.size()-1))
@@ -3027,6 +3039,8 @@ void AssociacaoMS::enviarEscolasVerao() const{
 				out << ";";
 				out << eventos.at(i)->getApoioEvento().getTipoApoio();
 				out << ";";
+				out << eventos.at(i)->getApoioEvento().getVerbaEvento();
+				out << ";";
 
 				for (unsigned int j = 0; j<eventos.at(i)->getFormadores().size(); j++)
 				{
@@ -3078,9 +3092,10 @@ void AssociacaoMS::enviarGestores() const
 		auto id = gestores.at(i)->getID();
 		auto password = gestores.at(i)->getPassword();
 		auto email = gestores.at(i)->getEmail();
+		auto verba = gestores.at(i)->getVerba();
 
 		if (i != 0) out << "\n";
-		out << nome << ";" << id << ";" << password << ";" << email;
+		out << nome << ";" << id << ";" << password << ";" << email << ";" << verba;
 	}
 	out.close();
 
@@ -3173,7 +3188,7 @@ void getNumber(unsigned int &number, const std::string &question) {
 
 void clearScreen() 
 {
-    //system("CLS");
-	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    system("CLS");
+	//std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
 
