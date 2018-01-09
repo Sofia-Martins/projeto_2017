@@ -1,2 +1,2 @@
-Sandra Cardoso;1;sandra;1@apic.com
-Joao Martins;6;joao;6@apic.com
+Sandra Cardoso;1;sandra;1@apic.com;40
+Joao Martins;6;joao;6@apic.com;50
